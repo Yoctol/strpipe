@@ -41,7 +41,7 @@ setup(
     description='Reversible String Process Pipeline',
     long_description=long_description,
     python_requires='>=3.6',
-    packages=find_packages,
+    packages=find_packages(),
     author='Yoctol Info',
     author_email='cph@yoctol.com',
     url='https://github.com/Yoctol/strpipe',
