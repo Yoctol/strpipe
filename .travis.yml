@@ -4,7 +4,6 @@ cache: pip
 
 python:
 - '3.6'
-- '3.7'
 - 'nightly'
 
 matrix:
@@ -25,7 +24,7 @@ deploy:
 - provider: pypi
   user: stegben
   password:
-    secure: ""
+    secure: "ocvrkXIGSM5k2HY2HM0U5Ec/hFc3OWhFia8pnsPfS2AJWxH3p9AW4X8C6eKyWGi3Ecd8MgYXqqHOtCk5KFlk9VEbPjCVBqTKYT2WCuneUQs6uyNJofgniJCK3FqSYusoU20KOOcVXL+ZSoX9fIdmUShMYXQx7vshxEYOntPmhUL2/8wlvPdKGS79QMgVOCFkD5ZDhGRVkb2X4vpgwSbffnF+dVW7/3mf6F0nwmxARD8S3emupc69gTcWbERhyxvkZ8t2RovAH/qjQN1Aqt0Sa8aTjP38iqZokjmeOSL3kTyuTsDNmSBc3xKthxJ9zPvW4iyszm3PZRKatWkg3eJE7WQ7gEx1qKqZLUhmi8O8bNhKaHuSSIU87sE4ITE33f6OTXqMEg8/Vzp8iCOPIouR6gUiXBsEMwNqWNr+o8HmOUY4o673umgxIZj4rNvNESExltzpr61GG2aCfvzd0FnELumX5WSUr29xHyA/qNJz9K/DoY1VJyVRwghnefI/QcQeVV5xZ8XXfIe49vu3IuCfc1CFsRqenMqLQTMIrrbM3xDtLiaaCV7LRn2xOycnz+EXp+roicldmKW4Ar9Sx0wUiV5wVNe70/NhoRUs02Z4zrqjPC1OEjmqtZzAAKkL0vgIItyz5bAJxFycqPboPfUtKyBPYcNxAJu7jYcrcZJWWr4="
   distributions: sdist bdist_wheel
   skip_upload_docs: true
   on:
