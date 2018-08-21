@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from setuptools import setup, find_packages, Extension
+from setuptools import setup, find_packages
+# from setuptools import Extension
 
 try:
     from Cython.Distutils import build_ext
@@ -40,9 +41,7 @@ setup(
     description='Reversible String Process Pipeline',
     long_description=long_description,
     python_requires='>=3.6',
-    packages=[
-        'strpipe',
-    ],
+    packages=find_packages,
     author='Yoctol Info',
     author_email='cph@yoctol.com',
     url='https://github.com/Yoctol/strpipe',
