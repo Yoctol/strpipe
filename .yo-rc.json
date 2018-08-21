@@ -1,0 +1,12 @@
+{
+  "generator-python3-package": {
+    "packageName": "strpipe",
+    "packageDesc": "Reversible String Process Pipeline",
+    "fullName": "Yoctol Info",
+    "pypiUserName": "stegben",
+    "githubUserName": "stegben",
+    "email": "cph@yoctol.com",
+    "useTravisCI": "true",
+    "version": "0.2.0"
+  }
+}
