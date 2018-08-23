@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from setuptools import setup, find_packages
-from setuptools import Extension
+# from setuptools import Extension
 
 
 try:
@@ -30,20 +30,14 @@ ext_modules = []
 
 if use_cython:
     ext_modules += [
-        Extension(
-            'strpipe.toolkit.compute_maxlen',
-            ['strpipe/toolkit/compute_maxlen.pyx'],
-            # language="c++",
-        ),
+        # Extension('uttut.elements', ['uttut/elements.pyx']),
     ]
     cmdclass.update({'build_ext': build_ext})
 else:
     ext_modules += [
-        Extension(
-            'strpipe.toolkit.compute_maxlen',
-            ['strpipe/toolkit/compute_maxlen.c'],
-        ),
+        # Extension('uttut.elements', ['uttut/elements.c']),
     ]
+
 
 setup(
     name='strpipe',
