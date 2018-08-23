@@ -2,7 +2,7 @@
 
 .PHONY: install
 install:
-	pip install -U pip wheel setuptools
+	pip install -U pip wheel setuptools cython
 	pip install -r requirements.txt
 	python setup.py build_ext
 	pip install -e .
