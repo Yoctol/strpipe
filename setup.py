@@ -3,6 +3,7 @@ from pathlib import Path
 from setuptools import setup, find_packages
 # from setuptools import Extension
 
+
 try:
     from Cython.Distutils import build_ext
 except ImportError:
@@ -10,13 +11,15 @@ except ImportError:
 else:
     use_cython = True
 
+
 readme = Path(__file__).parent.joinpath('README.md')
 if readme.exists():
     with readme.open() as f:
         long_description = f.read()
         try:
             from pypandoc import convert_text
-            long_description = convert_text(long_description, 'rst', format='md')
+            long_description = convert_text(
+                long_description, 'rst', format='md')
         except ImportError:
             print("warning: pypandoc module not found, could not convert Markdown to RST")
 else:
@@ -34,6 +37,7 @@ else:
     ext_modules += [
         # Extension('uttut.elements', ['uttut/elements.c']),
     ]
+
 
 setup(
     name='strpipe',
