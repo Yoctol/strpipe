@@ -7,7 +7,9 @@ About this project...
 
 ## Installation
 
-Installation instructions...
+```
+$ make install
+```
 
 ## Usage
 
@@ -15,4 +17,6 @@ Usage instructions...
 
 ## Test
 
-Testing instructions...
+```
+$ make test
+```
