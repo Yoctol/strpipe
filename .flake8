@@ -5,7 +5,7 @@ ignore =
     E125,E121,E266,
     # print is allowed
     T001, T003,
-    C901, C816
+    C901
 exclude =
     .git
     # __pycache__
