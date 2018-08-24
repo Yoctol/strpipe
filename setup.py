@@ -43,6 +43,10 @@ if use_cython:
             'strpipe.toolkit.index_to_token',
             ['strpipe/toolkit/index_to_token.pyx'],
         ),
+        Extension(
+            'strpipe.toolkit.build_vocabulary',
+            ['strpipe/toolkit/build_vocabulary.pyx'],
+        ),
     ]
     cmdclass.update({'build_ext': build_ext})
 else:
@@ -58,6 +62,10 @@ else:
         Extension(
             'strpipe.toolkit.index_to_token',
             ['strpipe/toolkit/index_to_token.c'],
+        ),
+        Extension(
+            'strpipe.toolkit.build_vocabulary',
+            ['strpipe/toolkit/build_vocabulary.c'],
         ),
     ]
 
