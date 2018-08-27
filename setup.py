@@ -35,7 +35,6 @@ if use_cython:
             ['strpipe/toolkit/compute_maxlen.pyx'],
             'strpipe.toolkit.consistent_hash',
             ['strpipe/toolkit/consistent_hash.pyx'],
-            language="c++",
         ),
     ]
     cmdclass.update({'build_ext': build_ext})
@@ -45,7 +44,7 @@ else:
             'strpipe.toolkit.compute_maxlen',
             ['strpipe/toolkit/compute_maxlen.c'],
             'strpipe.toolkit.consistent_hash',
-            ['strpipe/toolkit/consistent_hash.cpp'],
+            ['strpipe/toolkit/consistent_hash.c'],
         ),
     ]
 
