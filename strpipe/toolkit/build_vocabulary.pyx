@@ -19,7 +19,7 @@ def build_vocabulary_from_sentences(
         )
 
 
-cdef dict build_vocabulary_from_sentences_in_c(
+cdef dict build_vocabulary_from_sentences_in_c(  # noqa: E999
         list sentences,
         long int vocab_size,
         str sos_token,
@@ -73,5 +73,3 @@ cdef dict build_vocabulary_from_sentences_in_c(
             break
 
     return output_dict
-
-
