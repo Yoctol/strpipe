@@ -17,10 +17,15 @@ pip install strpipe
 import strpipe as sp
 
 p = sp.Pipe()
-p.add_step('Lower')
-p.add_step('JiebaTokenize')
+p.add_step(sp.Step('Lower'))
+p.add_step(sp.Step('JiebaTokenize'))
 
-p.fit()
+data = TextData([
+    '你好啊',
+    '早安',
+    '',
+])
+p.fit(data)
 p.transform()
 p.inverse_transform()
 ```
