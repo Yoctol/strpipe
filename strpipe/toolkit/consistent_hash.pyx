@@ -1,18 +1,34 @@
-from sklearn.utils import murmurhash3_32
+# distutils: sources = MurmurHash3.cpp
 
 
-def consistent_hash(
-        input_str: str,
-        mod_int: int,
-    ) -> int:
-    return consistent_hash_in_cpp(
-        input_str=input_str,
-        mod_int=mod_int,
+cdef extern from "MurmurHash3.h":  # noqa: E999
+    void MurmurHash3_x86_32(
+        void *key,  # noqa: E225
+        int len,
+        unsigned int seed,
+        void *out,  # noqa: E225
     )
 
 
-cdef long int consistent_hash_in_cpp(  # noqa: E999
+def consistent_hash(input_str: str, mod_int: int):
+    return consistent_hash_in_c(
+        input_str=input_str,
+        mod_int=mod_int,
+        seed=0,
+    )
+
+
+cdef unsigned int consistent_hash_in_c(  # noqa: E999
         str input_str,
-        long int mod_int,
+        unsigned int mod_int,
+        unsigned int seed,
     ):
-    return murmurhash3_32(input_str, seed=0) % mod_int
+    cdef unsigned int out
+    cdef bytes byte_str = input_str.encode('utf-8')
+    MurmurHash3_x86_32(
+        <char*> byte_str,  # noqa: E225, E226
+        len(byte_str),
+        seed,
+        &out,  # noqa: E225
+    )
+    return out % mod_int
