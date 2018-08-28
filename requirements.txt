@@ -2,5 +2,3 @@ pytest
 flake8
 pypandoc
 Cython
-scipy
-sklearn
