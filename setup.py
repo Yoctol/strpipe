@@ -39,6 +39,10 @@ if use_cython:
             ['strpipe/toolkit/consistent_hash.pyx'],
             language='c++',
         ),
+        Extension(
+            'strpipe.toolkit.index_to_token',
+            ['strpipe/toolkit/index_to_token.pyx'],
+        ),
     ]
     cmdclass.update({'build_ext': build_ext})
 else:
@@ -50,6 +54,10 @@ else:
         Extension(
             'strpipe.toolkit.consistent_hash',
             ['strpipe/toolkit/consistent_hash.cpp'],
+        ),
+        Extension(
+            'strpipe.toolkit.index_to_token',
+            ['strpipe/toolkit/index_to_token.c'],
         ),
     ]
 
