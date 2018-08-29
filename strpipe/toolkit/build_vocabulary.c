@@ -971,6 +971,9 @@ static CYTHON_INLINE int __Pyx_set_iter_next(
 /* Import.proto */
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
+/* ImportFrom.proto */
+static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
+
 /* PyThreadStateGet.proto */
 #if CYTHON_FAST_THREAD_STATE
 #define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
@@ -1077,10 +1080,6 @@ int __pyx_module_is_main_strpipe__toolkit__build_vocabulary = 0;
 /* Implementation of 'strpipe.toolkit.build_vocabulary' */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_sorted;
-static const char __pyx_k_EOS[] = "<EOS>";
-static const char __pyx_k_PAD[] = "<PAD>";
-static const char __pyx_k_SOS[] = "<SOS>";
-static const char __pyx_k_UNK[] = "<UNK>";
 static const char __pyx_k_key[] = "key";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
@@ -1097,16 +1096,16 @@ static const char __pyx_k_sos_token[] = "sos_token";
 static const char __pyx_k_unk_token[] = "unk_token";
 static const char __pyx_k_itemgetter[] = "itemgetter";
 static const char __pyx_k_vocab_size[] = "vocab_size";
+static const char __pyx_k_DefaultTokens[] = "DefaultTokens";
+static const char __pyx_k_default_tokens[] = "default_tokens";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_build_vocabulary_from_sentences[] = "build_vocabulary_from_sentences";
 static const char __pyx_k_strpipe_toolkit_build_vocabulary[] = "strpipe/toolkit/build_vocabulary.pyx";
 static const char __pyx_k_strpipe_toolkit_build_vocabulary_2[] = "strpipe.toolkit.build_vocabulary";
-static PyObject *__pyx_kp_s_EOS;
-static PyObject *__pyx_kp_s_PAD;
-static PyObject *__pyx_kp_s_SOS;
-static PyObject *__pyx_kp_s_UNK;
+static PyObject *__pyx_n_s_DefaultTokens;
 static PyObject *__pyx_n_s_build_vocabulary_from_sentences;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_default_tokens;
 static PyObject *__pyx_n_s_eos_token;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_itemgetter;
@@ -1129,12 +1128,16 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_
 static __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_items = {0, &__pyx_n_s_items, 0, 0, 0};
 static PyObject *__pyx_float_1e_8;
 static PyObject *__pyx_int_1;
-static PyObject *__pyx_tuple_;
-static PyObject *__pyx_tuple__2;
-static PyObject *__pyx_codeobj__3;
+static PyObject *__pyx_k_;
+static PyObject *__pyx_k__2;
+static PyObject *__pyx_k__3;
+static PyObject *__pyx_k__4;
+static PyObject *__pyx_tuple__5;
+static PyObject *__pyx_tuple__6;
+static PyObject *__pyx_codeobj__7;
 /* Late includes */
 
-/* "strpipe/toolkit/build_vocabulary.pyx":4
+/* "strpipe/toolkit/build_vocabulary.pyx":5
  * 
  * 
  * def build_vocabulary_from_sentences(             # <<<<<<<<<<<<<<
@@ -1159,10 +1162,10 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_16build_vocabulary_1build_vocabulary
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_sentences,&__pyx_n_s_vocab_size,&__pyx_n_s_sos_token,&__pyx_n_s_eos_token,&__pyx_n_s_unk_token,&__pyx_n_s_pad_token,0};
     PyObject* values[6] = {0,0,0,0,0,0};
     values[1] = ((PyObject *)__pyx_float_1e_8);
-    values[2] = ((PyObject*)__pyx_kp_s_SOS);
-    values[3] = ((PyObject*)__pyx_kp_s_EOS);
-    values[4] = ((PyObject*)__pyx_kp_s_UNK);
-    values[5] = ((PyObject*)__pyx_kp_s_PAD);
+    values[2] = __pyx_k_;
+    values[3] = __pyx_k__2;
+    values[4] = __pyx_k__3;
+    values[5] = __pyx_k__4;
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -1219,7 +1222,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_16build_vocabulary_1build_vocabulary
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "build_vocabulary_from_sentences") < 0)) __PYX_ERR(0, 4, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "build_vocabulary_from_sentences") < 0)) __PYX_ERR(0, 5, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1247,16 +1250,16 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_16build_vocabulary_1build_vocabulary
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("build_vocabulary_from_sentences", 0, 1, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 4, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("build_vocabulary_from_sentences", 0, 1, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 5, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.toolkit.build_vocabulary.build_vocabulary_from_sentences", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sos_token), (&PyString_Type), 1, "sos_token", 1))) __PYX_ERR(0, 7, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_eos_token), (&PyString_Type), 1, "eos_token", 1))) __PYX_ERR(0, 8, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_unk_token), (&PyString_Type), 1, "unk_token", 1))) __PYX_ERR(0, 9, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pad_token), (&PyString_Type), 1, "pad_token", 1))) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sos_token), (&PyString_Type), 1, "sos_token", 1))) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_eos_token), (&PyString_Type), 1, "eos_token", 1))) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_unk_token), (&PyString_Type), 1, "unk_token", 1))) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pad_token), (&PyString_Type), 1, "pad_token", 1))) __PYX_ERR(0, 11, __pyx_L1_error)
   __pyx_r = __pyx_pf_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_from_sentences(__pyx_self, __pyx_v_sentences, __pyx_v_vocab_size, __pyx_v_sos_token, __pyx_v_eos_token, __pyx_v_unk_token, __pyx_v_pad_token);
 
   /* function exit code */
@@ -1275,8 +1278,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("build_vocabulary_from_sentences", 0);
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":12
- *         pad_token: str = '<PAD>',
+  /* "strpipe/toolkit/build_vocabulary.pyx":13
+ *         pad_token: str = DefaultTokens.pad_token,
  *     ):
  *         return build_vocabulary_from_sentences_in_c(             # <<<<<<<<<<<<<<
  *             sentences=sentences,
@@ -1284,38 +1287,38 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":13
+  /* "strpipe/toolkit/build_vocabulary.pyx":14
  *     ):
  *         return build_vocabulary_from_sentences_in_c(
  *             sentences=sentences,             # <<<<<<<<<<<<<<
  *             vocab_size=vocab_size,
  *             sos_token=sos_token,
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_sentences))||((__pyx_v_sentences) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_sentences)->tp_name), 0))) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_sentences))||((__pyx_v_sentences) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_sentences)->tp_name), 0))) __PYX_ERR(0, 14, __pyx_L1_error)
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":14
+  /* "strpipe/toolkit/build_vocabulary.pyx":15
  *         return build_vocabulary_from_sentences_in_c(
  *             sentences=sentences,
  *             vocab_size=vocab_size,             # <<<<<<<<<<<<<<
  *             sos_token=sos_token,
  *             eos_token=eos_token,
  */
-  __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_v_vocab_size); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_v_vocab_size); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L1_error)
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":12
- *         pad_token: str = '<PAD>',
+  /* "strpipe/toolkit/build_vocabulary.pyx":13
+ *         pad_token: str = DefaultTokens.pad_token,
  *     ):
  *         return build_vocabulary_from_sentences_in_c(             # <<<<<<<<<<<<<<
  *             sentences=sentences,
  *             vocab_size=vocab_size,
  */
-  __pyx_t_2 = __pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_from_sentences_in_c(((PyObject*)__pyx_v_sentences), __pyx_t_1, __pyx_v_sos_token, __pyx_v_eos_token, __pyx_v_unk_token, __pyx_v_pad_token); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_from_sentences_in_c(((PyObject*)__pyx_v_sentences), __pyx_t_1, __pyx_v_sos_token, __pyx_v_eos_token, __pyx_v_unk_token, __pyx_v_pad_token); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":4
+  /* "strpipe/toolkit/build_vocabulary.pyx":5
  * 
  * 
  * def build_vocabulary_from_sentences(             # <<<<<<<<<<<<<<
@@ -1334,10 +1337,10 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/build_vocabulary.pyx":22
+/* "strpipe/toolkit/build_vocabulary.pyx":23
  * 
  * 
- * cdef dict build_vocabulary_from_sentences_in_c(             # <<<<<<<<<<<<<<
+ * cdef dict build_vocabulary_from_sentences_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
  *         list sentences,
  *         long int vocab_size,
  */
@@ -1379,23 +1382,23 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   int __pyx_t_17;
   __Pyx_RefNannySetupContext("build_vocabulary_from_sentences_in_c", 0);
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":33
+  /* "strpipe/toolkit/build_vocabulary.pyx":34
  *         [
  *             sos_token, eos_token,
  *             unk_token, pad_token,             # <<<<<<<<<<<<<<
  *         ],
  *     )
  */
-  __pyx_t_1 = PySet_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_1 = PySet_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PySet_Add(__pyx_t_1, __pyx_v_sos_token) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-  if (PySet_Add(__pyx_t_1, __pyx_v_eos_token) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-  if (PySet_Add(__pyx_t_1, __pyx_v_unk_token) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-  if (PySet_Add(__pyx_t_1, __pyx_v_pad_token) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+  if (PySet_Add(__pyx_t_1, __pyx_v_sos_token) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (PySet_Add(__pyx_t_1, __pyx_v_eos_token) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (PySet_Add(__pyx_t_1, __pyx_v_unk_token) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (PySet_Add(__pyx_t_1, __pyx_v_pad_token) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
   __pyx_v_default_tokens = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":36
+  /* "strpipe/toolkit/build_vocabulary.pyx":37
  *         ],
  *     )
  *     cdef unsigned int max_len = 0             # <<<<<<<<<<<<<<
@@ -1404,7 +1407,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
   __pyx_v_max_len = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":37
+  /* "strpipe/toolkit/build_vocabulary.pyx":38
  *     )
  *     cdef unsigned int max_len = 0
  *     cdef unsigned int n_sents = len(sentences)             # <<<<<<<<<<<<<<
@@ -1413,24 +1416,24 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
   if (unlikely(__pyx_v_sentences == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 37, __pyx_L1_error)
+    __PYX_ERR(0, 38, __pyx_L1_error)
   }
-  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 38, __pyx_L1_error)
   __pyx_v_n_sents = __pyx_t_2;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":43
+  /* "strpipe/toolkit/build_vocabulary.pyx":44
  *     cdef dict output_dict, counter
  * 
  *     counter = {}             # <<<<<<<<<<<<<<
  *     for i in range(n_sents):
  *         sentence = sentences[i]
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_counter = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":44
+  /* "strpipe/toolkit/build_vocabulary.pyx":45
  * 
  *     counter = {}
  *     for i in range(n_sents):             # <<<<<<<<<<<<<<
@@ -1442,7 +1445,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":45
+    /* "strpipe/toolkit/build_vocabulary.pyx":46
  *     counter = {}
  *     for i in range(n_sents):
  *         sentence = sentences[i]             # <<<<<<<<<<<<<<
@@ -1451,15 +1454,15 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
     if (unlikely(__pyx_v_sentences == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 45, __pyx_L1_error)
+      __PYX_ERR(0, 46, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 45, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 46, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_sentence, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":46
+    /* "strpipe/toolkit/build_vocabulary.pyx":47
  *     for i in range(n_sents):
  *         sentence = sentences[i]
  *         n_tokens = len(sentence)             # <<<<<<<<<<<<<<
@@ -1468,12 +1471,12 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
     if (unlikely(__pyx_v_sentence == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-      __PYX_ERR(0, 46, __pyx_L1_error)
+      __PYX_ERR(0, 47, __pyx_L1_error)
     }
-    __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentence); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 46, __pyx_L1_error)
+    __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentence); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 47, __pyx_L1_error)
     __pyx_v_n_tokens = __pyx_t_2;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":47
+    /* "strpipe/toolkit/build_vocabulary.pyx":48
  *         sentence = sentences[i]
  *         n_tokens = len(sentence)
  *         for j in range(n_tokens):             # <<<<<<<<<<<<<<
@@ -1485,7 +1488,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
     for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
       __pyx_v_j = __pyx_t_8;
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":48
+      /* "strpipe/toolkit/build_vocabulary.pyx":49
  *         n_tokens = len(sentence)
  *         for j in range(n_tokens):
  *             token = sentence[j]             # <<<<<<<<<<<<<<
@@ -1494,26 +1497,26 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
       if (unlikely(__pyx_v_sentence == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 48, __pyx_L1_error)
+        __PYX_ERR(0, 49, __pyx_L1_error)
       }
-      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentence, __pyx_v_j, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentence, __pyx_v_j, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 48, __pyx_L1_error)
+      if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 49, __pyx_L1_error)
       __Pyx_XDECREF_SET(__pyx_v_token, ((PyObject*)__pyx_t_1));
       __pyx_t_1 = 0;
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":49
+      /* "strpipe/toolkit/build_vocabulary.pyx":50
  *         for j in range(n_tokens):
  *             token = sentence[j]
  *             if token in counter:             # <<<<<<<<<<<<<<
  *                 counter[token] += 1
  *             else:
  */
-      __pyx_t_9 = (__Pyx_PyDict_ContainsTF(__pyx_v_token, __pyx_v_counter, Py_EQ)); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 49, __pyx_L1_error)
+      __pyx_t_9 = (__Pyx_PyDict_ContainsTF(__pyx_v_token, __pyx_v_counter, Py_EQ)); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 50, __pyx_L1_error)
       __pyx_t_10 = (__pyx_t_9 != 0);
       if (__pyx_t_10) {
 
-        /* "strpipe/toolkit/build_vocabulary.pyx":50
+        /* "strpipe/toolkit/build_vocabulary.pyx":51
  *             token = sentence[j]
  *             if token in counter:
  *                 counter[token] += 1             # <<<<<<<<<<<<<<
@@ -1522,16 +1525,16 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
         __Pyx_INCREF(__pyx_v_token);
         __pyx_t_11 = __pyx_v_token;
-        __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_counter, __pyx_t_11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_counter, __pyx_t_11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_12 = __Pyx_PyInt_AddObjC(__pyx_t_1, __pyx_int_1, 1, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 50, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyInt_AddObjC(__pyx_t_1, __pyx_int_1, 1, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 51, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        if (unlikely(PyDict_SetItem(__pyx_v_counter, __pyx_t_11, __pyx_t_12) < 0)) __PYX_ERR(0, 50, __pyx_L1_error)
+        if (unlikely(PyDict_SetItem(__pyx_v_counter, __pyx_t_11, __pyx_t_12) < 0)) __PYX_ERR(0, 51, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-        /* "strpipe/toolkit/build_vocabulary.pyx":49
+        /* "strpipe/toolkit/build_vocabulary.pyx":50
  *         for j in range(n_tokens):
  *             token = sentence[j]
  *             if token in counter:             # <<<<<<<<<<<<<<
@@ -1541,7 +1544,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
         goto __pyx_L7;
       }
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":52
+      /* "strpipe/toolkit/build_vocabulary.pyx":53
  *                 counter[token] += 1
  *             else:
  *                 counter[token] = 1             # <<<<<<<<<<<<<<
@@ -1549,103 +1552,103 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  *     trim_counter = sorted(
  */
       /*else*/ {
-        if (unlikely(PyDict_SetItem(__pyx_v_counter, __pyx_v_token, __pyx_int_1) < 0)) __PYX_ERR(0, 52, __pyx_L1_error)
+        if (unlikely(PyDict_SetItem(__pyx_v_counter, __pyx_v_token, __pyx_int_1) < 0)) __PYX_ERR(0, 53, __pyx_L1_error)
       }
       __pyx_L7:;
     }
   }
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":55
+  /* "strpipe/toolkit/build_vocabulary.pyx":56
  * 
  *     trim_counter = sorted(
  *         counter.items(),             # <<<<<<<<<<<<<<
  *         key=operator.itemgetter(1),
  *         reverse=True,
  */
-  __pyx_t_12 = __Pyx_PyDict_Items(__pyx_v_counter); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyDict_Items(__pyx_v_counter); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":54
+  /* "strpipe/toolkit/build_vocabulary.pyx":55
  *                 counter[token] = 1
  * 
  *     trim_counter = sorted(             # <<<<<<<<<<<<<<
  *         counter.items(),
  *         key=operator.itemgetter(1),
  */
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_12);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_12);
   __pyx_t_12 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":56
+  /* "strpipe/toolkit/build_vocabulary.pyx":57
  *     trim_counter = sorted(
  *         counter.items(),
  *         key=operator.itemgetter(1),             # <<<<<<<<<<<<<<
  *         reverse=True,
  *     )[0: vocab_size + 10]
  */
-  __pyx_t_12 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_operator); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_operator); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_itemgetter); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_itemgetter); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_key, __pyx_t_13) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_key, __pyx_t_13) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":57
+  /* "strpipe/toolkit/build_vocabulary.pyx":58
  *         counter.items(),
  *         key=operator.itemgetter(1),
  *         reverse=True,             # <<<<<<<<<<<<<<
  *     )[0: vocab_size + 10]
  * 
  */
-  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":54
+  /* "strpipe/toolkit/build_vocabulary.pyx":55
  *                 counter[token] = 1
  * 
  *     trim_counter = sorted(             # <<<<<<<<<<<<<<
  *         counter.items(),
  *         key=operator.itemgetter(1),
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_1, __pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_1, __pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":58
+  /* "strpipe/toolkit/build_vocabulary.pyx":59
  *         key=operator.itemgetter(1),
  *         reverse=True,
  *     )[0: vocab_size + 10]             # <<<<<<<<<<<<<<
  * 
  *     output_dict = {}
  */
-  __pyx_t_12 = __Pyx_PyObject_GetSlice(__pyx_t_13, 0, (__pyx_v_vocab_size + 10), NULL, NULL, NULL, 1, 1, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetSlice(__pyx_t_13, 0, (__pyx_v_vocab_size + 10), NULL, NULL, NULL, 1, 1, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_12))||((__pyx_t_12) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_12)->tp_name), 0))) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_t_12))||((__pyx_t_12) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_12)->tp_name), 0))) __PYX_ERR(0, 59, __pyx_L1_error)
   __pyx_v_trim_counter = ((PyObject*)__pyx_t_12);
   __pyx_t_12 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":60
+  /* "strpipe/toolkit/build_vocabulary.pyx":61
  *     )[0: vocab_size + 10]
  * 
  *     output_dict = {}             # <<<<<<<<<<<<<<
  *     vocab_count = 0
  *     for token in default_tokens:
  */
-  __pyx_t_12 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __pyx_v_output_dict = ((PyObject*)__pyx_t_12);
   __pyx_t_12 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":61
+  /* "strpipe/toolkit/build_vocabulary.pyx":62
  * 
  *     output_dict = {}
  *     vocab_count = 0             # <<<<<<<<<<<<<<
@@ -1654,7 +1657,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
   __pyx_v_vocab_count = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":62
+  /* "strpipe/toolkit/build_vocabulary.pyx":63
  *     output_dict = {}
  *     vocab_count = 0
  *     for token in default_tokens:             # <<<<<<<<<<<<<<
@@ -1662,7 +1665,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  *         vocab_count += 1
  */
   __pyx_t_2 = 0;
-  __pyx_t_13 = __Pyx_set_iterator(__pyx_v_default_tokens, 1, (&__pyx_t_15), (&__pyx_t_16)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_set_iterator(__pyx_v_default_tokens, 1, (&__pyx_t_15), (&__pyx_t_16)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_XDECREF(__pyx_t_12);
   __pyx_t_12 = __pyx_t_13;
@@ -1670,25 +1673,25 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   while (1) {
     __pyx_t_17 = __Pyx_set_iter_next(__pyx_t_12, __pyx_t_15, &__pyx_t_2, &__pyx_t_13, __pyx_t_16);
     if (unlikely(__pyx_t_17 == 0)) break;
-    if (unlikely(__pyx_t_17 == -1)) __PYX_ERR(0, 62, __pyx_L1_error)
+    if (unlikely(__pyx_t_17 == -1)) __PYX_ERR(0, 63, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
-    if (!(likely(PyString_CheckExact(__pyx_t_13))||((__pyx_t_13) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_13)->tp_name), 0))) __PYX_ERR(0, 62, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_t_13))||((__pyx_t_13) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_13)->tp_name), 0))) __PYX_ERR(0, 63, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_token, ((PyObject*)__pyx_t_13));
     __pyx_t_13 = 0;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":63
+    /* "strpipe/toolkit/build_vocabulary.pyx":64
  *     vocab_count = 0
  *     for token in default_tokens:
  *         output_dict[token] = vocab_count             # <<<<<<<<<<<<<<
  *         vocab_count += 1
  * 
  */
-    __pyx_t_13 = __Pyx_PyInt_From_unsigned_int(__pyx_v_vocab_count); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 63, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyInt_From_unsigned_int(__pyx_v_vocab_count); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
-    if (unlikely(PyDict_SetItem(__pyx_v_output_dict, __pyx_v_token, __pyx_t_13) < 0)) __PYX_ERR(0, 63, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_output_dict, __pyx_v_token, __pyx_t_13) < 0)) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":64
+    /* "strpipe/toolkit/build_vocabulary.pyx":65
  *     for token in default_tokens:
  *         output_dict[token] = vocab_count
  *         vocab_count += 1             # <<<<<<<<<<<<<<
@@ -1699,7 +1702,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   }
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":66
+  /* "strpipe/toolkit/build_vocabulary.pyx":67
  *         vocab_count += 1
  * 
  *     n_counter = len(trim_counter)             # <<<<<<<<<<<<<<
@@ -1708,12 +1711,12 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
   if (unlikely(__pyx_v_trim_counter == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 66, __pyx_L1_error)
+    __PYX_ERR(0, 67, __pyx_L1_error)
   }
-  __pyx_t_15 = PyList_GET_SIZE(__pyx_v_trim_counter); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_15 = PyList_GET_SIZE(__pyx_v_trim_counter); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 67, __pyx_L1_error)
   __pyx_v_n_counter = __pyx_t_15;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":67
+  /* "strpipe/toolkit/build_vocabulary.pyx":68
  * 
  *     n_counter = len(trim_counter)
  *     for idx in range(n_counter):             # <<<<<<<<<<<<<<
@@ -1725,7 +1728,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_idx = __pyx_t_5;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":68
+    /* "strpipe/toolkit/build_vocabulary.pyx":69
  *     n_counter = len(trim_counter)
  *     for idx in range(n_counter):
  *         key = trim_counter[idx][0]             # <<<<<<<<<<<<<<
@@ -1734,40 +1737,40 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
     if (unlikely(__pyx_v_trim_counter == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 68, __pyx_L1_error)
+      __PYX_ERR(0, 69, __pyx_L1_error)
     }
-    __pyx_t_12 = __Pyx_GetItemInt_List(__pyx_v_trim_counter, __pyx_v_idx, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_GetItemInt_List(__pyx_v_trim_counter, __pyx_v_idx, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 69, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_13 = __Pyx_GetItemInt(__pyx_t_12, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_GetItemInt(__pyx_t_12, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 69, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_XDECREF_SET(__pyx_v_key, __pyx_t_13);
     __pyx_t_13 = 0;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":69
+    /* "strpipe/toolkit/build_vocabulary.pyx":70
  *     for idx in range(n_counter):
  *         key = trim_counter[idx][0]
  *         if key not in output_dict:             # <<<<<<<<<<<<<<
  *             output_dict[key] = vocab_count
  *             vocab_count += 1
  */
-    __pyx_t_10 = (__Pyx_PyDict_ContainsTF(__pyx_v_key, __pyx_v_output_dict, Py_NE)); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 69, __pyx_L1_error)
+    __pyx_t_10 = (__Pyx_PyDict_ContainsTF(__pyx_v_key, __pyx_v_output_dict, Py_NE)); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 70, __pyx_L1_error)
     __pyx_t_9 = (__pyx_t_10 != 0);
     if (__pyx_t_9) {
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":70
+      /* "strpipe/toolkit/build_vocabulary.pyx":71
  *         key = trim_counter[idx][0]
  *         if key not in output_dict:
  *             output_dict[key] = vocab_count             # <<<<<<<<<<<<<<
  *             vocab_count += 1
  *         if vocab_count > vocab_size - 1:
  */
-      __pyx_t_13 = __Pyx_PyInt_From_unsigned_int(__pyx_v_vocab_count); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 70, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyInt_From_unsigned_int(__pyx_v_vocab_count); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      if (unlikely(PyDict_SetItem(__pyx_v_output_dict, __pyx_v_key, __pyx_t_13) < 0)) __PYX_ERR(0, 70, __pyx_L1_error)
+      if (unlikely(PyDict_SetItem(__pyx_v_output_dict, __pyx_v_key, __pyx_t_13) < 0)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":71
+      /* "strpipe/toolkit/build_vocabulary.pyx":72
  *         if key not in output_dict:
  *             output_dict[key] = vocab_count
  *             vocab_count += 1             # <<<<<<<<<<<<<<
@@ -1776,7 +1779,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
       __pyx_v_vocab_count = (__pyx_v_vocab_count + 1);
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":69
+      /* "strpipe/toolkit/build_vocabulary.pyx":70
  *     for idx in range(n_counter):
  *         key = trim_counter[idx][0]
  *         if key not in output_dict:             # <<<<<<<<<<<<<<
@@ -1785,7 +1788,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
     }
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":72
+    /* "strpipe/toolkit/build_vocabulary.pyx":73
  *             output_dict[key] = vocab_count
  *             vocab_count += 1
  *         if vocab_count > vocab_size - 1:             # <<<<<<<<<<<<<<
@@ -1795,7 +1798,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
     __pyx_t_9 = ((__pyx_v_vocab_count > (__pyx_v_vocab_size - 1)) != 0);
     if (__pyx_t_9) {
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":73
+      /* "strpipe/toolkit/build_vocabulary.pyx":74
  *             vocab_count += 1
  *         if vocab_count > vocab_size - 1:
  *             break             # <<<<<<<<<<<<<<
@@ -1804,7 +1807,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
       goto __pyx_L11_break;
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":72
+      /* "strpipe/toolkit/build_vocabulary.pyx":73
  *             output_dict[key] = vocab_count
  *             vocab_count += 1
  *         if vocab_count > vocab_size - 1:             # <<<<<<<<<<<<<<
@@ -1815,22 +1818,20 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   }
   __pyx_L11_break:;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":75
+  /* "strpipe/toolkit/build_vocabulary.pyx":76
  *             break
  * 
  *     return output_dict             # <<<<<<<<<<<<<<
- * 
- * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_output_dict);
   __pyx_r = __pyx_v_output_dict;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":22
+  /* "strpipe/toolkit/build_vocabulary.pyx":23
  * 
  * 
- * cdef dict build_vocabulary_from_sentences_in_c(             # <<<<<<<<<<<<<<
+ * cdef dict build_vocabulary_from_sentences_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
  *         list sentences,
  *         long int vocab_size,
  */
@@ -1894,12 +1895,10 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_EOS, __pyx_k_EOS, sizeof(__pyx_k_EOS), 0, 0, 1, 0},
-  {&__pyx_kp_s_PAD, __pyx_k_PAD, sizeof(__pyx_k_PAD), 0, 0, 1, 0},
-  {&__pyx_kp_s_SOS, __pyx_k_SOS, sizeof(__pyx_k_SOS), 0, 0, 1, 0},
-  {&__pyx_kp_s_UNK, __pyx_k_UNK, sizeof(__pyx_k_UNK), 0, 0, 1, 0},
+  {&__pyx_n_s_DefaultTokens, __pyx_k_DefaultTokens, sizeof(__pyx_k_DefaultTokens), 0, 0, 1, 1},
   {&__pyx_n_s_build_vocabulary_from_sentences, __pyx_k_build_vocabulary_from_sentences, sizeof(__pyx_k_build_vocabulary_from_sentences), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_default_tokens, __pyx_k_default_tokens, sizeof(__pyx_k_default_tokens), 0, 0, 1, 1},
   {&__pyx_n_s_eos_token, __pyx_k_eos_token, sizeof(__pyx_k_eos_token), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_itemgetter, __pyx_k_itemgetter, sizeof(__pyx_k_itemgetter), 0, 0, 1, 1},
@@ -1921,8 +1920,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 44, __pyx_L1_error)
-  __pyx_builtin_sorted = __Pyx_GetBuiltinName(__pyx_n_s_sorted); if (!__pyx_builtin_sorted) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_builtin_sorted = __Pyx_GetBuiltinName(__pyx_n_s_sorted); if (!__pyx_builtin_sorted) __PYX_ERR(0, 55, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1932,28 +1931,28 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":56
+  /* "strpipe/toolkit/build_vocabulary.pyx":57
  *     trim_counter = sorted(
  *         counter.items(),
  *         key=operator.itemgetter(1),             # <<<<<<<<<<<<<<
  *         reverse=True,
  *     )[0: vocab_size + 10]
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 56, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":4
+  /* "strpipe/toolkit/build_vocabulary.pyx":5
  * 
  * 
  * def build_vocabulary_from_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         vocab_size: int = 1e+8,
  */
-  __pyx_tuple__2 = PyTuple_Pack(6, __pyx_n_s_sentences, __pyx_n_s_vocab_size, __pyx_n_s_sos_token, __pyx_n_s_eos_token, __pyx_n_s_unk_token, __pyx_n_s_pad_token); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__2);
-  __Pyx_GIVEREF(__pyx_tuple__2);
-  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(6, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_build_vocabulary, __pyx_n_s_build_vocabulary_from_sentences, 4, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(6, __pyx_n_s_sentences, __pyx_n_s_vocab_size, __pyx_n_s_sos_token, __pyx_n_s_eos_token, __pyx_n_s_unk_token, __pyx_n_s_pad_token); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(6, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_build_vocabulary, __pyx_n_s_build_vocabulary_from_sentences, 5, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2110,6 +2109,7 @@ static int __pyx_pymod_exec_build_vocabulary(PyObject *__pyx_pyinit_module)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannyDeclarations
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m && __pyx_m == __pyx_pyinit_module) return 0;
@@ -2210,7 +2210,7 @@ if (!__Pyx_RefNanny) {
 
   /* "strpipe/toolkit/build_vocabulary.pyx":1
  * import operator             # <<<<<<<<<<<<<<
- * 
+ * from .default_tokens import DefaultTokens
  * 
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_operator, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -2218,33 +2218,122 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_operator, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":4
+  /* "strpipe/toolkit/build_vocabulary.pyx":2
+ * import operator
+ * from .default_tokens import DefaultTokens             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_n_s_DefaultTokens);
+  __Pyx_GIVEREF(__pyx_n_s_DefaultTokens);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_DefaultTokens);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_default_tokens, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DefaultTokens, __pyx_t_1) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "strpipe/toolkit/build_vocabulary.pyx":8
+ *         sentences: list[list[str]],
+ *         vocab_size: int = 1e+8,
+ *         sos_token: str = DefaultTokens.sos_token,             # <<<<<<<<<<<<<<
+ *         eos_token: str = DefaultTokens.eos_token,
+ *         unk_token: str = DefaultTokens.unk_token,
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_k_ = ((PyObject*)__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "strpipe/toolkit/build_vocabulary.pyx":9
+ *         vocab_size: int = 1e+8,
+ *         sos_token: str = DefaultTokens.sos_token,
+ *         eos_token: str = DefaultTokens.eos_token,             # <<<<<<<<<<<<<<
+ *         unk_token: str = DefaultTokens.unk_token,
+ *         pad_token: str = DefaultTokens.pad_token,
+ */
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_eos_token); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_k__2 = ((PyObject*)__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
+
+  /* "strpipe/toolkit/build_vocabulary.pyx":10
+ *         sos_token: str = DefaultTokens.sos_token,
+ *         eos_token: str = DefaultTokens.eos_token,
+ *         unk_token: str = DefaultTokens.unk_token,             # <<<<<<<<<<<<<<
+ *         pad_token: str = DefaultTokens.pad_token,
+ *     ):
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_unk_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_k__3 = ((PyObject*)__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "strpipe/toolkit/build_vocabulary.pyx":11
+ *         eos_token: str = DefaultTokens.eos_token,
+ *         unk_token: str = DefaultTokens.unk_token,
+ *         pad_token: str = DefaultTokens.pad_token,             # <<<<<<<<<<<<<<
+ *     ):
+ *         return build_vocabulary_from_sentences_in_c(
+ */
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_pad_token); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_k__4 = ((PyObject*)__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
+
+  /* "strpipe/toolkit/build_vocabulary.pyx":5
  * 
  * 
  * def build_vocabulary_from_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         vocab_size: int = 1e+8,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_16build_vocabulary_1build_vocabulary_from_sentences, NULL, __pyx_n_s_strpipe_toolkit_build_vocabulary_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_build_vocabulary_from_sentences, __pyx_t_1) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_16build_vocabulary_1build_vocabulary_from_sentences, NULL, __pyx_n_s_strpipe_toolkit_build_vocabulary_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_build_vocabulary_from_sentences, __pyx_t_2) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "strpipe/toolkit/build_vocabulary.pyx":1
  * import operator             # <<<<<<<<<<<<<<
- * 
+ * from .default_tokens import DefaultTokens
  * 
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /*--- Wrapped vars code ---*/
 
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init strpipe.toolkit.build_vocabulary", 0, __pyx_lineno, __pyx_filename);
@@ -3041,6 +3130,20 @@ bad:
     Py_XDECREF(empty_list);
     Py_XDECREF(empty_dict);
     return module;
+}
+
+/* ImportFrom */
+    static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
+    PyObject* value = __Pyx_PyObject_GetAttrStr(module, name);
+    if (unlikely(!value) && PyErr_ExceptionMatches(PyExc_AttributeError)) {
+        PyErr_Format(PyExc_ImportError,
+        #if PY_MAJOR_VERSION < 3
+            "cannot import name %.230s", PyString_AS_STRING(name));
+        #else
+            "cannot import name %S", name);
+        #endif
+    }
+    return value;
 }
 
 /* PyErrFetchRestore */

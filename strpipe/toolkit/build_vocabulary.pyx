@@ -1,13 +1,14 @@
 import operator
+from .default_tokens import DefaultTokens
 
 
 def build_vocabulary_from_sentences(
         sentences: list[list[str]],
         vocab_size: int = 1e+8,
-        sos_token: str = '<SOS>',
-        eos_token: str = '<EOS>',
-        unk_token: str = '<UNK>',
-        pad_token: str = '<PAD>',
+        sos_token: str = DefaultTokens.sos_token,
+        eos_token: str = DefaultTokens.eos_token,
+        unk_token: str = DefaultTokens.unk_token,
+        pad_token: str = DefaultTokens.pad_token,
     ):
         return build_vocabulary_from_sentences_in_c(
             sentences=sentences,
