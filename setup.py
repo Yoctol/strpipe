@@ -33,6 +33,8 @@ if use_cython:
         Extension(
             'strpipe.toolkit.compute_maxlen',
             ['strpipe/toolkit/compute_maxlen.pyx'],
+        ),
+        Extension(
             'strpipe.toolkit.consistent_hash',
             ['strpipe/toolkit/consistent_hash.pyx'],
             language='c++',
@@ -44,6 +46,8 @@ else:
         Extension(
             'strpipe.toolkit.compute_maxlen',
             ['strpipe/toolkit/compute_maxlen.c'],
+        ),
+        Extension(
             'strpipe.toolkit.consistent_hash',
             ['strpipe/toolkit/consistent_hash.cpp'],
         ),
