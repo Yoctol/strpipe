@@ -22,7 +22,7 @@ def build_vocabulary_from_sentences(
 
 cdef dict build_vocabulary_from_sentences_in_c(  # noqa: E999
         list sentences,
-        long int vocab_size,
+        unsigned int vocab_size,
         str sos_token,
         str eos_token,
         str unk_token,
@@ -34,13 +34,12 @@ cdef dict build_vocabulary_from_sentences_in_c(  # noqa: E999
             unk_token, pad_token,
         ],
     )
-    cdef unsigned int max_len = 0
-    cdef unsigned int n_sents = len(sentences)
     cdef str token
     cdef list sentence, trim_counter
-    cdef unsigned int i, j, vocab_count, n_tokens, n_counter
+    cdef unsigned int i, j, vocab_count, n_tokens, n_counter, n_sents
     cdef dict output_dict, counter
 
+    n_sents = len(sentences)
     counter = {}
     for i in range(n_sents):
         sentence = sentences[i]

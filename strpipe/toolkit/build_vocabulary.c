@@ -1043,10 +1043,10 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value)
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* CIntFromPy.proto */
-static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
+static CYTHON_INLINE unsigned int __Pyx_PyInt_As_unsigned_int(PyObject *);
 
 /* CIntFromPy.proto */
-static CYTHON_INLINE unsigned int __Pyx_PyInt_As_unsigned_int(PyObject *);
+static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -1072,7 +1072,7 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
 /* Module declarations from 'strpipe.toolkit.build_vocabulary' */
-static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_from_sentences_in_c(PyObject *, long, PyObject *, PyObject *, PyObject *, PyObject *); /*proto*/
+static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_from_sentences_in_c(PyObject *, unsigned int, PyObject *, PyObject *, PyObject *, PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "strpipe.toolkit.build_vocabulary"
 extern int __pyx_module_is_main_strpipe__toolkit__build_vocabulary;
 int __pyx_module_is_main_strpipe__toolkit__build_vocabulary = 0;
@@ -1274,7 +1274,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_16build_vocabulary_1build_vocabulary
 static PyObject *__pyx_pf_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_from_sentences(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sentences, PyObject *__pyx_v_vocab_size, PyObject *__pyx_v_sos_token, PyObject *__pyx_v_eos_token, PyObject *__pyx_v_unk_token, PyObject *__pyx_v_pad_token) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  long __pyx_t_1;
+  unsigned int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("build_vocabulary_from_sentences", 0);
 
@@ -1303,7 +1303,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_
  *             sos_token=sos_token,
  *             eos_token=eos_token,
  */
-  __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_v_vocab_size); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_unsigned_int(__pyx_v_vocab_size); if (unlikely((__pyx_t_1 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L1_error)
 
   /* "strpipe/toolkit/build_vocabulary.pyx":13
  *         pad_token: str = DefaultTokens.pad_token,
@@ -1342,13 +1342,11 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_
  * 
  * cdef dict build_vocabulary_from_sentences_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
  *         list sentences,
- *         long int vocab_size,
+ *         unsigned int vocab_size,
  */
 
-static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_from_sentences_in_c(PyObject *__pyx_v_sentences, long __pyx_v_vocab_size, PyObject *__pyx_v_sos_token, PyObject *__pyx_v_eos_token, PyObject *__pyx_v_unk_token, PyObject *__pyx_v_pad_token) {
+static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_from_sentences_in_c(PyObject *__pyx_v_sentences, unsigned int __pyx_v_vocab_size, PyObject *__pyx_v_sos_token, PyObject *__pyx_v_eos_token, PyObject *__pyx_v_unk_token, PyObject *__pyx_v_pad_token) {
   PyObject *__pyx_v_default_tokens = 0;
-  CYTHON_UNUSED unsigned int __pyx_v_max_len;
-  unsigned int __pyx_v_n_sents;
   PyObject *__pyx_v_token = 0;
   PyObject *__pyx_v_sentence = 0;
   PyObject *__pyx_v_trim_counter = 0;
@@ -1357,6 +1355,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   unsigned int __pyx_v_vocab_count;
   unsigned int __pyx_v_n_tokens;
   unsigned int __pyx_v_n_counter;
+  unsigned int __pyx_v_n_sents;
   PyObject *__pyx_v_output_dict = 0;
   PyObject *__pyx_v_counter = 0;
   unsigned int __pyx_v_idx;
@@ -1398,43 +1397,34 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   __pyx_v_default_tokens = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":37
- *         ],
- *     )
- *     cdef unsigned int max_len = 0             # <<<<<<<<<<<<<<
- *     cdef unsigned int n_sents = len(sentences)
- *     cdef str token
- */
-  __pyx_v_max_len = 0;
-
-  /* "strpipe/toolkit/build_vocabulary.pyx":38
- *     )
- *     cdef unsigned int max_len = 0
- *     cdef unsigned int n_sents = len(sentences)             # <<<<<<<<<<<<<<
- *     cdef str token
- *     cdef list sentence, trim_counter
+  /* "strpipe/toolkit/build_vocabulary.pyx":42
+ *     cdef dict output_dict, counter
+ * 
+ *     n_sents = len(sentences)             # <<<<<<<<<<<<<<
+ *     counter = {}
+ *     for i in range(n_sents):
  */
   if (unlikely(__pyx_v_sentences == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 38, __pyx_L1_error)
+    __PYX_ERR(0, 42, __pyx_L1_error)
   }
-  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 42, __pyx_L1_error)
   __pyx_v_n_sents = __pyx_t_2;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":44
- *     cdef dict output_dict, counter
+  /* "strpipe/toolkit/build_vocabulary.pyx":43
  * 
+ *     n_sents = len(sentences)
  *     counter = {}             # <<<<<<<<<<<<<<
  *     for i in range(n_sents):
  *         sentence = sentences[i]
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_counter = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":45
- * 
+  /* "strpipe/toolkit/build_vocabulary.pyx":44
+ *     n_sents = len(sentences)
  *     counter = {}
  *     for i in range(n_sents):             # <<<<<<<<<<<<<<
  *         sentence = sentences[i]
@@ -1445,7 +1435,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":46
+    /* "strpipe/toolkit/build_vocabulary.pyx":45
  *     counter = {}
  *     for i in range(n_sents):
  *         sentence = sentences[i]             # <<<<<<<<<<<<<<
@@ -1454,15 +1444,15 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
     if (unlikely(__pyx_v_sentences == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 46, __pyx_L1_error)
+      __PYX_ERR(0, 45, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 46, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 45, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_sentence, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":47
+    /* "strpipe/toolkit/build_vocabulary.pyx":46
  *     for i in range(n_sents):
  *         sentence = sentences[i]
  *         n_tokens = len(sentence)             # <<<<<<<<<<<<<<
@@ -1471,12 +1461,12 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
     if (unlikely(__pyx_v_sentence == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-      __PYX_ERR(0, 47, __pyx_L1_error)
+      __PYX_ERR(0, 46, __pyx_L1_error)
     }
-    __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentence); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentence); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 46, __pyx_L1_error)
     __pyx_v_n_tokens = __pyx_t_2;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":48
+    /* "strpipe/toolkit/build_vocabulary.pyx":47
  *         sentence = sentences[i]
  *         n_tokens = len(sentence)
  *         for j in range(n_tokens):             # <<<<<<<<<<<<<<
@@ -1488,7 +1478,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
     for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
       __pyx_v_j = __pyx_t_8;
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":49
+      /* "strpipe/toolkit/build_vocabulary.pyx":48
  *         n_tokens = len(sentence)
  *         for j in range(n_tokens):
  *             token = sentence[j]             # <<<<<<<<<<<<<<
@@ -1497,26 +1487,26 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
       if (unlikely(__pyx_v_sentence == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 49, __pyx_L1_error)
+        __PYX_ERR(0, 48, __pyx_L1_error)
       }
-      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentence, __pyx_v_j, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentence, __pyx_v_j, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 49, __pyx_L1_error)
+      if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 48, __pyx_L1_error)
       __Pyx_XDECREF_SET(__pyx_v_token, ((PyObject*)__pyx_t_1));
       __pyx_t_1 = 0;
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":50
+      /* "strpipe/toolkit/build_vocabulary.pyx":49
  *         for j in range(n_tokens):
  *             token = sentence[j]
  *             if token in counter:             # <<<<<<<<<<<<<<
  *                 counter[token] += 1
  *             else:
  */
-      __pyx_t_9 = (__Pyx_PyDict_ContainsTF(__pyx_v_token, __pyx_v_counter, Py_EQ)); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 50, __pyx_L1_error)
+      __pyx_t_9 = (__Pyx_PyDict_ContainsTF(__pyx_v_token, __pyx_v_counter, Py_EQ)); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 49, __pyx_L1_error)
       __pyx_t_10 = (__pyx_t_9 != 0);
       if (__pyx_t_10) {
 
-        /* "strpipe/toolkit/build_vocabulary.pyx":51
+        /* "strpipe/toolkit/build_vocabulary.pyx":50
  *             token = sentence[j]
  *             if token in counter:
  *                 counter[token] += 1             # <<<<<<<<<<<<<<
@@ -1525,16 +1515,16 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
         __Pyx_INCREF(__pyx_v_token);
         __pyx_t_11 = __pyx_v_token;
-        __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_counter, __pyx_t_11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_counter, __pyx_t_11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_12 = __Pyx_PyInt_AddObjC(__pyx_t_1, __pyx_int_1, 1, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 51, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyInt_AddObjC(__pyx_t_1, __pyx_int_1, 1, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 50, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        if (unlikely(PyDict_SetItem(__pyx_v_counter, __pyx_t_11, __pyx_t_12) < 0)) __PYX_ERR(0, 51, __pyx_L1_error)
+        if (unlikely(PyDict_SetItem(__pyx_v_counter, __pyx_t_11, __pyx_t_12) < 0)) __PYX_ERR(0, 50, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-        /* "strpipe/toolkit/build_vocabulary.pyx":50
+        /* "strpipe/toolkit/build_vocabulary.pyx":49
  *         for j in range(n_tokens):
  *             token = sentence[j]
  *             if token in counter:             # <<<<<<<<<<<<<<
@@ -1544,7 +1534,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
         goto __pyx_L7;
       }
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":53
+      /* "strpipe/toolkit/build_vocabulary.pyx":52
  *                 counter[token] += 1
  *             else:
  *                 counter[token] = 1             # <<<<<<<<<<<<<<
@@ -1552,103 +1542,103 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  *     trim_counter = sorted(
  */
       /*else*/ {
-        if (unlikely(PyDict_SetItem(__pyx_v_counter, __pyx_v_token, __pyx_int_1) < 0)) __PYX_ERR(0, 53, __pyx_L1_error)
+        if (unlikely(PyDict_SetItem(__pyx_v_counter, __pyx_v_token, __pyx_int_1) < 0)) __PYX_ERR(0, 52, __pyx_L1_error)
       }
       __pyx_L7:;
     }
   }
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":56
+  /* "strpipe/toolkit/build_vocabulary.pyx":55
  * 
  *     trim_counter = sorted(
  *         counter.items(),             # <<<<<<<<<<<<<<
  *         key=operator.itemgetter(1),
  *         reverse=True,
  */
-  __pyx_t_12 = __Pyx_PyDict_Items(__pyx_v_counter); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyDict_Items(__pyx_v_counter); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":55
+  /* "strpipe/toolkit/build_vocabulary.pyx":54
  *                 counter[token] = 1
  * 
  *     trim_counter = sorted(             # <<<<<<<<<<<<<<
  *         counter.items(),
  *         key=operator.itemgetter(1),
  */
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_12);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_12);
   __pyx_t_12 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":57
+  /* "strpipe/toolkit/build_vocabulary.pyx":56
  *     trim_counter = sorted(
  *         counter.items(),
  *         key=operator.itemgetter(1),             # <<<<<<<<<<<<<<
  *         reverse=True,
  *     )[0: vocab_size + 10]
  */
-  __pyx_t_12 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_operator); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_operator); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_itemgetter); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_itemgetter); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_key, __pyx_t_13) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_key, __pyx_t_13) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":58
+  /* "strpipe/toolkit/build_vocabulary.pyx":57
  *         counter.items(),
  *         key=operator.itemgetter(1),
  *         reverse=True,             # <<<<<<<<<<<<<<
  *     )[0: vocab_size + 10]
  * 
  */
-  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":55
+  /* "strpipe/toolkit/build_vocabulary.pyx":54
  *                 counter[token] = 1
  * 
  *     trim_counter = sorted(             # <<<<<<<<<<<<<<
  *         counter.items(),
  *         key=operator.itemgetter(1),
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_1, __pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_1, __pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":59
+  /* "strpipe/toolkit/build_vocabulary.pyx":58
  *         key=operator.itemgetter(1),
  *         reverse=True,
  *     )[0: vocab_size + 10]             # <<<<<<<<<<<<<<
  * 
  *     output_dict = {}
  */
-  __pyx_t_12 = __Pyx_PyObject_GetSlice(__pyx_t_13, 0, (__pyx_v_vocab_size + 10), NULL, NULL, NULL, 1, 1, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetSlice(__pyx_t_13, 0, (__pyx_v_vocab_size + 10), NULL, NULL, NULL, 1, 1, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_12))||((__pyx_t_12) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_12)->tp_name), 0))) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_t_12))||((__pyx_t_12) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_12)->tp_name), 0))) __PYX_ERR(0, 58, __pyx_L1_error)
   __pyx_v_trim_counter = ((PyObject*)__pyx_t_12);
   __pyx_t_12 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":61
+  /* "strpipe/toolkit/build_vocabulary.pyx":60
  *     )[0: vocab_size + 10]
  * 
  *     output_dict = {}             # <<<<<<<<<<<<<<
  *     vocab_count = 0
  *     for token in default_tokens:
  */
-  __pyx_t_12 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __pyx_v_output_dict = ((PyObject*)__pyx_t_12);
   __pyx_t_12 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":62
+  /* "strpipe/toolkit/build_vocabulary.pyx":61
  * 
  *     output_dict = {}
  *     vocab_count = 0             # <<<<<<<<<<<<<<
@@ -1657,7 +1647,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
   __pyx_v_vocab_count = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":63
+  /* "strpipe/toolkit/build_vocabulary.pyx":62
  *     output_dict = {}
  *     vocab_count = 0
  *     for token in default_tokens:             # <<<<<<<<<<<<<<
@@ -1665,7 +1655,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  *         vocab_count += 1
  */
   __pyx_t_2 = 0;
-  __pyx_t_13 = __Pyx_set_iterator(__pyx_v_default_tokens, 1, (&__pyx_t_15), (&__pyx_t_16)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_set_iterator(__pyx_v_default_tokens, 1, (&__pyx_t_15), (&__pyx_t_16)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_XDECREF(__pyx_t_12);
   __pyx_t_12 = __pyx_t_13;
@@ -1673,25 +1663,25 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   while (1) {
     __pyx_t_17 = __Pyx_set_iter_next(__pyx_t_12, __pyx_t_15, &__pyx_t_2, &__pyx_t_13, __pyx_t_16);
     if (unlikely(__pyx_t_17 == 0)) break;
-    if (unlikely(__pyx_t_17 == -1)) __PYX_ERR(0, 63, __pyx_L1_error)
+    if (unlikely(__pyx_t_17 == -1)) __PYX_ERR(0, 62, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
-    if (!(likely(PyString_CheckExact(__pyx_t_13))||((__pyx_t_13) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_13)->tp_name), 0))) __PYX_ERR(0, 63, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_t_13))||((__pyx_t_13) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_13)->tp_name), 0))) __PYX_ERR(0, 62, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_token, ((PyObject*)__pyx_t_13));
     __pyx_t_13 = 0;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":64
+    /* "strpipe/toolkit/build_vocabulary.pyx":63
  *     vocab_count = 0
  *     for token in default_tokens:
  *         output_dict[token] = vocab_count             # <<<<<<<<<<<<<<
  *         vocab_count += 1
  * 
  */
-    __pyx_t_13 = __Pyx_PyInt_From_unsigned_int(__pyx_v_vocab_count); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 64, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyInt_From_unsigned_int(__pyx_v_vocab_count); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 63, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
-    if (unlikely(PyDict_SetItem(__pyx_v_output_dict, __pyx_v_token, __pyx_t_13) < 0)) __PYX_ERR(0, 64, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_output_dict, __pyx_v_token, __pyx_t_13) < 0)) __PYX_ERR(0, 63, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":65
+    /* "strpipe/toolkit/build_vocabulary.pyx":64
  *     for token in default_tokens:
  *         output_dict[token] = vocab_count
  *         vocab_count += 1             # <<<<<<<<<<<<<<
@@ -1702,7 +1692,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   }
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":67
+  /* "strpipe/toolkit/build_vocabulary.pyx":66
  *         vocab_count += 1
  * 
  *     n_counter = len(trim_counter)             # <<<<<<<<<<<<<<
@@ -1711,12 +1701,12 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
   if (unlikely(__pyx_v_trim_counter == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 67, __pyx_L1_error)
+    __PYX_ERR(0, 66, __pyx_L1_error)
   }
-  __pyx_t_15 = PyList_GET_SIZE(__pyx_v_trim_counter); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_15 = PyList_GET_SIZE(__pyx_v_trim_counter); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 66, __pyx_L1_error)
   __pyx_v_n_counter = __pyx_t_15;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":68
+  /* "strpipe/toolkit/build_vocabulary.pyx":67
  * 
  *     n_counter = len(trim_counter)
  *     for idx in range(n_counter):             # <<<<<<<<<<<<<<
@@ -1728,7 +1718,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_idx = __pyx_t_5;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":69
+    /* "strpipe/toolkit/build_vocabulary.pyx":68
  *     n_counter = len(trim_counter)
  *     for idx in range(n_counter):
  *         key = trim_counter[idx][0]             # <<<<<<<<<<<<<<
@@ -1737,40 +1727,40 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
     if (unlikely(__pyx_v_trim_counter == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 69, __pyx_L1_error)
+      __PYX_ERR(0, 68, __pyx_L1_error)
     }
-    __pyx_t_12 = __Pyx_GetItemInt_List(__pyx_v_trim_counter, __pyx_v_idx, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 69, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_GetItemInt_List(__pyx_v_trim_counter, __pyx_v_idx, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_13 = __Pyx_GetItemInt(__pyx_t_12, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 69, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_GetItemInt(__pyx_t_12, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_XDECREF_SET(__pyx_v_key, __pyx_t_13);
     __pyx_t_13 = 0;
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":70
+    /* "strpipe/toolkit/build_vocabulary.pyx":69
  *     for idx in range(n_counter):
  *         key = trim_counter[idx][0]
  *         if key not in output_dict:             # <<<<<<<<<<<<<<
  *             output_dict[key] = vocab_count
  *             vocab_count += 1
  */
-    __pyx_t_10 = (__Pyx_PyDict_ContainsTF(__pyx_v_key, __pyx_v_output_dict, Py_NE)); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 70, __pyx_L1_error)
+    __pyx_t_10 = (__Pyx_PyDict_ContainsTF(__pyx_v_key, __pyx_v_output_dict, Py_NE)); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 69, __pyx_L1_error)
     __pyx_t_9 = (__pyx_t_10 != 0);
     if (__pyx_t_9) {
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":71
+      /* "strpipe/toolkit/build_vocabulary.pyx":70
  *         key = trim_counter[idx][0]
  *         if key not in output_dict:
  *             output_dict[key] = vocab_count             # <<<<<<<<<<<<<<
  *             vocab_count += 1
  *         if vocab_count > vocab_size - 1:
  */
-      __pyx_t_13 = __Pyx_PyInt_From_unsigned_int(__pyx_v_vocab_count); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 71, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyInt_From_unsigned_int(__pyx_v_vocab_count); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 70, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      if (unlikely(PyDict_SetItem(__pyx_v_output_dict, __pyx_v_key, __pyx_t_13) < 0)) __PYX_ERR(0, 71, __pyx_L1_error)
+      if (unlikely(PyDict_SetItem(__pyx_v_output_dict, __pyx_v_key, __pyx_t_13) < 0)) __PYX_ERR(0, 70, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":72
+      /* "strpipe/toolkit/build_vocabulary.pyx":71
  *         if key not in output_dict:
  *             output_dict[key] = vocab_count
  *             vocab_count += 1             # <<<<<<<<<<<<<<
@@ -1779,7 +1769,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
       __pyx_v_vocab_count = (__pyx_v_vocab_count + 1);
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":70
+      /* "strpipe/toolkit/build_vocabulary.pyx":69
  *     for idx in range(n_counter):
  *         key = trim_counter[idx][0]
  *         if key not in output_dict:             # <<<<<<<<<<<<<<
@@ -1788,7 +1778,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
     }
 
-    /* "strpipe/toolkit/build_vocabulary.pyx":73
+    /* "strpipe/toolkit/build_vocabulary.pyx":72
  *             output_dict[key] = vocab_count
  *             vocab_count += 1
  *         if vocab_count > vocab_size - 1:             # <<<<<<<<<<<<<<
@@ -1798,7 +1788,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
     __pyx_t_9 = ((__pyx_v_vocab_count > (__pyx_v_vocab_size - 1)) != 0);
     if (__pyx_t_9) {
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":74
+      /* "strpipe/toolkit/build_vocabulary.pyx":73
  *             vocab_count += 1
  *         if vocab_count > vocab_size - 1:
  *             break             # <<<<<<<<<<<<<<
@@ -1807,7 +1797,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  */
       goto __pyx_L11_break;
 
-      /* "strpipe/toolkit/build_vocabulary.pyx":73
+      /* "strpipe/toolkit/build_vocabulary.pyx":72
  *             output_dict[key] = vocab_count
  *             vocab_count += 1
  *         if vocab_count > vocab_size - 1:             # <<<<<<<<<<<<<<
@@ -1818,7 +1808,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
   }
   __pyx_L11_break:;
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":76
+  /* "strpipe/toolkit/build_vocabulary.pyx":75
  *             break
  * 
  *     return output_dict             # <<<<<<<<<<<<<<
@@ -1833,7 +1823,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_16build_vocabulary_build_vocabulary_f
  * 
  * cdef dict build_vocabulary_from_sentences_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
  *         list sentences,
- *         long int vocab_size,
+ *         unsigned int vocab_size,
  */
 
   /* function exit code */
@@ -1920,8 +1910,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 45, __pyx_L1_error)
-  __pyx_builtin_sorted = __Pyx_GetBuiltinName(__pyx_n_s_sorted); if (!__pyx_builtin_sorted) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_builtin_sorted = __Pyx_GetBuiltinName(__pyx_n_s_sorted); if (!__pyx_builtin_sorted) __PYX_ERR(0, 54, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1931,14 +1921,14 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "strpipe/toolkit/build_vocabulary.pyx":57
+  /* "strpipe/toolkit/build_vocabulary.pyx":56
  *     trim_counter = sorted(
  *         counter.items(),
  *         key=operator.itemgetter(1),             # <<<<<<<<<<<<<<
  *         reverse=True,
  *     )[0: vocab_size + 10]
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
@@ -3460,195 +3450,6 @@ bad:
 }
 
 /* CIntFromPy */
-    static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
-    const long neg_one = (long) -1, const_zero = (long) 0;
-    const int is_unsigned = neg_one > const_zero;
-#if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_Check(x))) {
-        if (sizeof(long) < sizeof(long)) {
-            __PYX_VERIFY_RETURN_INT(long, long, PyInt_AS_LONG(x))
-        } else {
-            long val = PyInt_AS_LONG(x);
-            if (is_unsigned && unlikely(val < 0)) {
-                goto raise_neg_overflow;
-            }
-            return (long) val;
-        }
-    } else
-#endif
-    if (likely(PyLong_Check(x))) {
-        if (is_unsigned) {
-#if CYTHON_USE_PYLONG_INTERNALS
-            const digit* digits = ((PyLongObject*)x)->ob_digit;
-            switch (Py_SIZE(x)) {
-                case  0: return (long) 0;
-                case  1: __PYX_VERIFY_RETURN_INT(long, digit, digits[0])
-                case 2:
-                    if (8 * sizeof(long) > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) >= 2 * PyLong_SHIFT) {
-                            return (long) (((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
-                        }
-                    }
-                    break;
-                case 3:
-                    if (8 * sizeof(long) > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) >= 3 * PyLong_SHIFT) {
-                            return (long) (((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
-                        }
-                    }
-                    break;
-                case 4:
-                    if (8 * sizeof(long) > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) >= 4 * PyLong_SHIFT) {
-                            return (long) (((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
-                        }
-                    }
-                    break;
-            }
-#endif
-#if CYTHON_COMPILING_IN_CPYTHON
-            if (unlikely(Py_SIZE(x) < 0)) {
-                goto raise_neg_overflow;
-            }
-#else
-            {
-                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
-                if (unlikely(result < 0))
-                    return (long) -1;
-                if (unlikely(result == 1))
-                    goto raise_neg_overflow;
-            }
-#endif
-            if (sizeof(long) <= sizeof(unsigned long)) {
-                __PYX_VERIFY_RETURN_INT_EXC(long, unsigned long, PyLong_AsUnsignedLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
-                __PYX_VERIFY_RETURN_INT_EXC(long, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
-#endif
-            }
-        } else {
-#if CYTHON_USE_PYLONG_INTERNALS
-            const digit* digits = ((PyLongObject*)x)->ob_digit;
-            switch (Py_SIZE(x)) {
-                case  0: return (long) 0;
-                case -1: __PYX_VERIFY_RETURN_INT(long, sdigit, (sdigit) (-(sdigit)digits[0]))
-                case  1: __PYX_VERIFY_RETURN_INT(long,  digit, +digits[0])
-                case -2:
-                    if (8 * sizeof(long) - 1 > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                            return (long) (((long)-1)*(((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-                case 2:
-                    if (8 * sizeof(long) > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                            return (long) ((((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-                case -3:
-                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                            return (long) (((long)-1)*(((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-                case 3:
-                    if (8 * sizeof(long) > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                            return (long) ((((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-                case -4:
-                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                            return (long) (((long)-1)*(((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-                case 4:
-                    if (8 * sizeof(long) > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                            return (long) ((((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-            }
-#endif
-            if (sizeof(long) <= sizeof(long)) {
-                __PYX_VERIFY_RETURN_INT_EXC(long, long, PyLong_AsLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
-                __PYX_VERIFY_RETURN_INT_EXC(long, PY_LONG_LONG, PyLong_AsLongLong(x))
-#endif
-            }
-        }
-        {
-#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
-            PyErr_SetString(PyExc_RuntimeError,
-                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
-#else
-            long val;
-            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
- #if PY_MAJOR_VERSION < 3
-            if (likely(v) && !PyLong_Check(v)) {
-                PyObject *tmp = v;
-                v = PyNumber_Long(tmp);
-                Py_DECREF(tmp);
-            }
- #endif
-            if (likely(v)) {
-                int one = 1; int is_little = (int)*(unsigned char *)&one;
-                unsigned char *bytes = (unsigned char *)&val;
-                int ret = _PyLong_AsByteArray((PyLongObject *)v,
-                                              bytes, sizeof(val),
-                                              is_little, !is_unsigned);
-                Py_DECREF(v);
-                if (likely(!ret))
-                    return val;
-            }
-#endif
-            return (long) -1;
-        }
-    } else {
-        long val;
-        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
-        if (!tmp) return (long) -1;
-        val = __Pyx_PyInt_As_long(tmp);
-        Py_DECREF(tmp);
-        return val;
-    }
-raise_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "value too large to convert to long");
-    return (long) -1;
-raise_neg_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "can't convert negative value to long");
-    return (long) -1;
-}
-
-/* CIntFromPy */
     static CYTHON_INLINE unsigned int __Pyx_PyInt_As_unsigned_int(PyObject *x) {
     const unsigned int neg_one = (unsigned int) -1, const_zero = (unsigned int) 0;
     const int is_unsigned = neg_one > const_zero;
@@ -3835,6 +3636,195 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to unsigned int");
     return (unsigned int) -1;
+}
+
+/* CIntFromPy */
+    static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
+    const long neg_one = (long) -1, const_zero = (long) 0;
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(long) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(long, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (long) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (long) 0;
+                case  1: __PYX_VERIFY_RETURN_INT(long, digit, digits[0])
+                case 2:
+                    if (8 * sizeof(long) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) >= 2 * PyLong_SHIFT) {
+                            return (long) (((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(long) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) >= 3 * PyLong_SHIFT) {
+                            return (long) (((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(long) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) >= 4 * PyLong_SHIFT) {
+                            return (long) (((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
+                        }
+                    }
+                    break;
+            }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+#else
+            {
+                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                if (unlikely(result < 0))
+                    return (long) -1;
+                if (unlikely(result == 1))
+                    goto raise_neg_overflow;
+            }
+#endif
+            if (sizeof(long) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(long, unsigned long, PyLong_AsUnsignedLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(long, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+#endif
+            }
+        } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (long) 0;
+                case -1: __PYX_VERIFY_RETURN_INT(long, sdigit, (sdigit) (-(sdigit)digits[0]))
+                case  1: __PYX_VERIFY_RETURN_INT(long,  digit, +digits[0])
+                case -2:
+                    if (8 * sizeof(long) - 1 > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                            return (long) (((long)-1)*(((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+                case 2:
+                    if (8 * sizeof(long) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                            return (long) ((((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+                case -3:
+                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                            return (long) (((long)-1)*(((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(long) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                            return (long) ((((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+                case -4:
+                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                            return (long) (((long)-1)*(((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(long) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                            return (long) ((((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+            }
+#endif
+            if (sizeof(long) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(long, long, PyLong_AsLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(long, PY_LONG_LONG, PyLong_AsLongLong(x))
+#endif
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            long val;
+            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (long) -1;
+        }
+    } else {
+        long val;
+        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
+        if (!tmp) return (long) -1;
+        val = __Pyx_PyInt_As_long(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to long");
+    return (long) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to long");
+    return (long) -1;
 }
 
 /* CIntFromPy */
