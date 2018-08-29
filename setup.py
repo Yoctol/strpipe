@@ -34,6 +34,11 @@ if use_cython:
             'strpipe.toolkit.compute_maxlen',
             ['strpipe/toolkit/compute_maxlen.pyx'],
         ),
+        Extension(
+            'strpipe.toolkit.consistent_hash',
+            ['strpipe/toolkit/consistent_hash.pyx'],
+            language='c++',
+        ),
     ]
     cmdclass.update({'build_ext': build_ext})
 else:
@@ -42,8 +47,11 @@ else:
             'strpipe.toolkit.compute_maxlen',
             ['strpipe/toolkit/compute_maxlen.c'],
         ),
+        Extension(
+            'strpipe.toolkit.consistent_hash',
+            ['strpipe/toolkit/consistent_hash.cpp'],
+        ),
     ]
-
 
 setup(
     name='strpipe',
@@ -51,12 +59,12 @@ setup(
     description='Reversible String Process Pipeline',
     long_description=long_description,
     python_requires='>=3.6',
-    packages=find_packages(),
     author='Yoctol Info',
     author_email='cph@yoctol.com',
     url='https://github.com/Yoctol/strpipe',
     license='MIT',
     install_requires=[],
+    packages=find_packages(),
     cmdclass=cmdclass,
     ext_modules=ext_modules,
 )
