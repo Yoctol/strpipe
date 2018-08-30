@@ -1,10 +1,10 @@
 
 class DefaultTokens:
 
-    sos_token = '<SOS>'
-    eos_token = '<EOS>'
-    unk_token = '<UNK>'
-    pad_token = '<PAD>'
+    sos = '<SOS>'
+    eos = '<EOS>'
+    unk = '<UNK>'
+    pad = '<PAD>'
 
     @classmethod
     def list_all_tokens(cls):
