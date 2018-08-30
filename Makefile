@@ -40,3 +40,7 @@ dev-test:
 	pip install -e .
 	flake8
 	pytest -v
+
+.PHONY: docs
+docs:
+	make -C docs html
