@@ -1,11 +1,12 @@
 # distutils: language = c++
 from consistent_hash cimport consistent_hash_in_c  # noqa: E999
+from default_tokens import DefaultTokens
 
 
 def token_to_index_with_unk(
         token: str,
         word2index: dict,
-        unk_token: str = '<UNK>',
+        unk_token: str = DefaultTokens.unk,
     ) -> int:
     return token_to_index_with_unk_in_c(
         token=token,
