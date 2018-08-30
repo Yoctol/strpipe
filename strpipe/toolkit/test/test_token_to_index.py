@@ -49,4 +49,4 @@ def test_token_to_index_with_hash():
             "想去": 5,
         },
     )
-    assert output == 0
+    assert output == 5

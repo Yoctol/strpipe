@@ -1,10 +1,11 @@
-import hashlib
+# distutils: language = c++
+from consistent_hash cimport consistent_hash_in_c  # noqa: E999
 
 
 def token_to_index_with_unk(
         token: str,
         word2index: dict,
-        unk_token: str = "<UNK>",
+        unk_token: str = '<UNK>',
     ) -> int:
     return token_to_index_with_unk_in_c(
         token=token,
@@ -13,12 +14,12 @@ def token_to_index_with_unk(
     )
 
 
-cdef int token_to_index_with_unk_in_c(  # noqa
+cdef unsigned int token_to_index_with_unk_in_c(  # noqa: E999
         str token,
         str unk_token,
         dict word2index,
     ):
-    cdef long int index
+    cdef unsigned int index
 
     if token not in word2index:
         # assign unk index
@@ -38,14 +39,18 @@ def token_to_index_with_hash(
     )
 
 
-cdef int token_to_index_with_hash_in_c(
+cdef unsigned int token_to_index_with_hash_in_c(  # noqa: E999
         str token,
         dict word2index,
     ):
-    cdef long int index
+    cdef unsigned int index
 
     if token not in word2index:
-        index = hashlib.sha1(token) % len(word2index)
+        index = consistent_hash_in_c(
+            input_str=token,
+            mod_int=len(word2index),
+            seed=0,
+        )
     else:
         index = word2index[token]
     return index

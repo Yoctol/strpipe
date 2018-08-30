@@ -50,6 +50,7 @@ if use_cython:
         Extension(
             'strpipe.toolkit.token_to_index',
             ['strpipe/toolkit/token_to_index.pyx'],
+            language='c++',
         ),
     ]
     cmdclass.update({'build_ext': build_ext})
@@ -73,7 +74,7 @@ else:
         ),
         Extension(
             'strpipe.toolkit.token_to_index',
-            ['strpipe/toolkit/token_to_index.c'],
+            ['strpipe/toolkit/token_to_index.cpp'],
         ),
     ]
 
