@@ -1,6 +1,3 @@
-from .pad import Pad
-
-
 class _OpFactory:
 
     def __init__(self):
@@ -12,9 +9,7 @@ class _OpFactory:
         else:
             raise KeyError(f"{name} already exists.")
 
-
-op_factory = _OpFactory()
-
-op_factory.register('Pad'
-    Pad,
-)
+    def __getitem__(self, op_name):
+        if op_name not in self._factory:
+            raise KeyError(f"{op_name} is not registered")
+        return self._factory[op_name]

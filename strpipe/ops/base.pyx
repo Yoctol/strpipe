@@ -3,11 +3,8 @@ cdef class BaseOp:
     cdef public str input_type
     cdef public str output_type
 
-    def __init__(self):
-        pass
-
     @staticmethod
-    def fit(input) -> state:
+    def fit(input):
         pass
 
     @staticmethod
@@ -15,5 +12,5 @@ cdef class BaseOp:
         pass
 
     @staticmethod
-    def inverse_transfrom(state, input, meta) -> Data:
+    def inverse_transfrom(state, input, meta):
         pass

@@ -10,6 +10,7 @@ install:
 .PHONY: lint
 lint:
 	flake8
+	flake8 --config=.flake8.cython
 
 .PHONY: test
 test:

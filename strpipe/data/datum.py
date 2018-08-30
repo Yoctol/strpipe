@@ -1,7 +1,5 @@
 from strpipe.data.types import (
     STRING,
-    STRING_LIST,
-    INT_LIST,
 )
 
 

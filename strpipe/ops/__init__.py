@@ -1,1 +1,4 @@
-from strpipe.ops.factory import op_factory
+from strpipe.ops.factory import _OpFactory
+
+
+op_factory = _OpFactory()
