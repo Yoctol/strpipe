@@ -923,6 +923,15 @@ static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
 #define __Pyx_PyList_Append(L,x) PyList_Append(L,x)
 #endif
 
+/* Import.proto */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
+
+/* ImportFrom.proto */
+static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
+
+/* GetModuleGlobalName.proto */
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
+
 /* PyThreadStateGet.proto */
 #if CYTHON_FAST_THREAD_STATE
 #define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
@@ -1029,21 +1038,27 @@ int __pyx_module_is_main_strpipe__toolkit__pad_sentences = 0;
 
 /* Implementation of 'strpipe.toolkit.pad_sentences' */
 static PyObject *__pyx_builtin_range;
-static const char __pyx_k_PAD[] = "<PAD>";
+static const char __pyx_k_pad[] = "pad";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_range[] = "range";
+static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_maxlen[] = "maxlen";
 static const char __pyx_k_pad_token[] = "pad_token";
 static const char __pyx_k_sentences[] = "sentences";
+static const char __pyx_k_DefaultTokens[] = "DefaultTokens";
 static const char __pyx_k_pad_sentences[] = "pad_sentences";
+static const char __pyx_k_default_tokens[] = "default_tokens";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_strpipe_toolkit_pad_sentences[] = "strpipe.toolkit.pad_sentences";
 static const char __pyx_k_strpipe_toolkit_pad_sentences_py[] = "strpipe/toolkit/pad_sentences.pyx";
-static PyObject *__pyx_kp_s_PAD;
+static PyObject *__pyx_n_s_DefaultTokens;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_default_tokens;
+static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_maxlen;
+static PyObject *__pyx_n_s_pad;
 static PyObject *__pyx_n_s_pad_sentences;
 static PyObject *__pyx_n_s_pad_token;
 static PyObject *__pyx_n_s_range;
@@ -1052,11 +1067,12 @@ static PyObject *__pyx_n_s_strpipe_toolkit_pad_sentences;
 static PyObject *__pyx_kp_s_strpipe_toolkit_pad_sentences_py;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sentences, PyObject *__pyx_v_maxlen, PyObject *__pyx_v_pad_token); /* proto */
-static PyObject *__pyx_tuple_;
-static PyObject *__pyx_codeobj__2;
+static PyObject *__pyx_k_;
+static PyObject *__pyx_tuple__2;
+static PyObject *__pyx_codeobj__3;
 /* Late includes */
 
-/* "strpipe/toolkit/pad_sentences.pyx":3
+/* "strpipe/toolkit/pad_sentences.pyx":4
  * 
  * 
  * def pad_sentences(             # <<<<<<<<<<<<<<
@@ -1077,7 +1093,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_13pad_sentences_1pad_sentences(PyObj
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_sentences,&__pyx_n_s_maxlen,&__pyx_n_s_pad_token,0};
     PyObject* values[3] = {0,0,0};
-    values[2] = ((PyObject*)__pyx_kp_s_PAD);
+    values[2] = __pyx_k_;
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -1100,7 +1116,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_13pad_sentences_1pad_sentences(PyObj
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_maxlen)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("pad_sentences", 0, 2, 3, 1); __PYX_ERR(0, 3, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("pad_sentences", 0, 2, 3, 1); __PYX_ERR(0, 4, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -1110,7 +1126,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_13pad_sentences_1pad_sentences(PyObj
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "pad_sentences") < 0)) __PYX_ERR(0, 3, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "pad_sentences") < 0)) __PYX_ERR(0, 4, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1128,13 +1144,13 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_13pad_sentences_1pad_sentences(PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pad_sentences", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 3, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pad_sentences", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 4, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.toolkit.pad_sentences.pad_sentences", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pad_token), (&PyString_Type), 1, "pad_token", 1))) __PYX_ERR(0, 6, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pad_token), (&PyString_Type), 1, "pad_token", 1))) __PYX_ERR(0, 7, __pyx_L1_error)
   __pyx_r = __pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(__pyx_self, __pyx_v_sentences, __pyx_v_maxlen, __pyx_v_pad_token);
 
   /* function exit code */
@@ -1153,7 +1169,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("pad_sentences", 0);
 
-  /* "strpipe/toolkit/pad_sentences.pyx":9
+  /* "strpipe/toolkit/pad_sentences.pyx":10
  *     ) -> list[list[str]]:
  * 
  *     return pad_sentences_in_c(             # <<<<<<<<<<<<<<
@@ -1162,38 +1178,38 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "strpipe/toolkit/pad_sentences.pyx":10
+  /* "strpipe/toolkit/pad_sentences.pyx":11
  * 
  *     return pad_sentences_in_c(
  *         sentences=sentences,             # <<<<<<<<<<<<<<
  *         pad_token=pad_token,
  *         maxlen=maxlen,
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_sentences))||((__pyx_v_sentences) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_sentences)->tp_name), 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_sentences))||((__pyx_v_sentences) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_sentences)->tp_name), 0))) __PYX_ERR(0, 11, __pyx_L1_error)
 
-  /* "strpipe/toolkit/pad_sentences.pyx":12
+  /* "strpipe/toolkit/pad_sentences.pyx":13
  *         sentences=sentences,
  *         pad_token=pad_token,
  *         maxlen=maxlen,             # <<<<<<<<<<<<<<
  *     )
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_1 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_1 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 13, __pyx_L1_error)
 
-  /* "strpipe/toolkit/pad_sentences.pyx":9
+  /* "strpipe/toolkit/pad_sentences.pyx":10
  *     ) -> list[list[str]]:
  * 
  *     return pad_sentences_in_c(             # <<<<<<<<<<<<<<
  *         sentences=sentences,
  *         pad_token=pad_token,
  */
-  __pyx_t_2 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(((PyObject*)__pyx_v_sentences), __pyx_v_pad_token, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(((PyObject*)__pyx_v_sentences), __pyx_v_pad_token, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":3
+  /* "strpipe/toolkit/pad_sentences.pyx":4
  * 
  * 
  * def pad_sentences(             # <<<<<<<<<<<<<<
@@ -1212,7 +1228,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/pad_sentences.pyx":16
+/* "strpipe/toolkit/pad_sentences.pyx":17
  * 
  * 
  * cdef list pad_sentence_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
@@ -1233,7 +1249,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("pad_sentence_in_c", 0);
 
-  /* "strpipe/toolkit/pad_sentences.pyx":24
+  /* "strpipe/toolkit/pad_sentences.pyx":25
  *     cdef list padded_sentence, diff_sentence
  * 
  *     sent_len = len(sentence)             # <<<<<<<<<<<<<<
@@ -1242,12 +1258,12 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
  */
   if (unlikely(__pyx_v_sentence == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 24, __pyx_L1_error)
+    __PYX_ERR(0, 25, __pyx_L1_error)
   }
-  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_sentence); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_sentence); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 25, __pyx_L1_error)
   __pyx_v_sent_len = __pyx_t_1;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":26
+  /* "strpipe/toolkit/pad_sentences.pyx":27
  *     sent_len = len(sentence)
  * 
  *     if sent_len >= maxlen:             # <<<<<<<<<<<<<<
@@ -1257,7 +1273,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
   __pyx_t_2 = ((__pyx_v_sent_len >= __pyx_v_maxlen) != 0);
   if (__pyx_t_2) {
 
-    /* "strpipe/toolkit/pad_sentences.pyx":27
+    /* "strpipe/toolkit/pad_sentences.pyx":28
  * 
  *     if sent_len >= maxlen:
  *         padded_sentence = sentence[: maxlen]             # <<<<<<<<<<<<<<
@@ -1266,14 +1282,14 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
  */
     if (unlikely(__pyx_v_sentence == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 27, __pyx_L1_error)
+      __PYX_ERR(0, 28, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_PyList_GetSlice(__pyx_v_sentence, 0, __pyx_v_maxlen); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyList_GetSlice(__pyx_v_sentence, 0, __pyx_v_maxlen); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 28, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_v_padded_sentence = ((PyObject*)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":26
+    /* "strpipe/toolkit/pad_sentences.pyx":27
  *     sent_len = len(sentence)
  * 
  *     if sent_len >= maxlen:             # <<<<<<<<<<<<<<
@@ -1283,7 +1299,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
     goto __pyx_L3;
   }
 
-  /* "strpipe/toolkit/pad_sentences.pyx":29
+  /* "strpipe/toolkit/pad_sentences.pyx":30
  *         padded_sentence = sentence[: maxlen]
  *     else:
  *         diff_len = maxlen - sent_len             # <<<<<<<<<<<<<<
@@ -1293,14 +1309,14 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
   /*else*/ {
     __pyx_v_diff_len = (__pyx_v_maxlen - __pyx_v_sent_len);
 
-    /* "strpipe/toolkit/pad_sentences.pyx":30
+    /* "strpipe/toolkit/pad_sentences.pyx":31
  *     else:
  *         diff_len = maxlen - sent_len
  *         diff_sentence = [pad_token] * diff_len             # <<<<<<<<<<<<<<
  *         padded_sentence = sentence
  *         padded_sentence.extend(diff_sentence)
  */
-    __pyx_t_3 = PyList_New(1 * (__pyx_v_diff_len)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_3 = PyList_New(1 * (__pyx_v_diff_len)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     { Py_ssize_t __pyx_temp;
       for (__pyx_temp=0; __pyx_temp < __pyx_v_diff_len; __pyx_temp++) {
@@ -1312,7 +1328,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
     __pyx_v_diff_sentence = ((PyObject*)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":31
+    /* "strpipe/toolkit/pad_sentences.pyx":32
  *         diff_len = maxlen - sent_len
  *         diff_sentence = [pad_token] * diff_len
  *         padded_sentence = sentence             # <<<<<<<<<<<<<<
@@ -1322,7 +1338,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
     __Pyx_INCREF(__pyx_v_sentence);
     __pyx_v_padded_sentence = __pyx_v_sentence;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":32
+    /* "strpipe/toolkit/pad_sentences.pyx":33
  *         diff_sentence = [pad_token] * diff_len
  *         padded_sentence = sentence
  *         padded_sentence.extend(diff_sentence)             # <<<<<<<<<<<<<<
@@ -1331,13 +1347,13 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
  */
     if (unlikely(__pyx_v_padded_sentence == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "extend");
-      __PYX_ERR(0, 32, __pyx_L1_error)
+      __PYX_ERR(0, 33, __pyx_L1_error)
     }
-    __pyx_t_4 = __Pyx_PyList_Extend(__pyx_v_padded_sentence, __pyx_v_diff_sentence); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 32, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyList_Extend(__pyx_v_padded_sentence, __pyx_v_diff_sentence); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 33, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":33
+  /* "strpipe/toolkit/pad_sentences.pyx":34
  *         padded_sentence = sentence
  *         padded_sentence.extend(diff_sentence)
  *     return padded_sentence             # <<<<<<<<<<<<<<
@@ -1349,7 +1365,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
   __pyx_r = __pyx_v_padded_sentence;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":16
+  /* "strpipe/toolkit/pad_sentences.pyx":17
  * 
  * 
  * cdef list pad_sentence_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
@@ -1370,7 +1386,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/pad_sentences.pyx":36
+/* "strpipe/toolkit/pad_sentences.pyx":37
  * 
  * 
  * cdef list pad_sentences_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
@@ -1394,19 +1410,19 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
   int __pyx_t_6;
   __Pyx_RefNannySetupContext("pad_sentences_in_c", 0);
 
-  /* "strpipe/toolkit/pad_sentences.pyx":44
+  /* "strpipe/toolkit/pad_sentences.pyx":45
  *     cdef list sentence, padded_sentence, output_list
  * 
  *     output_list = []             # <<<<<<<<<<<<<<
  *     n_sent = len(sentences)
  * 
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_output_list = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":45
+  /* "strpipe/toolkit/pad_sentences.pyx":46
  * 
  *     output_list = []
  *     n_sent = len(sentences)             # <<<<<<<<<<<<<<
@@ -1415,12 +1431,12 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
  */
   if (unlikely(__pyx_v_sentences == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 45, __pyx_L1_error)
+    __PYX_ERR(0, 46, __pyx_L1_error)
   }
-  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 46, __pyx_L1_error)
   __pyx_v_n_sent = __pyx_t_2;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":47
+  /* "strpipe/toolkit/pad_sentences.pyx":48
  *     n_sent = len(sentences)
  * 
  *     for i in range(n_sent):             # <<<<<<<<<<<<<<
@@ -1432,7 +1448,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":48
+    /* "strpipe/toolkit/pad_sentences.pyx":49
  * 
  *     for i in range(n_sent):
  *         sentence = sentences[i]             # <<<<<<<<<<<<<<
@@ -1441,36 +1457,36 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
  */
     if (unlikely(__pyx_v_sentences == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 48, __pyx_L1_error)
+      __PYX_ERR(0, 49, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 48, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 49, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_sentence, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":49
+    /* "strpipe/toolkit/pad_sentences.pyx":50
  *     for i in range(n_sent):
  *         sentence = sentences[i]
  *         padded_sentence = pad_sentence_in_c(             # <<<<<<<<<<<<<<
  *             sentence=sentence,
  *             pad_token=pad_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(__pyx_v_sentence, __pyx_v_pad_token, __pyx_v_maxlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(__pyx_v_sentence, __pyx_v_pad_token, __pyx_v_maxlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_padded_sentence, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":54
+    /* "strpipe/toolkit/pad_sentences.pyx":55
  *             maxlen=maxlen,
  *         )
  *         output_list.append(padded_sentence)             # <<<<<<<<<<<<<<
  *     return output_list
  */
-    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_output_list, __pyx_v_padded_sentence); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 54, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_output_list, __pyx_v_padded_sentence); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 55, __pyx_L1_error)
   }
 
-  /* "strpipe/toolkit/pad_sentences.pyx":55
+  /* "strpipe/toolkit/pad_sentences.pyx":56
  *         )
  *         output_list.append(padded_sentence)
  *     return output_list             # <<<<<<<<<<<<<<
@@ -1480,7 +1496,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
   __pyx_r = __pyx_v_output_list;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":36
+  /* "strpipe/toolkit/pad_sentences.pyx":37
  * 
  * 
  * cdef list pad_sentences_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
@@ -1539,10 +1555,13 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_PAD, __pyx_k_PAD, sizeof(__pyx_k_PAD), 0, 0, 1, 0},
+  {&__pyx_n_s_DefaultTokens, __pyx_k_DefaultTokens, sizeof(__pyx_k_DefaultTokens), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_default_tokens, __pyx_k_default_tokens, sizeof(__pyx_k_default_tokens), 0, 0, 1, 1},
+  {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_maxlen, __pyx_k_maxlen, sizeof(__pyx_k_maxlen), 0, 0, 1, 1},
+  {&__pyx_n_s_pad, __pyx_k_pad, sizeof(__pyx_k_pad), 0, 0, 1, 1},
   {&__pyx_n_s_pad_sentences, __pyx_k_pad_sentences, sizeof(__pyx_k_pad_sentences), 0, 0, 1, 1},
   {&__pyx_n_s_pad_token, __pyx_k_pad_token, sizeof(__pyx_k_pad_token), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
@@ -1553,7 +1572,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 48, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1563,17 +1582,17 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "strpipe/toolkit/pad_sentences.pyx":3
+  /* "strpipe/toolkit/pad_sentences.pyx":4
  * 
  * 
  * def pad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         maxlen: int,
  */
-  __pyx_tuple_ = PyTuple_Pack(3, __pyx_n_s_sentences, __pyx_n_s_maxlen, __pyx_n_s_pad_token); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 3, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_pad_sentences_py, __pyx_n_s_pad_sentences, 3, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(3, __pyx_n_s_sentences, __pyx_n_s_maxlen, __pyx_n_s_pad_token); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
+  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_pad_sentences_py, __pyx_n_s_pad_sentences, 4, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1582,7 +1601,7 @@ static int __Pyx_InitCachedConstants(void) {
 }
 
 static int __Pyx_InitGlobals(void) {
-  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 3, __pyx_L1_error);
+  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1727,6 +1746,7 @@ static int __pyx_pymod_exec_pad_sentences(PyObject *__pyx_pyinit_module)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannyDeclarations
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m && __pyx_m == __pyx_pyinit_module) return 0;
@@ -1743,27 +1763,27 @@ if (!__Pyx_RefNanny) {
 }
 #endif
   __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_pad_sentences(void)", 0);
-  if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
-  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 3, __pyx_L1_error)
-  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 3, __pyx_L1_error)
-  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pyx_CyFunction_USED
-  if (__pyx_CyFunction_init() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__pyx_CyFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_FusedFunction_USED
-  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Coroutine_USED
-  if (__pyx_Coroutine_init() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__pyx_Coroutine_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Generator_USED
-  if (__pyx_Generator_init() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__pyx_Generator_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_AsyncGen_USED
-  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_StopAsyncIteration_USED
-  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   /*--- Library function declarations ---*/
   /*--- Threads initialization code ---*/
@@ -1782,36 +1802,36 @@ if (!__Pyx_RefNanny) {
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
-  if (unlikely(!__pyx_m)) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (unlikely(!__pyx_m)) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_INCREF(__pyx_d);
-  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(0, 3, __pyx_L1_error)
-  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(0, 1, __pyx_L1_error)
   #if CYTHON_COMPILING_IN_PYPY
   Py_INCREF(__pyx_b);
   #endif
-  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(0, 3, __pyx_L1_error);
+  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   /*--- Initialize various global constants etc. ---*/
-  if (__Pyx_InitGlobals() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__Pyx_InitGlobals() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
-  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   if (__pyx_module_is_main_strpipe__toolkit__pad_sentences) {
-    if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+    if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
-    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 3, __pyx_L1_error)
+    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
     if (!PyDict_GetItemString(modules, "strpipe.toolkit.pad_sentences")) {
-      if (unlikely(PyDict_SetItemString(modules, "strpipe.toolkit.pad_sentences", __pyx_m) < 0)) __PYX_ERR(0, 3, __pyx_L1_error)
+      if (unlikely(PyDict_SetItemString(modules, "strpipe.toolkit.pad_sentences", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
   /*--- Builtin init code ---*/
-  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Constants init code ---*/
-  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
@@ -1822,31 +1842,65 @@ if (!__Pyx_RefNanny) {
   (void)__Pyx_modinit_function_import_code();
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
-  if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "strpipe/toolkit/pad_sentences.pyx":3
+  /* "strpipe/toolkit/pad_sentences.pyx":1
+ * from default_tokens import DefaultTokens             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_n_s_DefaultTokens);
+  __Pyx_GIVEREF(__pyx_n_s_DefaultTokens);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_DefaultTokens);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_default_tokens, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DefaultTokens, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "strpipe/toolkit/pad_sentences.pyx":7
+ *         sentences: list[list[str]],
+ *         maxlen: int,
+ *         pad_token: str = DefaultTokens.pad,             # <<<<<<<<<<<<<<
+ *     ) -> list[list[str]]:
+ * 
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_pad); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_k_ = ((PyObject*)__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "strpipe/toolkit/pad_sentences.pyx":4
  * 
  * 
  * def pad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         maxlen: int,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_13pad_sentences_1pad_sentences, NULL, __pyx_n_s_strpipe_toolkit_pad_sentences); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_13pad_sentences_1pad_sentences, NULL, __pyx_n_s_strpipe_toolkit_pad_sentences); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pad_sentences, __pyx_t_1) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pad_sentences, __pyx_t_1) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":36
+  /* "strpipe/toolkit/pad_sentences.pyx":1
+ * from default_tokens import DefaultTokens             # <<<<<<<<<<<<<<
  * 
  * 
- * cdef list pad_sentences_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
- *         list sentences,
- *         str pad_token,
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /*--- Wrapped vars code ---*/
@@ -1854,6 +1908,7 @@ if (!__Pyx_RefNanny) {
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init strpipe.toolkit.pad_sentences", 0, __pyx_lineno, __pyx_filename);
@@ -2228,8 +2283,114 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i, 
     return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
 }
 
+/* Import */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
+    PyObject *empty_list = 0;
+    PyObject *module = 0;
+    PyObject *global_dict = 0;
+    PyObject *empty_dict = 0;
+    PyObject *list;
+    #if PY_MAJOR_VERSION < 3
+    PyObject *py_import;
+    py_import = __Pyx_PyObject_GetAttrStr(__pyx_b, __pyx_n_s_import);
+    if (!py_import)
+        goto bad;
+    #endif
+    if (from_list)
+        list = from_list;
+    else {
+        empty_list = PyList_New(0);
+        if (!empty_list)
+            goto bad;
+        list = empty_list;
+    }
+    global_dict = PyModule_GetDict(__pyx_m);
+    if (!global_dict)
+        goto bad;
+    empty_dict = PyDict_New();
+    if (!empty_dict)
+        goto bad;
+    {
+        #if PY_MAJOR_VERSION >= 3
+        if (level == -1) {
+            if (strchr(__Pyx_MODULE_NAME, '.')) {
+                module = PyImport_ImportModuleLevelObject(
+                    name, global_dict, empty_dict, list, 1);
+                if (!module) {
+                    if (!PyErr_ExceptionMatches(PyExc_ImportError))
+                        goto bad;
+                    PyErr_Clear();
+                }
+            }
+            level = 0;
+        }
+        #endif
+        if (!module) {
+            #if PY_MAJOR_VERSION < 3
+            PyObject *py_level = PyInt_FromLong(level);
+            if (!py_level)
+                goto bad;
+            module = PyObject_CallFunctionObjArgs(py_import,
+                name, global_dict, empty_dict, list, py_level, NULL);
+            Py_DECREF(py_level);
+            #else
+            module = PyImport_ImportModuleLevelObject(
+                name, global_dict, empty_dict, list, level);
+            #endif
+        }
+    }
+bad:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(py_import);
+    #endif
+    Py_XDECREF(empty_list);
+    Py_XDECREF(empty_dict);
+    return module;
+}
+
+/* ImportFrom */
+static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
+    PyObject* value = __Pyx_PyObject_GetAttrStr(module, name);
+    if (unlikely(!value) && PyErr_ExceptionMatches(PyExc_AttributeError)) {
+        PyErr_Format(PyExc_ImportError,
+        #if PY_MAJOR_VERSION < 3
+            "cannot import name %.230s", PyString_AS_STRING(name));
+        #else
+            "cannot import name %S", name);
+        #endif
+    }
+    return value;
+}
+
+/* GetModuleGlobalName */
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
+    PyObject *result;
+#if !CYTHON_AVOID_BORROWED_REFS
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030500A1
+    result = _PyDict_GetItem_KnownHash(__pyx_d, name, ((PyASCIIObject *) name)->hash);
+    if (likely(result)) {
+        Py_INCREF(result);
+    } else if (unlikely(PyErr_Occurred())) {
+        result = NULL;
+    } else {
+#else
+    result = PyDict_GetItem(__pyx_d, name);
+    if (likely(result)) {
+        Py_INCREF(result);
+    } else {
+#endif
+#else
+    result = PyObject_GetItem(__pyx_d, name);
+    if (!result) {
+        PyErr_Clear();
+#endif
+        result = __Pyx_GetBuiltinName(name);
+    }
+    return result;
+}
+
 /* PyErrFetchRestore */
-#if CYTHON_FAST_THREAD_STATE
+    #if CYTHON_FAST_THREAD_STATE
 static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
     PyObject *tmp_type, *tmp_value, *tmp_tb;
     tmp_type = tstate->curexc_type;
@@ -2253,7 +2414,7 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 #endif
 
 /* CLineInTraceback */
-#ifndef CYTHON_CLINE_IN_TRACEBACK
+    #ifndef CYTHON_CLINE_IN_TRACEBACK
 static int __Pyx_CLineForTraceback(CYTHON_UNUSED PyThreadState *tstate, int c_line) {
     PyObject *use_cline;
     PyObject *ptype, *pvalue, *ptraceback;
@@ -2293,7 +2454,7 @@ static int __Pyx_CLineForTraceback(CYTHON_UNUSED PyThreadState *tstate, int c_li
 #endif
 
 /* CodeObjectCache */
-static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
+    static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
     int start = 0, mid = 0, end = count - 1;
     if (end >= 0 && code_line > entries[end].code_line) {
         return count;
@@ -2373,7 +2534,7 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object) {
 }
 
 /* AddTraceback */
-#include "compile.h"
+    #include "compile.h"
 #include "frameobject.h"
 #include "traceback.h"
 static PyCodeObject* __Pyx_CreateCodeObjectForTraceback(
@@ -2458,7 +2619,7 @@ bad:
 }
 
 /* CIntFromPyVerify */
-#define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+    #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
 #define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
@@ -2480,7 +2641,7 @@ bad:
     }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value) {
+    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value) {
     const unsigned int neg_one = (unsigned int) -1, const_zero = (unsigned int) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -2511,7 +2672,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value)
 }
 
 /* CIntFromPy */
-static CYTHON_INLINE unsigned int __Pyx_PyInt_As_unsigned_int(PyObject *x) {
+    static CYTHON_INLINE unsigned int __Pyx_PyInt_As_unsigned_int(PyObject *x) {
     const unsigned int neg_one = (unsigned int) -1, const_zero = (unsigned int) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -2700,7 +2861,7 @@ raise_neg_overflow:
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -2731,7 +2892,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
 }
 
 /* CIntFromPy */
-static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
+    static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -2920,7 +3081,7 @@ raise_neg_overflow:
 }
 
 /* CIntFromPy */
-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
+    static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
     const int neg_one = (int) -1, const_zero = (int) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -3109,7 +3270,7 @@ raise_neg_overflow:
 }
 
 /* FastTypeChecks */
-#if CYTHON_COMPILING_IN_CPYTHON
+    #if CYTHON_COMPILING_IN_CPYTHON
 static int __Pyx_InBases(PyTypeObject *a, PyTypeObject *b) {
     while (a) {
         a = a->tp_base;
@@ -3209,7 +3370,7 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 #endif
 
 /* CheckBinaryVersion */
-static int __Pyx_check_binary_version(void) {
+    static int __Pyx_check_binary_version(void) {
     char ctversion[4], rtversion[4];
     PyOS_snprintf(ctversion, 4, "%d.%d", PY_MAJOR_VERSION, PY_MINOR_VERSION);
     PyOS_snprintf(rtversion, 4, "%s", Py_GetVersion());
@@ -3225,7 +3386,7 @@ static int __Pyx_check_binary_version(void) {
 }
 
 /* InitStrings */
-static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
+    static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
     while (t->p) {
         #if PY_MAJOR_VERSION < 3
         if (t->is_unicode) {

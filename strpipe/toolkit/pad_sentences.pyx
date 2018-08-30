@@ -1,9 +1,10 @@
+from default_tokens import DefaultTokens
 
 
 def pad_sentences(
         sentences: list[list[str]],
         maxlen: int,
-        pad_token: str = '<PAD>',
+        pad_token: str = DefaultTokens.pad,
     ) -> list[list[str]]:
 
     return pad_sentences_in_c(
