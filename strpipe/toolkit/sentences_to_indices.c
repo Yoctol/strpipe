@@ -266,33 +266,19 @@
   #endif
 #endif
 
-#ifndef __cplusplus
-  #error "Cython files generated with the C++ option must be compiled with a C++ compiler."
-#endif
 #ifndef CYTHON_INLINE
   #if defined(__clang__)
     #define CYTHON_INLINE __inline__ __attribute__ ((__unused__))
-  #else
+  #elif defined(__GNUC__)
+    #define CYTHON_INLINE __inline__
+  #elif defined(_MSC_VER)
+    #define CYTHON_INLINE __inline
+  #elif defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
     #define CYTHON_INLINE inline
+  #else
+    #define CYTHON_INLINE
   #endif
 #endif
-template<typename T>
-void __Pyx_call_destructor(T& x) {
-    x.~T();
-}
-template<typename T>
-class __Pyx_FakeReference {
-  public:
-    __Pyx_FakeReference() : ptr(NULL) { }
-    __Pyx_FakeReference(const T& ref) : ptr(const_cast<T*>(&ref)) { }
-    T *operator->() { return ptr; }
-    T *operator&() { return ptr; }
-    operator T&() { return *ptr; }
-    template<typename U> bool operator ==(U other) { return *ptr == other; }
-    template<typename U> bool operator !=(U other) { return *ptr != other; }
-  private:
-    T *ptr;
-};
 
 #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX < 0x02070600 && !defined(Py_OptimizeFlag)
   #define Py_OptimizeFlag 0
@@ -972,6 +958,15 @@ static void __Pyx_WriteUnraisable(const char *name, int clineno,
                                   int lineno, const char *filename,
                                   int full_traceback, int nogil);
 
+/* Import.proto */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
+
+/* ImportFrom.proto */
+static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
+
+/* GetModuleGlobalName.proto */
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
+
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
 #define __Pyx_CLineForTraceback(tstate, c_line)  (((CYTHON_CLINE_IN_TRACEBACK)) ? c_line : 0)
@@ -1063,27 +1058,32 @@ int __pyx_module_is_main_strpipe__toolkit__sentences_to_indices = 0;
 /* Implementation of 'strpipe.toolkit.sentences_to_indices' */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_ValueError;
-static const char __pyx_k_UNK[] = "<UNK>";
+static const char __pyx_k_unk[] = "unk";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_range[] = "range";
+static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_sentence[] = "sentence";
 static const char __pyx_k_use_hash[] = "use_hash";
 static const char __pyx_k_sentences[] = "sentences";
 static const char __pyx_k_unk_token[] = "unk_token";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_word2index[] = "word2index";
+static const char __pyx_k_DefaultTokens[] = "DefaultTokens";
+static const char __pyx_k_default_tokens[] = "default_tokens";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_sentence_to_indices[] = "sentence_to_indices";
 static const char __pyx_k_batch_sentences_to_indices[] = "batch_sentences_to_indices";
 static const char __pyx_k_OOV_handling_support_1_hash_2_UN[] = "OOV handling support (1) hash (2) UNK token only";
 static const char __pyx_k_strpipe_toolkit_sentences_to_ind[] = "strpipe/toolkit/sentences_to_indices.pyx";
 static const char __pyx_k_strpipe_toolkit_sentences_to_ind_2[] = "strpipe.toolkit.sentences_to_indices";
+static PyObject *__pyx_n_s_DefaultTokens;
 static PyObject *__pyx_kp_s_OOV_handling_support_1_hash_2_UN;
-static PyObject *__pyx_kp_s_UNK;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_batch_sentences_to_indices;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_default_tokens;
+static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_sentence;
@@ -1092,19 +1092,22 @@ static PyObject *__pyx_n_s_sentences;
 static PyObject *__pyx_kp_s_strpipe_toolkit_sentences_to_ind;
 static PyObject *__pyx_n_s_strpipe_toolkit_sentences_to_ind_2;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_n_s_unk;
 static PyObject *__pyx_n_s_unk_token;
 static PyObject *__pyx_n_s_use_hash;
 static PyObject *__pyx_n_s_word2index;
 static PyObject *__pyx_pf_7strpipe_7toolkit_20sentences_to_indices_sentence_to_indices(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sentence, PyObject *__pyx_v_word2index, int __pyx_v_use_hash, PyObject *__pyx_v_unk_token); /* proto */
 static PyObject *__pyx_pf_7strpipe_7toolkit_20sentences_to_indices_2batch_sentences_to_indices(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sentences, PyObject *__pyx_v_word2index, int __pyx_v_use_hash, PyObject *__pyx_v_unk_token); /* proto */
-static PyObject *__pyx_tuple_;
-static PyObject *__pyx_tuple__2;
+static PyObject *__pyx_k_;
+static PyObject *__pyx_k__2;
+static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
-static PyObject *__pyx_codeobj__3;
+static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_codeobj__5;
+static PyObject *__pyx_codeobj__7;
 /* Late includes */
 
-/* "strpipe/toolkit/sentences_to_indices.pyx":7
+/* "strpipe/toolkit/sentences_to_indices.pyx":8
  * 
  * 
  * def sentence_to_indices(             # <<<<<<<<<<<<<<
@@ -1126,7 +1129,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_20sentences_to_indices_1sentence_to_
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_sentence,&__pyx_n_s_word2index,&__pyx_n_s_use_hash,&__pyx_n_s_unk_token,0};
     PyObject* values[4] = {0,0,0,0};
-    values[3] = ((PyObject*)__pyx_kp_s_UNK);
+    values[3] = __pyx_k_;
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -1151,7 +1154,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_20sentences_to_indices_1sentence_to_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_word2index)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sentence_to_indices", 0, 2, 4, 1); __PYX_ERR(0, 7, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sentence_to_indices", 0, 2, 4, 1); __PYX_ERR(0, 8, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -1167,7 +1170,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_20sentences_to_indices_1sentence_to_
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "sentence_to_indices") < 0)) __PYX_ERR(0, 7, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "sentence_to_indices") < 0)) __PYX_ERR(0, 8, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1184,14 +1187,14 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_20sentences_to_indices_1sentence_to_
     __pyx_v_sentence = ((PyObject*)values[0]);
     __pyx_v_word2index = values[1];
     if (values[2]) {
-      __pyx_v_use_hash = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_use_hash == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 10, __pyx_L3_error)
+      __pyx_v_use_hash = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_use_hash == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 11, __pyx_L3_error)
     } else {
 
-      /* "strpipe/toolkit/sentences_to_indices.pyx":10
+      /* "strpipe/toolkit/sentences_to_indices.pyx":11
  *         sentence: list,
  *         word2index: dict[str, int],
  *         use_hash: bint = False,             # <<<<<<<<<<<<<<
- *         unk_token: str = "<UNK>",
+ *         unk_token: str = DefaultTokens.unk,
  *     ) -> list[int]:
  */
       __pyx_v_use_hash = ((int)0);
@@ -1200,17 +1203,17 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_20sentences_to_indices_1sentence_to_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("sentence_to_indices", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 7, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("sentence_to_indices", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 8, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.toolkit.sentences_to_indices.sentence_to_indices", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sentence), (&PyList_Type), 1, "sentence", 1))) __PYX_ERR(0, 8, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_unk_token), (&PyString_Type), 1, "unk_token", 1))) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sentence), (&PyList_Type), 1, "sentence", 1))) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_unk_token), (&PyString_Type), 1, "unk_token", 1))) __PYX_ERR(0, 12, __pyx_L1_error)
   __pyx_r = __pyx_pf_7strpipe_7toolkit_20sentences_to_indices_sentence_to_indices(__pyx_self, __pyx_v_sentence, __pyx_v_word2index, __pyx_v_use_hash, __pyx_v_unk_token);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":7
+  /* "strpipe/toolkit/sentences_to_indices.pyx":8
  * 
  * 
  * def sentence_to_indices(             # <<<<<<<<<<<<<<
@@ -1233,38 +1236,38 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_20sentences_to_indices_sentence_to_i
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("sentence_to_indices", 0);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":13
- *         unk_token: str = "<UNK>",
+  /* "strpipe/toolkit/sentences_to_indices.pyx":15
  *     ) -> list[int]:
+ * 
  *     return sentence_to_indices_in_c(             # <<<<<<<<<<<<<<
  *         sentence=sentence,
  *         word2index=word2index,
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":15
+  /* "strpipe/toolkit/sentences_to_indices.pyx":17
  *     return sentence_to_indices_in_c(
  *         sentence=sentence,
  *         word2index=word2index,             # <<<<<<<<<<<<<<
  *         use_hash=use_hash,
  *         unk_token=unk_token,
  */
-  if (!(likely(PyDict_CheckExact(__pyx_v_word2index))||((__pyx_v_word2index) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_word2index)->tp_name), 0))) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (!(likely(PyDict_CheckExact(__pyx_v_word2index))||((__pyx_v_word2index) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_word2index)->tp_name), 0))) __PYX_ERR(0, 17, __pyx_L1_error)
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":13
- *         unk_token: str = "<UNK>",
+  /* "strpipe/toolkit/sentences_to_indices.pyx":15
  *     ) -> list[int]:
+ * 
  *     return sentence_to_indices_in_c(             # <<<<<<<<<<<<<<
  *         sentence=sentence,
  *         word2index=word2index,
  */
-  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_indices_in_c(__pyx_v_sentence, ((PyObject*)__pyx_v_word2index), __pyx_v_use_hash, __pyx_v_unk_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_indices_in_c(__pyx_v_sentence, ((PyObject*)__pyx_v_word2index), __pyx_v_use_hash, __pyx_v_unk_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":7
+  /* "strpipe/toolkit/sentences_to_indices.pyx":8
  * 
  * 
  * def sentence_to_indices(             # <<<<<<<<<<<<<<
@@ -1283,7 +1286,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_20sentences_to_indices_sentence_to_i
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/sentences_to_indices.pyx":21
+/* "strpipe/toolkit/sentences_to_indices.pyx":23
  * 
  * 
  * def batch_sentences_to_indices(             # <<<<<<<<<<<<<<
@@ -1305,7 +1308,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_20sentences_to_indices_3batch_senten
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_sentences,&__pyx_n_s_word2index,&__pyx_n_s_use_hash,&__pyx_n_s_unk_token,0};
     PyObject* values[4] = {0,0,0,0};
-    values[3] = ((PyObject*)__pyx_kp_s_UNK);
+    values[3] = __pyx_k__2;
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -1330,7 +1333,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_20sentences_to_indices_3batch_senten
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_word2index)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("batch_sentences_to_indices", 0, 2, 4, 1); __PYX_ERR(0, 21, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("batch_sentences_to_indices", 0, 2, 4, 1); __PYX_ERR(0, 23, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -1346,7 +1349,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_20sentences_to_indices_3batch_senten
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "batch_sentences_to_indices") < 0)) __PYX_ERR(0, 21, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "batch_sentences_to_indices") < 0)) __PYX_ERR(0, 23, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1363,14 +1366,14 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_20sentences_to_indices_3batch_senten
     __pyx_v_sentences = values[0];
     __pyx_v_word2index = values[1];
     if (values[2]) {
-      __pyx_v_use_hash = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_use_hash == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 24, __pyx_L3_error)
+      __pyx_v_use_hash = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_use_hash == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
     } else {
 
-      /* "strpipe/toolkit/sentences_to_indices.pyx":24
+      /* "strpipe/toolkit/sentences_to_indices.pyx":26
  *         sentences: list[str],
  *         word2index: dict[str, int],
  *         use_hash: bint = False,             # <<<<<<<<<<<<<<
- *         unk_token: str = "<UNK>",
+ *         unk_token: str = DefaultTokens.unk,
  *     ):
  */
       __pyx_v_use_hash = ((int)0);
@@ -1379,16 +1382,16 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_20sentences_to_indices_3batch_senten
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("batch_sentences_to_indices", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 21, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("batch_sentences_to_indices", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 23, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.toolkit.sentences_to_indices.batch_sentences_to_indices", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_unk_token), (&PyString_Type), 1, "unk_token", 1))) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_unk_token), (&PyString_Type), 1, "unk_token", 1))) __PYX_ERR(0, 27, __pyx_L1_error)
   __pyx_r = __pyx_pf_7strpipe_7toolkit_20sentences_to_indices_2batch_sentences_to_indices(__pyx_self, __pyx_v_sentences, __pyx_v_word2index, __pyx_v_use_hash, __pyx_v_unk_token);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":21
+  /* "strpipe/toolkit/sentences_to_indices.pyx":23
  * 
  * 
  * def batch_sentences_to_indices(             # <<<<<<<<<<<<<<
@@ -1411,8 +1414,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_20sentences_to_indices_2batch_senten
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("batch_sentences_to_indices", 0);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":27
- *         unk_token: str = "<UNK>",
+  /* "strpipe/toolkit/sentences_to_indices.pyx":29
+ *         unk_token: str = DefaultTokens.unk,
  *     ):
  *     return batch_sentences_to_indices_in_c(             # <<<<<<<<<<<<<<
  *         sentences=sentences,
@@ -1420,38 +1423,38 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_20sentences_to_indices_2batch_senten
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":28
+  /* "strpipe/toolkit/sentences_to_indices.pyx":30
  *     ):
  *     return batch_sentences_to_indices_in_c(
  *         sentences=sentences,             # <<<<<<<<<<<<<<
  *         word2index=word2index,
  *         use_hash=use_hash,
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_sentences))||((__pyx_v_sentences) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_sentences)->tp_name), 0))) __PYX_ERR(0, 28, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_sentences))||((__pyx_v_sentences) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_sentences)->tp_name), 0))) __PYX_ERR(0, 30, __pyx_L1_error)
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":29
+  /* "strpipe/toolkit/sentences_to_indices.pyx":31
  *     return batch_sentences_to_indices_in_c(
  *         sentences=sentences,
  *         word2index=word2index,             # <<<<<<<<<<<<<<
  *         use_hash=use_hash,
  *         unk_token=unk_token,
  */
-  if (!(likely(PyDict_CheckExact(__pyx_v_word2index))||((__pyx_v_word2index) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_word2index)->tp_name), 0))) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (!(likely(PyDict_CheckExact(__pyx_v_word2index))||((__pyx_v_word2index) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_word2index)->tp_name), 0))) __PYX_ERR(0, 31, __pyx_L1_error)
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":27
- *         unk_token: str = "<UNK>",
+  /* "strpipe/toolkit/sentences_to_indices.pyx":29
+ *         unk_token: str = DefaultTokens.unk,
  *     ):
  *     return batch_sentences_to_indices_in_c(             # <<<<<<<<<<<<<<
  *         sentences=sentences,
  *         word2index=word2index,
  */
-  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_20sentences_to_indices_batch_sentences_to_indices_in_c(((PyObject*)__pyx_v_sentences), ((PyObject*)__pyx_v_word2index), __pyx_v_use_hash, __pyx_v_unk_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_20sentences_to_indices_batch_sentences_to_indices_in_c(((PyObject*)__pyx_v_sentences), ((PyObject*)__pyx_v_word2index), __pyx_v_use_hash, __pyx_v_unk_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":21
+  /* "strpipe/toolkit/sentences_to_indices.pyx":23
  * 
  * 
  * def batch_sentences_to_indices(             # <<<<<<<<<<<<<<
@@ -1470,7 +1473,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_20sentences_to_indices_2batch_senten
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/sentences_to_indices.pyx":35
+/* "strpipe/toolkit/sentences_to_indices.pyx":37
  * 
  * 
  * cdef list batch_sentences_to_indices_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
@@ -1494,7 +1497,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_batch_sentence
   int __pyx_t_6;
   __Pyx_RefNannySetupContext("batch_sentences_to_indices_in_c", 0);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":43
+  /* "strpipe/toolkit/sentences_to_indices.pyx":45
  *     cdef int i, n_sent
  *     cdef list sentence, indices, output_list
  *     n_sent = len(sentences)             # <<<<<<<<<<<<<<
@@ -1503,24 +1506,24 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_batch_sentence
  */
   if (unlikely(__pyx_v_sentences == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 43, __pyx_L1_error)
+    __PYX_ERR(0, 45, __pyx_L1_error)
   }
-  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 45, __pyx_L1_error)
   __pyx_v_n_sent = __pyx_t_1;
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":44
+  /* "strpipe/toolkit/sentences_to_indices.pyx":46
  *     cdef list sentence, indices, output_list
  *     n_sent = len(sentences)
  *     output_list = []             # <<<<<<<<<<<<<<
  * 
  *     for i in range(n_sent):
  */
-  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_output_list = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":46
+  /* "strpipe/toolkit/sentences_to_indices.pyx":48
  *     output_list = []
  * 
  *     for i in range(n_sent):             # <<<<<<<<<<<<<<
@@ -1532,7 +1535,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_batch_sentence
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "strpipe/toolkit/sentences_to_indices.pyx":47
+    /* "strpipe/toolkit/sentences_to_indices.pyx":49
  * 
  *     for i in range(n_sent):
  *         sentence = sentences[i]             # <<<<<<<<<<<<<<
@@ -1541,37 +1544,37 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_batch_sentence
  */
     if (unlikely(__pyx_v_sentences == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 47, __pyx_L1_error)
+      __PYX_ERR(0, 49, __pyx_L1_error)
     }
-    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 47, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 49, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_sentence, ((PyObject*)__pyx_t_2));
     __pyx_t_2 = 0;
 
-    /* "strpipe/toolkit/sentences_to_indices.pyx":48
+    /* "strpipe/toolkit/sentences_to_indices.pyx":50
  *     for i in range(n_sent):
  *         sentence = sentences[i]
  *         indices = sentence_to_indices_in_c(             # <<<<<<<<<<<<<<
  *             sentence=sentence,
  *             word2index=word2index,
  */
-    __pyx_t_2 = __pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_indices_in_c(__pyx_v_sentence, __pyx_v_word2index, __pyx_v_use_hash, __pyx_v_unk_token); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_indices_in_c(__pyx_v_sentence, __pyx_v_word2index, __pyx_v_use_hash, __pyx_v_unk_token); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_XDECREF_SET(__pyx_v_indices, ((PyObject*)__pyx_t_2));
     __pyx_t_2 = 0;
 
-    /* "strpipe/toolkit/sentences_to_indices.pyx":54
+    /* "strpipe/toolkit/sentences_to_indices.pyx":56
  *             unk_token=unk_token,
  *         )
  *         output_list.append(indices)             # <<<<<<<<<<<<<<
  *     return output_list
  * 
  */
-    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_output_list, __pyx_v_indices); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 54, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_output_list, __pyx_v_indices); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 56, __pyx_L1_error)
   }
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":55
+  /* "strpipe/toolkit/sentences_to_indices.pyx":57
  *         )
  *         output_list.append(indices)
  *     return output_list             # <<<<<<<<<<<<<<
@@ -1583,7 +1586,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_batch_sentence
   __pyx_r = __pyx_v_output_list;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":35
+  /* "strpipe/toolkit/sentences_to_indices.pyx":37
  * 
  * 
  * cdef list batch_sentences_to_indices_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
@@ -1605,7 +1608,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_batch_sentence
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/sentences_to_indices.pyx":58
+/* "strpipe/toolkit/sentences_to_indices.pyx":60
  * 
  * 
  * cdef list sentence_to_indices_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
@@ -1631,19 +1634,19 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
   int __pyx_t_7;
   __Pyx_RefNannySetupContext("sentence_to_indices_in_c", 0);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":65
+  /* "strpipe/toolkit/sentences_to_indices.pyx":67
  *     ):
  *     cdef int i, n_token
  *     cdef list output_list = []             # <<<<<<<<<<<<<<
  *     cdef bint unk_in_word2index
  * 
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_output_list = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":68
+  /* "strpipe/toolkit/sentences_to_indices.pyx":70
  *     cdef bint unk_in_word2index
  * 
  *     unk_in_word2index = check_unk_in_word2index_in_c(             # <<<<<<<<<<<<<<
@@ -1652,7 +1655,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
  */
   __pyx_v_unk_in_word2index = __pyx_f_7strpipe_7toolkit_20sentences_to_indices_check_unk_in_word2index_in_c(__pyx_v_unk_token, __pyx_v_word2index);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":72
+  /* "strpipe/toolkit/sentences_to_indices.pyx":74
  *         word2index=word2index,
  *     )
  *     n_token = len(sentence)             # <<<<<<<<<<<<<<
@@ -1661,12 +1664,12 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
  */
   if (unlikely(__pyx_v_sentence == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 72, __pyx_L1_error)
+    __PYX_ERR(0, 74, __pyx_L1_error)
   }
-  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentence); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentence); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 74, __pyx_L1_error)
   __pyx_v_n_token = __pyx_t_2;
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":74
+  /* "strpipe/toolkit/sentences_to_indices.pyx":76
  *     n_token = len(sentence)
  * 
  *     for i in range(n_token):             # <<<<<<<<<<<<<<
@@ -1678,7 +1681,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "strpipe/toolkit/sentences_to_indices.pyx":75
+    /* "strpipe/toolkit/sentences_to_indices.pyx":77
  * 
  *     for i in range(n_token):
  *         token = sentence[i]             # <<<<<<<<<<<<<<
@@ -1687,14 +1690,14 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
  */
     if (unlikely(__pyx_v_sentence == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 75, __pyx_L1_error)
+      __PYX_ERR(0, 77, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentence, __pyx_v_i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentence, __pyx_v_i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_token, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "strpipe/toolkit/sentences_to_indices.pyx":76
+    /* "strpipe/toolkit/sentences_to_indices.pyx":78
  *     for i in range(n_token):
  *         token = sentence[i]
  *         if use_hash:             # <<<<<<<<<<<<<<
@@ -1704,16 +1707,16 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
     __pyx_t_6 = (__pyx_v_use_hash != 0);
     if (__pyx_t_6) {
 
-      /* "strpipe/toolkit/sentences_to_indices.pyx":78
+      /* "strpipe/toolkit/sentences_to_indices.pyx":80
  *         if use_hash:
  *             index = token_to_index_with_hash_in_c(
  *                 token=token,             # <<<<<<<<<<<<<<
  *                 word2index=word2index,
  *             )
  */
-      if (!(likely(PyString_CheckExact(__pyx_v_token))||((__pyx_v_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_token)->tp_name), 0))) __PYX_ERR(0, 78, __pyx_L1_error)
+      if (!(likely(PyString_CheckExact(__pyx_v_token))||((__pyx_v_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_token)->tp_name), 0))) __PYX_ERR(0, 80, __pyx_L1_error)
 
-      /* "strpipe/toolkit/sentences_to_indices.pyx":77
+      /* "strpipe/toolkit/sentences_to_indices.pyx":79
  *         token = sentence[i]
  *         if use_hash:
  *             index = token_to_index_with_hash_in_c(             # <<<<<<<<<<<<<<
@@ -1722,7 +1725,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
  */
       __pyx_v_index = __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_hash_in_c(((PyObject*)__pyx_v_token), __pyx_v_word2index);
 
-      /* "strpipe/toolkit/sentences_to_indices.pyx":76
+      /* "strpipe/toolkit/sentences_to_indices.pyx":78
  *     for i in range(n_token):
  *         token = sentence[i]
  *         if use_hash:             # <<<<<<<<<<<<<<
@@ -1732,7 +1735,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
       goto __pyx_L5;
     }
 
-    /* "strpipe/toolkit/sentences_to_indices.pyx":81
+    /* "strpipe/toolkit/sentences_to_indices.pyx":83
  *                 word2index=word2index,
  *             )
  *         elif unk_in_word2index:             # <<<<<<<<<<<<<<
@@ -1742,16 +1745,16 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
     __pyx_t_6 = (__pyx_v_unk_in_word2index != 0);
     if (likely(__pyx_t_6)) {
 
-      /* "strpipe/toolkit/sentences_to_indices.pyx":84
+      /* "strpipe/toolkit/sentences_to_indices.pyx":86
  *             index = token_to_index_with_unk_in_c(
  *                 unk_token=unk_token,
  *                 token=token,             # <<<<<<<<<<<<<<
  *                 word2index=word2index,
  *             )
  */
-      if (!(likely(PyString_CheckExact(__pyx_v_token))||((__pyx_v_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_token)->tp_name), 0))) __PYX_ERR(0, 84, __pyx_L1_error)
+      if (!(likely(PyString_CheckExact(__pyx_v_token))||((__pyx_v_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_token)->tp_name), 0))) __PYX_ERR(0, 86, __pyx_L1_error)
 
-      /* "strpipe/toolkit/sentences_to_indices.pyx":82
+      /* "strpipe/toolkit/sentences_to_indices.pyx":84
  *             )
  *         elif unk_in_word2index:
  *             index = token_to_index_with_unk_in_c(             # <<<<<<<<<<<<<<
@@ -1760,7 +1763,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
  */
       __pyx_v_index = __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk_in_c(((PyObject*)__pyx_v_token), __pyx_v_unk_token, __pyx_v_word2index);
 
-      /* "strpipe/toolkit/sentences_to_indices.pyx":81
+      /* "strpipe/toolkit/sentences_to_indices.pyx":83
  *                 word2index=word2index,
  *             )
  *         elif unk_in_word2index:             # <<<<<<<<<<<<<<
@@ -1770,7 +1773,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
       goto __pyx_L5;
     }
 
-    /* "strpipe/toolkit/sentences_to_indices.pyx":88
+    /* "strpipe/toolkit/sentences_to_indices.pyx":90
  *             )
  *         else:
  *             raise ValueError(             # <<<<<<<<<<<<<<
@@ -1778,28 +1781,28 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
  *             )
  */
     /*else*/ {
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_Raise(__pyx_t_1, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __PYX_ERR(0, 88, __pyx_L1_error)
+      __PYX_ERR(0, 90, __pyx_L1_error)
     }
     __pyx_L5:;
 
-    /* "strpipe/toolkit/sentences_to_indices.pyx":91
+    /* "strpipe/toolkit/sentences_to_indices.pyx":93
  *                 "OOV handling support (1) hash (2) UNK token only",
  *             )
  *         output_list.append(index)             # <<<<<<<<<<<<<<
  *     return output_list
  * 
  */
-    __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_output_list, __pyx_t_1); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_output_list, __pyx_t_1); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":92
+  /* "strpipe/toolkit/sentences_to_indices.pyx":94
  *             )
  *         output_list.append(index)
  *     return output_list             # <<<<<<<<<<<<<<
@@ -1811,7 +1814,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
   __pyx_r = __pyx_v_output_list;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":58
+  /* "strpipe/toolkit/sentences_to_indices.pyx":60
  * 
  * 
  * cdef list sentence_to_indices_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
@@ -1832,7 +1835,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_20sentences_to_indices_sentence_to_in
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/sentences_to_indices.pyx":95
+/* "strpipe/toolkit/sentences_to_indices.pyx":97
  * 
  * 
  * cdef bint check_unk_in_word2index_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
@@ -1847,7 +1850,7 @@ static int __pyx_f_7strpipe_7toolkit_20sentences_to_indices_check_unk_in_word2in
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("check_unk_in_word2index_in_c", 0);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":99
+  /* "strpipe/toolkit/sentences_to_indices.pyx":101
  *         dict word2index,
  *     ):
  *     if unk_token in word2index:             # <<<<<<<<<<<<<<
@@ -1856,13 +1859,13 @@ static int __pyx_f_7strpipe_7toolkit_20sentences_to_indices_check_unk_in_word2in
  */
   if (unlikely(__pyx_v_word2index == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 99, __pyx_L1_error)
+    __PYX_ERR(0, 101, __pyx_L1_error)
   }
-  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_unk_token, __pyx_v_word2index, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_unk_token, __pyx_v_word2index, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 101, __pyx_L1_error)
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "strpipe/toolkit/sentences_to_indices.pyx":100
+    /* "strpipe/toolkit/sentences_to_indices.pyx":102
  *     ):
  *     if unk_token in word2index:
  *         return True             # <<<<<<<<<<<<<<
@@ -1872,7 +1875,7 @@ static int __pyx_f_7strpipe_7toolkit_20sentences_to_indices_check_unk_in_word2in
     __pyx_r = 1;
     goto __pyx_L0;
 
-    /* "strpipe/toolkit/sentences_to_indices.pyx":99
+    /* "strpipe/toolkit/sentences_to_indices.pyx":101
  *         dict word2index,
  *     ):
  *     if unk_token in word2index:             # <<<<<<<<<<<<<<
@@ -1881,7 +1884,7 @@ static int __pyx_f_7strpipe_7toolkit_20sentences_to_indices_check_unk_in_word2in
  */
   }
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":102
+  /* "strpipe/toolkit/sentences_to_indices.pyx":104
  *         return True
  *     else:
  *         return False             # <<<<<<<<<<<<<<
@@ -1891,7 +1894,7 @@ static int __pyx_f_7strpipe_7toolkit_20sentences_to_indices_check_unk_in_word2in
     goto __pyx_L0;
   }
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":95
+  /* "strpipe/toolkit/sentences_to_indices.pyx":97
  * 
  * 
  * cdef bint check_unk_in_word2index_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
@@ -1945,11 +1948,13 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_DefaultTokens, __pyx_k_DefaultTokens, sizeof(__pyx_k_DefaultTokens), 0, 0, 1, 1},
   {&__pyx_kp_s_OOV_handling_support_1_hash_2_UN, __pyx_k_OOV_handling_support_1_hash_2_UN, sizeof(__pyx_k_OOV_handling_support_1_hash_2_UN), 0, 0, 1, 0},
-  {&__pyx_kp_s_UNK, __pyx_k_UNK, sizeof(__pyx_k_UNK), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_batch_sentences_to_indices, __pyx_k_batch_sentences_to_indices, sizeof(__pyx_k_batch_sentences_to_indices), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_default_tokens, __pyx_k_default_tokens, sizeof(__pyx_k_default_tokens), 0, 0, 1, 1},
+  {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
   {&__pyx_n_s_sentence, __pyx_k_sentence, sizeof(__pyx_k_sentence), 0, 0, 1, 1},
@@ -1958,14 +1963,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_strpipe_toolkit_sentences_to_ind, __pyx_k_strpipe_toolkit_sentences_to_ind, sizeof(__pyx_k_strpipe_toolkit_sentences_to_ind), 0, 0, 1, 0},
   {&__pyx_n_s_strpipe_toolkit_sentences_to_ind_2, __pyx_k_strpipe_toolkit_sentences_to_ind_2, sizeof(__pyx_k_strpipe_toolkit_sentences_to_ind_2), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_n_s_unk, __pyx_k_unk, sizeof(__pyx_k_unk), 0, 0, 1, 1},
   {&__pyx_n_s_unk_token, __pyx_k_unk_token, sizeof(__pyx_k_unk_token), 0, 0, 1, 1},
   {&__pyx_n_s_use_hash, __pyx_k_use_hash, sizeof(__pyx_k_use_hash), 0, 0, 1, 1},
   {&__pyx_n_s_word2index, __pyx_k_word2index, sizeof(__pyx_k_word2index), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 46, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 90, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1975,40 +1981,40 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":88
+  /* "strpipe/toolkit/sentences_to_indices.pyx":90
  *             )
  *         else:
  *             raise ValueError(             # <<<<<<<<<<<<<<
  *                 "OOV handling support (1) hash (2) UNK token only",
  *             )
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_OOV_handling_support_1_hash_2_UN); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 88, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_OOV_handling_support_1_hash_2_UN); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":7
+  /* "strpipe/toolkit/sentences_to_indices.pyx":8
  * 
  * 
  * def sentence_to_indices(             # <<<<<<<<<<<<<<
  *         sentence: list,
  *         word2index: dict[str, int],
  */
-  __pyx_tuple__2 = PyTuple_Pack(4, __pyx_n_s_sentence, __pyx_n_s_word2index, __pyx_n_s_use_hash, __pyx_n_s_unk_token); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__2);
-  __Pyx_GIVEREF(__pyx_tuple__2);
-  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_sentences_to_ind, __pyx_n_s_sentence_to_indices, 7, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(4, __pyx_n_s_sentence, __pyx_n_s_word2index, __pyx_n_s_use_hash, __pyx_n_s_unk_token); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_sentences_to_ind, __pyx_n_s_sentence_to_indices, 8, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 8, __pyx_L1_error)
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":21
+  /* "strpipe/toolkit/sentences_to_indices.pyx":23
  * 
  * 
  * def batch_sentences_to_indices(             # <<<<<<<<<<<<<<
  *         sentences: list[str],
  *         word2index: dict[str, int],
  */
-  __pyx_tuple__4 = PyTuple_Pack(4, __pyx_n_s_sentences, __pyx_n_s_word2index, __pyx_n_s_use_hash, __pyx_n_s_unk_token); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__4);
-  __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_sentences_to_ind, __pyx_n_s_batch_sentences_to_indices, 21, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(4, __pyx_n_s_sentences, __pyx_n_s_word2index, __pyx_n_s_use_hash, __pyx_n_s_unk_token); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_sentences_to_ind, __pyx_n_s_batch_sentences_to_indices, 23, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2171,6 +2177,7 @@ static int __pyx_pymod_exec_sentences_to_indices(PyObject *__pyx_pyinit_module)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannyDeclarations
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m && __pyx_m == __pyx_pyinit_module) return 0;
@@ -2269,45 +2276,101 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":7
+  /* "strpipe/toolkit/sentences_to_indices.pyx":5
+ *     token_to_index_with_hash_in_c,
+ * )
+ * from .default_tokens import DefaultTokens             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_n_s_DefaultTokens);
+  __Pyx_GIVEREF(__pyx_n_s_DefaultTokens);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_DefaultTokens);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_default_tokens, __pyx_t_1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DefaultTokens, __pyx_t_1) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "strpipe/toolkit/sentences_to_indices.pyx":12
+ *         word2index: dict[str, int],
+ *         use_hash: bint = False,
+ *         unk_token: str = DefaultTokens.unk,             # <<<<<<<<<<<<<<
+ *     ) -> list[int]:
+ * 
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_unk); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_k_ = ((PyObject*)__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "strpipe/toolkit/sentences_to_indices.pyx":8
  * 
  * 
  * def sentence_to_indices(             # <<<<<<<<<<<<<<
  *         sentence: list,
  *         word2index: dict[str, int],
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_20sentences_to_indices_1sentence_to_indices, NULL, __pyx_n_s_strpipe_toolkit_sentences_to_ind_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_20sentences_to_indices_1sentence_to_indices, NULL, __pyx_n_s_strpipe_toolkit_sentences_to_ind_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sentence_to_indices, __pyx_t_1) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sentence_to_indices, __pyx_t_1) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/sentences_to_indices.pyx":21
+  /* "strpipe/toolkit/sentences_to_indices.pyx":27
+ *         word2index: dict[str, int],
+ *         use_hash: bint = False,
+ *         unk_token: str = DefaultTokens.unk,             # <<<<<<<<<<<<<<
+ *     ):
+ *     return batch_sentences_to_indices_in_c(
+ */
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_unk); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_k__2 = ((PyObject*)__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
+
+  /* "strpipe/toolkit/sentences_to_indices.pyx":23
  * 
  * 
  * def batch_sentences_to_indices(             # <<<<<<<<<<<<<<
  *         sentences: list[str],
  *         word2index: dict[str, int],
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_20sentences_to_indices_3batch_sentences_to_indices, NULL, __pyx_n_s_strpipe_toolkit_sentences_to_ind_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_batch_sentences_to_indices, __pyx_t_1) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_20sentences_to_indices_3batch_sentences_to_indices, NULL, __pyx_n_s_strpipe_toolkit_sentences_to_ind_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_batch_sentences_to_indices, __pyx_t_2) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "strpipe/toolkit/sentences_to_indices.pyx":1
  * from token_to_index cimport(   # noqa: E999             # <<<<<<<<<<<<<<
  *     token_to_index_with_unk_in_c,
  *     token_to_index_with_hash_in_c,
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /*--- Wrapped vars code ---*/
 
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init strpipe.toolkit.sentences_to_indices", 0, __pyx_lineno, __pyx_filename);
@@ -2868,8 +2931,114 @@ static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
 #endif
 }
 
+/* Import */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
+    PyObject *empty_list = 0;
+    PyObject *module = 0;
+    PyObject *global_dict = 0;
+    PyObject *empty_dict = 0;
+    PyObject *list;
+    #if PY_MAJOR_VERSION < 3
+    PyObject *py_import;
+    py_import = __Pyx_PyObject_GetAttrStr(__pyx_b, __pyx_n_s_import);
+    if (!py_import)
+        goto bad;
+    #endif
+    if (from_list)
+        list = from_list;
+    else {
+        empty_list = PyList_New(0);
+        if (!empty_list)
+            goto bad;
+        list = empty_list;
+    }
+    global_dict = PyModule_GetDict(__pyx_m);
+    if (!global_dict)
+        goto bad;
+    empty_dict = PyDict_New();
+    if (!empty_dict)
+        goto bad;
+    {
+        #if PY_MAJOR_VERSION >= 3
+        if (level == -1) {
+            if (strchr(__Pyx_MODULE_NAME, '.')) {
+                module = PyImport_ImportModuleLevelObject(
+                    name, global_dict, empty_dict, list, 1);
+                if (!module) {
+                    if (!PyErr_ExceptionMatches(PyExc_ImportError))
+                        goto bad;
+                    PyErr_Clear();
+                }
+            }
+            level = 0;
+        }
+        #endif
+        if (!module) {
+            #if PY_MAJOR_VERSION < 3
+            PyObject *py_level = PyInt_FromLong(level);
+            if (!py_level)
+                goto bad;
+            module = PyObject_CallFunctionObjArgs(py_import,
+                name, global_dict, empty_dict, list, py_level, NULL);
+            Py_DECREF(py_level);
+            #else
+            module = PyImport_ImportModuleLevelObject(
+                name, global_dict, empty_dict, list, level);
+            #endif
+        }
+    }
+bad:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(py_import);
+    #endif
+    Py_XDECREF(empty_list);
+    Py_XDECREF(empty_dict);
+    return module;
+}
+
+/* ImportFrom */
+static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
+    PyObject* value = __Pyx_PyObject_GetAttrStr(module, name);
+    if (unlikely(!value) && PyErr_ExceptionMatches(PyExc_AttributeError)) {
+        PyErr_Format(PyExc_ImportError,
+        #if PY_MAJOR_VERSION < 3
+            "cannot import name %.230s", PyString_AS_STRING(name));
+        #else
+            "cannot import name %S", name);
+        #endif
+    }
+    return value;
+}
+
+/* GetModuleGlobalName */
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
+    PyObject *result;
+#if !CYTHON_AVOID_BORROWED_REFS
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030500A1
+    result = _PyDict_GetItem_KnownHash(__pyx_d, name, ((PyASCIIObject *) name)->hash);
+    if (likely(result)) {
+        Py_INCREF(result);
+    } else if (unlikely(PyErr_Occurred())) {
+        result = NULL;
+    } else {
+#else
+    result = PyDict_GetItem(__pyx_d, name);
+    if (likely(result)) {
+        Py_INCREF(result);
+    } else {
+#endif
+#else
+    result = PyObject_GetItem(__pyx_d, name);
+    if (!result) {
+        PyErr_Clear();
+#endif
+        result = __Pyx_GetBuiltinName(name);
+    }
+    return result;
+}
+
 /* CLineInTraceback */
-#ifndef CYTHON_CLINE_IN_TRACEBACK
+    #ifndef CYTHON_CLINE_IN_TRACEBACK
 static int __Pyx_CLineForTraceback(CYTHON_UNUSED PyThreadState *tstate, int c_line) {
     PyObject *use_cline;
     PyObject *ptype, *pvalue, *ptraceback;
@@ -2909,7 +3078,7 @@ static int __Pyx_CLineForTraceback(CYTHON_UNUSED PyThreadState *tstate, int c_li
 #endif
 
 /* CodeObjectCache */
-static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
+    static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
     int start = 0, mid = 0, end = count - 1;
     if (end >= 0 && code_line > entries[end].code_line) {
         return count;
@@ -2989,7 +3158,7 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object) {
 }
 
 /* AddTraceback */
-#include "compile.h"
+    #include "compile.h"
 #include "frameobject.h"
 #include "traceback.h"
 static PyCodeObject* __Pyx_CreateCodeObjectForTraceback(
@@ -3074,7 +3243,7 @@ bad:
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
     const int neg_one = (int) -1, const_zero = (int) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -3105,7 +3274,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntFromPyVerify */
-#define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+    #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
 #define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
@@ -3127,7 +3296,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
     }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value) {
+    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value) {
     const unsigned int neg_one = (unsigned int) -1, const_zero = (unsigned int) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -3158,7 +3327,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value)
 }
 
 /* CIntFromPy */
-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
+    static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
     const int neg_one = (int) -1, const_zero = (int) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -3347,7 +3516,7 @@ raise_neg_overflow:
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -3378,7 +3547,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
 }
 
 /* CIntFromPy */
-static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
+    static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -3567,7 +3736,7 @@ raise_neg_overflow:
 }
 
 /* FastTypeChecks */
-#if CYTHON_COMPILING_IN_CPYTHON
+    #if CYTHON_COMPILING_IN_CPYTHON
 static int __Pyx_InBases(PyTypeObject *a, PyTypeObject *b) {
     while (a) {
         a = a->tp_base;
@@ -3667,7 +3836,7 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 #endif
 
 /* CheckBinaryVersion */
-static int __Pyx_check_binary_version(void) {
+    static int __Pyx_check_binary_version(void) {
     char ctversion[4], rtversion[4];
     PyOS_snprintf(ctversion, 4, "%d.%d", PY_MAJOR_VERSION, PY_MINOR_VERSION);
     PyOS_snprintf(rtversion, 4, "%s", Py_GetVersion());
@@ -3683,7 +3852,7 @@ static int __Pyx_check_binary_version(void) {
 }
 
 /* ModuleImport */
-#ifndef __PYX_HAVE_RT_ImportModule
+    #ifndef __PYX_HAVE_RT_ImportModule
 #define __PYX_HAVE_RT_ImportModule
 static PyObject *__Pyx_ImportModule(const char *name) {
     PyObject *py_name = 0;
@@ -3701,7 +3870,7 @@ bad:
 #endif
 
 /* FunctionImport */
-#ifndef __PYX_HAVE_RT_ImportFunction
+    #ifndef __PYX_HAVE_RT_ImportFunction
 #define __PYX_HAVE_RT_ImportFunction
 static int __Pyx_ImportFunction(PyObject *module, const char *funcname, void (**f)(void), const char *sig) {
     PyObject *d = 0;
@@ -3755,7 +3924,7 @@ bad:
 #endif
 
 /* InitStrings */
-static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
+    static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
     while (t->p) {
         #if PY_MAJOR_VERSION < 3
         if (t->is_unicode) {

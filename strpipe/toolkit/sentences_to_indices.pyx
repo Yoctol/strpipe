@@ -2,14 +2,16 @@ from token_to_index cimport(   # noqa: E999
     token_to_index_with_unk_in_c,
     token_to_index_with_hash_in_c,
 )
+from .default_tokens import DefaultTokens
 
 
 def sentence_to_indices(
         sentence: list,
         word2index: dict[str, int],
         use_hash: bint = False,
-        unk_token: str = "<UNK>",
+        unk_token: str = DefaultTokens.unk,
     ) -> list[int]:
+
     return sentence_to_indices_in_c(
         sentence=sentence,
         word2index=word2index,
@@ -22,7 +24,7 @@ def batch_sentences_to_indices(
         sentences: list[str],
         word2index: dict[str, int],
         use_hash: bint = False,
-        unk_token: str = "<UNK>",
+        unk_token: str = DefaultTokens.unk,
     ):
     return batch_sentences_to_indices_in_c(
         sentences=sentences,
