@@ -25,58 +25,53 @@ if readme.exists():
 else:
     long_description = '-'
 
+
 cmdclass = {}
 ext_modules = []
 
+
 if use_cython:
-    ext_modules += [
-        Extension(
-            'strpipe.toolkit.compute_maxlen',
-            ['strpipe/toolkit/compute_maxlen.pyx'],
-        ),
-        Extension(
-            'strpipe.toolkit.consistent_hash',
-            ['strpipe/toolkit/consistent_hash.pyx'],
-            language='c++',
-        ),
-        Extension(
-            'strpipe.toolkit.index_to_token',
-            ['strpipe/toolkit/index_to_token.pyx'],
-        ),
-        Extension(
-            'strpipe.toolkit.build_vocabulary',
-            ['strpipe/toolkit/build_vocabulary.pyx'],
-        ),
-        Extension(
-            'strpipe.toolkit.token_to_index',
-            ['strpipe/toolkit/token_to_index.pyx'],
-            language='c++',
-        ),
-    ]
+    pyx_paths = sorted(Path('.').rglob("*.pyx"))
+
+    for pyx_path in pyx_paths:
+        path_str = str(pyx_path)
+        first_line = pyx_path.read_text().split('\n')[0]
+        if ('cpp' in first_line) or ('c++' in first_line):
+            extension = Extension(
+                path_str[:-4].replace('/', '.'),
+                [path_str],
+                language='c++',
+            )
+        else:
+            extension = Extension(
+                path_str[:-4].replace('/', '.'),
+                [path_str],
+            )
+        ext_modules.append(extension)
     cmdclass.update({'build_ext': build_ext})
+
 else:
-    ext_modules += [
-        Extension(
-            'strpipe.toolkit.compute_maxlen',
-            ['strpipe/toolkit/compute_maxlen.c'],
-        ),
-        Extension(
-            'strpipe.toolkit.consistent_hash',
-            ['strpipe/toolkit/consistent_hash.cpp'],
-        ),
-        Extension(
-            'strpipe.toolkit.index_to_token',
-            ['strpipe/toolkit/index_to_token.c'],
-        ),
-        Extension(
-            'strpipe.toolkit.build_vocabulary',
-            ['strpipe/toolkit/build_vocabulary.c'],
-        ),
-        Extension(
-            'strpipe.toolkit.token_to_index',
-            ['strpipe/toolkit/token_to_index.cpp'],
-        ),
-    ]
+    # .c files
+    pyx_paths = sorted(Path('.').rglob("*.c"))
+    for pyx_path in pyx_paths:
+        path_str = str(pyx_path)
+        ext_modules.append(
+            Extension(
+                path_str[:-2].replace('/', '.'),
+                [path_str],
+            )
+        )
+
+    # .cpp files
+    pyx_paths = sorted(Path('.').rglob("*.cpp"))
+    for pyx_path in pyx_paths:
+        path_str = str(pyx_path)
+        ext_modules.append(
+            Extension(
+                path_str[:-4].replace('/', '.'),
+                [path_str],
+            )
+        )
 
 setup(
     name='strpipe',
