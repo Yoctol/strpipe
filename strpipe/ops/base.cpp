@@ -801,7 +801,9 @@ struct __pyx_obj_7strpipe_3ops_4base_BaseOp {
 
 
 
-/* "strpipe/ops/base.pyx":1
+/* "strpipe/ops/base.pyx":4
+ * 
+ * 
  * cdef class BaseOp:             # <<<<<<<<<<<<<<
  * 
  *     @staticmethod
@@ -1173,7 +1175,7 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_codeobj__2;
 /* Late includes */
 
-/* "strpipe/ops/base.pyx":4
+/* "strpipe/ops/base.pyx":7
  * 
  *     @staticmethod
  *     cdef fit(input):             # <<<<<<<<<<<<<<
@@ -1193,7 +1195,7 @@ static PyObject *__pyx_f_7strpipe_3ops_4base_6BaseOp_fit(CYTHON_UNUSED struct __
   return __pyx_r;
 }
 
-/* "strpipe/ops/base.pyx":8
+/* "strpipe/ops/base.pyx":11
  * 
  *     @staticmethod
  *     cdef transform(state, input):             # <<<<<<<<<<<<<<
@@ -1213,7 +1215,7 @@ static PyObject *__pyx_f_7strpipe_3ops_4base_6BaseOp_transform(CYTHON_UNUSED str
   return __pyx_r;
 }
 
-/* "strpipe/ops/base.pyx":12
+/* "strpipe/ops/base.pyx":15
  * 
  *     @staticmethod
  *     cdef inverse_transfrom(state, input, meta):             # <<<<<<<<<<<<<<
@@ -2496,14 +2498,14 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtable_7strpipe_3ops_4base_BaseOp.fit = (PyObject *(*)(struct __pyx_obj_7strpipe_3ops_4base_BaseOp *))__pyx_f_7strpipe_3ops_4base_6BaseOp_fit;
   __pyx_vtable_7strpipe_3ops_4base_BaseOp.transform = (PyObject *(*)(struct __pyx_obj_7strpipe_3ops_4base_BaseOp *, PyObject *))__pyx_f_7strpipe_3ops_4base_6BaseOp_transform;
   __pyx_vtable_7strpipe_3ops_4base_BaseOp.inverse_transfrom = (PyObject *(*)(struct __pyx_obj_7strpipe_3ops_4base_BaseOp *, PyObject *, PyObject *))__pyx_f_7strpipe_3ops_4base_6BaseOp_inverse_transfrom;
-  if (PyType_Ready(&__pyx_type_7strpipe_3ops_4base_BaseOp) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7strpipe_3ops_4base_BaseOp) < 0) __PYX_ERR(2, 4, __pyx_L1_error)
   __pyx_type_7strpipe_3ops_4base_BaseOp.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7strpipe_3ops_4base_BaseOp.tp_dictoffset && __pyx_type_7strpipe_3ops_4base_BaseOp.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7strpipe_3ops_4base_BaseOp.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_7strpipe_3ops_4base_BaseOp.tp_dict, __pyx_vtabptr_7strpipe_3ops_4base_BaseOp) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "BaseOp", (PyObject *)&__pyx_type_7strpipe_3ops_4base_BaseOp) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_7strpipe_3ops_4base_BaseOp) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_7strpipe_3ops_4base_BaseOp.tp_dict, __pyx_vtabptr_7strpipe_3ops_4base_BaseOp) < 0) __PYX_ERR(2, 4, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "BaseOp", (PyObject *)&__pyx_type_7strpipe_3ops_4base_BaseOp) < 0) __PYX_ERR(2, 4, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_7strpipe_3ops_4base_BaseOp) < 0) __PYX_ERR(2, 4, __pyx_L1_error)
   __pyx_ptype_7strpipe_3ops_4base_BaseOp = &__pyx_type_7strpipe_3ops_4base_BaseOp;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -2720,9 +2722,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "strpipe/ops/base.pyx":1
- * cdef class BaseOp:             # <<<<<<<<<<<<<<
+ * # distutils: language = c++             # <<<<<<<<<<<<<<
  * 
- *     @staticmethod
+ * 
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
