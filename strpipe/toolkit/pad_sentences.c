@@ -1011,14 +1011,14 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value)
 /* CIntFromPy.proto */
 static CYTHON_INLINE unsigned int __Pyx_PyInt_As_unsigned_int(PyObject *);
 
+/* CIntFromPy.proto */
+static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
+
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
-
-/* CIntFromPy.proto */
-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 /* FastTypeChecks.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
@@ -1104,8 +1104,8 @@ static PyObject *__pyx_codeobj__5;
 /* Late includes */
 
 /* "strpipe/toolkit/pad_sentences.pyx":4
- *
- *
+ * 
+ * 
  * def pad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         maxlen: int,
@@ -1204,7 +1204,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
   __Pyx_RefNannySetupContext("pad_sentences", 0);
 
   /* "strpipe/toolkit/pad_sentences.pyx":14
- *
+ * 
  *     meta = pad_sentences_meta_in_c(
  *         sentences=sentences,             # <<<<<<<<<<<<<<
  *         pad_token=pad_token,
@@ -1223,7 +1223,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
 
   /* "strpipe/toolkit/pad_sentences.pyx":13
  *     '''
- *
+ * 
  *     meta = pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *         sentences=sentences,
  *         pad_token=pad_token,
@@ -1267,8 +1267,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
  *         maxlen=maxlen,
  *     )
  *     return padded_sentences, meta             # <<<<<<<<<<<<<<
- *
- *
+ * 
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
@@ -1284,8 +1284,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":4
- *
- *
+ * 
+ * 
  * def pad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         maxlen: int,
@@ -1305,8 +1305,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":26
- *
- *
+ * 
+ * 
  * def unpad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         meta: list[dict],
@@ -1404,7 +1404,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_2unpad_sentences(CYT
  *         sentences=sentences,
  *         meta=meta,             # <<<<<<<<<<<<<<
  *     )
- *
+ * 
  */
   if (!(likely(PyList_CheckExact(__pyx_v_meta))||((__pyx_v_meta) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_meta)->tp_name), 0))) __PYX_ERR(0, 35, __pyx_L1_error)
 
@@ -1422,8 +1422,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_2unpad_sentences(CYT
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":26
- *
- *
+ * 
+ * 
  * def unpad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         meta: list[dict],
@@ -1441,8 +1441,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_2unpad_sentences(CYT
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":39
- *
- *
+ * 
+ * 
  * cdef list pad_sentence_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         str pad_token,
@@ -1463,9 +1463,9 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
 
   /* "strpipe/toolkit/pad_sentences.pyx":47
  *     cdef list padded_sentence, diff_sentence
- *
+ * 
  *     sent_len = len(sentence)             # <<<<<<<<<<<<<<
- *
+ * 
  *     if sent_len >= maxlen:
  */
   if (unlikely(__pyx_v_sentence == Py_None)) {
@@ -1477,7 +1477,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
 
   /* "strpipe/toolkit/pad_sentences.pyx":49
  *     sent_len = len(sentence)
- *
+ * 
  *     if sent_len >= maxlen:             # <<<<<<<<<<<<<<
  *         padded_sentence = sentence[: maxlen]
  *     else:
@@ -1486,7 +1486,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
   if (__pyx_t_2) {
 
     /* "strpipe/toolkit/pad_sentences.pyx":50
- *
+ * 
  *     if sent_len >= maxlen:
  *         padded_sentence = sentence[: maxlen]             # <<<<<<<<<<<<<<
  *     else:
@@ -1503,7 +1503,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
 
     /* "strpipe/toolkit/pad_sentences.pyx":49
  *     sent_len = len(sentence)
- *
+ * 
  *     if sent_len >= maxlen:             # <<<<<<<<<<<<<<
  *         padded_sentence = sentence[: maxlen]
  *     else:
@@ -1555,7 +1555,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
  *         padded_sentence = sentence
  *         padded_sentence.extend(diff_sentence)             # <<<<<<<<<<<<<<
  *     return padded_sentence
- *
+ * 
  */
     if (unlikely(__pyx_v_padded_sentence == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "extend");
@@ -1569,8 +1569,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
  *         padded_sentence = sentence
  *         padded_sentence.extend(diff_sentence)
  *     return padded_sentence             # <<<<<<<<<<<<<<
- *
- *
+ * 
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_padded_sentence);
@@ -1578,8 +1578,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":39
- *
- *
+ * 
+ * 
  * cdef list pad_sentence_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         str pad_token,
@@ -1599,8 +1599,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":59
- *
- *
+ * 
+ * 
  * cdef dict pad_sentence_meta_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         str pad_token,
@@ -1709,7 +1709,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_meta_in_
  *         sentence_tail = sentence[maxlen:]
  *         output_meta_dict['sentence_tail'] = sentence_tail             # <<<<<<<<<<<<<<
  *     return output_meta_dict
- *
+ * 
  */
     if (unlikely(PyDict_SetItem(__pyx_v_output_meta_dict, __pyx_n_s_sentence_tail, __pyx_v_sentence_tail) < 0)) __PYX_ERR(0, 72, __pyx_L1_error)
   }
@@ -1719,8 +1719,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_meta_in_
  *         sentence_tail = sentence[maxlen:]
  *         output_meta_dict['sentence_tail'] = sentence_tail
  *     return output_meta_dict             # <<<<<<<<<<<<<<
- *
- *
+ * 
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_output_meta_dict);
@@ -1728,8 +1728,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_meta_in_
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":59
- *
- *
+ * 
+ * 
  * cdef dict pad_sentence_meta_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         str pad_token,
@@ -1749,33 +1749,32 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_meta_in_
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":76
- *
- *
+ * 
+ * 
  * cdef list unpad_sentence_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         dict meta,
  */
 
 static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(PyObject *__pyx_v_sentence, PyObject *__pyx_v_meta) {
-  unsigned int __pyx_v_padded_sentlen;
-  unsigned int __pyx_v_sentlen;
+  int __pyx_v_padded_sentlen;
+  int __pyx_v_sentlen;
   PyObject *__pyx_v_sentence_tail = 0;
   PyObject *__pyx_v_output_sentence = 0;
-  CYTHON_UNUSED Py_ssize_t __pyx_v_padded_sentence;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  unsigned int __pyx_t_2;
+  int __pyx_t_2;
   Py_ssize_t __pyx_t_3;
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("unpad_sentence_in_c", 0);
 
   /* "strpipe/toolkit/pad_sentences.pyx":83
  *     cdef list sentence_tail, output_sentence
- *
+ * 
  *     sentlen = meta['sentlen']             # <<<<<<<<<<<<<<
  *     sentence_tail = meta['sentence_tail']
- *     padded_sentence = len(sentence)
+ *     padded_sentlen = len(sentence)
  */
   if (unlikely(__pyx_v_meta == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -1783,16 +1782,16 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
   }
   __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_meta, __pyx_n_s_sentlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_As_unsigned_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_sentlen = __pyx_t_2;
 
   /* "strpipe/toolkit/pad_sentences.pyx":84
- *
+ * 
  *     sentlen = meta['sentlen']
  *     sentence_tail = meta['sentence_tail']             # <<<<<<<<<<<<<<
- *     padded_sentence = len(sentence)
- *
+ *     padded_sentlen = len(sentence)
+ *     if padded_sentlen >= sentlen:
  */
   if (unlikely(__pyx_v_meta == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -1807,20 +1806,20 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
   /* "strpipe/toolkit/pad_sentences.pyx":85
  *     sentlen = meta['sentlen']
  *     sentence_tail = meta['sentence_tail']
- *     padded_sentence = len(sentence)             # <<<<<<<<<<<<<<
- *
+ *     padded_sentlen = len(sentence)             # <<<<<<<<<<<<<<
  *     if padded_sentlen >= sentlen:
+ *         output_sentence = sentence[:sentlen]
  */
   if (unlikely(__pyx_v_sentence == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
     __PYX_ERR(0, 85, __pyx_L1_error)
   }
   __pyx_t_3 = PyList_GET_SIZE(__pyx_v_sentence); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 85, __pyx_L1_error)
-  __pyx_v_padded_sentence = __pyx_t_3;
+  __pyx_v_padded_sentlen = __pyx_t_3;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":87
- *     padded_sentence = len(sentence)
- *
+  /* "strpipe/toolkit/pad_sentences.pyx":86
+ *     sentence_tail = meta['sentence_tail']
+ *     padded_sentlen = len(sentence)
  *     if padded_sentlen >= sentlen:             # <<<<<<<<<<<<<<
  *         output_sentence = sentence[:sentlen]
  *     else:
@@ -1828,8 +1827,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
   __pyx_t_4 = ((__pyx_v_padded_sentlen >= __pyx_v_sentlen) != 0);
   if (__pyx_t_4) {
 
-    /* "strpipe/toolkit/pad_sentences.pyx":88
- *
+    /* "strpipe/toolkit/pad_sentences.pyx":87
+ *     padded_sentlen = len(sentence)
  *     if padded_sentlen >= sentlen:
  *         output_sentence = sentence[:sentlen]             # <<<<<<<<<<<<<<
  *     else:
@@ -1837,16 +1836,16 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
  */
     if (unlikely(__pyx_v_sentence == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 88, __pyx_L1_error)
+      __PYX_ERR(0, 87, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_PyList_GetSlice(__pyx_v_sentence, 0, __pyx_v_sentlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyList_GetSlice(__pyx_v_sentence, 0, __pyx_v_sentlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_output_sentence = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":87
- *     padded_sentence = len(sentence)
- *
+    /* "strpipe/toolkit/pad_sentences.pyx":86
+ *     sentence_tail = meta['sentence_tail']
+ *     padded_sentlen = len(sentence)
  *     if padded_sentlen >= sentlen:             # <<<<<<<<<<<<<<
  *         output_sentence = sentence[:sentlen]
  *     else:
@@ -1854,27 +1853,27 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
     goto __pyx_L3;
   }
 
-  /* "strpipe/toolkit/pad_sentences.pyx":90
+  /* "strpipe/toolkit/pad_sentences.pyx":89
  *         output_sentence = sentence[:sentlen]
  *     else:
  *         output_sentence = sentence + sentence_tail             # <<<<<<<<<<<<<<
- *
+ * 
  *     return output_sentence
  */
   /*else*/ {
-    __pyx_t_1 = PyNumber_Add(__pyx_v_sentence, __pyx_v_sentence_tail); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Add(__pyx_v_sentence, __pyx_v_sentence_tail); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_output_sentence = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
   }
   __pyx_L3:;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":92
+  /* "strpipe/toolkit/pad_sentences.pyx":91
  *         output_sentence = sentence + sentence_tail
- *
+ * 
  *     return output_sentence             # <<<<<<<<<<<<<<
- *
- *
+ * 
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_output_sentence);
@@ -1882,8 +1881,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":76
- *
- *
+ * 
+ * 
  * cdef list unpad_sentence_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         dict meta,
@@ -1902,8 +1901,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/pad_sentences.pyx":96
- *
+/* "strpipe/toolkit/pad_sentences.pyx":95
+ * 
  * ### batch versions ###
  * cdef list pad_sentences_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
@@ -1926,35 +1925,35 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
   int __pyx_t_6;
   __Pyx_RefNannySetupContext("pad_sentences_in_c", 0);
 
-  /* "strpipe/toolkit/pad_sentences.pyx":104
+  /* "strpipe/toolkit/pad_sentences.pyx":103
  *     cdef list sentence, padded_sentence, output_list
- *
+ * 
  *     output_list = []             # <<<<<<<<<<<<<<
  *     n_sent = len(sentences)
- *
+ * 
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_output_list = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":105
- *
+  /* "strpipe/toolkit/pad_sentences.pyx":104
+ * 
  *     output_list = []
  *     n_sent = len(sentences)             # <<<<<<<<<<<<<<
- *
+ * 
  *     for i in range(n_sent):
  */
   if (unlikely(__pyx_v_sentences == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 105, __pyx_L1_error)
+    __PYX_ERR(0, 104, __pyx_L1_error)
   }
-  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 104, __pyx_L1_error)
   __pyx_v_n_sent = __pyx_t_2;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":107
+  /* "strpipe/toolkit/pad_sentences.pyx":106
  *     n_sent = len(sentences)
- *
+ * 
  *     for i in range(n_sent):             # <<<<<<<<<<<<<<
  *         sentence = sentences[i]
  *         padded_sentence = pad_sentence_in_c(
@@ -1964,8 +1963,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":108
- *
+    /* "strpipe/toolkit/pad_sentences.pyx":107
+ * 
  *     for i in range(n_sent):
  *         sentence = sentences[i]             # <<<<<<<<<<<<<<
  *         padded_sentence = pad_sentence_in_c(
@@ -1973,50 +1972,50 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
  */
     if (unlikely(__pyx_v_sentences == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 108, __pyx_L1_error)
+      __PYX_ERR(0, 107, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 108, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 107, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_sentence, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":109
+    /* "strpipe/toolkit/pad_sentences.pyx":108
  *     for i in range(n_sent):
  *         sentence = sentences[i]
  *         padded_sentence = pad_sentence_in_c(             # <<<<<<<<<<<<<<
  *             sentence=sentence,
  *             pad_token=pad_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(__pyx_v_sentence, __pyx_v_pad_token, __pyx_v_maxlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(__pyx_v_sentence, __pyx_v_pad_token, __pyx_v_maxlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_padded_sentence, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":114
+    /* "strpipe/toolkit/pad_sentences.pyx":113
  *             maxlen=maxlen,
  *         )
  *         output_list.append(padded_sentence)             # <<<<<<<<<<<<<<
  *     return output_list
- *
+ * 
  */
-    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_output_list, __pyx_v_padded_sentence); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 114, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_output_list, __pyx_v_padded_sentence); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 113, __pyx_L1_error)
   }
 
-  /* "strpipe/toolkit/pad_sentences.pyx":115
+  /* "strpipe/toolkit/pad_sentences.pyx":114
  *         )
  *         output_list.append(padded_sentence)
  *     return output_list             # <<<<<<<<<<<<<<
- *
- *
+ * 
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_output_list);
   __pyx_r = __pyx_v_output_list;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":96
- *
+  /* "strpipe/toolkit/pad_sentences.pyx":95
+ * 
  * ### batch versions ###
  * cdef list pad_sentences_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
@@ -2037,9 +2036,9 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/pad_sentences.pyx":118
- *
- *
+/* "strpipe/toolkit/pad_sentences.pyx":117
+ * 
+ * 
  * cdef list pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
  *         str pad_token,
@@ -2061,34 +2060,34 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
   int __pyx_t_7;
   __Pyx_RefNannySetupContext("pad_sentences_meta_in_c", 0);
 
-  /* "strpipe/toolkit/pad_sentences.pyx":124
+  /* "strpipe/toolkit/pad_sentences.pyx":123
  *     ):
  *     cdef unsigned int i, n_sent
  *     cdef list output_meta_list = []             # <<<<<<<<<<<<<<
  *     cdef dict meta_dict
- *
+ * 
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_output_meta_list = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":127
+  /* "strpipe/toolkit/pad_sentences.pyx":126
  *     cdef dict meta_dict
- *
+ * 
  *     n_sent = len(sentences)             # <<<<<<<<<<<<<<
  *     for i in range(n_sent):
  *         meta_dict = pad_sentence_meta_in_c(
  */
   if (unlikely(__pyx_v_sentences == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 127, __pyx_L1_error)
+    __PYX_ERR(0, 126, __pyx_L1_error)
   }
-  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_t_2 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 126, __pyx_L1_error)
   __pyx_v_n_sent = __pyx_t_2;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":128
- *
+  /* "strpipe/toolkit/pad_sentences.pyx":127
+ * 
  *     n_sent = len(sentences)
  *     for i in range(n_sent):             # <<<<<<<<<<<<<<
  *         meta_dict = pad_sentence_meta_in_c(
@@ -2099,7 +2098,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":130
+    /* "strpipe/toolkit/pad_sentences.pyx":129
  *     for i in range(n_sent):
  *         meta_dict = pad_sentence_meta_in_c(
  *             sentence=sentences[i],             # <<<<<<<<<<<<<<
@@ -2108,50 +2107,50 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
  */
     if (unlikely(__pyx_v_sentences == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 130, __pyx_L1_error)
+      __PYX_ERR(0, 129, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 130, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 129, __pyx_L1_error)
 
-    /* "strpipe/toolkit/pad_sentences.pyx":129
+    /* "strpipe/toolkit/pad_sentences.pyx":128
  *     n_sent = len(sentences)
  *     for i in range(n_sent):
  *         meta_dict = pad_sentence_meta_in_c(             # <<<<<<<<<<<<<<
  *             sentence=sentences[i],
  *             pad_token=pad_token,
  */
-    __pyx_t_6 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_meta_in_c(((PyObject*)__pyx_t_1), __pyx_v_pad_token, __pyx_v_maxlen); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_6 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_meta_in_c(((PyObject*)__pyx_t_1), __pyx_v_pad_token, __pyx_v_maxlen); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_XDECREF_SET(__pyx_v_meta_dict, ((PyObject*)__pyx_t_6));
     __pyx_t_6 = 0;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":134
+    /* "strpipe/toolkit/pad_sentences.pyx":133
  *             maxlen=maxlen,
  *         )
  *         output_meta_list.append(meta_dict)             # <<<<<<<<<<<<<<
  *     return output_meta_list
- *
+ * 
  */
-    __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_output_meta_list, __pyx_v_meta_dict); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_output_meta_list, __pyx_v_meta_dict); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 133, __pyx_L1_error)
   }
 
-  /* "strpipe/toolkit/pad_sentences.pyx":135
+  /* "strpipe/toolkit/pad_sentences.pyx":134
  *         )
  *         output_meta_list.append(meta_dict)
  *     return output_meta_list             # <<<<<<<<<<<<<<
- *
- *
+ * 
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_output_meta_list);
   __pyx_r = __pyx_v_output_meta_list;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":118
- *
- *
+  /* "strpipe/toolkit/pad_sentences.pyx":117
+ * 
+ * 
  * cdef list pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
  *         str pad_token,
@@ -2171,9 +2170,9 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/pad_sentences.pyx":138
- *
- *
+/* "strpipe/toolkit/pad_sentences.pyx":137
+ * 
+ * 
  * cdef list unpad_sentences_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
  *         list meta,
@@ -2196,33 +2195,33 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(
   int __pyx_t_8;
   __Pyx_RefNannySetupContext("unpad_sentences_in_c", 0);
 
-  /* "strpipe/toolkit/pad_sentences.pyx":145
+  /* "strpipe/toolkit/pad_sentences.pyx":144
  *     cdef unsigned int i, n_sent
- *
+ * 
  *     n_sent = len(sentences)             # <<<<<<<<<<<<<<
  *     output_sentences = []
  *     for i in range(n_sent):
  */
   if (unlikely(__pyx_v_sentences == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 145, __pyx_L1_error)
+    __PYX_ERR(0, 144, __pyx_L1_error)
   }
-  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 144, __pyx_L1_error)
   __pyx_v_n_sent = __pyx_t_1;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":146
- *
+  /* "strpipe/toolkit/pad_sentences.pyx":145
+ * 
  *     n_sent = len(sentences)
  *     output_sentences = []             # <<<<<<<<<<<<<<
  *     for i in range(n_sent):
  *         output_sentence = unpad_sentence_in_c(
  */
-  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_output_sentences = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":147
+  /* "strpipe/toolkit/pad_sentences.pyx":146
  *     n_sent = len(sentences)
  *     output_sentences = []
  *     for i in range(n_sent):             # <<<<<<<<<<<<<<
@@ -2234,7 +2233,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":149
+    /* "strpipe/toolkit/pad_sentences.pyx":148
  *     for i in range(n_sent):
  *         output_sentence = unpad_sentence_in_c(
  *             sentence=sentences[i],             # <<<<<<<<<<<<<<
@@ -2243,13 +2242,13 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(
  */
     if (unlikely(__pyx_v_sentences == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 149, __pyx_L1_error)
+      __PYX_ERR(0, 148, __pyx_L1_error)
     }
-    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 149, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 148, __pyx_L1_error)
 
-    /* "strpipe/toolkit/pad_sentences.pyx":150
+    /* "strpipe/toolkit/pad_sentences.pyx":149
  *         output_sentence = unpad_sentence_in_c(
  *             sentence=sentences[i],
  *             meta=meta[i],             # <<<<<<<<<<<<<<
@@ -2258,36 +2257,36 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(
  */
     if (unlikely(__pyx_v_meta == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 150, __pyx_L1_error)
+      __PYX_ERR(0, 149, __pyx_L1_error)
     }
-    __pyx_t_6 = __Pyx_GetItemInt_List(__pyx_v_meta, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 150, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_GetItemInt_List(__pyx_v_meta, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 1, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    if (!(likely(PyDict_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_6)->tp_name), 0))) __PYX_ERR(0, 150, __pyx_L1_error)
+    if (!(likely(PyDict_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_6)->tp_name), 0))) __PYX_ERR(0, 149, __pyx_L1_error)
 
-    /* "strpipe/toolkit/pad_sentences.pyx":148
+    /* "strpipe/toolkit/pad_sentences.pyx":147
  *     output_sentences = []
  *     for i in range(n_sent):
  *         output_sentence = unpad_sentence_in_c(             # <<<<<<<<<<<<<<
  *             sentence=sentences[i],
  *             meta=meta[i],
  */
-    __pyx_t_7 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(((PyObject*)__pyx_t_2), ((PyObject*)__pyx_t_6)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_t_7 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(((PyObject*)__pyx_t_2), ((PyObject*)__pyx_t_6)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_XDECREF_SET(__pyx_v_output_sentence, ((PyObject*)__pyx_t_7));
     __pyx_t_7 = 0;
 
-    /* "strpipe/toolkit/pad_sentences.pyx":152
+    /* "strpipe/toolkit/pad_sentences.pyx":151
  *             meta=meta[i],
  *         )
  *         output_sentences.append(output_sentence)             # <<<<<<<<<<<<<<
  *     return output_sentences
  */
-    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_output_sentences, __pyx_v_output_sentence); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 152, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_output_sentences, __pyx_v_output_sentence); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 151, __pyx_L1_error)
   }
 
-  /* "strpipe/toolkit/pad_sentences.pyx":153
+  /* "strpipe/toolkit/pad_sentences.pyx":152
  *         )
  *         output_sentences.append(output_sentence)
  *     return output_sentences             # <<<<<<<<<<<<<<
@@ -2297,9 +2296,9 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(
   __pyx_r = __pyx_v_output_sentences;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/pad_sentences.pyx":138
- *
- *
+  /* "strpipe/toolkit/pad_sentences.pyx":137
+ * 
+ * 
  * cdef list unpad_sentences_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
  *         list meta,
@@ -2379,7 +2378,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 106, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2390,8 +2389,8 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
   /* "strpipe/toolkit/pad_sentences.pyx":4
- *
- *
+ * 
+ * 
  * def pad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         maxlen: int,
@@ -2402,8 +2401,8 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_pad_sentences_py, __pyx_n_s_pad_sentences, 4, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 4, __pyx_L1_error)
 
   /* "strpipe/toolkit/pad_sentences.pyx":26
- *
- *
+ * 
+ * 
  * def unpad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         meta: list[dict],
@@ -2675,8 +2674,8 @@ if (!__Pyx_RefNanny) {
 
   /* "strpipe/toolkit/pad_sentences.pyx":1
  * from default_tokens import DefaultTokens             # <<<<<<<<<<<<<<
- *
- *
+ * 
+ * 
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2710,8 +2709,8 @@ if (!__Pyx_RefNanny) {
   __pyx_t_1 = 0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":4
- *
- *
+ * 
+ * 
  * def pad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         maxlen: int,
@@ -2722,8 +2721,8 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":26
- *
- *
+ * 
+ * 
  * def unpad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         meta: list[dict],
@@ -2735,8 +2734,8 @@ if (!__Pyx_RefNanny) {
 
   /* "strpipe/toolkit/pad_sentences.pyx":1
  * from default_tokens import DefaultTokens             # <<<<<<<<<<<<<<
- *
- *
+ * 
+ * 
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3719,6 +3718,195 @@ raise_neg_overflow:
     return (unsigned int) -1;
 }
 
+/* CIntFromPy */
+    static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
+    const int neg_one = (int) -1, const_zero = (int) 0;
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(int) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(int, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (int) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (int) 0;
+                case  1: __PYX_VERIFY_RETURN_INT(int, digit, digits[0])
+                case 2:
+                    if (8 * sizeof(int) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(int) >= 2 * PyLong_SHIFT) {
+                            return (int) (((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(int) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(int) >= 3 * PyLong_SHIFT) {
+                            return (int) (((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(int) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(int) >= 4 * PyLong_SHIFT) {
+                            return (int) (((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
+                        }
+                    }
+                    break;
+            }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+#else
+            {
+                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                if (unlikely(result < 0))
+                    return (int) -1;
+                if (unlikely(result == 1))
+                    goto raise_neg_overflow;
+            }
+#endif
+            if (sizeof(int) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(int, unsigned long, PyLong_AsUnsignedLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(int, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+#endif
+            }
+        } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (int) 0;
+                case -1: __PYX_VERIFY_RETURN_INT(int, sdigit, (sdigit) (-(sdigit)digits[0]))
+                case  1: __PYX_VERIFY_RETURN_INT(int,  digit, +digits[0])
+                case -2:
+                    if (8 * sizeof(int) - 1 > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(int) - 1 > 2 * PyLong_SHIFT) {
+                            return (int) (((int)-1)*(((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                        }
+                    }
+                    break;
+                case 2:
+                    if (8 * sizeof(int) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(int) - 1 > 2 * PyLong_SHIFT) {
+                            return (int) ((((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                        }
+                    }
+                    break;
+                case -3:
+                    if (8 * sizeof(int) - 1 > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(int) - 1 > 3 * PyLong_SHIFT) {
+                            return (int) (((int)-1)*(((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(int) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(int) - 1 > 3 * PyLong_SHIFT) {
+                            return (int) ((((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                        }
+                    }
+                    break;
+                case -4:
+                    if (8 * sizeof(int) - 1 > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(int) - 1 > 4 * PyLong_SHIFT) {
+                            return (int) (((int)-1)*(((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(int) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(int) - 1 > 4 * PyLong_SHIFT) {
+                            return (int) ((((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                        }
+                    }
+                    break;
+            }
+#endif
+            if (sizeof(int) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(int, long, PyLong_AsLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(int, PY_LONG_LONG, PyLong_AsLongLong(x))
+#endif
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            int val;
+            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (int) -1;
+        }
+    } else {
+        int val;
+        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
+        if (!tmp) return (int) -1;
+        val = __Pyx_PyInt_As_int(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to int");
+    return (int) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to int");
+    return (int) -1;
+}
+
 /* CIntToPy */
     static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) -1, const_zero = (long) 0;
@@ -3937,195 +4125,6 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to long");
     return (long) -1;
-}
-
-/* CIntFromPy */
-    static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
-    const int neg_one = (int) -1, const_zero = (int) 0;
-    const int is_unsigned = neg_one > const_zero;
-#if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_Check(x))) {
-        if (sizeof(int) < sizeof(long)) {
-            __PYX_VERIFY_RETURN_INT(int, long, PyInt_AS_LONG(x))
-        } else {
-            long val = PyInt_AS_LONG(x);
-            if (is_unsigned && unlikely(val < 0)) {
-                goto raise_neg_overflow;
-            }
-            return (int) val;
-        }
-    } else
-#endif
-    if (likely(PyLong_Check(x))) {
-        if (is_unsigned) {
-#if CYTHON_USE_PYLONG_INTERNALS
-            const digit* digits = ((PyLongObject*)x)->ob_digit;
-            switch (Py_SIZE(x)) {
-                case  0: return (int) 0;
-                case  1: __PYX_VERIFY_RETURN_INT(int, digit, digits[0])
-                case 2:
-                    if (8 * sizeof(int) > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(int) >= 2 * PyLong_SHIFT) {
-                            return (int) (((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
-                        }
-                    }
-                    break;
-                case 3:
-                    if (8 * sizeof(int) > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(int) >= 3 * PyLong_SHIFT) {
-                            return (int) (((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
-                        }
-                    }
-                    break;
-                case 4:
-                    if (8 * sizeof(int) > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(int) >= 4 * PyLong_SHIFT) {
-                            return (int) (((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
-                        }
-                    }
-                    break;
-            }
-#endif
-#if CYTHON_COMPILING_IN_CPYTHON
-            if (unlikely(Py_SIZE(x) < 0)) {
-                goto raise_neg_overflow;
-            }
-#else
-            {
-                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
-                if (unlikely(result < 0))
-                    return (int) -1;
-                if (unlikely(result == 1))
-                    goto raise_neg_overflow;
-            }
-#endif
-            if (sizeof(int) <= sizeof(unsigned long)) {
-                __PYX_VERIFY_RETURN_INT_EXC(int, unsigned long, PyLong_AsUnsignedLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
-                __PYX_VERIFY_RETURN_INT_EXC(int, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
-#endif
-            }
-        } else {
-#if CYTHON_USE_PYLONG_INTERNALS
-            const digit* digits = ((PyLongObject*)x)->ob_digit;
-            switch (Py_SIZE(x)) {
-                case  0: return (int) 0;
-                case -1: __PYX_VERIFY_RETURN_INT(int, sdigit, (sdigit) (-(sdigit)digits[0]))
-                case  1: __PYX_VERIFY_RETURN_INT(int,  digit, +digits[0])
-                case -2:
-                    if (8 * sizeof(int) - 1 > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(int) - 1 > 2 * PyLong_SHIFT) {
-                            return (int) (((int)-1)*(((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                        }
-                    }
-                    break;
-                case 2:
-                    if (8 * sizeof(int) > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(int) - 1 > 2 * PyLong_SHIFT) {
-                            return (int) ((((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                        }
-                    }
-                    break;
-                case -3:
-                    if (8 * sizeof(int) - 1 > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(int) - 1 > 3 * PyLong_SHIFT) {
-                            return (int) (((int)-1)*(((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                        }
-                    }
-                    break;
-                case 3:
-                    if (8 * sizeof(int) > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(int) - 1 > 3 * PyLong_SHIFT) {
-                            return (int) ((((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                        }
-                    }
-                    break;
-                case -4:
-                    if (8 * sizeof(int) - 1 > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(int) - 1 > 4 * PyLong_SHIFT) {
-                            return (int) (((int)-1)*(((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                        }
-                    }
-                    break;
-                case 4:
-                    if (8 * sizeof(int) > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(int) - 1 > 4 * PyLong_SHIFT) {
-                            return (int) ((((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                        }
-                    }
-                    break;
-            }
-#endif
-            if (sizeof(int) <= sizeof(long)) {
-                __PYX_VERIFY_RETURN_INT_EXC(int, long, PyLong_AsLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
-                __PYX_VERIFY_RETURN_INT_EXC(int, PY_LONG_LONG, PyLong_AsLongLong(x))
-#endif
-            }
-        }
-        {
-#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
-            PyErr_SetString(PyExc_RuntimeError,
-                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
-#else
-            int val;
-            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
- #if PY_MAJOR_VERSION < 3
-            if (likely(v) && !PyLong_Check(v)) {
-                PyObject *tmp = v;
-                v = PyNumber_Long(tmp);
-                Py_DECREF(tmp);
-            }
- #endif
-            if (likely(v)) {
-                int one = 1; int is_little = (int)*(unsigned char *)&one;
-                unsigned char *bytes = (unsigned char *)&val;
-                int ret = _PyLong_AsByteArray((PyLongObject *)v,
-                                              bytes, sizeof(val),
-                                              is_little, !is_unsigned);
-                Py_DECREF(v);
-                if (likely(!ret))
-                    return val;
-            }
-#endif
-            return (int) -1;
-        }
-    } else {
-        int val;
-        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
-        if (!tmp) return (int) -1;
-        val = __Pyx_PyInt_As_int(tmp);
-        Py_DECREF(tmp);
-        return val;
-    }
-raise_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "value too large to convert to int");
-    return (int) -1;
-raise_neg_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "can't convert negative value to int");
-    return (int) -1;
 }
 
 /* FastTypeChecks */
