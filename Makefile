@@ -39,7 +39,7 @@ dev-test:
 	rm -rf build
 	python setup.py build_ext
 	pip install -e .
-	flake8
+	make lint
 	pytest -v
 
 .PHONY: docs
