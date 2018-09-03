@@ -1,11 +1,15 @@
 .DEFAULT_GOAL := all
 
+.PHONY: installself
+installself:
+	python setup.py build_ext
+	pip install -e .
+
 .PHONY: install
 install:
 	pip install -U pip wheel setuptools cython
 	pip install -r requirements.txt
-	python setup.py build_ext
-	pip install -e .
+	make installself
 
 .PHONY: lint
 lint:
