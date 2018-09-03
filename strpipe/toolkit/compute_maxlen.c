@@ -956,6 +956,9 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
 
+/* FunctionExport.proto */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
@@ -1019,7 +1022,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_14compute_maxlen_compute_maxlen(CYTH
  * def compute_maxlen(sentences):
  *     return compute_maxlen_in_c(sentences)             # <<<<<<<<<<<<<<
  * 
- * cdef compute_maxlen_in_c(list sentences):
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   if (!(likely(PyList_CheckExact(__pyx_v_sentences))||((__pyx_v_sentences) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_sentences)->tp_name), 0))) __PYX_ERR(0, 2, __pyx_L1_error)
@@ -1046,10 +1049,10 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_14compute_maxlen_compute_maxlen(CYTH
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/compute_maxlen.pyx":4
- *     return compute_maxlen_in_c(sentences)
+/* "strpipe/toolkit/compute_maxlen.pyx":5
  * 
- * cdef compute_maxlen_in_c(list sentences):             # <<<<<<<<<<<<<<
+ * 
+ * cdef compute_maxlen_in_c(list sentences):  # noqa: E999             # <<<<<<<<<<<<<<
  *     cdef int maxlen = 0
  *     cdef list sent
  */
@@ -1068,16 +1071,16 @@ static PyObject *__pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c(
   int __pyx_t_6;
   __Pyx_RefNannySetupContext("compute_maxlen_in_c", 0);
 
-  /* "strpipe/toolkit/compute_maxlen.pyx":5
+  /* "strpipe/toolkit/compute_maxlen.pyx":6
  * 
- * cdef compute_maxlen_in_c(list sentences):
+ * cdef compute_maxlen_in_c(list sentences):  # noqa: E999
  *     cdef int maxlen = 0             # <<<<<<<<<<<<<<
  *     cdef list sent
  *     for i in range(len(sentences)):
  */
   __pyx_v_maxlen = 0;
 
-  /* "strpipe/toolkit/compute_maxlen.pyx":7
+  /* "strpipe/toolkit/compute_maxlen.pyx":8
  *     cdef int maxlen = 0
  *     cdef list sent
  *     for i in range(len(sentences)):             # <<<<<<<<<<<<<<
@@ -1086,14 +1089,14 @@ static PyObject *__pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c(
  */
   if (unlikely(__pyx_v_sentences == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 7, __pyx_L1_error)
+    __PYX_ERR(0, 8, __pyx_L1_error)
   }
-  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_sentences); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 8, __pyx_L1_error)
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "strpipe/toolkit/compute_maxlen.pyx":8
+    /* "strpipe/toolkit/compute_maxlen.pyx":9
  *     cdef list sent
  *     for i in range(len(sentences)):
  *         sent = sentences[i]             # <<<<<<<<<<<<<<
@@ -1102,15 +1105,15 @@ static PyObject *__pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c(
  */
     if (unlikely(__pyx_v_sentences == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 8, __pyx_L1_error)
+      __PYX_ERR(0, 9, __pyx_L1_error)
     }
-    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 8, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_sentences, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 9, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (!(likely(PyList_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_4)->tp_name), 0))) __PYX_ERR(0, 8, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_4)->tp_name), 0))) __PYX_ERR(0, 9, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_sent, ((PyObject*)__pyx_t_4));
     __pyx_t_4 = 0;
 
-    /* "strpipe/toolkit/compute_maxlen.pyx":9
+    /* "strpipe/toolkit/compute_maxlen.pyx":10
  *     for i in range(len(sentences)):
  *         sent = sentences[i]
  *         if len(sent) > maxlen:             # <<<<<<<<<<<<<<
@@ -1119,13 +1122,13 @@ static PyObject *__pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c(
  */
     if (unlikely(__pyx_v_sent == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-      __PYX_ERR(0, 9, __pyx_L1_error)
+      __PYX_ERR(0, 10, __pyx_L1_error)
     }
-    __pyx_t_5 = PyList_GET_SIZE(__pyx_v_sent); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 9, __pyx_L1_error)
+    __pyx_t_5 = PyList_GET_SIZE(__pyx_v_sent); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 10, __pyx_L1_error)
     __pyx_t_6 = ((__pyx_t_5 > __pyx_v_maxlen) != 0);
     if (__pyx_t_6) {
 
-      /* "strpipe/toolkit/compute_maxlen.pyx":10
+      /* "strpipe/toolkit/compute_maxlen.pyx":11
  *         sent = sentences[i]
  *         if len(sent) > maxlen:
  *             maxlen = len(sent)             # <<<<<<<<<<<<<<
@@ -1133,12 +1136,12 @@ static PyObject *__pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c(
  */
       if (unlikely(__pyx_v_sent == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-        __PYX_ERR(0, 10, __pyx_L1_error)
+        __PYX_ERR(0, 11, __pyx_L1_error)
       }
-      __pyx_t_5 = PyList_GET_SIZE(__pyx_v_sent); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 10, __pyx_L1_error)
+      __pyx_t_5 = PyList_GET_SIZE(__pyx_v_sent); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 11, __pyx_L1_error)
       __pyx_v_maxlen = __pyx_t_5;
 
-      /* "strpipe/toolkit/compute_maxlen.pyx":9
+      /* "strpipe/toolkit/compute_maxlen.pyx":10
  *     for i in range(len(sentences)):
  *         sent = sentences[i]
  *         if len(sent) > maxlen:             # <<<<<<<<<<<<<<
@@ -1148,22 +1151,22 @@ static PyObject *__pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c(
     }
   }
 
-  /* "strpipe/toolkit/compute_maxlen.pyx":11
+  /* "strpipe/toolkit/compute_maxlen.pyx":12
  *         if len(sent) > maxlen:
  *             maxlen = len(sent)
  *     return maxlen             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_maxlen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_maxlen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/compute_maxlen.pyx":4
- *     return compute_maxlen_in_c(sentences)
+  /* "strpipe/toolkit/compute_maxlen.pyx":5
  * 
- * cdef compute_maxlen_in_c(list sentences):             # <<<<<<<<<<<<<<
+ * 
+ * cdef compute_maxlen_in_c(list sentences):  # noqa: E999             # <<<<<<<<<<<<<<
  *     cdef int maxlen = 0
  *     cdef list sent
  */
@@ -1228,7 +1231,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 8, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1289,8 +1292,12 @@ static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
+  if (__Pyx_ExportFunction("compute_maxlen_in_c", (void (*)(void))__pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c, "PyObject *(PyObject *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_type_init_code(void) {
@@ -1488,7 +1495,7 @@ if (!__Pyx_RefNanny) {
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  (void)__Pyx_modinit_function_export_code();
+  if (unlikely(__Pyx_modinit_function_export_code() != 0)) goto __pyx_L1_error;
   (void)__Pyx_modinit_type_init_code();
   (void)__Pyx_modinit_type_import_code();
   (void)__Pyx_modinit_variable_import_code();
@@ -1508,10 +1515,10 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_compute_maxlen, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/compute_maxlen.pyx":4
- *     return compute_maxlen_in_c(sentences)
+  /* "strpipe/toolkit/compute_maxlen.pyx":5
  * 
- * cdef compute_maxlen_in_c(list sentences):             # <<<<<<<<<<<<<<
+ * 
+ * cdef compute_maxlen_in_c(list sentences):  # noqa: E999             # <<<<<<<<<<<<<<
  *     cdef int maxlen = 0
  *     cdef list sent
  */
@@ -2482,6 +2489,43 @@ static int __Pyx_check_binary_version(void) {
         return PyErr_WarnEx(NULL, message, 1);
     }
     return 0;
+}
+
+/* FunctionExport */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    union {
+        void (*fp)(void);
+        void *p;
+    } tmp;
+    d = PyObject_GetAttrString(__pyx_m, (char *)"__pyx_capi__");
+    if (!d) {
+        PyErr_Clear();
+        d = PyDict_New();
+        if (!d)
+            goto bad;
+        Py_INCREF(d);
+        if (PyModule_AddObject(__pyx_m, (char *)"__pyx_capi__", d) < 0)
+            goto bad;
+    }
+    tmp.fp = f;
+#if PY_VERSION_HEX >= 0x02070000
+    cobj = PyCapsule_New(tmp.p, sig, 0);
+#else
+    cobj = PyCObject_FromVoidPtrAndDesc(tmp.p, (void *)sig, 0);
+#endif
+    if (!cobj)
+        goto bad;
+    if (PyDict_SetItemString(d, name, cobj) < 0)
+        goto bad;
+    Py_DECREF(cobj);
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(cobj);
+    Py_XDECREF(d);
+    return -1;
 }
 
 /* InitStrings */

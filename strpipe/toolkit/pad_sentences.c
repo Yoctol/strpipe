@@ -1104,8 +1104,8 @@ static PyObject *__pyx_codeobj__5;
 /* Late includes */
 
 /* "strpipe/toolkit/pad_sentences.pyx":4
- * 
- * 
+ *
+ *
  * def pad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         maxlen: int,
@@ -1204,7 +1204,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
   __Pyx_RefNannySetupContext("pad_sentences", 0);
 
   /* "strpipe/toolkit/pad_sentences.pyx":14
- * 
+ *
  *     meta = pad_sentences_meta_in_c(
  *         sentences=sentences,             # <<<<<<<<<<<<<<
  *         pad_token=pad_token,
@@ -1223,7 +1223,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
 
   /* "strpipe/toolkit/pad_sentences.pyx":13
  *     '''
- * 
+ *
  *     meta = pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *         sentences=sentences,
  *         pad_token=pad_token,
@@ -1267,8 +1267,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
  *         maxlen=maxlen,
  *     )
  *     return padded_sentences, meta             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
@@ -1284,8 +1284,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":4
- * 
- * 
+ *
+ *
  * def pad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         maxlen: int,
@@ -1305,8 +1305,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_pad_sentences(CYTHON
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":26
- * 
- * 
+ *
+ *
  * def unpad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         meta: list[dict],
@@ -1404,7 +1404,7 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_2unpad_sentences(CYT
  *         sentences=sentences,
  *         meta=meta,             # <<<<<<<<<<<<<<
  *     )
- * 
+ *
  */
   if (!(likely(PyList_CheckExact(__pyx_v_meta))||((__pyx_v_meta) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_meta)->tp_name), 0))) __PYX_ERR(0, 35, __pyx_L1_error)
 
@@ -1422,8 +1422,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_2unpad_sentences(CYT
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":26
- * 
- * 
+ *
+ *
  * def unpad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         meta: list[dict],
@@ -1441,8 +1441,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_13pad_sentences_2unpad_sentences(CYT
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":39
- * 
- * 
+ *
+ *
  * cdef list pad_sentence_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         str pad_token,
@@ -1463,9 +1463,9 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
 
   /* "strpipe/toolkit/pad_sentences.pyx":47
  *     cdef list padded_sentence, diff_sentence
- * 
+ *
  *     sent_len = len(sentence)             # <<<<<<<<<<<<<<
- * 
+ *
  *     if sent_len >= maxlen:
  */
   if (unlikely(__pyx_v_sentence == Py_None)) {
@@ -1477,7 +1477,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
 
   /* "strpipe/toolkit/pad_sentences.pyx":49
  *     sent_len = len(sentence)
- * 
+ *
  *     if sent_len >= maxlen:             # <<<<<<<<<<<<<<
  *         padded_sentence = sentence[: maxlen]
  *     else:
@@ -1486,7 +1486,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
   if (__pyx_t_2) {
 
     /* "strpipe/toolkit/pad_sentences.pyx":50
- * 
+ *
  *     if sent_len >= maxlen:
  *         padded_sentence = sentence[: maxlen]             # <<<<<<<<<<<<<<
  *     else:
@@ -1503,7 +1503,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
 
     /* "strpipe/toolkit/pad_sentences.pyx":49
  *     sent_len = len(sentence)
- * 
+ *
  *     if sent_len >= maxlen:             # <<<<<<<<<<<<<<
  *         padded_sentence = sentence[: maxlen]
  *     else:
@@ -1555,7 +1555,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
  *         padded_sentence = sentence
  *         padded_sentence.extend(diff_sentence)             # <<<<<<<<<<<<<<
  *     return padded_sentence
- * 
+ *
  */
     if (unlikely(__pyx_v_padded_sentence == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "extend");
@@ -1569,8 +1569,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
  *         padded_sentence = sentence
  *         padded_sentence.extend(diff_sentence)
  *     return padded_sentence             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_padded_sentence);
@@ -1578,8 +1578,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":39
- * 
- * 
+ *
+ *
  * cdef list pad_sentence_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         str pad_token,
@@ -1599,8 +1599,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_in_c(PyO
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":59
- * 
- * 
+ *
+ *
  * cdef dict pad_sentence_meta_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         str pad_token,
@@ -1709,7 +1709,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_meta_in_
  *         sentence_tail = sentence[maxlen:]
  *         output_meta_dict['sentence_tail'] = sentence_tail             # <<<<<<<<<<<<<<
  *     return output_meta_dict
- * 
+ *
  */
     if (unlikely(PyDict_SetItem(__pyx_v_output_meta_dict, __pyx_n_s_sentence_tail, __pyx_v_sentence_tail) < 0)) __PYX_ERR(0, 72, __pyx_L1_error)
   }
@@ -1719,8 +1719,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_meta_in_
  *         sentence_tail = sentence[maxlen:]
  *         output_meta_dict['sentence_tail'] = sentence_tail
  *     return output_meta_dict             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_output_meta_dict);
@@ -1728,8 +1728,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_meta_in_
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":59
- * 
- * 
+ *
+ *
  * cdef dict pad_sentence_meta_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         str pad_token,
@@ -1749,8 +1749,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentence_meta_in_
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":76
- * 
- * 
+ *
+ *
  * cdef list unpad_sentence_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         dict meta,
@@ -1772,7 +1772,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
 
   /* "strpipe/toolkit/pad_sentences.pyx":83
  *     cdef list sentence_tail, output_sentence
- * 
+ *
  *     sentlen = meta['sentlen']             # <<<<<<<<<<<<<<
  *     sentence_tail = meta['sentence_tail']
  *     padded_sentence = len(sentence)
@@ -1788,11 +1788,11 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
   __pyx_v_sentlen = __pyx_t_2;
 
   /* "strpipe/toolkit/pad_sentences.pyx":84
- * 
+ *
  *     sentlen = meta['sentlen']
  *     sentence_tail = meta['sentence_tail']             # <<<<<<<<<<<<<<
  *     padded_sentence = len(sentence)
- * 
+ *
  */
   if (unlikely(__pyx_v_meta == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -1808,7 +1808,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
  *     sentlen = meta['sentlen']
  *     sentence_tail = meta['sentence_tail']
  *     padded_sentence = len(sentence)             # <<<<<<<<<<<<<<
- * 
+ *
  *     if padded_sentlen >= sentlen:
  */
   if (unlikely(__pyx_v_sentence == Py_None)) {
@@ -1820,7 +1820,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
 
   /* "strpipe/toolkit/pad_sentences.pyx":87
  *     padded_sentence = len(sentence)
- * 
+ *
  *     if padded_sentlen >= sentlen:             # <<<<<<<<<<<<<<
  *         output_sentence = sentence[:sentlen]
  *     else:
@@ -1829,7 +1829,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
   if (__pyx_t_4) {
 
     /* "strpipe/toolkit/pad_sentences.pyx":88
- * 
+ *
  *     if padded_sentlen >= sentlen:
  *         output_sentence = sentence[:sentlen]             # <<<<<<<<<<<<<<
  *     else:
@@ -1846,7 +1846,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
 
     /* "strpipe/toolkit/pad_sentences.pyx":87
  *     padded_sentence = len(sentence)
- * 
+ *
  *     if padded_sentlen >= sentlen:             # <<<<<<<<<<<<<<
  *         output_sentence = sentence[:sentlen]
  *     else:
@@ -1858,7 +1858,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
  *         output_sentence = sentence[:sentlen]
  *     else:
  *         output_sentence = sentence + sentence_tail             # <<<<<<<<<<<<<<
- * 
+ *
  *     return output_sentence
  */
   /*else*/ {
@@ -1871,10 +1871,10 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
 
   /* "strpipe/toolkit/pad_sentences.pyx":92
  *         output_sentence = sentence + sentence_tail
- * 
+ *
  *     return output_sentence             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_output_sentence);
@@ -1882,8 +1882,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":76
- * 
- * 
+ *
+ *
  * cdef list unpad_sentence_in_c(             # <<<<<<<<<<<<<<
  *         list sentence,
  *         dict meta,
@@ -1903,7 +1903,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentence_in_c(P
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":96
- * 
+ *
  * ### batch versions ###
  * cdef list pad_sentences_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
@@ -1928,10 +1928,10 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
 
   /* "strpipe/toolkit/pad_sentences.pyx":104
  *     cdef list sentence, padded_sentence, output_list
- * 
+ *
  *     output_list = []             # <<<<<<<<<<<<<<
  *     n_sent = len(sentences)
- * 
+ *
  */
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -1939,10 +1939,10 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
   __pyx_t_1 = 0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":105
- * 
+ *
  *     output_list = []
  *     n_sent = len(sentences)             # <<<<<<<<<<<<<<
- * 
+ *
  *     for i in range(n_sent):
  */
   if (unlikely(__pyx_v_sentences == Py_None)) {
@@ -1954,7 +1954,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
 
   /* "strpipe/toolkit/pad_sentences.pyx":107
  *     n_sent = len(sentences)
- * 
+ *
  *     for i in range(n_sent):             # <<<<<<<<<<<<<<
  *         sentence = sentences[i]
  *         padded_sentence = pad_sentence_in_c(
@@ -1965,7 +1965,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
     __pyx_v_i = __pyx_t_5;
 
     /* "strpipe/toolkit/pad_sentences.pyx":108
- * 
+ *
  *     for i in range(n_sent):
  *         sentence = sentences[i]             # <<<<<<<<<<<<<<
  *         padded_sentence = pad_sentence_in_c(
@@ -1998,7 +1998,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
  *         )
  *         output_list.append(padded_sentence)             # <<<<<<<<<<<<<<
  *     return output_list
- * 
+ *
  */
     __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_output_list, __pyx_v_padded_sentence); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 114, __pyx_L1_error)
   }
@@ -2007,8 +2007,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
  *         )
  *         output_list.append(padded_sentence)
  *     return output_list             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_output_list);
@@ -2016,7 +2016,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":96
- * 
+ *
  * ### batch versions ###
  * cdef list pad_sentences_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
@@ -2038,8 +2038,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(Py
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":118
- * 
- * 
+ *
+ *
  * cdef list pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
  *         str pad_token,
@@ -2066,7 +2066,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
  *     cdef unsigned int i, n_sent
  *     cdef list output_meta_list = []             # <<<<<<<<<<<<<<
  *     cdef dict meta_dict
- * 
+ *
  */
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2075,7 +2075,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
 
   /* "strpipe/toolkit/pad_sentences.pyx":127
  *     cdef dict meta_dict
- * 
+ *
  *     n_sent = len(sentences)             # <<<<<<<<<<<<<<
  *     for i in range(n_sent):
  *         meta_dict = pad_sentence_meta_in_c(
@@ -2088,7 +2088,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
   __pyx_v_n_sent = __pyx_t_2;
 
   /* "strpipe/toolkit/pad_sentences.pyx":128
- * 
+ *
  *     n_sent = len(sentences)
  *     for i in range(n_sent):             # <<<<<<<<<<<<<<
  *         meta_dict = pad_sentence_meta_in_c(
@@ -2132,7 +2132,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
  *         )
  *         output_meta_list.append(meta_dict)             # <<<<<<<<<<<<<<
  *     return output_meta_list
- * 
+ *
  */
     __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_output_meta_list, __pyx_v_meta_dict); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 134, __pyx_L1_error)
   }
@@ -2141,8 +2141,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
  *         )
  *         output_meta_list.append(meta_dict)
  *     return output_meta_list             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_output_meta_list);
@@ -2150,8 +2150,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":118
- * 
- * 
+ *
+ *
  * cdef list pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
  *         str pad_token,
@@ -2172,8 +2172,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in
 }
 
 /* "strpipe/toolkit/pad_sentences.pyx":138
- * 
- * 
+ *
+ *
  * cdef list unpad_sentences_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
  *         list meta,
@@ -2198,7 +2198,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(
 
   /* "strpipe/toolkit/pad_sentences.pyx":145
  *     cdef unsigned int i, n_sent
- * 
+ *
  *     n_sent = len(sentences)             # <<<<<<<<<<<<<<
  *     output_sentences = []
  *     for i in range(n_sent):
@@ -2211,7 +2211,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(
   __pyx_v_n_sent = __pyx_t_1;
 
   /* "strpipe/toolkit/pad_sentences.pyx":146
- * 
+ *
  *     n_sent = len(sentences)
  *     output_sentences = []             # <<<<<<<<<<<<<<
  *     for i in range(n_sent):
@@ -2298,8 +2298,8 @@ static PyObject *__pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(
   goto __pyx_L0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":138
- * 
- * 
+ *
+ *
  * cdef list unpad_sentences_in_c(             # <<<<<<<<<<<<<<
  *         list sentences,
  *         list meta,
@@ -2390,8 +2390,8 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
   /* "strpipe/toolkit/pad_sentences.pyx":4
- * 
- * 
+ *
+ *
  * def pad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         maxlen: int,
@@ -2402,8 +2402,8 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_pad_sentences_py, __pyx_n_s_pad_sentences, 4, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 4, __pyx_L1_error)
 
   /* "strpipe/toolkit/pad_sentences.pyx":26
- * 
- * 
+ *
+ *
  * def unpad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         meta: list[dict],
@@ -2675,8 +2675,8 @@ if (!__Pyx_RefNanny) {
 
   /* "strpipe/toolkit/pad_sentences.pyx":1
  * from default_tokens import DefaultTokens             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2710,8 +2710,8 @@ if (!__Pyx_RefNanny) {
   __pyx_t_1 = 0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":4
- * 
- * 
+ *
+ *
  * def pad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         maxlen: int,
@@ -2722,8 +2722,8 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "strpipe/toolkit/pad_sentences.pyx":26
- * 
- * 
+ *
+ *
  * def unpad_sentences(             # <<<<<<<<<<<<<<
  *         sentences: list[list[str]],
  *         meta: list[dict],
@@ -2735,8 +2735,8 @@ if (!__Pyx_RefNanny) {
 
   /* "strpipe/toolkit/pad_sentences.pyx":1
  * from default_tokens import DefaultTokens             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
