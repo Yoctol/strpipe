@@ -10,4 +10,4 @@ cdef class BaseOp:
     cdef transform(state, input)
 
     @staticmethod
-    cdef inverse_transfrom(state, input, meta)
+    cdef inverse_transfrom(state, input, tx_info)
