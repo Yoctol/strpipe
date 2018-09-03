@@ -1,5 +1,3 @@
-
-
 cdef list pad_sentence_in_c(
     list sentence,
     str pad_token,

@@ -39,7 +39,7 @@ dev-test:
 	rm -rf build
 	python setup.py build_ext
 	pip install -e .
-	flake8 --config=.flake8.cython
+	make lint
 	pytest -v
 
 .PHONY: docs
