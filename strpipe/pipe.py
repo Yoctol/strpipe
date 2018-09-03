@@ -104,7 +104,7 @@ class Pipe:
             meta = tx_info[idx]
             step = self._steps[idx]
             data = step.inverse_transform(data, meta)
-        return data, tx_info
+        return data
 
     def save_json(self, path):
         serializable = {}
