@@ -31,7 +31,7 @@ ext_modules = []
 
 
 if use_cython:
-    pyx_paths = sorted(Path('.').rglob("*.pyx"))
+    pyx_paths = sorted(Path('./strpipe').rglob("*.pyx"))
 
     for pyx_path in pyx_paths:
         path_str = str(pyx_path)
@@ -52,7 +52,7 @@ if use_cython:
 
 else:
     # .c files
-    pyx_paths = sorted(Path('.').rglob("*.c"))
+    pyx_paths = sorted(Path('./strpipe').rglob("*.c"))
     for pyx_path in pyx_paths:
         path_str = str(pyx_path)
         ext_modules.append(
@@ -63,7 +63,7 @@ else:
         )
 
     # .cpp files
-    pyx_paths = sorted(Path('.').rglob("*.cpp"))
+    pyx_paths = sorted(Path('./strpipe').rglob("*.cpp"))
     for pyx_path in pyx_paths:
         path_str = str(pyx_path)
         ext_modules.append(
