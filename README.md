@@ -53,3 +53,16 @@ result, meta = p.transform(['你好'])
 ```
 $ make test
 ```
+
+## Extend Ops
+
+1. Extend the new ops with `BaseOp`
+2. Define `input_type`, `output_type`
+3. Implement op creation
+4. Implement fit, transform, inverse_transform. If the op is stateless, the `fit` method should return None.
+
+> Note: It is expected that an ops's functionality will often be able to be decomposed into several functions. These functions should be written into (or imported from) the toolkit package for easy reuse.
+Ops in the ops package will, for the most part, be wrappers for functions in toolkit.
+
+5. Write tests
+6. Register to `op_factory`
