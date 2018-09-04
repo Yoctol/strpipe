@@ -77,13 +77,12 @@ cdef list unpad_sentence_in_c(
         list sentence,
         dict meta,
     ):
-    cdef unsigned int padded_sentlen, sentlen
+    cdef int padded_sentlen, sentlen
     cdef list sentence_tail, output_sentence
 
     sentlen = meta['sentlen']
     sentence_tail = meta['sentence_tail']
-    padded_sentence = len(sentence)
-
+    padded_sentlen = len(sentence)
     if padded_sentlen >= sentlen:
         output_sentence = sentence[:sentlen]
     else:
