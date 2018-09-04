@@ -850,6 +850,16 @@ static const char *__pyx_f[] = {
 #define __Pyx_CLEAR(r)    do { PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);} while(0)
 #define __Pyx_XCLEAR(r)   do { if((r) != NULL) {PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);}} while(0)
 
+/* PyObjectGetAttrStr.proto */
+#if CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name);
+#else
+#define __Pyx_PyObject_GetAttrStr(o,n) PyObject_GetAttr(o,n)
+#endif
+
+/* GetBuiltinName.proto */
+static PyObject *__Pyx_GetBuiltinName(PyObject *name);
+
 /* RaiseArgTupleInvalid.proto */
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
@@ -874,16 +884,38 @@ static CYTHON_INLINE int __Pyx_PyDict_ContainsTF(PyObject* item, PyObject* dict,
     return unlikely(result < 0) ? result : (result == (eq == Py_EQ));
 }
 
-/* DictGetItem.proto */
-#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
-static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key);
-#define __Pyx_PyObject_Dict_GetItem(obj, name)\
-    (likely(PyDict_CheckExact(obj)) ?\
-     __Pyx_PyDict_GetItem(obj, name) : PyObject_GetItem(obj, name))
+/* PyCFunctionFastCall.proto */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
 #else
-#define __Pyx_PyDict_GetItem(d, key) PyObject_GetItem(d, key)
-#define __Pyx_PyObject_Dict_GetItem(obj, name)  PyObject_GetItem(obj, name)
+#define __Pyx_PyCFunction_FastCall(func, args, nargs)  (assert(0), NULL)
 #endif
+
+/* PyFunctionFastCall.proto */
+#if CYTHON_FAST_PYCALL
+#define __Pyx_PyFunction_FastCall(func, args, nargs)\
+    __Pyx_PyFunction_FastCallDict((func), (args), (nargs), NULL)
+#if 1 || PY_VERSION_HEX < 0x030600B1
+static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, int nargs, PyObject *kwargs);
+#else
+#define __Pyx_PyFunction_FastCallDict(func, args, nargs, kwargs) _PyFunction_FastCallDict(func, args, nargs, kwargs)
+#endif
+#endif
+
+/* PyObjectCall.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+#else
+#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#endif
+
+/* PyObjectCallMethO.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
+#endif
+
+/* PyObjectCallOneArg.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
 
 /* PyThreadStateGet.proto */
 #if CYTHON_FAST_THREAD_STATE
@@ -921,26 +953,30 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 #define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
 #endif
 
+/* RaiseException.proto */
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
+
+/* DictGetItem.proto */
+#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
+static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key);
+#define __Pyx_PyObject_Dict_GetItem(obj, name)\
+    (likely(PyDict_CheckExact(obj)) ?\
+     __Pyx_PyDict_GetItem(obj, name) : PyObject_GetItem(obj, name))
+#else
+#define __Pyx_PyDict_GetItem(d, key) PyObject_GetItem(d, key)
+#define __Pyx_PyObject_Dict_GetItem(obj, name)  PyObject_GetItem(obj, name)
+#endif
+
 /* WriteUnraisableException.proto */
 static void __Pyx_WriteUnraisable(const char *name, int clineno,
                                   int lineno, const char *filename,
                                   int full_traceback, int nogil);
-
-/* PyObjectGetAttrStr.proto */
-#if CYTHON_USE_TYPE_SLOTS
-static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name);
-#else
-#define __Pyx_PyObject_GetAttrStr(o,n) PyObject_GetAttr(o,n)
-#endif
 
 /* Import.proto */
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
 /* ImportFrom.proto */
 static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
-
-/* GetBuiltinName.proto */
-static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
 /* GetModuleGlobalName.proto */
 static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
@@ -1028,43 +1064,50 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 static unsigned int (*__pyx_f_7strpipe_7toolkit_15consistent_hash_consistent_hash_in_c)(PyObject *, unsigned int, unsigned int); /*proto*/
 
 /* Module declarations from 'strpipe.toolkit.token_to_index' */
-static unsigned int __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk_in_c(PyObject *, PyObject *, PyObject *); /*proto*/
-static unsigned int __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_hash_in_c(PyObject *, PyObject *); /*proto*/
+static unsigned int __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk_in_cpp(PyObject *, PyObject *, PyObject *); /*proto*/
+static unsigned int __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_hash_in_cpp(PyObject *, PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "strpipe.toolkit.token_to_index"
 extern int __pyx_module_is_main_strpipe__toolkit__token_to_index;
 int __pyx_module_is_main_strpipe__toolkit__token_to_index = 0;
 
 /* Implementation of 'strpipe.toolkit.token_to_index' */
+static PyObject *__pyx_builtin_KeyError;
 static const char __pyx_k_unk[] = "unk";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_token[] = "token";
+static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
+static const char __pyx_k_KeyError[] = "KeyError";
 static const char __pyx_k_unk_token[] = "unk_token";
-static const char __pyx_k_word2index[] = "word2index";
+static const char __pyx_k_token2index[] = "token2index";
 static const char __pyx_k_DefaultTokens[] = "DefaultTokens";
 static const char __pyx_k_default_tokens[] = "default_tokens";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_token_to_index_with_unk[] = "token_to_index_with_unk";
 static const char __pyx_k_token_to_index_with_hash[] = "token_to_index_with_hash";
 static const char __pyx_k_strpipe_toolkit_token_to_index[] = "strpipe.toolkit.token_to_index";
+static const char __pyx_k_unk_token_is_not_in_token2index[] = "unk token [{}] is not in token2index";
 static const char __pyx_k_strpipe_toolkit_token_to_index_p[] = "strpipe/toolkit/token_to_index.pyx";
 static PyObject *__pyx_n_s_DefaultTokens;
+static PyObject *__pyx_n_s_KeyError;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_default_tokens;
+static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_strpipe_toolkit_token_to_index;
 static PyObject *__pyx_kp_s_strpipe_toolkit_token_to_index_p;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_token;
+static PyObject *__pyx_n_s_token2index;
 static PyObject *__pyx_n_s_token_to_index_with_hash;
 static PyObject *__pyx_n_s_token_to_index_with_unk;
 static PyObject *__pyx_n_s_unk;
 static PyObject *__pyx_n_s_unk_token;
-static PyObject *__pyx_n_s_word2index;
-static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_token, PyObject *__pyx_v_word2index, PyObject *__pyx_v_unk_token); /* proto */
-static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_2token_to_index_with_hash(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_token, PyObject *__pyx_v_word2index); /* proto */
+static PyObject *__pyx_kp_s_unk_token_is_not_in_token2index;
+static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_token, PyObject *__pyx_v_token2index, PyObject *__pyx_v_unk_token); /* proto */
+static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_2token_to_index_with_hash(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_token, PyObject *__pyx_v_token2index); /* proto */
 static PyObject *__pyx_k_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__4;
@@ -1077,7 +1120,7 @@ static PyObject *__pyx_codeobj__5;
  * 
  * def token_to_index_with_unk(             # <<<<<<<<<<<<<<
  *         token: str,
- *         word2index: dict,
+ *         token2index: dict,
  */
 
 /* Python wrapper */
@@ -1085,13 +1128,13 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_1token_to_index_wit
 static PyMethodDef __pyx_mdef_7strpipe_7toolkit_14token_to_index_1token_to_index_with_unk = {"token_to_index_with_unk", (PyCFunction)__pyx_pw_7strpipe_7toolkit_14token_to_index_1token_to_index_with_unk, METH_VARARGS|METH_KEYWORDS, 0};
 static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_1token_to_index_with_unk(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_token = 0;
-  PyObject *__pyx_v_word2index = 0;
+  PyObject *__pyx_v_token2index = 0;
   PyObject *__pyx_v_unk_token = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("token_to_index_with_unk (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_token,&__pyx_n_s_word2index,&__pyx_n_s_unk_token,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_token,&__pyx_n_s_token2index,&__pyx_n_s_unk_token,0};
     PyObject* values[3] = {0,0,0};
     values[2] = __pyx_k_;
     if (unlikely(__pyx_kwds)) {
@@ -1114,7 +1157,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_1token_to_index_wit
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_word2index)) != 0)) kw_args--;
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_token2index)) != 0)) kw_args--;
         else {
           __Pyx_RaiseArgtupleInvalid("token_to_index_with_unk", 0, 2, 3, 1); __PYX_ERR(0, 6, __pyx_L3_error)
         }
@@ -1139,7 +1182,7 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_1token_to_index_wit
       }
     }
     __pyx_v_token = ((PyObject*)values[0]);
-    __pyx_v_word2index = ((PyObject*)values[1]);
+    __pyx_v_token2index = ((PyObject*)values[1]);
     __pyx_v_unk_token = ((PyObject*)values[2]);
   }
   goto __pyx_L4_argument_unpacking_done;
@@ -1151,9 +1194,9 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_1token_to_index_wit
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_token), (&PyString_Type), 1, "token", 1))) __PYX_ERR(0, 7, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_word2index), (&PyDict_Type), 1, "word2index", 1))) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_token2index), (&PyDict_Type), 1, "token2index", 1))) __PYX_ERR(0, 8, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_unk_token), (&PyString_Type), 1, "unk_token", 1))) __PYX_ERR(0, 9, __pyx_L1_error)
-  __pyx_r = __pyx_pf_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk(__pyx_self, __pyx_v_token, __pyx_v_word2index, __pyx_v_unk_token);
+  __pyx_r = __pyx_pf_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk(__pyx_self, __pyx_v_token, __pyx_v_token2index, __pyx_v_unk_token);
 
   /* function exit code */
   goto __pyx_L0;
@@ -1164,16 +1207,17 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_1token_to_index_wit
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_token, PyObject *__pyx_v_word2index, PyObject *__pyx_v_unk_token) {
+static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_token, PyObject *__pyx_v_token2index, PyObject *__pyx_v_unk_token) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
+  unsigned int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("token_to_index_with_unk", 0);
 
   /* "strpipe/toolkit/token_to_index.pyx":11
  *         unk_token: str = DefaultTokens.unk,
  *     ) -> int:
- *     return token_to_index_with_unk_in_c(             # <<<<<<<<<<<<<<
+ *     return token_to_index_with_unk_in_cpp(             # <<<<<<<<<<<<<<
  *         token=token,
  *         unk_token=unk_token,
  */
@@ -1182,14 +1226,23 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_token_to_index_with
   /* "strpipe/toolkit/token_to_index.pyx":14
  *         token=token,
  *         unk_token=unk_token,
- *         word2index=word2index,             # <<<<<<<<<<<<<<
+ *         token2index=token2index,             # <<<<<<<<<<<<<<
  *     )
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk_in_c(__pyx_v_token, __pyx_v_unk_token, __pyx_v_word2index)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
+  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk_in_cpp(__pyx_v_token, __pyx_v_unk_token, __pyx_v_token2index); if (unlikely(__pyx_t_1 == ((unsigned int)-1))) __PYX_ERR(0, 11, __pyx_L1_error)
+
+  /* "strpipe/toolkit/token_to_index.pyx":11
+ *         unk_token: str = DefaultTokens.unk,
+ *     ) -> int:
+ *     return token_to_index_with_unk_in_cpp(             # <<<<<<<<<<<<<<
+ *         token=token,
+ *         unk_token=unk_token,
+ */
+  __pyx_t_2 = __Pyx_PyInt_From_unsigned_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
   goto __pyx_L0;
 
   /* "strpipe/toolkit/token_to_index.pyx":6
@@ -1197,12 +1250,12 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_token_to_index_with
  * 
  * def token_to_index_with_unk(             # <<<<<<<<<<<<<<
  *         token: str,
- *         word2index: dict,
+ *         token2index: dict,
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("strpipe.toolkit.token_to_index.token_to_index_with_unk", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -1214,86 +1267,188 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_token_to_index_with
 /* "strpipe/toolkit/token_to_index.pyx":18
  * 
  * 
- * cdef unsigned int token_to_index_with_unk_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
+ * cdef unsigned int token_to_index_with_unk_in_cpp(  # noqa: E999             # <<<<<<<<<<<<<<
  *         str token,
  *         str unk_token,
  */
 
-static unsigned int __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk_in_c(PyObject *__pyx_v_token, PyObject *__pyx_v_unk_token, PyObject *__pyx_v_word2index) {
+static unsigned int __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk_in_cpp(PyObject *__pyx_v_token, PyObject *__pyx_v_unk_token, PyObject *__pyx_v_token2index) {
   unsigned int __pyx_v_index;
   unsigned int __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
-  unsigned int __pyx_t_4;
-  __Pyx_RefNannySetupContext("token_to_index_with_unk_in_c", 0);
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  unsigned int __pyx_t_7;
+  __Pyx_RefNannySetupContext("token_to_index_with_unk_in_cpp", 0);
 
   /* "strpipe/toolkit/token_to_index.pyx":25
  *     cdef unsigned int index
  * 
- *     if token not in word2index:             # <<<<<<<<<<<<<<
- *         # assign unk index
- *         index = word2index[unk_token]
+ *     if unk_token not in token2index:             # <<<<<<<<<<<<<<
+ *         raise KeyError(
+ *             'unk token [{}] is not in token2index'.format(
  */
-  if (unlikely(__pyx_v_word2index == Py_None)) {
+  if (unlikely(__pyx_v_token2index == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
     __PYX_ERR(0, 25, __pyx_L1_error)
   }
-  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_token, __pyx_v_word2index, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_unk_token, __pyx_v_token2index, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 25, __pyx_L1_error)
   __pyx_t_2 = (__pyx_t_1 != 0);
-  if (__pyx_t_2) {
+  if (unlikely(__pyx_t_2)) {
 
     /* "strpipe/toolkit/token_to_index.pyx":27
- *     if token not in word2index:
- *         # assign unk index
- *         index = word2index[unk_token]             # <<<<<<<<<<<<<<
- *     else:
- *         index = word2index[token]
+ *     if unk_token not in token2index:
+ *         raise KeyError(
+ *             'unk token [{}] is not in token2index'.format(             # <<<<<<<<<<<<<<
+ *                 unk_token,
+ *             ),
  */
-    if (unlikely(__pyx_v_word2index == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 27, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_unk_token_is_not_in_token2index, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+
+    /* "strpipe/toolkit/token_to_index.pyx":28
+ *         raise KeyError(
+ *             'unk token [{}] is not in token2index'.format(
+ *                 unk_token,             # <<<<<<<<<<<<<<
+ *             ),
+ *         )
+ */
+    __pyx_t_5 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_5)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_5);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+      }
     }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_word2index, __pyx_v_unk_token); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyInt_As_unsigned_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L1_error)
+    if (!__pyx_t_5) {
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_unk_token); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+    } else {
+      #if CYTHON_FAST_PYCALL
+      if (PyFunction_Check(__pyx_t_4)) {
+        PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_v_unk_token};
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __Pyx_GOTREF(__pyx_t_3);
+      } else
+      #endif
+      #if CYTHON_FAST_PYCCALL
+      if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
+        PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_v_unk_token};
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __Pyx_GOTREF(__pyx_t_3);
+      } else
+      #endif
+      {
+        __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 27, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_6);
+        __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
+        __Pyx_INCREF(__pyx_v_unk_token);
+        __Pyx_GIVEREF(__pyx_v_unk_token);
+        PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_v_unk_token);
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      }
+    }
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "strpipe/toolkit/token_to_index.pyx":26
+ * 
+ *     if unk_token not in token2index:
+ *         raise KeyError(             # <<<<<<<<<<<<<<
+ *             'unk token [{}] is not in token2index'.format(
+ *                 unk_token,
+ */
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_KeyError, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 26, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_v_index = __pyx_t_4;
+    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __PYX_ERR(0, 26, __pyx_L1_error)
 
     /* "strpipe/toolkit/token_to_index.pyx":25
  *     cdef unsigned int index
  * 
- *     if token not in word2index:             # <<<<<<<<<<<<<<
- *         # assign unk index
- *         index = word2index[unk_token]
+ *     if unk_token not in token2index:             # <<<<<<<<<<<<<<
+ *         raise KeyError(
+ *             'unk token [{}] is not in token2index'.format(
  */
-    goto __pyx_L3;
   }
 
-  /* "strpipe/toolkit/token_to_index.pyx":29
- *         index = word2index[unk_token]
+  /* "strpipe/toolkit/token_to_index.pyx":32
+ *         )
+ * 
+ *     if token not in token2index:             # <<<<<<<<<<<<<<
+ *         # assign unk index
+ *         index = token2index[unk_token]
+ */
+  if (unlikely(__pyx_v_token2index == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
+    __PYX_ERR(0, 32, __pyx_L1_error)
+  }
+  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_v_token, __pyx_v_token2index, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_1 = (__pyx_t_2 != 0);
+  if (__pyx_t_1) {
+
+    /* "strpipe/toolkit/token_to_index.pyx":34
+ *     if token not in token2index:
+ *         # assign unk index
+ *         index = token2index[unk_token]             # <<<<<<<<<<<<<<
  *     else:
- *         index = word2index[token]             # <<<<<<<<<<<<<<
+ *         index = token2index[token]
+ */
+    if (unlikely(__pyx_v_token2index == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(0, 34, __pyx_L1_error)
+    }
+    __pyx_t_4 = __Pyx_PyDict_GetItem(__pyx_v_token2index, __pyx_v_unk_token); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 34, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_7 = __Pyx_PyInt_As_unsigned_int(__pyx_t_4); if (unlikely((__pyx_t_7 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_v_index = __pyx_t_7;
+
+    /* "strpipe/toolkit/token_to_index.pyx":32
+ *         )
+ * 
+ *     if token not in token2index:             # <<<<<<<<<<<<<<
+ *         # assign unk index
+ *         index = token2index[unk_token]
+ */
+    goto __pyx_L4;
+  }
+
+  /* "strpipe/toolkit/token_to_index.pyx":36
+ *         index = token2index[unk_token]
+ *     else:
+ *         index = token2index[token]             # <<<<<<<<<<<<<<
  *     return index
  * 
  */
   /*else*/ {
-    if (unlikely(__pyx_v_word2index == Py_None)) {
+    if (unlikely(__pyx_v_token2index == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 29, __pyx_L1_error)
+      __PYX_ERR(0, 36, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_word2index, __pyx_v_token); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 29, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyInt_As_unsigned_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 29, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_v_index = __pyx_t_4;
+    __pyx_t_4 = __Pyx_PyDict_GetItem(__pyx_v_token2index, __pyx_v_token); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 36, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_7 = __Pyx_PyInt_As_unsigned_int(__pyx_t_4); if (unlikely((__pyx_t_7 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 36, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_v_index = __pyx_t_7;
   }
-  __pyx_L3:;
+  __pyx_L4:;
 
-  /* "strpipe/toolkit/token_to_index.pyx":30
+  /* "strpipe/toolkit/token_to_index.pyx":37
  *     else:
- *         index = word2index[token]
+ *         index = token2index[token]
  *     return index             # <<<<<<<<<<<<<<
  * 
  * 
@@ -1304,7 +1459,7 @@ static unsigned int __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_wi
   /* "strpipe/toolkit/token_to_index.pyx":18
  * 
  * 
- * cdef unsigned int token_to_index_with_unk_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
+ * cdef unsigned int token_to_index_with_unk_in_cpp(  # noqa: E999             # <<<<<<<<<<<<<<
  *         str token,
  *         str unk_token,
  */
@@ -1312,19 +1467,22 @@ static unsigned int __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_wi
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_WriteUnraisable("strpipe.toolkit.token_to_index.token_to_index_with_unk_in_c", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __pyx_r = 0;
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("strpipe.toolkit.token_to_index.token_to_index_with_unk_in_cpp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/token_to_index.pyx":33
+/* "strpipe/toolkit/token_to_index.pyx":40
  * 
  * 
  * def token_to_index_with_hash(             # <<<<<<<<<<<<<<
  *         token: str,
- *         word2index: dict,
+ *         token2index: dict,
  */
 
 /* Python wrapper */
@@ -1332,12 +1490,12 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_3token_to_index_wit
 static PyMethodDef __pyx_mdef_7strpipe_7toolkit_14token_to_index_3token_to_index_with_hash = {"token_to_index_with_hash", (PyCFunction)__pyx_pw_7strpipe_7toolkit_14token_to_index_3token_to_index_with_hash, METH_VARARGS|METH_KEYWORDS, 0};
 static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_3token_to_index_with_hash(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_token = 0;
-  PyObject *__pyx_v_word2index = 0;
+  PyObject *__pyx_v_token2index = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("token_to_index_with_hash (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_token,&__pyx_n_s_word2index,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_token,&__pyx_n_s_token2index,0};
     PyObject* values[2] = {0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
@@ -1357,13 +1515,13 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_3token_to_index_wit
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_word2index)) != 0)) kw_args--;
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_token2index)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("token_to_index_with_hash", 1, 2, 2, 1); __PYX_ERR(0, 33, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("token_to_index_with_hash", 1, 2, 2, 1); __PYX_ERR(0, 40, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "token_to_index_with_hash") < 0)) __PYX_ERR(0, 33, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "token_to_index_with_hash") < 0)) __PYX_ERR(0, 40, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1372,19 +1530,19 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_3token_to_index_wit
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_token = ((PyObject*)values[0]);
-    __pyx_v_word2index = ((PyObject*)values[1]);
+    __pyx_v_token2index = ((PyObject*)values[1]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("token_to_index_with_hash", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 33, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("token_to_index_with_hash", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 40, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.toolkit.token_to_index.token_to_index_with_hash", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_token), (&PyString_Type), 1, "token", 1))) __PYX_ERR(0, 34, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_word2index), (&PyDict_Type), 1, "word2index", 1))) __PYX_ERR(0, 35, __pyx_L1_error)
-  __pyx_r = __pyx_pf_7strpipe_7toolkit_14token_to_index_2token_to_index_with_hash(__pyx_self, __pyx_v_token, __pyx_v_word2index);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_token), (&PyString_Type), 1, "token", 1))) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_token2index), (&PyDict_Type), 1, "token2index", 1))) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_r = __pyx_pf_7strpipe_7toolkit_14token_to_index_2token_to_index_with_hash(__pyx_self, __pyx_v_token, __pyx_v_token2index);
 
   /* function exit code */
   goto __pyx_L0;
@@ -1395,40 +1553,40 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_14token_to_index_3token_to_index_wit
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_2token_to_index_with_hash(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_token, PyObject *__pyx_v_word2index) {
+static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_2token_to_index_with_hash(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_token, PyObject *__pyx_v_token2index) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("token_to_index_with_hash", 0);
 
-  /* "strpipe/toolkit/token_to_index.pyx":37
- *         word2index: dict,
+  /* "strpipe/toolkit/token_to_index.pyx":44
+ *         token2index: dict,
  *     ) -> int:
- *     return token_to_index_with_hash_in_c(             # <<<<<<<<<<<<<<
+ *     return token_to_index_with_hash_in_cpp(             # <<<<<<<<<<<<<<
  *         token=token,
- *         word2index=word2index,
+ *         token2index=token2index,
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "strpipe/toolkit/token_to_index.pyx":39
- *     return token_to_index_with_hash_in_c(
+  /* "strpipe/toolkit/token_to_index.pyx":46
+ *     return token_to_index_with_hash_in_cpp(
  *         token=token,
- *         word2index=word2index,             # <<<<<<<<<<<<<<
+ *         token2index=token2index,             # <<<<<<<<<<<<<<
  *     )
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_hash_in_c(__pyx_v_token, __pyx_v_word2index)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_hash_in_cpp(__pyx_v_token, __pyx_v_token2index)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/token_to_index.pyx":33
+  /* "strpipe/toolkit/token_to_index.pyx":40
  * 
  * 
  * def token_to_index_with_hash(             # <<<<<<<<<<<<<<
  *         token: str,
- *         word2index: dict,
+ *         token2index: dict,
  */
 
   /* function exit code */
@@ -1442,111 +1600,113 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_14token_to_index_2token_to_index_wit
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/token_to_index.pyx":43
+/* "strpipe/toolkit/token_to_index.pyx":50
  * 
  * 
- * cdef unsigned int token_to_index_with_hash_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
+ * cdef unsigned int token_to_index_with_hash_in_cpp(  # noqa: E999             # <<<<<<<<<<<<<<
  *         str token,
- *         dict word2index,
+ *         dict token2index,
  */
 
-static unsigned int __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_hash_in_c(PyObject *__pyx_v_token, PyObject *__pyx_v_word2index) {
+static unsigned int __pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_hash_in_cpp(PyObject *__pyx_v_token, PyObject *__pyx_v_token2index) {
   unsigned int __pyx_v_index;
+  unsigned int __pyx_v_vocab_size;
   unsigned int __pyx_r;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
+  Py_ssize_t __pyx_t_1;
   int __pyx_t_2;
-  Py_ssize_t __pyx_t_3;
+  int __pyx_t_3;
   PyObject *__pyx_t_4 = NULL;
   unsigned int __pyx_t_5;
-  __Pyx_RefNannySetupContext("token_to_index_with_hash_in_c", 0);
+  __Pyx_RefNannySetupContext("token_to_index_with_hash_in_cpp", 0);
 
-  /* "strpipe/toolkit/token_to_index.pyx":49
- *     cdef unsigned int index
+  /* "strpipe/toolkit/token_to_index.pyx":55
+ *     ):
+ *     cdef unsigned int index, vocab_size
+ *     vocab_size = len(token2index)             # <<<<<<<<<<<<<<
  * 
- *     if token not in word2index:             # <<<<<<<<<<<<<<
- *         index = consistent_hash_in_c(
- *             input_str=token,
+ *     if token not in token2index:
  */
-  if (unlikely(__pyx_v_word2index == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 49, __pyx_L1_error)
+  if (unlikely(__pyx_v_token2index == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
+    __PYX_ERR(0, 55, __pyx_L1_error)
   }
-  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_token, __pyx_v_word2index, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 49, __pyx_L1_error)
-  __pyx_t_2 = (__pyx_t_1 != 0);
-  if (__pyx_t_2) {
+  __pyx_t_1 = PyDict_Size(__pyx_v_token2index); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_v_vocab_size = __pyx_t_1;
 
-    /* "strpipe/toolkit/token_to_index.pyx":52
+  /* "strpipe/toolkit/token_to_index.pyx":57
+ *     vocab_size = len(token2index)
+ * 
+ *     if token not in token2index:             # <<<<<<<<<<<<<<
  *         index = consistent_hash_in_c(
  *             input_str=token,
- *             mod_int=len(word2index),             # <<<<<<<<<<<<<<
- *             seed=0,
- *         )
  */
-    if (unlikely(__pyx_v_word2index == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-      __PYX_ERR(0, 52, __pyx_L1_error)
-    }
-    __pyx_t_3 = PyDict_Size(__pyx_v_word2index); if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (unlikely(__pyx_v_token2index == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
+    __PYX_ERR(0, 57, __pyx_L1_error)
+  }
+  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_v_token, __pyx_v_token2index, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
 
-    /* "strpipe/toolkit/token_to_index.pyx":50
+    /* "strpipe/toolkit/token_to_index.pyx":58
  * 
- *     if token not in word2index:
+ *     if token not in token2index:
  *         index = consistent_hash_in_c(             # <<<<<<<<<<<<<<
  *             input_str=token,
- *             mod_int=len(word2index),
+ *             mod_int=vocab_size,
  */
-    __pyx_v_index = __pyx_f_7strpipe_7toolkit_15consistent_hash_consistent_hash_in_c(__pyx_v_token, __pyx_t_3, 0);
+    __pyx_v_index = __pyx_f_7strpipe_7toolkit_15consistent_hash_consistent_hash_in_c(__pyx_v_token, __pyx_v_vocab_size, 0);
 
-    /* "strpipe/toolkit/token_to_index.pyx":49
- *     cdef unsigned int index
+    /* "strpipe/toolkit/token_to_index.pyx":57
+ *     vocab_size = len(token2index)
  * 
- *     if token not in word2index:             # <<<<<<<<<<<<<<
+ *     if token not in token2index:             # <<<<<<<<<<<<<<
  *         index = consistent_hash_in_c(
  *             input_str=token,
  */
     goto __pyx_L3;
   }
 
-  /* "strpipe/toolkit/token_to_index.pyx":56
+  /* "strpipe/toolkit/token_to_index.pyx":64
  *         )
  *     else:
- *         index = word2index[token]             # <<<<<<<<<<<<<<
+ *         index = token2index[token]             # <<<<<<<<<<<<<<
  *     return index
  */
   /*else*/ {
-    if (unlikely(__pyx_v_word2index == Py_None)) {
+    if (unlikely(__pyx_v_token2index == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 56, __pyx_L1_error)
+      __PYX_ERR(0, 64, __pyx_L1_error)
     }
-    __pyx_t_4 = __Pyx_PyDict_GetItem(__pyx_v_word2index, __pyx_v_token); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyDict_GetItem(__pyx_v_token2index, __pyx_v_token); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyInt_As_unsigned_int(__pyx_t_4); if (unlikely((__pyx_t_5 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 56, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_As_unsigned_int(__pyx_t_4); if (unlikely((__pyx_t_5 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_index = __pyx_t_5;
   }
   __pyx_L3:;
 
-  /* "strpipe/toolkit/token_to_index.pyx":57
+  /* "strpipe/toolkit/token_to_index.pyx":65
  *     else:
- *         index = word2index[token]
+ *         index = token2index[token]
  *     return index             # <<<<<<<<<<<<<<
  */
   __pyx_r = __pyx_v_index;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/token_to_index.pyx":43
+  /* "strpipe/toolkit/token_to_index.pyx":50
  * 
  * 
- * cdef unsigned int token_to_index_with_hash_in_c(  # noqa: E999             # <<<<<<<<<<<<<<
+ * cdef unsigned int token_to_index_with_hash_in_cpp(  # noqa: E999             # <<<<<<<<<<<<<<
  *         str token,
- *         dict word2index,
+ *         dict token2index,
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_WriteUnraisable("strpipe.toolkit.token_to_index.token_to_index_with_hash_in_c", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_WriteUnraisable("strpipe.toolkit.token_to_index.token_to_index_with_hash_in_cpp", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -1591,23 +1751,29 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_DefaultTokens, __pyx_k_DefaultTokens, sizeof(__pyx_k_DefaultTokens), 0, 0, 1, 1},
+  {&__pyx_n_s_KeyError, __pyx_k_KeyError, sizeof(__pyx_k_KeyError), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_default_tokens, __pyx_k_default_tokens, sizeof(__pyx_k_default_tokens), 0, 0, 1, 1},
+  {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_strpipe_toolkit_token_to_index, __pyx_k_strpipe_toolkit_token_to_index, sizeof(__pyx_k_strpipe_toolkit_token_to_index), 0, 0, 1, 1},
   {&__pyx_kp_s_strpipe_toolkit_token_to_index_p, __pyx_k_strpipe_toolkit_token_to_index_p, sizeof(__pyx_k_strpipe_toolkit_token_to_index_p), 0, 0, 1, 0},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_token, __pyx_k_token, sizeof(__pyx_k_token), 0, 0, 1, 1},
+  {&__pyx_n_s_token2index, __pyx_k_token2index, sizeof(__pyx_k_token2index), 0, 0, 1, 1},
   {&__pyx_n_s_token_to_index_with_hash, __pyx_k_token_to_index_with_hash, sizeof(__pyx_k_token_to_index_with_hash), 0, 0, 1, 1},
   {&__pyx_n_s_token_to_index_with_unk, __pyx_k_token_to_index_with_unk, sizeof(__pyx_k_token_to_index_with_unk), 0, 0, 1, 1},
   {&__pyx_n_s_unk, __pyx_k_unk, sizeof(__pyx_k_unk), 0, 0, 1, 1},
   {&__pyx_n_s_unk_token, __pyx_k_unk_token, sizeof(__pyx_k_unk_token), 0, 0, 1, 1},
-  {&__pyx_n_s_word2index, __pyx_k_word2index, sizeof(__pyx_k_word2index), 0, 0, 1, 1},
+  {&__pyx_kp_s_unk_token_is_not_in_token2index, __pyx_k_unk_token_is_not_in_token2index, sizeof(__pyx_k_unk_token_is_not_in_token2index), 0, 0, 1, 0},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
+  __pyx_builtin_KeyError = __Pyx_GetBuiltinName(__pyx_n_s_KeyError); if (!__pyx_builtin_KeyError) __PYX_ERR(0, 26, __pyx_L1_error)
   return 0;
+  __pyx_L1_error:;
+  return -1;
 }
 
 static int __Pyx_InitCachedConstants(void) {
@@ -1619,24 +1785,24 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * def token_to_index_with_unk(             # <<<<<<<<<<<<<<
  *         token: str,
- *         word2index: dict,
+ *         token2index: dict,
  */
-  __pyx_tuple__2 = PyTuple_Pack(3, __pyx_n_s_token, __pyx_n_s_word2index, __pyx_n_s_unk_token); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(3, __pyx_n_s_token, __pyx_n_s_token2index, __pyx_n_s_unk_token); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
   __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_token_to_index_p, __pyx_n_s_token_to_index_with_unk, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 6, __pyx_L1_error)
 
-  /* "strpipe/toolkit/token_to_index.pyx":33
+  /* "strpipe/toolkit/token_to_index.pyx":40
  * 
  * 
  * def token_to_index_with_hash(             # <<<<<<<<<<<<<<
  *         token: str,
- *         word2index: dict,
+ *         token2index: dict,
  */
-  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_n_s_token, __pyx_n_s_word2index); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_n_s_token, __pyx_n_s_token2index); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_token_to_index_p, __pyx_n_s_token_to_index_with_hash, 33, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_token_to_index_p, __pyx_n_s_token_to_index_with_hash, 40, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1679,8 +1845,8 @@ static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
-  if (__Pyx_ExportFunction("token_to_index_with_unk_in_c", (void (*)(void))__pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk_in_c, "unsigned int (PyObject *, PyObject *, PyObject *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ExportFunction("token_to_index_with_hash_in_c", (void (*)(void))__pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_hash_in_c, "unsigned int (PyObject *, PyObject *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ExportFunction("token_to_index_with_unk_in_cpp", (void (*)(void))__pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_unk_in_cpp, "unsigned int (PyObject *, PyObject *, PyObject *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ExportFunction("token_to_index_with_hash_in_cpp", (void (*)(void))__pyx_f_7strpipe_7toolkit_14token_to_index_token_to_index_with_hash_in_cpp, "unsigned int (PyObject *, PyObject *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1925,10 +2091,10 @@ if (!__Pyx_RefNanny) {
 
   /* "strpipe/toolkit/token_to_index.pyx":9
  *         token: str,
- *         word2index: dict,
+ *         token2index: dict,
  *         unk_token: str = DefaultTokens.unk,             # <<<<<<<<<<<<<<
  *     ) -> int:
- *     return token_to_index_with_unk_in_c(
+ *     return token_to_index_with_unk_in_cpp(
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -1945,23 +2111,23 @@ if (!__Pyx_RefNanny) {
  * 
  * def token_to_index_with_unk(             # <<<<<<<<<<<<<<
  *         token: str,
- *         word2index: dict,
+ *         token2index: dict,
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_14token_to_index_1token_to_index_with_unk, NULL, __pyx_n_s_strpipe_toolkit_token_to_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_token_to_index_with_unk, __pyx_t_1) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/token_to_index.pyx":33
+  /* "strpipe/toolkit/token_to_index.pyx":40
  * 
  * 
  * def token_to_index_with_hash(             # <<<<<<<<<<<<<<
  *         token: str,
- *         word2index: dict,
+ *         token2index: dict,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_14token_to_index_3token_to_index_with_hash, NULL, __pyx_n_s_strpipe_toolkit_token_to_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_14token_to_index_3token_to_index_with_hash, NULL, __pyx_n_s_strpipe_toolkit_token_to_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_token_to_index_with_hash, __pyx_t_1) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_token_to_index_with_hash, __pyx_t_1) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "strpipe/toolkit/token_to_index.pyx":1
@@ -2016,6 +2182,34 @@ end:
     return (__Pyx_RefNannyAPIStruct *)r;
 }
 #endif
+
+/* PyObjectGetAttrStr */
+#if CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name) {
+    PyTypeObject* tp = Py_TYPE(obj);
+    if (likely(tp->tp_getattro))
+        return tp->tp_getattro(obj, attr_name);
+#if PY_MAJOR_VERSION < 3
+    if (likely(tp->tp_getattr))
+        return tp->tp_getattr(obj, PyString_AS_STRING(attr_name));
+#endif
+    return PyObject_GetAttr(obj, attr_name);
+}
+#endif
+
+/* GetBuiltinName */
+static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
+    PyObject* result = __Pyx_PyObject_GetAttrStr(__pyx_b, name);
+    if (unlikely(!result)) {
+        PyErr_Format(PyExc_NameError,
+#if PY_MAJOR_VERSION >= 3
+            "name '%U' is not defined", name);
+#else
+            "name '%.200s' is not defined", PyString_AS_STRING(name));
+#endif
+    }
+    return result;
+}
 
 /* RaiseArgTupleInvalid */
 static void __Pyx_RaiseArgtupleInvalid(
@@ -2180,22 +2374,226 @@ static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *nam
     return 0;
 }
 
-/* DictGetItem */
-#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
-static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key) {
-    PyObject *value;
-    value = PyDict_GetItemWithError(d, key);
-    if (unlikely(!value)) {
-        if (!PyErr_Occurred()) {
-            PyObject* args = PyTuple_Pack(1, key);
-            if (likely(args))
-                PyErr_SetObject(PyExc_KeyError, args);
-            Py_XDECREF(args);
-        }
+/* PyCFunctionFastCall */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
+    PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
+    PyCFunction meth = PyCFunction_GET_FUNCTION(func);
+    PyObject *self = PyCFunction_GET_SELF(func);
+    int flags = PyCFunction_GET_FLAGS(func);
+    assert(PyCFunction_Check(func));
+    assert(METH_FASTCALL == (flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_KEYWORDS)));
+    assert(nargs >= 0);
+    assert(nargs == 0 || args != NULL);
+    /* _PyCFunction_FastCallDict() must not be called with an exception set,
+       because it may clear it (directly or indirectly) and so the
+       caller loses its exception */
+    assert(!PyErr_Occurred());
+    if ((PY_VERSION_HEX < 0x030700A0) || unlikely(flags & METH_KEYWORDS)) {
+        return (*((__Pyx_PyCFunctionFastWithKeywords)meth)) (self, args, nargs, NULL);
+    } else {
+        return (*((__Pyx_PyCFunctionFast)meth)) (self, args, nargs);
+    }
+}
+#endif
+
+/* PyFunctionFastCall */
+#if CYTHON_FAST_PYCALL
+#include "frameobject.h"
+static PyObject* __Pyx_PyFunction_FastCallNoKw(PyCodeObject *co, PyObject **args, Py_ssize_t na,
+                                               PyObject *globals) {
+    PyFrameObject *f;
+    PyThreadState *tstate = __Pyx_PyThreadState_Current;
+    PyObject **fastlocals;
+    Py_ssize_t i;
+    PyObject *result;
+    assert(globals != NULL);
+    /* XXX Perhaps we should create a specialized
+       PyFrame_New() that doesn't take locals, but does
+       take builtins without sanity checking them.
+       */
+    assert(tstate != NULL);
+    f = PyFrame_New(tstate, co, globals, NULL);
+    if (f == NULL) {
         return NULL;
     }
-    Py_INCREF(value);
-    return value;
+    fastlocals = f->f_localsplus;
+    for (i = 0; i < na; i++) {
+        Py_INCREF(*args);
+        fastlocals[i] = *args++;
+    }
+    result = PyEval_EvalFrameEx(f,0);
+    ++tstate->recursion_depth;
+    Py_DECREF(f);
+    --tstate->recursion_depth;
+    return result;
+}
+#if 1 || PY_VERSION_HEX < 0x030600B1
+static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, int nargs, PyObject *kwargs) {
+    PyCodeObject *co = (PyCodeObject *)PyFunction_GET_CODE(func);
+    PyObject *globals = PyFunction_GET_GLOBALS(func);
+    PyObject *argdefs = PyFunction_GET_DEFAULTS(func);
+    PyObject *closure;
+#if PY_MAJOR_VERSION >= 3
+    PyObject *kwdefs;
+#endif
+    PyObject *kwtuple, **k;
+    PyObject **d;
+    Py_ssize_t nd;
+    Py_ssize_t nk;
+    PyObject *result;
+    assert(kwargs == NULL || PyDict_Check(kwargs));
+    nk = kwargs ? PyDict_Size(kwargs) : 0;
+    if (Py_EnterRecursiveCall((char*)" while calling a Python object")) {
+        return NULL;
+    }
+    if (
+#if PY_MAJOR_VERSION >= 3
+            co->co_kwonlyargcount == 0 &&
+#endif
+            likely(kwargs == NULL || nk == 0) &&
+            co->co_flags == (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)) {
+        if (argdefs == NULL && co->co_argcount == nargs) {
+            result = __Pyx_PyFunction_FastCallNoKw(co, args, nargs, globals);
+            goto done;
+        }
+        else if (nargs == 0 && argdefs != NULL
+                 && co->co_argcount == Py_SIZE(argdefs)) {
+            /* function called with no arguments, but all parameters have
+               a default value: use default values as arguments .*/
+            args = &PyTuple_GET_ITEM(argdefs, 0);
+            result =__Pyx_PyFunction_FastCallNoKw(co, args, Py_SIZE(argdefs), globals);
+            goto done;
+        }
+    }
+    if (kwargs != NULL) {
+        Py_ssize_t pos, i;
+        kwtuple = PyTuple_New(2 * nk);
+        if (kwtuple == NULL) {
+            result = NULL;
+            goto done;
+        }
+        k = &PyTuple_GET_ITEM(kwtuple, 0);
+        pos = i = 0;
+        while (PyDict_Next(kwargs, &pos, &k[i], &k[i+1])) {
+            Py_INCREF(k[i]);
+            Py_INCREF(k[i+1]);
+            i += 2;
+        }
+        nk = i / 2;
+    }
+    else {
+        kwtuple = NULL;
+        k = NULL;
+    }
+    closure = PyFunction_GET_CLOSURE(func);
+#if PY_MAJOR_VERSION >= 3
+    kwdefs = PyFunction_GET_KW_DEFAULTS(func);
+#endif
+    if (argdefs != NULL) {
+        d = &PyTuple_GET_ITEM(argdefs, 0);
+        nd = Py_SIZE(argdefs);
+    }
+    else {
+        d = NULL;
+        nd = 0;
+    }
+#if PY_MAJOR_VERSION >= 3
+    result = PyEval_EvalCodeEx((PyObject*)co, globals, (PyObject *)NULL,
+                               args, nargs,
+                               k, (int)nk,
+                               d, (int)nd, kwdefs, closure);
+#else
+    result = PyEval_EvalCodeEx(co, globals, (PyObject *)NULL,
+                               args, nargs,
+                               k, (int)nk,
+                               d, (int)nd, closure);
+#endif
+    Py_XDECREF(kwtuple);
+done:
+    Py_LeaveRecursiveCall();
+    return result;
+}
+#endif
+#endif
+
+/* PyObjectCall */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
+/* PyObjectCallMethO */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
+    PyObject *self, *result;
+    PyCFunction cfunc;
+    cfunc = PyCFunction_GET_FUNCTION(func);
+    self = PyCFunction_GET_SELF(func);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = cfunc(self, arg);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
+/* PyObjectCallOneArg */
+#if CYTHON_COMPILING_IN_CPYTHON
+static PyObject* __Pyx__PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+    PyObject *result;
+    PyObject *args = PyTuple_New(1);
+    if (unlikely(!args)) return NULL;
+    Py_INCREF(arg);
+    PyTuple_SET_ITEM(args, 0, arg);
+    result = __Pyx_PyObject_Call(func, args, NULL);
+    Py_DECREF(args);
+    return result;
+}
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+#if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(func)) {
+        return __Pyx_PyFunction_FastCall(func, &arg, 1);
+    }
+#endif
+    if (likely(PyCFunction_Check(func))) {
+        if (likely(PyCFunction_GET_FLAGS(func) & METH_O)) {
+            return __Pyx_PyObject_CallMethO(func, arg);
+#if CYTHON_FAST_PYCCALL
+        } else if (PyCFunction_GET_FLAGS(func) & METH_FASTCALL) {
+            return __Pyx_PyCFunction_FastCall(func, &arg, 1);
+#endif
+        }
+    }
+    return __Pyx__PyObject_CallOneArg(func, arg);
+}
+#else
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+    PyObject *result;
+    PyObject *args = PyTuple_Pack(1, arg);
+    if (unlikely(!args)) return NULL;
+    result = __Pyx_PyObject_Call(func, args, NULL);
+    Py_DECREF(args);
+    return result;
 }
 #endif
 
@@ -2220,6 +2618,184 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
     tstate->curexc_type = 0;
     tstate->curexc_value = 0;
     tstate->curexc_traceback = 0;
+}
+#endif
+
+/* RaiseException */
+#if PY_MAJOR_VERSION < 3
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb,
+                        CYTHON_UNUSED PyObject *cause) {
+    __Pyx_PyThreadState_declare
+    Py_XINCREF(type);
+    if (!value || value == Py_None)
+        value = NULL;
+    else
+        Py_INCREF(value);
+    if (!tb || tb == Py_None)
+        tb = NULL;
+    else {
+        Py_INCREF(tb);
+        if (!PyTraceBack_Check(tb)) {
+            PyErr_SetString(PyExc_TypeError,
+                "raise: arg 3 must be a traceback or None");
+            goto raise_error;
+        }
+    }
+    if (PyType_Check(type)) {
+#if CYTHON_COMPILING_IN_PYPY
+        if (!value) {
+            Py_INCREF(Py_None);
+            value = Py_None;
+        }
+#endif
+        PyErr_NormalizeException(&type, &value, &tb);
+    } else {
+        if (value) {
+            PyErr_SetString(PyExc_TypeError,
+                "instance exception may not have a separate value");
+            goto raise_error;
+        }
+        value = type;
+        type = (PyObject*) Py_TYPE(type);
+        Py_INCREF(type);
+        if (!PyType_IsSubtype((PyTypeObject *)type, (PyTypeObject *)PyExc_BaseException)) {
+            PyErr_SetString(PyExc_TypeError,
+                "raise: exception class must be a subclass of BaseException");
+            goto raise_error;
+        }
+    }
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrRestore(type, value, tb);
+    return;
+raise_error:
+    Py_XDECREF(value);
+    Py_XDECREF(type);
+    Py_XDECREF(tb);
+    return;
+}
+#else
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause) {
+    PyObject* owned_instance = NULL;
+    if (tb == Py_None) {
+        tb = 0;
+    } else if (tb && !PyTraceBack_Check(tb)) {
+        PyErr_SetString(PyExc_TypeError,
+            "raise: arg 3 must be a traceback or None");
+        goto bad;
+    }
+    if (value == Py_None)
+        value = 0;
+    if (PyExceptionInstance_Check(type)) {
+        if (value) {
+            PyErr_SetString(PyExc_TypeError,
+                "instance exception may not have a separate value");
+            goto bad;
+        }
+        value = type;
+        type = (PyObject*) Py_TYPE(value);
+    } else if (PyExceptionClass_Check(type)) {
+        PyObject *instance_class = NULL;
+        if (value && PyExceptionInstance_Check(value)) {
+            instance_class = (PyObject*) Py_TYPE(value);
+            if (instance_class != type) {
+                int is_subclass = PyObject_IsSubclass(instance_class, type);
+                if (!is_subclass) {
+                    instance_class = NULL;
+                } else if (unlikely(is_subclass == -1)) {
+                    goto bad;
+                } else {
+                    type = instance_class;
+                }
+            }
+        }
+        if (!instance_class) {
+            PyObject *args;
+            if (!value)
+                args = PyTuple_New(0);
+            else if (PyTuple_Check(value)) {
+                Py_INCREF(value);
+                args = value;
+            } else
+                args = PyTuple_Pack(1, value);
+            if (!args)
+                goto bad;
+            owned_instance = PyObject_Call(type, args, NULL);
+            Py_DECREF(args);
+            if (!owned_instance)
+                goto bad;
+            value = owned_instance;
+            if (!PyExceptionInstance_Check(value)) {
+                PyErr_Format(PyExc_TypeError,
+                             "calling %R should have returned an instance of "
+                             "BaseException, not %R",
+                             type, Py_TYPE(value));
+                goto bad;
+            }
+        }
+    } else {
+        PyErr_SetString(PyExc_TypeError,
+            "raise: exception class must be a subclass of BaseException");
+        goto bad;
+    }
+    if (cause) {
+        PyObject *fixed_cause;
+        if (cause == Py_None) {
+            fixed_cause = NULL;
+        } else if (PyExceptionClass_Check(cause)) {
+            fixed_cause = PyObject_CallObject(cause, NULL);
+            if (fixed_cause == NULL)
+                goto bad;
+        } else if (PyExceptionInstance_Check(cause)) {
+            fixed_cause = cause;
+            Py_INCREF(fixed_cause);
+        } else {
+            PyErr_SetString(PyExc_TypeError,
+                            "exception causes must derive from "
+                            "BaseException");
+            goto bad;
+        }
+        PyException_SetCause(value, fixed_cause);
+    }
+    PyErr_SetObject(type, value);
+    if (tb) {
+#if CYTHON_COMPILING_IN_PYPY
+        PyObject *tmp_type, *tmp_value, *tmp_tb;
+        PyErr_Fetch(&tmp_type, &tmp_value, &tmp_tb);
+        Py_INCREF(tb);
+        PyErr_Restore(tmp_type, tmp_value, tb);
+        Py_XDECREF(tmp_tb);
+#else
+        PyThreadState *tstate = __Pyx_PyThreadState_Current;
+        PyObject* tmp_tb = tstate->curexc_traceback;
+        if (tb != tmp_tb) {
+            Py_INCREF(tb);
+            tstate->curexc_traceback = tb;
+            Py_XDECREF(tmp_tb);
+        }
+#endif
+    }
+bad:
+    Py_XDECREF(owned_instance);
+    return;
+}
+#endif
+
+/* DictGetItem */
+#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
+static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key) {
+    PyObject *value;
+    value = PyDict_GetItemWithError(d, key);
+    if (unlikely(!value)) {
+        if (!PyErr_Occurred()) {
+            PyObject* args = PyTuple_Pack(1, key);
+            if (likely(args))
+                PyErr_SetObject(PyExc_KeyError, args);
+            Py_XDECREF(args);
+        }
+        return NULL;
+    }
+    Py_INCREF(value);
+    return value;
 }
 #endif
 
@@ -2264,20 +2840,6 @@ static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
         PyGILState_Release(state);
 #endif
 }
-
-/* PyObjectGetAttrStr */
-#if CYTHON_USE_TYPE_SLOTS
-static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name) {
-    PyTypeObject* tp = Py_TYPE(obj);
-    if (likely(tp->tp_getattro))
-        return tp->tp_getattro(obj, attr_name);
-#if PY_MAJOR_VERSION < 3
-    if (likely(tp->tp_getattr))
-        return tp->tp_getattr(obj, PyString_AS_STRING(attr_name));
-#endif
-    return PyObject_GetAttr(obj, attr_name);
-}
-#endif
 
 /* Import */
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
@@ -2356,20 +2918,6 @@ static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
         #endif
     }
     return value;
-}
-
-/* GetBuiltinName */
-static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
-    PyObject* result = __Pyx_PyObject_GetAttrStr(__pyx_b, name);
-    if (unlikely(!result)) {
-        PyErr_Format(PyExc_NameError,
-#if PY_MAJOR_VERSION >= 3
-            "name '%U' is not defined", name);
-#else
-            "name '%.200s' is not defined", PyString_AS_STRING(name));
-#endif
-    }
-    return result;
 }
 
 /* GetModuleGlobalName */
