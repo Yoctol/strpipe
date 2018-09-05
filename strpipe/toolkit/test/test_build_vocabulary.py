@@ -1,26 +1,6 @@
 from ..build_vocabulary import build_vocabulary_from_sentences
 
 
-def test_build_vocabulary_from_empty():
-    empty_output = build_vocabulary_from_sentences([])
-    assert set(empty_output.keys()) == set(
-        ['<SOS>', '<EOS>', '<PAD>', '<UNK>'])
-    assert set(empty_output.values()) == set([0, 1, 2, 3])
-
-
-def test_build_vocabulary_with_same_tokens():
-    output = build_vocabulary_from_sentences(
-        [],
-        sos_token='<SOS>',
-        eos_token='<EOS>',
-        unk_token='<EOS>',
-        pad_token='<PAD>',
-    )
-    assert set(output.keys()) == set(
-        ['<SOS>', '<EOS>', '<PAD>'])
-    assert set(output.values()) == set([0, 1, 2])
-
-
 def test_build_vocabulary_from_sentences():
     output = build_vocabulary_from_sentences(
         [
@@ -29,11 +9,10 @@ def test_build_vocabulary_from_sentences():
         ],
     )
     assert set(output.keys()) == set(
-        ['<SOS>', '<EOS>', '<PAD>',
-         '<UNK>', '隼興', '喜歡', '蛋白質'],
+        ['隼興', '喜歡', '蛋白質'],
     )
     assert set(output.values()) == set(
-        list(range(7)),
+        list(range(3)),
     )
 
 
@@ -42,29 +21,32 @@ def test_build_vocabulary_from_sentences_with_limit_size():
         [
             ['隼興', '喜歡', '蛋白質'],
             ['蛋白質'],
+            ['gb', '的', '下午茶', '是', '香蕉',
+             '和', '茶葉蛋'],
+            ['香蕉', '是', '澱粉'],
+            ['茶葉蛋', '是', '蛋白質'],
         ],
-        vocab_size=5,
+        vocab_size=4,
     )
     assert set(output.keys()) == set(
-        ['<SOS>', '<EOS>', '<PAD>',
-         '<UNK>', '蛋白質'],
+        ['蛋白質', '是', '茶葉蛋', '香蕉'],
     )
     assert set(output.values()) == set(
-        list(range(5)),
+        list(range(4)),
     )
 
 
-def test_build_vocabulary_from_sentences_with_conflict():
-    output = build_vocabulary_from_sentences(
-        [
-            ['<SOS>', '喜歡', '蛋白質', '<EOS>'],
-            ['蛋白質'],
-        ],
-    )
-    assert set(output.keys()) == set(
-        ['<SOS>', '<EOS>', '<PAD>',
-         '<UNK>', '喜歡', '蛋白質'],
-    )
-    assert set(output.values()) == set(
-        list(range(6)),
-    )
+# def test_build_vocabulary_from_sentences_with_conflict():
+#     output = build_vocabulary_from_sentences(
+#         [
+#             ['<SOS>', '喜歡', '蛋白質', '<EOS>'],
+#             ['蛋白質'],
+#         ],
+#     )
+#     assert set(output.keys()) == set(
+#         ['<SOS>', '<EOS>', '<PAD>',
+#          '<UNK>', '喜歡', '蛋白質'],
+#     )
+#     assert set(output.values()) == set(
+#         list(range(6)),
+#     )
