@@ -10,11 +10,5 @@ Welcome to strpipe's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   README <readme_link>
+   reference/modules.rst
