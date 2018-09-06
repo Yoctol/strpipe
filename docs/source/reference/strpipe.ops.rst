@@ -1,13 +1,6 @@
 strpipe.ops package
 ===================
 
-Subpackages
------------
-
-.. toctree::
-
-    strpipe.ops.tests
-
 Submodules
 ----------
 

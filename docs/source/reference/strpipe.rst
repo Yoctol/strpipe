@@ -8,7 +8,6 @@ Subpackages
 
     strpipe.data
     strpipe.ops
-    strpipe.tests
     strpipe.toolkit
 
 Submodules
