@@ -187,3 +187,83 @@ def test_unpad_sentences(sentences):
         ]
     )
     assert output == sentences
+
+
+def test_unpad_sentences_with_eos_and_sos():
+    sentences = [
+        ["<MAYBE_START_TOKEN>",
+         "<MAYBE_END_TOKEN>",
+         "<MAYBE_PADDING>",
+         "<MAYBE_PADDING>",
+         "<MAYBE_PADDING>"],
+        ["<MAYBE_START_TOKEN>",
+         "1",
+         "<MAYBE_END_TOKEN>",
+         "<MAYBE_PADDING>",
+         "<MAYBE_PADDING>"],
+        ["<MAYBE_START_TOKEN>",
+         "1",
+         "2",
+         "<MAYBE_END_TOKEN>",
+         "<MAYBE_PADDING>"],
+        ["<MAYBE_START_TOKEN>",
+         "1",
+         "2",
+         "3",
+         "<MAYBE_END_TOKEN>"],
+
+    ]
+
+    meta = [
+        {'sentlen': 5, 'sentence_tail': [], 'pad_token': '<PAD>'},
+        {'sentlen': 5, 'sentence_tail': [], 'pad_token': '<PAD>'},
+        {'sentlen': 5, 'sentence_tail': [], 'pad_token': '<PAD>'},
+        {'sentlen': 5, 'sentence_tail': [], 'pad_token': '<PAD>'},
+    ]
+
+    output = unpad_sentences(
+        sentences=sentences,
+        meta=meta
+    )
+    assert output == sentences
+
+    meta = [
+        {'sentlen': 6, 'sentence_tail': ['a'], 'pad_token': '<PAD>'},
+        {'sentlen': 7, 'sentence_tail': ['a', 'b'], 'pad_token': '<PAD>'},
+        {'sentlen': 8, 'sentence_tail': ['a', 'b', 'c'], 'pad_token': '<PAD>'},
+        {'sentlen': 9, 'sentence_tail': ['a', 'b', 'c', 'd'], 'pad_token': '<PAD>'},
+    ]
+
+    output = unpad_sentences(
+        sentences=sentences,
+        meta=meta
+    )
+
+    for l1, l2, d in zip(output, sentences, meta):
+        assert l1 == l2 + d['sentence_tail']
+
+    meta = [
+        {'sentlen': 0, 'sentence_tail': [],
+         'sos_token': '<MAYBE_START_TOKEN>',
+         'eos_token': '<MAYBE_END_TOKEN>',
+         'pad_token': '<MAYBE_PADDING>'},
+        {'sentlen': 1, 'sentence_tail': [],
+         'sos_token': '<MAYBE_START_TOKEN>',
+         'eos_token': '<MAYBE_END_TOKEN>',
+         'pad_token': '<MAYBE_PADDING>'},
+        {'sentlen': 2, 'sentence_tail': [],
+         'sos_token': '<MAYBE_START_TOKEN>',
+         'eos_token': '<MAYBE_END_TOKEN>',
+         'pad_token': '<MAYBE_PADDING>'},
+        {'sentlen': 3, 'sentence_tail': [],
+         'sos_token': '<MAYBE_START_TOKEN>',
+         'eos_token': '<MAYBE_END_TOKEN>',
+         'pad_token': '<MAYBE_PADDING>'},
+    ]
+
+    output = unpad_sentences(
+        sentences=sentences,
+        meta=meta
+    )
+
+    assert output == [[], ["1"], ["1", "2"], ["1", "2", "3"]]
