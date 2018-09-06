@@ -54,6 +54,14 @@ result, meta = p.transform(['你好'])
 $ make test
 ```
 
+## Docs
+
+```
+$ make docs
+
+Docs will be built in the `docs/build/html` folder.
+```
+
 ## Extend Ops
 
 1. Extend the new ops with `BaseOp`
