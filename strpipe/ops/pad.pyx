@@ -15,7 +15,7 @@ cdef class Pad(BaseOp):
     '''Pad texts so that they are the same size.
 
     Args:
-        pad_token: Padding token.
+        pad_token (optional): Padding token. Default: :obj:`DefaultTokens.pad`
         sos_token (optional): Start of sentence token.
         eos_token (optional): End of sentence token.
         maxlen (optional): The length to pad to. Note that this includes eos, sos tokens as
@@ -25,7 +25,12 @@ cdef class Pad(BaseOp):
     cdef str _pad_token
     cdef int _maxlen
 
-    def __init__(self, str pad_token=DefaultTokens.pad, int maxlen=-1):
+    def __init__(
+        self,
+        str sos_token=DefaultTokens.nul,
+        str eos_token=DefaultTokens.nul,
+        str pad_token=DefaultTokens.pad,
+        int maxlen=-1):
         self.input_type = STRING_LIST
         self.output_type = STRING_LIST
         self._pad_token = pad_token
