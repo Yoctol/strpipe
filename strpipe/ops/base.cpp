@@ -805,8 +805,8 @@ struct __pyx_obj_7strpipe_3ops_4base_BaseOp {
  * 
  * 
  * cdef class BaseOp:             # <<<<<<<<<<<<<<
+ *     '''Base class for Ops
  * 
- *     @staticmethod
  */
 
 struct __pyx_vtabstruct_7strpipe_3ops_4base_BaseOp {
@@ -1175,7 +1175,7 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_codeobj__2;
 /* Late includes */
 
-/* "strpipe/ops/base.pyx":7
+/* "strpipe/ops/base.pyx":15
  * 
  *     @staticmethod
  *     cdef fit(input):             # <<<<<<<<<<<<<<
@@ -1195,7 +1195,7 @@ static PyObject *__pyx_f_7strpipe_3ops_4base_6BaseOp_fit(CYTHON_UNUSED struct __
   return __pyx_r;
 }
 
-/* "strpipe/ops/base.pyx":11
+/* "strpipe/ops/base.pyx":19
  * 
  *     @staticmethod
  *     cdef transform(state, input):             # <<<<<<<<<<<<<<
@@ -1215,7 +1215,7 @@ static PyObject *__pyx_f_7strpipe_3ops_4base_6BaseOp_transform(CYTHON_UNUSED str
   return __pyx_r;
 }
 
-/* "strpipe/ops/base.pyx":15
+/* "strpipe/ops/base.pyx":23
  * 
  *     @staticmethod
  *     cdef inverse_transfrom(state, input, meta):             # <<<<<<<<<<<<<<
@@ -1452,6 +1452,7 @@ static int __pyx_pf_7strpipe_3ops_4base_6BaseOp_11output_type_4__del__(struct __
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_3ops_4base_6BaseOp_1__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_7strpipe_3ops_4base_6BaseOp___reduce_cython__[] = "BaseOp.__reduce_cython__(self)";
 static PyObject *__pyx_pw_7strpipe_3ops_4base_6BaseOp_1__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -1698,6 +1699,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_4base_6BaseOp___reduce_cython__(struct _
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_3ops_4base_6BaseOp_3__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static char __pyx_doc_7strpipe_3ops_4base_6BaseOp_2__setstate_cython__[] = "BaseOp.__setstate_cython__(self, __pyx_state)";
 static PyObject *__pyx_pw_7strpipe_3ops_4base_6BaseOp_3__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -1753,7 +1755,8 @@ static PyObject *__pyx_pf_7strpipe_3ops_4base_6BaseOp_2__setstate_cython__(struc
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_3ops_4base_1__pyx_unpickle_BaseOp(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_7strpipe_3ops_4base_1__pyx_unpickle_BaseOp = {"__pyx_unpickle_BaseOp", (PyCFunction)__pyx_pw_7strpipe_3ops_4base_1__pyx_unpickle_BaseOp, METH_VARARGS|METH_KEYWORDS, 0};
+static char __pyx_doc_7strpipe_3ops_4base___pyx_unpickle_BaseOp[] = "__pyx_unpickle_BaseOp(__pyx_type, long __pyx_checksum, __pyx_state)";
+static PyMethodDef __pyx_mdef_7strpipe_3ops_4base_1__pyx_unpickle_BaseOp = {"__pyx_unpickle_BaseOp", (PyCFunction)__pyx_pw_7strpipe_3ops_4base_1__pyx_unpickle_BaseOp, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7strpipe_3ops_4base___pyx_unpickle_BaseOp};
 static PyObject *__pyx_pw_7strpipe_3ops_4base_1__pyx_unpickle_BaseOp(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v___pyx_type = 0;
   long __pyx_v___pyx_checksum;
@@ -2292,14 +2295,14 @@ static int __pyx_setprop_7strpipe_3ops_4base_6BaseOp_output_type(PyObject *o, Py
 }
 
 static PyMethodDef __pyx_methods_7strpipe_3ops_4base_BaseOp[] = {
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_7strpipe_3ops_4base_6BaseOp_1__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_7strpipe_3ops_4base_6BaseOp_3__setstate_cython__, METH_O, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_7strpipe_3ops_4base_6BaseOp_1__reduce_cython__, METH_NOARGS, __pyx_doc_7strpipe_3ops_4base_6BaseOp___reduce_cython__},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_7strpipe_3ops_4base_6BaseOp_3__setstate_cython__, METH_O, __pyx_doc_7strpipe_3ops_4base_6BaseOp_2__setstate_cython__},
   {0, 0, 0, 0}
 };
 
 static struct PyGetSetDef __pyx_getsets_7strpipe_3ops_4base_BaseOp[] = {
-  {(char *)"input_type", __pyx_getprop_7strpipe_3ops_4base_6BaseOp_input_type, __pyx_setprop_7strpipe_3ops_4base_6BaseOp_input_type, (char *)0, 0},
-  {(char *)"output_type", __pyx_getprop_7strpipe_3ops_4base_6BaseOp_output_type, __pyx_setprop_7strpipe_3ops_4base_6BaseOp_output_type, (char *)0, 0},
+  {(char *)"input_type", __pyx_getprop_7strpipe_3ops_4base_6BaseOp_input_type, __pyx_setprop_7strpipe_3ops_4base_6BaseOp_input_type, (char *)"input_type: str", 0},
+  {(char *)"output_type", __pyx_getprop_7strpipe_3ops_4base_6BaseOp_output_type, __pyx_setprop_7strpipe_3ops_4base_6BaseOp_output_type, (char *)"output_type: str", 0},
   {0, 0, 0, 0, 0}
 };
 
@@ -2329,7 +2332,7 @@ static PyTypeObject __pyx_type_7strpipe_3ops_4base_BaseOp = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
-  0, /*tp_doc*/
+  "Base class for Ops\n\n    Sub-classes should implement `fit`, `transform`, and `inverse_transform`.\n\n    Attributes:\n        input_type: input type of data to transform\n        output_type: output type of transformed data\n    ", /*tp_doc*/
   0, /*tp_traverse*/
   0, /*tp_clear*/
   0, /*tp_richcompare*/
