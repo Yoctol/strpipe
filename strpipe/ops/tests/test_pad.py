@@ -76,6 +76,20 @@ def test_pad_fit(init_args, input_data, expected_maxlen):
     assert json.dumps(state)  # serializable
 
 
+@pytest.mark.parametrize('padder', [
+    Pad(sos_token='<START_TOK>'),
+    Pad(eos_token='<END_TOK>'),
+    Pad(pad_token='<PADDING>'),
+])
+def test_pad_fit_checks_tokens_not_in_input_data(padder):
+    input_data = [
+        ["I'm", "ok"],
+        ["<START_TOK>", "I", "already", "have", "tokens", "<END_TOK>", "<PADDING>"]
+    ]
+    with pytest.raises(ValueError):
+        padder.fit(input_data)
+
+
 def test_pad_transform():
     padder = Pad()
     pto = '<pad>'
