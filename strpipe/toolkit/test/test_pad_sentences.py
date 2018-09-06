@@ -43,6 +43,7 @@ def test_pad_sentences_with_default_pad(sentences):
             {'sentlen': 0, 'sentence_tail': []},
         ]):
         assert_dict_contains(d1, d2)
+        assert d1['pad_token'] == '<PAD>'
 
 
 def test_pad_sentences_with_custom_pad(sentences):
@@ -66,6 +67,7 @@ def test_pad_sentences_with_custom_pad(sentences):
             {'sentlen': 0, 'sentence_tail': []},
         ]):
         assert_dict_contains(d1, d2)
+        assert d1['pad_token'] == '<CPH>'
 
 
 @pytest.mark.parametrize("sos,eos,pad,maxlen,expected_padded_sentences,expected_meta", [
@@ -155,8 +157,16 @@ def test_pad_sentences(sentences, sos, eos, pad, maxlen,
 
     padded_sentences, meta = pad_sentences(**kwargs)
     assert padded_sentences == expected_padded_sentences
-    for d1, in d2 in zip(meta, expected_meta):
+    for d1, d2 in zip(meta, expected_meta):
         assert_dict_contains(d1, d2)
+        if sos is not None:
+            assert d1['sos_token'] == sos
+        if eos is not None:
+            assert d1['eos_token'] == eos
+        if pad is not None:
+            assert d1['pad_token'] == pad
+        else:
+            assert d1['pad_token'] == '<PAD>'
 
 
 def test_unpad_sentences(sentences):
