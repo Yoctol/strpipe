@@ -1,6 +1,8 @@
 cdef list pad_sentence_in_c(
     list sentence,
     str pad_token,
+    str sos_token,
+    str eos_token,
     unsigned int maxlen,
 )
 
@@ -8,6 +10,8 @@ cdef list pad_sentence_in_c(
 cdef dict pad_sentence_meta_in_c(
     list sentence,
     str pad_token,
+    str sos_token,
+    str eos_token,
     unsigned int maxlen,
 )
 
@@ -21,6 +25,8 @@ cdef list unpad_sentence_in_c(
 cdef list pad_sentences_in_c(
     list sentences,
     str pad_token,
+    str sos_token,
+    str eos_token,
     unsigned int maxlen,
 )
 
@@ -28,6 +34,8 @@ cdef list pad_sentences_in_c(
 cdef list pad_sentences_meta_in_c(
     list sentences,
     str pad_token,
+    str sos_token,
+    str eos_token,
     unsigned int maxlen,
 )
 
