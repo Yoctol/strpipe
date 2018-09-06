@@ -7,9 +7,15 @@ from strpipe.ops.pad import Pad
 
 
 def test_pad_correctly_created():
-    padder = Pad()
-    assert padder.input_type == STRING_LIST
-    assert padder.output_type == STRING_LIST
+    def yield_padders():
+        yield Pad()
+        yield Pad(pad_token='<pad>')
+        yield Pad(eos_token='<eos>')
+        yield Pad(sos_token='<sos>')
+        yield Pad(sos_token='<sos>', eos_token='<eos>')
+    for padder in yield_padders():
+        assert padder.input_type == STRING_LIST
+        assert padder.output_type == STRING_LIST
 
 
 def test_pad_fit():
