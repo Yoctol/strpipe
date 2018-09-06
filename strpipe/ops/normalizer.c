@@ -1238,6 +1238,7 @@ static const char __pyx_k_strpipe_data_types[] = "strpipe.data.types";
 static const char __pyx_k_strpipe_ops_normalizer[] = "strpipe.ops.normalizer";
 static const char __pyx_k_pyx_unpickle_Normalizer[] = "__pyx_unpickle_Normalizer";
 static const char __pyx_k_text_normalizer_library[] = "text_normalizer.library";
+static const char __pyx_k_identity_text_normalizer[] = "identity_text_normalizer";
 static const char __pyx_k_text_normalizer_collection[] = "text_normalizer.collection";
 static const char __pyx_k_Incompatible_checksums_s_vs_0xe5[] = "Incompatible checksums (%s vs 0xe5dc0f2 = (_norm_id, _normalizer, input_type, output_type))";
 static PyObject *__pyx_n_s_;
@@ -1248,6 +1249,7 @@ static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_denormalize;
 static PyObject *__pyx_n_s_dict;
 static PyObject *__pyx_n_s_getstate;
+static PyObject *__pyx_n_s_identity_text_normalizer;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_input_data;
 static PyObject *__pyx_n_s_main;
@@ -1296,7 +1298,7 @@ static PyObject *__pyx_codeobj__3;
 /* "strpipe/ops/normalizer.pyx":17
  *     '''
  * 
- *     def __init__(self, norm_id: str):             # <<<<<<<<<<<<<<
+ *     def __init__(self, norm_id: str = 'identity_text_normalizer'):             # <<<<<<<<<<<<<<
  *         self.input_type = STRING
  *         self.output_type = STRING
  */
@@ -1311,6 +1313,7 @@ static int __pyx_pw_7strpipe_3ops_10normalizer_10Normalizer_1__init__(PyObject *
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_norm_id,0};
     PyObject* values[1] = {0};
+    values[0] = ((PyObject*)__pyx_n_s_identity_text_normalizer);
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -1323,22 +1326,27 @@ static int __pyx_pw_7strpipe_3ops_10normalizer_10Normalizer_1__init__(PyObject *
       kw_args = PyDict_Size(__pyx_kwds);
       switch (pos_args) {
         case  0:
-        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_norm_id)) != 0)) kw_args--;
-        else goto __pyx_L5_argtuple_error;
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_norm_id);
+          if (value) { values[0] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 17, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
-      goto __pyx_L5_argtuple_error;
     } else {
-      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
     }
     __pyx_v_norm_id = ((PyObject*)values[0]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 17, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 17, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.ops.normalizer.Normalizer.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1365,7 +1373,7 @@ static int __pyx_pf_7strpipe_3ops_10normalizer_10Normalizer___init__(struct __py
 
   /* "strpipe/ops/normalizer.pyx":18
  * 
- *     def __init__(self, norm_id: str):
+ *     def __init__(self, norm_id: str = 'identity_text_normalizer'):
  *         self.input_type = STRING             # <<<<<<<<<<<<<<
  *         self.output_type = STRING
  *         self._norm_id = norm_id
@@ -1380,7 +1388,7 @@ static int __pyx_pf_7strpipe_3ops_10normalizer_10Normalizer___init__(struct __py
   __pyx_t_1 = 0;
 
   /* "strpipe/ops/normalizer.pyx":19
- *     def __init__(self, norm_id: str):
+ *     def __init__(self, norm_id: str = 'identity_text_normalizer'):
  *         self.input_type = STRING
  *         self.output_type = STRING             # <<<<<<<<<<<<<<
  *         self._norm_id = norm_id
@@ -1429,7 +1437,7 @@ static int __pyx_pf_7strpipe_3ops_10normalizer_10Normalizer___init__(struct __py
   /* "strpipe/ops/normalizer.pyx":17
  *     '''
  * 
- *     def __init__(self, norm_id: str):             # <<<<<<<<<<<<<<
+ *     def __init__(self, norm_id: str = 'identity_text_normalizer'):             # <<<<<<<<<<<<<<
  *         self.input_type = STRING
  *         self.output_type = STRING
  */
@@ -3262,6 +3270,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_denormalize, __pyx_k_denormalize, sizeof(__pyx_k_denormalize), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
+  {&__pyx_n_s_identity_text_normalizer, __pyx_k_identity_text_normalizer, sizeof(__pyx_k_identity_text_normalizer), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_input_data, __pyx_k_input_data, sizeof(__pyx_k_input_data), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},

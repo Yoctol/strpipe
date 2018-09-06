@@ -14,7 +14,7 @@ cdef class Normalizer(BaseOp):
     ref: https://github.com/Yoctol/text-normalizer
     '''
 
-    def __init__(self, norm_id: str):
+    def __init__(self, norm_id: str = 'identity_text_normalizer'):
         self.input_type = STRING
         self.output_type = STRING
         self._norm_id = norm_id
