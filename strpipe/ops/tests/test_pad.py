@@ -1,5 +1,7 @@
 import json
 
+import pytest
+
 from strpipe.data.types import STRING_LIST
 from strpipe.toolkit.default_tokens import DefaultTokens
 
@@ -18,23 +20,29 @@ def test_pad_correctly_created():
         assert padder.output_type == STRING_LIST
 
 
-def test_pad_fit():
-    padder = Pad()
+@pytest.mark.parametrize('init_args,input_data,expected_maxlen', [
+    (
+        {},
+        [
+            ['a', 'p', 'p', 'l', 'e'],
+            ['b', 'a', 'n', 'a', 'n', 'a'],
+            ['e', 'a', 't'],
+        ],
+        6
+    )
 
-    input_data = [
-        ['a', 'p', 'p', 'l', 'e'],
-        ['b', 'a', 'n', 'a', 'n', 'a'],
-        ['e', 'a', 't'],
-    ]
+])
+def test_pad_fit(init_args, input_data, expected_maxlen):
+    padder = Pad(**init_args)
 
     state = padder.fit(input_data)
 
     assert isinstance(state, dict)
     assert 'maxlen' in state
-    assert state['maxlen'] == 6
+    assert state['maxlen'] == expected_maxlen
     assert 'pad_token' in state
-    assert state['pad_token'] == DefaultTokens.pad
-    assert json.dumps(state)  # serialzable
+    assert state['pad_token'] == init_args.get('pad_token') or DefaultTokens.pad
+    assert json.dumps(state)  # serializable
 
 
 def test_pad_transform():
