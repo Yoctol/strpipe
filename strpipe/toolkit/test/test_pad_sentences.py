@@ -99,8 +99,8 @@ def test_pad_sentences_with_custom_pad(sentences):
         ["<YO>", "隼興", "覺得"],
         ["<YO>", "藍莓", "結冰"],
         ["<YO>", "薩克斯風", "好用"],
-        ["<YO>", "", "<CPH>"],
-        ["<YO>", "<CPH>", "<CPH>"]], [
+        ["<YO>", "", "<PAD>"],
+        ["<YO>", "<PAD>", "<PAD>"]], [
         {'sentlen': 5, 'sentence_tail': ["有顆頭", "有點", "猥瑣"]},
         {'sentlen': 3, 'sentence_tail': ["惹"]},
         {'sentlen': 2, 'sentence_tail': []},
