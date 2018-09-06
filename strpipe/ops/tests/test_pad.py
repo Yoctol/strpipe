@@ -21,7 +21,7 @@ def test_pad_correctly_created():
 
 
 @pytest.mark.parametrize('init_args,input_data,expected_maxlen', [
-    (
+    (  # 1
         {},
         [
             ['a', 'p', 'p', 'l', 'e'],
@@ -29,8 +29,35 @@ def test_pad_correctly_created():
             ['e', 'a', 't'],
         ],
         6
+    ),
+    (  # 2
+        {
+            'sos_token': DefaultTokens.sos,
+        },
+        [
+            ['one', 'plus', 'two']
+        ],
+        4
+    ),
+    (  # 3
+        {
+            'eos_token': DefaultTokens.sos,
+        },
+        [
+            ['one', 'plus', 'two']
+        ],
+        4
+    ),
+    (  # 4
+        {
+            'eos_token': DefaultTokens.eos,
+            'sos_token': DefaultTokens.sos
+        },
+        [
+            ['one', 'plus', 'two']
+        ],
+        5
     )
-
 ])
 def test_pad_fit(init_args, input_data, expected_maxlen):
     padder = Pad(**init_args)
@@ -42,6 +69,10 @@ def test_pad_fit(init_args, input_data, expected_maxlen):
     assert state['maxlen'] == expected_maxlen
     assert 'pad_token' in state
     assert state['pad_token'] == init_args.get('pad_token') or DefaultTokens.pad
+    if 'eos_token' in init_args:
+        assert state['eos_token'] == init_args['eos_token']
+    if 'sos_token' in init_args:
+        assert state['sos_token'] == init_args['sos_token']
     assert json.dumps(state)  # serializable
 
 
