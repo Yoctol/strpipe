@@ -1,7 +1,14 @@
+# pytest
 pytest
 pytest-mock
+
 flake8
 pypandoc
+
+# sphinx document
 sphinx
 sphinx-rtd-theme
 recommonmark
+
+# tokenizer
+tokenizer-hub
