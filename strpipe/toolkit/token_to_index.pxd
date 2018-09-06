@@ -1,9 +1,9 @@
-cdef unsigned int token_to_index_with_unk_in_c(
+cdef unsigned int token_to_index_with_unk_in_cpp(
     str token,
     str unk_token,
-    dict word2index,
-)
-cdef unsigned int token_to_index_with_hash_in_c(
+    dict token2index,
+) except -1
+cdef unsigned int token_to_index_with_hash_in_cpp(
     str token,
-    dict word2index,
+    dict token2index,
 )

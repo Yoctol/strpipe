@@ -5,53 +5,61 @@ from default_tokens import DefaultTokens
 
 def token_to_index_with_unk(
         token: str,
-        word2index: dict,
+        token2index: dict,
         unk_token: str = DefaultTokens.unk,
     ) -> int:
-    return token_to_index_with_unk_in_c(
+    return token_to_index_with_unk_in_cpp(
         token=token,
         unk_token=unk_token,
-        word2index=word2index,
+        token2index=token2index,
     )
 
 
-cdef unsigned int token_to_index_with_unk_in_c(  # noqa: E999
+cdef unsigned int token_to_index_with_unk_in_cpp(  # noqa: E999
         str token,
         str unk_token,
-        dict word2index,
-    ):
+        dict token2index,
+    ) except -1:
     cdef unsigned int index
 
-    if token not in word2index:
+    if unk_token not in token2index:
+        raise KeyError(
+            'unk token [{}] is not in token2index'.format(
+                unk_token,
+            ),
+        )
+
+    if token not in token2index:
         # assign unk index
-        index = word2index[unk_token]
+        index = token2index[unk_token]
     else:
-        index = word2index[token]
+        index = token2index[token]
     return index
 
 
 def token_to_index_with_hash(
         token: str,
-        word2index: dict,
+        token2index: dict,
     ) -> int:
-    return token_to_index_with_hash_in_c(
+    return token_to_index_with_hash_in_cpp(
         token=token,
-        word2index=word2index,
+        token2index=token2index,
     )
 
 
-cdef unsigned int token_to_index_with_hash_in_c(  # noqa: E999
+cdef unsigned int token_to_index_with_hash_in_cpp(  # noqa: E999
         str token,
-        dict word2index,
+        dict token2index,
     ):
-    cdef unsigned int index
+    cdef unsigned int index, vocab_size
+    vocab_size = len(token2index)
 
-    if token not in word2index:
+    if token not in token2index:
         index = consistent_hash_in_c(
             input_str=token,
-            mod_int=len(word2index),
+            mod_int=vocab_size,
             seed=0,
         )
     else:
-        index = word2index[token]
+        index = token2index[token]
     return index
