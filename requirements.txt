@@ -9,6 +9,3 @@ pypandoc
 sphinx
 sphinx-rtd-theme
 recommonmark
-
-# tokenizer
-tokenizer-hub
