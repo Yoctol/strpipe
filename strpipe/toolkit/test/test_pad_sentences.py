@@ -14,6 +14,15 @@ def sentences():
     ]
 
 
+def assert_dict_contains(d1, d2):
+    '''assert d1 contains all the items in d2
+    '''
+    for k, v in d2.items():
+        if d1[k] != v:
+            raise AssertionError(
+                "First dictionary has {}={} but expected is {}={}".format(k, d1[k], k, v))
+
+
 def test_pad_sentences_with_default_pad(sentences):
     output = pad_sentences(
         sentences=sentences,
@@ -26,13 +35,14 @@ def test_pad_sentences_with_default_pad(sentences):
         ["", "<PAD>", "<PAD>"],
         ["<PAD>", "<PAD>", "<PAD>"],
     ]
-    assert output[1] == [
-        {'sentlen': 5, 'sentence_tail': ["有點", "猥瑣"]},
-        {'sentlen': 3, 'sentence_tail': []},
-        {'sentlen': 2, 'sentence_tail': []},
-        {'sentlen': 1, 'sentence_tail': []},
-        {'sentlen': 0, 'sentence_tail': []},
-    ]
+    for d1, d2 in zip(output[1], [
+            {'sentlen': 5, 'sentence_tail': ["有點", "猥瑣"]},
+            {'sentlen': 3, 'sentence_tail': []},
+            {'sentlen': 2, 'sentence_tail': []},
+            {'sentlen': 1, 'sentence_tail': []},
+            {'sentlen': 0, 'sentence_tail': []},
+        ]):
+        assert_dict_contains(d1, d2)
 
 
 def test_pad_sentences_with_custom_pad(sentences):
@@ -48,13 +58,14 @@ def test_pad_sentences_with_custom_pad(sentences):
         ["", "<CPH>", "<CPH>"],
         ["<CPH>", "<CPH>", "<CPH>"],
     ]
-    assert output[1] == [
-        {'sentlen': 5, 'sentence_tail': ["有點", "猥瑣"]},
-        {'sentlen': 3, 'sentence_tail': []},
-        {'sentlen': 2, 'sentence_tail': []},
-        {'sentlen': 1, 'sentence_tail': []},
-        {'sentlen': 0, 'sentence_tail': []},
-    ]
+    for d1, d2 in zip(output[1], [
+            {'sentlen': 5, 'sentence_tail': ["有點", "猥瑣"]},
+            {'sentlen': 3, 'sentence_tail': []},
+            {'sentlen': 2, 'sentence_tail': []},
+            {'sentlen': 1, 'sentence_tail': []},
+            {'sentlen': 0, 'sentence_tail': []},
+        ]):
+        assert_dict_contains(d1, d2)
 
 
 @pytest.mark.parametrize("sos,eos,pad,maxlen,expected_padded_sentences,expected_meta", [
@@ -144,7 +155,8 @@ def test_pad_sentences(sentences, sos, eos, pad, maxlen,
 
     padded_sentences, meta = pad_sentences(**kwargs)
     assert padded_sentences == expected_padded_sentences
-    assert meta == expected_meta
+    for d1, in d2 in zip(meta, expected_meta):
+        assert_dict_contains(d1, d2)
 
 
 def test_unpad_sentences(sentences):
