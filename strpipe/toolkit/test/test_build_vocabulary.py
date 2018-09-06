@@ -34,19 +34,3 @@ def test_build_vocabulary_from_sentences_with_limit_size():
     assert set(output.values()) == set(
         list(range(4)),
     )
-
-
-# def test_build_vocabulary_from_sentences_with_conflict():
-#     output = build_vocabulary_from_sentences(
-#         [
-#             ['<SOS>', '喜歡', '蛋白質', '<EOS>'],
-#             ['蛋白質'],
-#         ],
-#     )
-#     assert set(output.keys()) == set(
-#         ['<SOS>', '<EOS>', '<PAD>',
-#          '<UNK>', '喜歡', '蛋白質'],
-#     )
-#     assert set(output.values()) == set(
-#         list(range(6)),
-#     )
