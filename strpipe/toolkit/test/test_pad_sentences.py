@@ -57,6 +57,57 @@ def test_pad_sentences_with_custom_pad(sentences):
     ]
 
 
+@pytest.mark.parametrize("sos,eos,pad,maxlen,expected_padded_sentences,expected_meta", [
+    (None, None, None, 3, [
+        ["隼興", "覺得", "有顆頭"],
+        ["藍莓", "結冰", "惹"],
+        ["薩克斯風", "好用", "<PAD>"],
+        ["", "<PAD>", "<PAD>"],
+        ["<PAD>", "<PAD>", "<PAD>"]], [
+        {'sentlen': 5, 'sentence_tail': ["有點", "猥瑣"]},
+        {'sentlen': 3, 'sentence_tail': []},
+        {'sentlen': 2, 'sentence_tail': []},
+        {'sentlen': 1, 'sentence_tail': []},
+        {'sentlen': 0, 'sentence_tail': []}]
+    ),
+    (None, None, '<CPH>', 3, [
+        ["隼興", "覺得", "有顆頭"],
+        ["藍莓", "結冰", "惹"],
+        ["薩克斯風", "好用", "<CPH>"],
+        ["", "<CPH>", "<CPH>"],
+        ["<CPH>", "<CPH>", "<CPH>"]], [
+        {'sentlen': 5, 'sentence_tail': ["有點", "猥瑣"]},
+        {'sentlen': 3, 'sentence_tail': []},
+        {'sentlen': 2, 'sentence_tail': []},
+        {'sentlen': 1, 'sentence_tail': []},
+        {'sentlen': 0, 'sentence_tail': []}]
+    ),
+], ids=[
+    'default_pad',
+    'custom_pad'
+])
+def test_pad_sentences(sentences, sos, eos, pad, maxlen,
+    expected_padded_sentences, expected_meta):
+
+    kwargs = {
+        'sentences': sentences,
+        'sos_token': sos,
+        'eos_token': eos,
+        'pad_token': pad,
+        'maxlen': maxlen
+    }
+    if sos is None:
+        del kwargs['sos_token']
+    if eos is None:
+        del kwargs['eos_token']
+    if pad is None:
+        del kwargs['pad_token']
+
+    padded_sentences, meta = pad_sentences(**kwargs)
+    assert padded_sentences == expected_padded_sentences
+    assert meta == expected_meta
+
+
 def test_unpad_sentences(sentences):
     output = unpad_sentences(
         sentences=[
