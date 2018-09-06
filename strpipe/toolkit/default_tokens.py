@@ -1,10 +1,10 @@
-
 class DefaultTokens:
 
     sos = '<SOS>'
     eos = '<EOS>'
     unk = '<UNK>'
     pad = '<PAD>'
+    nul = '\0'  # For Cython classes to use as Python's 'None'.
 
     @classmethod
     def list_all_tokens(cls):
