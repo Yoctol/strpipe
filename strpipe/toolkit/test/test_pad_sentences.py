@@ -1,16 +1,23 @@
+import pytest
+
 from ..pad_sentences import pad_sentences, unpad_sentences
 
 
-def test_pad_sentences_with_default_pad():
+@pytest.fixture
+def sentences():
+    return [
+        ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],
+        ["藍莓", "結冰", "惹"],
+        ["薩克斯風", "好用"],
+        [""],
+        [],
+    ]
+
+
+def test_pad_sentences_with_default_pad(sentences):
     output = pad_sentences(
-        sentences=[
-            ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],
-            ["藍莓", "結冰", "惹"],
-            ["薩克斯風", "好用"],
-            [""],
-            [],
-        ],
-        maxlen=3,
+        sentences=sentences,
+        maxlen=3
     )
     assert output[0] == [
         ["隼興", "覺得", "有顆頭"],
@@ -28,15 +35,9 @@ def test_pad_sentences_with_default_pad():
     ]
 
 
-def test_pad_sentences_with_custom_pad():
+def test_pad_sentences_with_custom_pad(sentences):
     output = pad_sentences(
-        sentences=[
-            ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],
-            ["藍莓", "結冰", "惹"],
-            ["薩克斯風", "好用"],
-            [""],
-            [],
-        ],
+        sentences=sentences,
         maxlen=3,
         pad_token="<CPH>",
     )
@@ -56,7 +57,7 @@ def test_pad_sentences_with_custom_pad():
     ]
 
 
-def test_unpad_sentences():
+def test_unpad_sentences(sentences):
     output = unpad_sentences(
         sentences=[
             ["隼興", "覺得", "有顆頭"],
@@ -73,10 +74,4 @@ def test_unpad_sentences():
             {'sentlen': 0, 'sentence_tail': []},
         ]
     )
-    assert output == [
-        ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],
-        ["藍莓", "結冰", "惹"],
-        ["薩克斯風", "好用"],
-        [""],
-        [],
-    ]
+    assert output == sentences
