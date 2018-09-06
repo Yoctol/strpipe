@@ -790,8 +790,8 @@ struct __pyx_obj_7strpipe_3ops_4base_BaseOp {
  * 
  * 
  * cdef class Pad(BaseOp):             # <<<<<<<<<<<<<<
+ *     '''Pad texts so that they are the same size.
  * 
- *     cdef str _pad_token
  */
 struct __pyx_obj_7strpipe_3ops_3pad_Pad {
   struct __pyx_obj_7strpipe_3ops_4base_BaseOp __pyx_base;
@@ -819,8 +819,8 @@ static struct __pyx_vtabstruct_7strpipe_3ops_4base_BaseOp *__pyx_vtabptr_7strpip
  * 
  * 
  * cdef class Pad(BaseOp):             # <<<<<<<<<<<<<<
+ *     '''Pad texts so that they are the same size.
  * 
- *     cdef str _pad_token
  */
 
 struct __pyx_vtabstruct_7strpipe_3ops_3pad_Pad {
@@ -903,6 +903,12 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
 /* RaiseArgTupleInvalid.proto */
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
+/* ArgTypeTest.proto */
+#define __Pyx_ArgTypeTest(obj, type, none_allowed, name, exact)\
+    ((likely((Py_TYPE(obj) == type) | (none_allowed && (obj == Py_None)))) ? 1 :\
+        __Pyx__ArgTypeTest(obj, type, name, exact))
+static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *name, int exact);
 
 /* PyObjectGetAttrStr.proto */
 #if CYTHON_USE_TYPE_SLOTS
@@ -1258,10 +1264,10 @@ static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_codeobj__3;
 /* Late includes */
 
-/* "strpipe/ops/pad.pyx":19
+/* "strpipe/ops/pad.pyx":28
  *     cdef int _maxlen
  * 
- *     def __init__(self, pad_token=DefaultTokens.pad, int maxlen=-1):             # <<<<<<<<<<<<<<
+ *     def __init__(self, str pad_token=DefaultTokens.pad, int maxlen=-1):             # <<<<<<<<<<<<<<
  *         self.input_type = STRING_LIST
  *         self.output_type = STRING_LIST
  */
@@ -1304,7 +1310,7 @@ static int __pyx_pw_7strpipe_3ops_3pad_3Pad_1__init__(PyObject *__pyx_v_self, Py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 19, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 28, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1316,24 +1322,29 @@ static int __pyx_pw_7strpipe_3ops_3pad_3Pad_1__init__(PyObject *__pyx_v_self, Py
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_pad_token = values[0];
+    __pyx_v_pad_token = ((PyObject*)values[0]);
     if (values[1]) {
-      __pyx_v_maxlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_maxlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 19, __pyx_L3_error)
+      __pyx_v_maxlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_maxlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 28, __pyx_L3_error)
     } else {
       __pyx_v_maxlen = ((int)-1);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 19, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 28, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.ops.pad.Pad.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pad_token), (&PyString_Type), 1, "pad_token", 1))) __PYX_ERR(0, 28, __pyx_L1_error)
   __pyx_r = __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(((struct __pyx_obj_7strpipe_3ops_3pad_Pad *)__pyx_v_self), __pyx_v_pad_token, __pyx_v_maxlen);
 
   /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = -1;
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
@@ -1344,55 +1355,52 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "strpipe/ops/pad.pyx":20
+  /* "strpipe/ops/pad.pyx":29
  * 
- *     def __init__(self, pad_token=DefaultTokens.pad, int maxlen=-1):
+ *     def __init__(self, str pad_token=DefaultTokens.pad, int maxlen=-1):
  *         self.input_type = STRING_LIST             # <<<<<<<<<<<<<<
  *         self.output_type = STRING_LIST
  *         self._pad_token = pad_token
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_STRING_LIST); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_STRING_LIST); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->__pyx_base.input_type);
   __Pyx_DECREF(__pyx_v_self->__pyx_base.input_type);
   __pyx_v_self->__pyx_base.input_type = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":21
- *     def __init__(self, pad_token=DefaultTokens.pad, int maxlen=-1):
+  /* "strpipe/ops/pad.pyx":30
+ *     def __init__(self, str pad_token=DefaultTokens.pad, int maxlen=-1):
  *         self.input_type = STRING_LIST
  *         self.output_type = STRING_LIST             # <<<<<<<<<<<<<<
  *         self._pad_token = pad_token
  *         self._maxlen = maxlen
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_STRING_LIST); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_STRING_LIST); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->__pyx_base.output_type);
   __Pyx_DECREF(__pyx_v_self->__pyx_base.output_type);
   __pyx_v_self->__pyx_base.output_type = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":22
+  /* "strpipe/ops/pad.pyx":31
  *         self.input_type = STRING_LIST
  *         self.output_type = STRING_LIST
  *         self._pad_token = pad_token             # <<<<<<<<<<<<<<
  *         self._maxlen = maxlen
  * 
  */
-  if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 22, __pyx_L1_error)
-  __pyx_t_1 = __pyx_v_pad_token;
-  __Pyx_INCREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_v_pad_token);
+  __Pyx_GIVEREF(__pyx_v_pad_token);
   __Pyx_GOTREF(__pyx_v_self->_pad_token);
   __Pyx_DECREF(__pyx_v_self->_pad_token);
-  __pyx_v_self->_pad_token = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+  __pyx_v_self->_pad_token = __pyx_v_pad_token;
 
-  /* "strpipe/ops/pad.pyx":23
+  /* "strpipe/ops/pad.pyx":32
  *         self.output_type = STRING_LIST
  *         self._pad_token = pad_token
  *         self._maxlen = maxlen             # <<<<<<<<<<<<<<
@@ -1401,10 +1409,10 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
  */
   __pyx_v_self->_maxlen = __pyx_v_maxlen;
 
-  /* "strpipe/ops/pad.pyx":19
+  /* "strpipe/ops/pad.pyx":28
  *     cdef int _maxlen
  * 
- *     def __init__(self, pad_token=DefaultTokens.pad, int maxlen=-1):             # <<<<<<<<<<<<<<
+ *     def __init__(self, str pad_token=DefaultTokens.pad, int maxlen=-1):             # <<<<<<<<<<<<<<
  *         self.input_type = STRING_LIST
  *         self.output_type = STRING_LIST
  */
@@ -1421,16 +1429,17 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
   return __pyx_r;
 }
 
-/* "strpipe/ops/pad.pyx":25
+/* "strpipe/ops/pad.pyx":34
  *         self._maxlen = maxlen
  * 
  *     def fit(self, input_data):             # <<<<<<<<<<<<<<
- *         cdef int maxlen
- *         if self._maxlen == -1:
+ *         ''' Figure out maxlen if not specified in __init__.
+ * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_3fit(PyObject *__pyx_v_self, PyObject *__pyx_v_input_data); /*proto*/
+static char __pyx_doc_7strpipe_3ops_3pad_3Pad_2fit[] = "Pad.fit(self, input_data)\n Figure out maxlen if not specified in __init__.\n\n        Args:\n            input_data: input data\n        ";
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_3fit(PyObject *__pyx_v_self, PyObject *__pyx_v_input_data) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -1452,8 +1461,8 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2fit(struct __pyx_obj_7strpipe
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("fit", 0);
 
-  /* "strpipe/ops/pad.pyx":27
- *     def fit(self, input_data):
+  /* "strpipe/ops/pad.pyx":41
+ *         '''
  *         cdef int maxlen
  *         if self._maxlen == -1:             # <<<<<<<<<<<<<<
  *             maxlen = compute_maxlen_in_c(input_data)
@@ -1462,22 +1471,22 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2fit(struct __pyx_obj_7strpipe
   __pyx_t_1 = ((__pyx_v_self->_maxlen == -1L) != 0);
   if (__pyx_t_1) {
 
-    /* "strpipe/ops/pad.pyx":28
+    /* "strpipe/ops/pad.pyx":42
  *         cdef int maxlen
  *         if self._maxlen == -1:
  *             maxlen = compute_maxlen_in_c(input_data)             # <<<<<<<<<<<<<<
  *         else:
  *             maxlen = self._maxlen
  */
-    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 28, __pyx_L1_error)
-    __pyx_t_2 = __pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c(((PyObject*)__pyx_v_input_data)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c(((PyObject*)__pyx_v_input_data)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 28, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_maxlen = __pyx_t_3;
 
-    /* "strpipe/ops/pad.pyx":27
- *     def fit(self, input_data):
+    /* "strpipe/ops/pad.pyx":41
+ *         '''
  *         cdef int maxlen
  *         if self._maxlen == -1:             # <<<<<<<<<<<<<<
  *             maxlen = compute_maxlen_in_c(input_data)
@@ -1486,7 +1495,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2fit(struct __pyx_obj_7strpipe
     goto __pyx_L3;
   }
 
-  /* "strpipe/ops/pad.pyx":30
+  /* "strpipe/ops/pad.pyx":44
  *             maxlen = compute_maxlen_in_c(input_data)
  *         else:
  *             maxlen = self._maxlen             # <<<<<<<<<<<<<<
@@ -1499,47 +1508,47 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2fit(struct __pyx_obj_7strpipe
   }
   __pyx_L3:;
 
-  /* "strpipe/ops/pad.pyx":31
+  /* "strpipe/ops/pad.pyx":45
  *         else:
  *             maxlen = self._maxlen
  *         return {             # <<<<<<<<<<<<<<
  *             'maxlen': maxlen,
- *             'pad_token': self._pad_token
+ *             'pad_token': self._pad_token,
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "strpipe/ops/pad.pyx":32
+  /* "strpipe/ops/pad.pyx":46
  *             maxlen = self._maxlen
  *         return {
  *             'maxlen': maxlen,             # <<<<<<<<<<<<<<
- *             'pad_token': self._pad_token
+ *             'pad_token': self._pad_token,
  *         }
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_maxlen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_maxlen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_maxlen, __pyx_t_4) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_maxlen, __pyx_t_4) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "strpipe/ops/pad.pyx":33
+  /* "strpipe/ops/pad.pyx":47
  *         return {
  *             'maxlen': maxlen,
- *             'pad_token': self._pad_token             # <<<<<<<<<<<<<<
+ *             'pad_token': self._pad_token,             # <<<<<<<<<<<<<<
  *         }
  * 
  */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_pad_token, __pyx_v_self->_pad_token) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_pad_token, __pyx_v_self->_pad_token) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/ops/pad.pyx":25
+  /* "strpipe/ops/pad.pyx":34
  *         self._maxlen = maxlen
  * 
  *     def fit(self, input_data):             # <<<<<<<<<<<<<<
- *         cdef int maxlen
- *         if self._maxlen == -1:
+ *         ''' Figure out maxlen if not specified in __init__.
+ * 
  */
 
   /* function exit code */
@@ -1554,16 +1563,17 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2fit(struct __pyx_obj_7strpipe
   return __pyx_r;
 }
 
-/* "strpipe/ops/pad.pyx":36
+/* "strpipe/ops/pad.pyx":50
  *         }
  * 
  *     def transform(self, state, input_data):             # <<<<<<<<<<<<<<
- *         maxlen = state['maxlen']
- *         pad_token = state['pad_token']
+ *         '''Add eos and sos tokens if necessary then pads to fixed length.
+ * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_5transform(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7strpipe_3ops_3pad_3Pad_4transform[] = "Pad.transform(self, state, input_data)\nAdd eos and sos tokens if necessary then pads to fixed length.\n\n        Args:\n            state\n            input_data\n        ";
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_5transform(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v_input_data = 0;
@@ -1593,11 +1603,11 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_5transform(PyObject *__pyx_v_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_input_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, 1); __PYX_ERR(0, 36, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, 1); __PYX_ERR(0, 50, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "transform") < 0)) __PYX_ERR(0, 36, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "transform") < 0)) __PYX_ERR(0, 50, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1610,7 +1620,7 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_5transform(PyObject *__pyx_v_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 36, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 50, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.ops.pad.Pad.transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1634,109 +1644,109 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4transform(CYTHON_UNUSED struc
   unsigned int __pyx_t_2;
   __Pyx_RefNannySetupContext("transform", 0);
 
-  /* "strpipe/ops/pad.pyx":37
- * 
- *     def transform(self, state, input_data):
+  /* "strpipe/ops/pad.pyx":57
+ *             input_data
+ *         '''
  *         maxlen = state['maxlen']             # <<<<<<<<<<<<<<
  *         pad_token = state['pad_token']
  *         tx_info = pad_sentences_meta_in_c(
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_maxlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_maxlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_maxlen = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":38
- *     def transform(self, state, input_data):
+  /* "strpipe/ops/pad.pyx":58
+ *         '''
  *         maxlen = state['maxlen']
  *         pad_token = state['pad_token']             # <<<<<<<<<<<<<<
  *         tx_info = pad_sentences_meta_in_c(
  *             sentences=input_data,
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_pad_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_pad_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_pad_token = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":40
+  /* "strpipe/ops/pad.pyx":60
  *         pad_token = state['pad_token']
  *         tx_info = pad_sentences_meta_in_c(
  *             sentences=input_data,             # <<<<<<<<<<<<<<
  *             pad_token=pad_token,
  *             maxlen=maxlen,
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 40, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 60, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":41
+  /* "strpipe/ops/pad.pyx":61
  *         tx_info = pad_sentences_meta_in_c(
  *             sentences=input_data,
  *             pad_token=pad_token,             # <<<<<<<<<<<<<<
  *             maxlen=maxlen,
  *         )
  */
-  if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 61, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":42
+  /* "strpipe/ops/pad.pyx":62
  *             sentences=input_data,
  *             pad_token=pad_token,
  *             maxlen=maxlen,             # <<<<<<<<<<<<<<
  *         )
  *         padded_sentences = pad_sentences_in_c(
  */
-  __pyx_t_2 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_2 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_2 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":39
+  /* "strpipe/ops/pad.pyx":59
  *         maxlen = state['maxlen']
  *         pad_token = state['pad_token']
  *         tx_info = pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *             sentences=input_data,
  *             pad_token=pad_token,
  */
-  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_tx_info = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":45
+  /* "strpipe/ops/pad.pyx":65
  *         )
  *         padded_sentences = pad_sentences_in_c(
  *             sentences=input_data,             # <<<<<<<<<<<<<<
  *             pad_token=pad_token,
  *             maxlen=maxlen,
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 65, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":46
+  /* "strpipe/ops/pad.pyx":66
  *         padded_sentences = pad_sentences_in_c(
  *             sentences=input_data,
  *             pad_token=pad_token,             # <<<<<<<<<<<<<<
  *             maxlen=maxlen,
  *         )
  */
-  if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 66, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":47
+  /* "strpipe/ops/pad.pyx":67
  *             sentences=input_data,
  *             pad_token=pad_token,
  *             maxlen=maxlen,             # <<<<<<<<<<<<<<
  *         )
  *         return padded_sentences, tx_info
  */
-  __pyx_t_2 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_2 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_2 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 67, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":44
+  /* "strpipe/ops/pad.pyx":64
  *             maxlen=maxlen,
  *         )
  *         padded_sentences = pad_sentences_in_c(             # <<<<<<<<<<<<<<
  *             sentences=input_data,
  *             pad_token=pad_token,
  */
-  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_padded_sentences = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":49
+  /* "strpipe/ops/pad.pyx":69
  *             maxlen=maxlen,
  *         )
  *         return padded_sentences, tx_info             # <<<<<<<<<<<<<<
@@ -1744,7 +1754,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4transform(CYTHON_UNUSED struc
  *     def inverse_transform(self, state, input_data, tx_info):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_padded_sentences);
   __Pyx_GIVEREF(__pyx_v_padded_sentences);
@@ -1756,12 +1766,12 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4transform(CYTHON_UNUSED struc
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/ops/pad.pyx":36
+  /* "strpipe/ops/pad.pyx":50
  *         }
  * 
  *     def transform(self, state, input_data):             # <<<<<<<<<<<<<<
- *         maxlen = state['maxlen']
- *         pad_token = state['pad_token']
+ *         '''Add eos and sos tokens if necessary then pads to fixed length.
+ * 
  */
 
   /* function exit code */
@@ -1779,16 +1789,17 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4transform(CYTHON_UNUSED struc
   return __pyx_r;
 }
 
-/* "strpipe/ops/pad.pyx":51
+/* "strpipe/ops/pad.pyx":71
  *         return padded_sentences, tx_info
  * 
  *     def inverse_transform(self, state, input_data, tx_info):             # <<<<<<<<<<<<<<
- *         return unpad_sentences_in_c(
- *             input_data,
+ *         '''Remove eos, sos and padding.
+ * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_7inverse_transform(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7strpipe_3ops_3pad_3Pad_6inverse_transform[] = "Pad.inverse_transform(self, state, input_data, tx_info)\nRemove eos, sos and padding.\n\n        Args:\n            state:\n            input_data:\n            tx_info:\n        ";
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_7inverse_transform(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   CYTHON_UNUSED PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v_input_data = 0;
@@ -1821,17 +1832,17 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_7inverse_transform(PyObject *_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_input_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 1); __PYX_ERR(0, 51, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 1); __PYX_ERR(0, 71, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_tx_info)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 2); __PYX_ERR(0, 51, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 2); __PYX_ERR(0, 71, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "inverse_transform") < 0)) __PYX_ERR(0, 51, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "inverse_transform") < 0)) __PYX_ERR(0, 71, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1846,7 +1857,7 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_7inverse_transform(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 51, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 71, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.ops.pad.Pad.inverse_transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1865,51 +1876,51 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(CYTHON_UNUS
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("inverse_transform", 0);
 
-  /* "strpipe/ops/pad.pyx":52
- * 
- *     def inverse_transform(self, state, input_data, tx_info):
+  /* "strpipe/ops/pad.pyx":79
+ *             tx_info:
+ *         '''
  *         return unpad_sentences_in_c(             # <<<<<<<<<<<<<<
  *             input_data,
- *             tx_info
+ *             tx_info,
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "strpipe/ops/pad.pyx":53
- *     def inverse_transform(self, state, input_data, tx_info):
+  /* "strpipe/ops/pad.pyx":80
+ *         '''
  *         return unpad_sentences_in_c(
  *             input_data,             # <<<<<<<<<<<<<<
- *             tx_info
+ *             tx_info,
  *         )
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 80, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":54
+  /* "strpipe/ops/pad.pyx":81
  *         return unpad_sentences_in_c(
  *             input_data,
- *             tx_info             # <<<<<<<<<<<<<<
+ *             tx_info,             # <<<<<<<<<<<<<<
  *         )
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 54, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 81, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":52
- * 
- *     def inverse_transform(self, state, input_data, tx_info):
+  /* "strpipe/ops/pad.pyx":79
+ *             tx_info:
+ *         '''
  *         return unpad_sentences_in_c(             # <<<<<<<<<<<<<<
  *             input_data,
- *             tx_info
+ *             tx_info,
  */
-  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/ops/pad.pyx":51
+  /* "strpipe/ops/pad.pyx":71
  *         return padded_sentences, tx_info
  * 
  *     def inverse_transform(self, state, input_data, tx_info):             # <<<<<<<<<<<<<<
- *         return unpad_sentences_in_c(
- *             input_data,
+ *         '''Remove eos, sos and padding.
+ * 
  */
 
   /* function exit code */
@@ -1931,6 +1942,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(CYTHON_UNUS
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_7strpipe_3ops_3pad_3Pad_8__reduce_cython__[] = "Pad.__reduce_cython__(self)";
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -2192,6 +2204,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8__reduce_cython__(struct __py
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static char __pyx_doc_7strpipe_3ops_3pad_3Pad_10__setstate_cython__[] = "Pad.__setstate_cython__(self, __pyx_state)";
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -2247,7 +2260,8 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_10__setstate_cython__(struct _
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_1__pyx_unpickle_Pad(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_7strpipe_3ops_3pad_1__pyx_unpickle_Pad = {"__pyx_unpickle_Pad", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_1__pyx_unpickle_Pad, METH_VARARGS|METH_KEYWORDS, 0};
+static char __pyx_doc_7strpipe_3ops_3pad___pyx_unpickle_Pad[] = "__pyx_unpickle_Pad(__pyx_type, long __pyx_checksum, __pyx_state)";
+static PyMethodDef __pyx_mdef_7strpipe_3ops_3pad_1__pyx_unpickle_Pad = {"__pyx_unpickle_Pad", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_1__pyx_unpickle_Pad, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7strpipe_3ops_3pad___pyx_unpickle_Pad};
 static PyObject *__pyx_pw_7strpipe_3ops_3pad_1__pyx_unpickle_Pad(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v___pyx_type = 0;
   long __pyx_v___pyx_checksum;
@@ -2775,11 +2789,11 @@ static void __pyx_tp_dealloc_7strpipe_3ops_3pad_Pad(PyObject *o) {
 }
 
 static PyMethodDef __pyx_methods_7strpipe_3ops_3pad_Pad[] = {
-  {"fit", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_3Pad_3fit, METH_O, 0},
-  {"transform", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_3Pad_5transform, METH_VARARGS|METH_KEYWORDS, 0},
-  {"inverse_transform", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_3Pad_7inverse_transform, METH_VARARGS|METH_KEYWORDS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_3Pad_9__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_3Pad_11__setstate_cython__, METH_O, 0},
+  {"fit", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_3Pad_3fit, METH_O, __pyx_doc_7strpipe_3ops_3pad_3Pad_2fit},
+  {"transform", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_3Pad_5transform, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7strpipe_3ops_3pad_3Pad_4transform},
+  {"inverse_transform", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_3Pad_7inverse_transform, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7strpipe_3ops_3pad_3Pad_6inverse_transform},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_3Pad_9__reduce_cython__, METH_NOARGS, __pyx_doc_7strpipe_3ops_3pad_3Pad_8__reduce_cython__},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_7strpipe_3ops_3pad_3Pad_11__setstate_cython__, METH_O, __pyx_doc_7strpipe_3ops_3pad_3Pad_10__setstate_cython__},
   {0, 0, 0, 0}
 };
 
@@ -2809,7 +2823,7 @@ static PyTypeObject __pyx_type_7strpipe_3ops_3pad_Pad = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
-  0, /*tp_doc*/
+  "Pad(str pad_token=DefaultTokens.pad, int maxlen=-1)\nPad texts so that they are the same size.\n\n    Args:\n        pad_token: Padding token.\n        sos_token (optional): Start of sentence token.\n        eos_token (optional): End of sentence token.\n        maxlen (optional): The length to pad to. Note that this includes eos, sos tokens as\n            part of the length count.\n    ", /*tp_doc*/
   0, /*tp_traverse*/
   0, /*tp_clear*/
   0, /*tp_richcompare*/
@@ -3265,19 +3279,20 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":19
+  /* "strpipe/ops/pad.pyx":28
  *     cdef int _maxlen
  * 
- *     def __init__(self, pad_token=DefaultTokens.pad, int maxlen=-1):             # <<<<<<<<<<<<<<
+ *     def __init__(self, str pad_token=DefaultTokens.pad, int maxlen=-1):             # <<<<<<<<<<<<<<
  *         self.input_type = STRING_LIST
  *         self.output_type = STRING_LIST
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_pad); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_pad); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_k_ = __pyx_t_2;
+  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_k_ = ((PyObject*)__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_2 = 0;
 
@@ -3484,6 +3499,27 @@ static void __Pyx_RaiseArgtupleInvalid(
                  "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
                  func_name, more_or_less, num_expected,
                  (num_expected == 1) ? "" : "s", num_found);
+}
+
+/* ArgTypeTest */
+static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *name, int exact)
+{
+    if (unlikely(!type)) {
+        PyErr_SetString(PyExc_SystemError, "Missing type object");
+        return 0;
+    }
+    else if (exact) {
+        #if PY_MAJOR_VERSION == 2
+        if ((type == &PyBaseString_Type) && likely(__Pyx_PyBaseString_CheckExact(obj))) return 1;
+        #endif
+    }
+    else {
+        if (likely(__Pyx_TypeCheck(obj, type))) return 1;
+    }
+    PyErr_Format(PyExc_TypeError,
+        "Argument '%.200s' has incorrect type (expected %.200s, got %.200s)",
+        name, type->tp_name, Py_TYPE(obj)->tp_name);
+    return 0;
 }
 
 /* PyObjectGetAttrStr */
