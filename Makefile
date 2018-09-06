@@ -48,4 +48,5 @@ dev-test:
 
 .PHONY: docs
 docs:
+	make installself
 	make -C docs
