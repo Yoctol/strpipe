@@ -47,7 +47,7 @@ class Pipe:
         self._step_info = []
         self.op_factory = default_op_factory if op_factory is None else op_factory
 
-    def add_steps_by_op_name(
+    def add_step_by_op_name(
             self,
             op_name,
             op_kwargs=None,
@@ -125,7 +125,7 @@ class Pipe:
             _data = json.load(f)
             step_recoverables = _data['steps']
         for step_info in step_recoverables:
-            p.add_steps_by_op_name(
+            p.add_step_by_op_name(
                 op_name=step_info['op_name'],
                 op_kwargs=step_info['op_kwargs'],
                 state=step_info['state'],
