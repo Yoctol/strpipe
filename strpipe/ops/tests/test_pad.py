@@ -13,6 +13,7 @@ def test_pad_correctly_created():
         yield Pad()
         yield Pad(pad_token='<pad>')
         yield Pad(sos_token='<sos>', eos_token='<eos>')
+        yield Pad(sos_token='<sos>', eos_token='<eos>', pad_token='<pad>')
     for padder in yield_padders():
         assert padder.input_type == STRING_LIST
         assert padder.output_type == STRING_LIST
