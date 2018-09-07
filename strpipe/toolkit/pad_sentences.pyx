@@ -1,4 +1,4 @@
-#cython: nonecheck=True
+# cython: nonecheck=True
 from libc.stdio cimport printf
 from default_tokens import DefaultTokens
 
@@ -135,7 +135,7 @@ cdef list unpad_sentence_in_c(
     if meta.get('eos_token'):
         end_idx -= 1
 
-    output_sentence = sentence[start_idx:start_idx+sentlen] + sentence_tail
+    output_sentence = sentence[start_idx:start_idx + sentlen] + sentence_tail
 
     return output_sentence
 

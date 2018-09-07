@@ -81,8 +81,8 @@ def test_pad_sentences_with_custom_pad(sentences):
         {'sentlen': 3, 'sentence_tail': []},
         {'sentlen': 2, 'sentence_tail': []},
         {'sentlen': 1, 'sentence_tail': []},
-        {'sentlen': 0, 'sentence_tail': []}]
-    ),
+        {'sentlen': 0, 'sentence_tail': []}
+    ]),
     (None, None, '<CPH>', 3, [
         ["隼興", "覺得", "有顆頭"],
         ["藍莓", "結冰", "惹"],
@@ -93,8 +93,8 @@ def test_pad_sentences_with_custom_pad(sentences):
         {'sentlen': 3, 'sentence_tail': []},
         {'sentlen': 2, 'sentence_tail': []},
         {'sentlen': 1, 'sentence_tail': []},
-        {'sentlen': 0, 'sentence_tail': []}]
-    ),
+        {'sentlen': 0, 'sentence_tail': []}
+    ]),
     ('<YO>', None, None, 3, [
         ["<YO>", "隼興", "覺得"],
         ["<YO>", "藍莓", "結冰"],
@@ -105,8 +105,8 @@ def test_pad_sentences_with_custom_pad(sentences):
         {'sentlen': 3, 'sentence_tail': ["惹"]},
         {'sentlen': 2, 'sentence_tail': []},
         {'sentlen': 1, 'sentence_tail': []},
-        {'sentlen': 0, 'sentence_tail': []}]
-    ),
+        {'sentlen': 0, 'sentence_tail': []}
+    ]),
     (None, '<BYE>', None, 3, [
         ["隼興", "覺得", "<BYE>"],
         ["藍莓", "結冰", "<BYE>"],
@@ -117,8 +117,8 @@ def test_pad_sentences_with_custom_pad(sentences):
         {'sentlen': 3, 'sentence_tail': ["惹"]},
         {'sentlen': 2, 'sentence_tail': []},
         {'sentlen': 1, 'sentence_tail': []},
-        {'sentlen': 0, 'sentence_tail': []}]
-    ),
+        {'sentlen': 0, 'sentence_tail': []}
+    ]),
     ('<A>', '<Z>', None, 3, [
         ["<A>", "隼興", "<Z>"],
         ["<A>", "藍莓", "<Z>"],
@@ -129,8 +129,8 @@ def test_pad_sentences_with_custom_pad(sentences):
         {'sentlen': 3, 'sentence_tail': ["結冰", "惹"]},
         {'sentlen': 2, 'sentence_tail': ["好用"]},
         {'sentlen': 1, 'sentence_tail': []},
-        {'sentlen': 0, 'sentence_tail': []}]
-    ),
+        {'sentlen': 0, 'sentence_tail': []}
+    ]),
 ], ids=[
     'default_pad',
     'custom_pad',
@@ -139,7 +139,7 @@ def test_pad_sentences_with_custom_pad(sentences):
     'sos_and_eos',
 ])
 def test_pad_sentences(sentences, sos, eos, pad, maxlen,
-    expected_padded_sentences, expected_meta):
+                       expected_padded_sentences, expected_meta):
 
     kwargs = {
         'sentences': sentences,
