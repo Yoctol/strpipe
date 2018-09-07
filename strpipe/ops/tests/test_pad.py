@@ -26,6 +26,15 @@ def test_pad_init_needs_both_sos_and_eos_or_neither():
         Pad(eos_token='<eos>')
 
 
+def test_pad_init_tokens_should_be_distinct():
+    with pytest.raises(ValueError):
+        Pad(sos_token='<hello>', eos_token='<hello>')
+    with pytest.raises(ValueError):
+        Pad(sos_token=DefaultTokens.pad)
+    with pytest.raises(ValueError):
+        Pad(eos_token=DefaultTokens.pad)
+
+
 def test_pad_passing_state_needs_both_sos_and_eos_or_neither():
     padder = Pad()
     input_data = [
@@ -53,6 +62,41 @@ def test_pad_passing_state_needs_both_sos_and_eos_or_neither():
         padder.inverse_transform(state3, output_data1, tx_info)
     with pytest.raises(ValueError):
         padder.inverse_transform(state4, output_data2, tx_info)
+
+
+def test_pad_passing_state_tokens_in_state_should_be_distinct():
+    padder = Pad()
+    input_data = [
+        ["a", "b", "c"],
+    ]
+    tx_info = [
+        {'sentlen': 0, 'sentence_tail': []},
+    ]
+
+    bad_state1 = {'maxlen': 5, 'pad_token': '<PAD>',
+                  'sos_token': '<PAD>', 'eos_token': '<eos>'}
+    bad_state2 = {'maxlen': 5, 'pad_token': '<PAD>',
+                  'sos_token': '<sos>', 'eos_token': '<PAD>'}
+    bad_state3 = {'maxlen': 5, 'pad_token': '<PAD>',
+                  'sos_token': '<boundary>', 'eos_token': '<boundary>'}
+
+    for bad_state in (bad_state1, bad_state2, bad_state3):
+        with pytest.raises(ValueError):
+            padder.transform(bad_state, input_data)
+
+    state = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<eos>'}
+    output_data, _ = padder.transform(state, input_data)
+
+    bad_state4 = {'maxlen': 5, 'pad_token': '<PAD>',
+                  'sos_token': '<PAD>', 'eos_token': '<eos>'}
+    bad_state5 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token':
+                  '<sos>', 'eos_token': '<PAD>'}
+    bad_state6 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token':
+                  '<boundary>', 'eos_token': '<boundary>'}
+
+    for bad_state in (bad_state4, bad_state5, bad_state6):
+        with pytest.raises(ValueError):
+            padder.inverse_transform(bad_state, output_data, tx_info)
 
 
 def test_pad_fit():
