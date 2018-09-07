@@ -35,12 +35,14 @@ clean:
 	rm -f .coverage
 	rm -f .coverage.*
 	rm -rf build
+	python setup_utils/remove_so_files.py
 	make -C docs clean
 	python setup.py clean
 
 .PHONY: dev-test
 dev-test:
 	rm -rf build
+	python setup_utils/remove_so_files.py
 	python setup.py build_ext
 	pip install -e .
 	make lint
