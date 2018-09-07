@@ -199,6 +199,8 @@ def test_pad_inverse_transform_with_sos_and_eos():
     state = {
         'maxlen': 7,
         'pad_token': pto,
+        'sos_token': sto,
+        'eos_token': eto
     }
 
     output_data = [
