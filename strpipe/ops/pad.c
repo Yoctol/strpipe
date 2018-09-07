@@ -1485,39 +1485,39 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "strpipe/ops/pad.pyx":37
- *         str pad_token=DefaultTokens.pad,
- *         int maxlen=-1):
+  /* "strpipe/ops/pad.pyx":38
+ *         int maxlen=-1,
+ *     ):
  *         self.input_type = STRING_LIST             # <<<<<<<<<<<<<<
  *         self.output_type = STRING_LIST
  *         self._pad_token = pad_token
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_STRING_LIST); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_STRING_LIST); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 37, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->__pyx_base.input_type);
   __Pyx_DECREF(__pyx_v_self->__pyx_base.input_type);
   __pyx_v_self->__pyx_base.input_type = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":38
- *         int maxlen=-1):
+  /* "strpipe/ops/pad.pyx":39
+ *     ):
  *         self.input_type = STRING_LIST
  *         self.output_type = STRING_LIST             # <<<<<<<<<<<<<<
  *         self._pad_token = pad_token
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_STRING_LIST); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_STRING_LIST); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->__pyx_base.output_type);
   __Pyx_DECREF(__pyx_v_self->__pyx_base.output_type);
   __pyx_v_self->__pyx_base.output_type = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":39
+  /* "strpipe/ops/pad.pyx":40
  *         self.input_type = STRING_LIST
  *         self.output_type = STRING_LIST
  *         self._pad_token = pad_token             # <<<<<<<<<<<<<<
@@ -1530,14 +1530,14 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
   __Pyx_DECREF(__pyx_v_self->_pad_token);
   __pyx_v_self->_pad_token = __pyx_v_pad_token;
 
-  /* "strpipe/ops/pad.pyx":41
+  /* "strpipe/ops/pad.pyx":42
  *         self._pad_token = pad_token
  * 
  *         self._check_tokens(sos_token, eos_token, pad_token)             # <<<<<<<<<<<<<<
  * 
  *         self._sos_token = sos_token
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_tokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_tokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -1554,7 +1554,7 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_3, __pyx_v_sos_token, __pyx_v_eos_token, __pyx_v_pad_token};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -1562,13 +1562,13 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_3, __pyx_v_sos_token, __pyx_v_eos_token, __pyx_v_pad_token};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 41, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 42, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -1582,14 +1582,14 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
     __Pyx_INCREF(__pyx_v_pad_token);
     __Pyx_GIVEREF(__pyx_v_pad_token);
     PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_4, __pyx_v_pad_token);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":43
+  /* "strpipe/ops/pad.pyx":44
  *         self._check_tokens(sos_token, eos_token, pad_token)
  * 
  *         self._sos_token = sos_token             # <<<<<<<<<<<<<<
@@ -1602,7 +1602,7 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
   __Pyx_DECREF(__pyx_v_self->_sos_token);
   __pyx_v_self->_sos_token = __pyx_v_sos_token;
 
-  /* "strpipe/ops/pad.pyx":44
+  /* "strpipe/ops/pad.pyx":45
  * 
  *         self._sos_token = sos_token
  *         self._eos_token = eos_token             # <<<<<<<<<<<<<<
@@ -1615,7 +1615,7 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
   __Pyx_DECREF(__pyx_v_self->_eos_token);
   __pyx_v_self->_eos_token = __pyx_v_eos_token;
 
-  /* "strpipe/ops/pad.pyx":46
+  /* "strpipe/ops/pad.pyx":47
  *         self._eos_token = eos_token
  * 
  *         self._maxlen = maxlen             # <<<<<<<<<<<<<<
@@ -1647,7 +1647,7 @@ static int __pyx_pf_7strpipe_3ops_3pad_3Pad___init__(struct __pyx_obj_7strpipe_3
   return __pyx_r;
 }
 
-/* "strpipe/ops/pad.pyx":48
+/* "strpipe/ops/pad.pyx":49
  *         self._maxlen = maxlen
  * 
  *     def _check_tokens(self, sos_token, eos_token, pad_token):             # <<<<<<<<<<<<<<
@@ -1690,17 +1690,17 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_3_check_tokens(PyObject *__pyx
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_eos_token)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_check_tokens", 1, 3, 3, 1); __PYX_ERR(0, 48, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_check_tokens", 1, 3, 3, 1); __PYX_ERR(0, 49, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pad_token)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_check_tokens", 1, 3, 3, 2); __PYX_ERR(0, 48, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_check_tokens", 1, 3, 3, 2); __PYX_ERR(0, 49, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_check_tokens") < 0)) __PYX_ERR(0, 48, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_check_tokens") < 0)) __PYX_ERR(0, 49, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1715,7 +1715,7 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_3_check_tokens(PyObject *__pyx
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_check_tokens", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 48, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_check_tokens", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 49, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.ops.pad.Pad._check_tokens", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1737,41 +1737,41 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("_check_tokens", 0);
 
-  /* "strpipe/ops/pad.pyx":49
+  /* "strpipe/ops/pad.pyx":50
  * 
  *     def _check_tokens(self, sos_token, eos_token, pad_token):
  *         if (sos_token == DefaultTokens.nul) and (eos_token == DefaultTokens.nul):             # <<<<<<<<<<<<<<
  *             return True
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_sos_token, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_sos_token, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
   } else {
     __pyx_t_1 = __pyx_t_4;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_eos_token, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_eos_token, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_1 = __pyx_t_4;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "strpipe/ops/pad.pyx":50
+    /* "strpipe/ops/pad.pyx":51
  *     def _check_tokens(self, sos_token, eos_token, pad_token):
  *         if (sos_token == DefaultTokens.nul) and (eos_token == DefaultTokens.nul):
  *             return True             # <<<<<<<<<<<<<<
@@ -1783,7 +1783,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
     __pyx_r = Py_True;
     goto __pyx_L0;
 
-    /* "strpipe/ops/pad.pyx":49
+    /* "strpipe/ops/pad.pyx":50
  * 
  *     def _check_tokens(self, sos_token, eos_token, pad_token):
  *         if (sos_token == DefaultTokens.nul) and (eos_token == DefaultTokens.nul):             # <<<<<<<<<<<<<<
@@ -1792,38 +1792,38 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
  */
   }
 
-  /* "strpipe/ops/pad.pyx":52
+  /* "strpipe/ops/pad.pyx":53
  *             return True
  * 
  *         if eos_token == DefaultTokens.nul:             # <<<<<<<<<<<<<<
  *             raise ValueError("Only start-of-sentence token was provided."
  *                              "Should provide corresponding end-of-sentence token.")
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_eos_token, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_eos_token, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(__pyx_t_1)) {
 
-    /* "strpipe/ops/pad.pyx":53
+    /* "strpipe/ops/pad.pyx":54
  * 
  *         if eos_token == DefaultTokens.nul:
  *             raise ValueError("Only start-of-sentence token was provided."             # <<<<<<<<<<<<<<
  *                              "Should provide corresponding end-of-sentence token.")
  * 
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 53, __pyx_L1_error)
+    __PYX_ERR(0, 54, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":52
+    /* "strpipe/ops/pad.pyx":53
  *             return True
  * 
  *         if eos_token == DefaultTokens.nul:             # <<<<<<<<<<<<<<
@@ -1832,38 +1832,38 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
  */
   }
 
-  /* "strpipe/ops/pad.pyx":56
+  /* "strpipe/ops/pad.pyx":57
  *                              "Should provide corresponding end-of-sentence token.")
  * 
  *         if sos_token == DefaultTokens.nul:             # <<<<<<<<<<<<<<
  *             raise ValueError("Only start-of-sentence token was provided."
  *                              "Should provide corresponding end-of-sentence token.")
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_sos_token, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_sos_token, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(__pyx_t_1)) {
 
-    /* "strpipe/ops/pad.pyx":57
+    /* "strpipe/ops/pad.pyx":58
  * 
  *         if sos_token == DefaultTokens.nul:
  *             raise ValueError("Only start-of-sentence token was provided."             # <<<<<<<<<<<<<<
  *                              "Should provide corresponding end-of-sentence token.")
  * 
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 57, __pyx_L1_error)
+    __PYX_ERR(0, 58, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":56
+    /* "strpipe/ops/pad.pyx":57
  *                              "Should provide corresponding end-of-sentence token.")
  * 
  *         if sos_token == DefaultTokens.nul:             # <<<<<<<<<<<<<<
@@ -1872,32 +1872,32 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
  */
   }
 
-  /* "strpipe/ops/pad.pyx":60
+  /* "strpipe/ops/pad.pyx":61
  *                              "Should provide corresponding end-of-sentence token.")
  * 
  *         if sos_token == eos_token:             # <<<<<<<<<<<<<<
  *             raise ValueError("Start-of-sentence token cannot be equal to end-of-sentence token.")
  *         if sos_token == pad_token:
  */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_sos_token, __pyx_v_eos_token, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_sos_token, __pyx_v_eos_token, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(__pyx_t_1)) {
 
-    /* "strpipe/ops/pad.pyx":61
+    /* "strpipe/ops/pad.pyx":62
  * 
  *         if sos_token == eos_token:
  *             raise ValueError("Start-of-sentence token cannot be equal to end-of-sentence token.")             # <<<<<<<<<<<<<<
  *         if sos_token == pad_token:
  *             raise ValueError("Start-of-sentence token cannot be equal to pad token.")
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 61, __pyx_L1_error)
+    __PYX_ERR(0, 62, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":60
+    /* "strpipe/ops/pad.pyx":61
  *                              "Should provide corresponding end-of-sentence token.")
  * 
  *         if sos_token == eos_token:             # <<<<<<<<<<<<<<
@@ -1906,32 +1906,32 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
  */
   }
 
-  /* "strpipe/ops/pad.pyx":62
+  /* "strpipe/ops/pad.pyx":63
  *         if sos_token == eos_token:
  *             raise ValueError("Start-of-sentence token cannot be equal to end-of-sentence token.")
  *         if sos_token == pad_token:             # <<<<<<<<<<<<<<
  *             raise ValueError("Start-of-sentence token cannot be equal to pad token.")
  *         if eos_token == pad_token:
  */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_sos_token, __pyx_v_pad_token, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_sos_token, __pyx_v_pad_token, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(__pyx_t_1)) {
 
-    /* "strpipe/ops/pad.pyx":63
+    /* "strpipe/ops/pad.pyx":64
  *             raise ValueError("Start-of-sentence token cannot be equal to end-of-sentence token.")
  *         if sos_token == pad_token:
  *             raise ValueError("Start-of-sentence token cannot be equal to pad token.")             # <<<<<<<<<<<<<<
  *         if eos_token == pad_token:
  *             raise ValueError("End-of-sentence token cannot be equal to pad token.")
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 63, __pyx_L1_error)
+    __PYX_ERR(0, 64, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":62
+    /* "strpipe/ops/pad.pyx":63
  *         if sos_token == eos_token:
  *             raise ValueError("Start-of-sentence token cannot be equal to end-of-sentence token.")
  *         if sos_token == pad_token:             # <<<<<<<<<<<<<<
@@ -1940,32 +1940,32 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
  */
   }
 
-  /* "strpipe/ops/pad.pyx":64
+  /* "strpipe/ops/pad.pyx":65
  *         if sos_token == pad_token:
  *             raise ValueError("Start-of-sentence token cannot be equal to pad token.")
  *         if eos_token == pad_token:             # <<<<<<<<<<<<<<
  *             raise ValueError("End-of-sentence token cannot be equal to pad token.")
  * 
  */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_eos_token, __pyx_v_pad_token, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_eos_token, __pyx_v_pad_token, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(__pyx_t_1)) {
 
-    /* "strpipe/ops/pad.pyx":65
+    /* "strpipe/ops/pad.pyx":66
  *             raise ValueError("Start-of-sentence token cannot be equal to pad token.")
  *         if eos_token == pad_token:
  *             raise ValueError("End-of-sentence token cannot be equal to pad token.")             # <<<<<<<<<<<<<<
  * 
  *         return True
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 65, __pyx_L1_error)
+    __PYX_ERR(0, 66, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":64
+    /* "strpipe/ops/pad.pyx":65
  *         if sos_token == pad_token:
  *             raise ValueError("Start-of-sentence token cannot be equal to pad token.")
  *         if eos_token == pad_token:             # <<<<<<<<<<<<<<
@@ -1974,7 +1974,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
  */
   }
 
-  /* "strpipe/ops/pad.pyx":67
+  /* "strpipe/ops/pad.pyx":68
  *             raise ValueError("End-of-sentence token cannot be equal to pad token.")
  * 
  *         return True             # <<<<<<<<<<<<<<
@@ -1986,7 +1986,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "strpipe/ops/pad.pyx":48
+  /* "strpipe/ops/pad.pyx":49
  *         self._maxlen = maxlen
  * 
  *     def _check_tokens(self, sos_token, eos_token, pad_token):             # <<<<<<<<<<<<<<
@@ -2006,7 +2006,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
   return __pyx_r;
 }
 
-/* "strpipe/ops/pad.pyx":69
+/* "strpipe/ops/pad.pyx":70
  *         return True
  * 
  *     def fit(self, input_data):             # <<<<<<<<<<<<<<
@@ -2039,19 +2039,19 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("fit", 0);
 
-  /* "strpipe/ops/pad.pyx":76
+  /* "strpipe/ops/pad.pyx":77
  *         """
  *         cdef int maxlen
  *         cdef dict result = {}             # <<<<<<<<<<<<<<
  *         if self._maxlen == -1:
  *             maxlen = compute_maxlen_in_c(input_data)
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_result = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":77
+  /* "strpipe/ops/pad.pyx":78
  *         cdef int maxlen
  *         cdef dict result = {}
  *         if self._maxlen == -1:             # <<<<<<<<<<<<<<
@@ -2061,37 +2061,37 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
   __pyx_t_2 = ((__pyx_v_self->_maxlen == -1L) != 0);
   if (__pyx_t_2) {
 
-    /* "strpipe/ops/pad.pyx":78
+    /* "strpipe/ops/pad.pyx":79
  *         cdef dict result = {}
  *         if self._maxlen == -1:
  *             maxlen = compute_maxlen_in_c(input_data)             # <<<<<<<<<<<<<<
  *             if self._sos_token != DefaultTokens.nul:
  *                 maxlen += 2
  */
-    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 78, __pyx_L1_error)
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c(((PyObject*)__pyx_v_input_data)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 78, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 79, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_14compute_maxlen_compute_maxlen_in_c(((PyObject*)__pyx_v_input_data)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_maxlen = __pyx_t_3;
 
-    /* "strpipe/ops/pad.pyx":79
+    /* "strpipe/ops/pad.pyx":80
  *         if self._maxlen == -1:
  *             maxlen = compute_maxlen_in_c(input_data)
  *             if self._sos_token != DefaultTokens.nul:             # <<<<<<<<<<<<<<
  *                 maxlen += 2
  *                 result['sos_token'] = self._sos_token
  */
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 79, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_v_self->_sos_token, __pyx_t_4, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 79, __pyx_L1_error)
+    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_v_self->_sos_token, __pyx_t_4, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (__pyx_t_2) {
 
-      /* "strpipe/ops/pad.pyx":80
+      /* "strpipe/ops/pad.pyx":81
  *             maxlen = compute_maxlen_in_c(input_data)
  *             if self._sos_token != DefaultTokens.nul:
  *                 maxlen += 2             # <<<<<<<<<<<<<<
@@ -2100,7 +2100,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
  */
       __pyx_v_maxlen = (__pyx_v_maxlen + 2);
 
-      /* "strpipe/ops/pad.pyx":81
+      /* "strpipe/ops/pad.pyx":82
  *             if self._sos_token != DefaultTokens.nul:
  *                 maxlen += 2
  *                 result['sos_token'] = self._sos_token             # <<<<<<<<<<<<<<
@@ -2109,10 +2109,10 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
  */
       __pyx_t_4 = __pyx_v_self->_sos_token;
       __Pyx_INCREF(__pyx_t_4);
-      if (unlikely(PyDict_SetItem(__pyx_v_result, __pyx_n_s_sos_token, __pyx_t_4) < 0)) __PYX_ERR(0, 81, __pyx_L1_error)
+      if (unlikely(PyDict_SetItem(__pyx_v_result, __pyx_n_s_sos_token, __pyx_t_4) < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "strpipe/ops/pad.pyx":82
+      /* "strpipe/ops/pad.pyx":83
  *                 maxlen += 2
  *                 result['sos_token'] = self._sos_token
  *                 result['eos_token'] = self._eos_token             # <<<<<<<<<<<<<<
@@ -2121,10 +2121,10 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
  */
       __pyx_t_4 = __pyx_v_self->_eos_token;
       __Pyx_INCREF(__pyx_t_4);
-      if (unlikely(PyDict_SetItem(__pyx_v_result, __pyx_n_s_eos_token, __pyx_t_4) < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
+      if (unlikely(PyDict_SetItem(__pyx_v_result, __pyx_n_s_eos_token, __pyx_t_4) < 0)) __PYX_ERR(0, 83, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "strpipe/ops/pad.pyx":79
+      /* "strpipe/ops/pad.pyx":80
  *         if self._maxlen == -1:
  *             maxlen = compute_maxlen_in_c(input_data)
  *             if self._sos_token != DefaultTokens.nul:             # <<<<<<<<<<<<<<
@@ -2133,7 +2133,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
  */
     }
 
-    /* "strpipe/ops/pad.pyx":77
+    /* "strpipe/ops/pad.pyx":78
  *         cdef int maxlen
  *         cdef dict result = {}
  *         if self._maxlen == -1:             # <<<<<<<<<<<<<<
@@ -2143,7 +2143,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
     goto __pyx_L3;
   }
 
-  /* "strpipe/ops/pad.pyx":84
+  /* "strpipe/ops/pad.pyx":85
  *                 result['eos_token'] = self._eos_token
  *         else:
  *             maxlen = self._maxlen             # <<<<<<<<<<<<<<
@@ -2156,19 +2156,19 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
   }
   __pyx_L3:;
 
-  /* "strpipe/ops/pad.pyx":86
+  /* "strpipe/ops/pad.pyx":87
  *             maxlen = self._maxlen
  * 
  *         result['maxlen'] = maxlen             # <<<<<<<<<<<<<<
  *         result['pad_token'] = self._pad_token
  * 
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_maxlen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_maxlen); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (unlikely(PyDict_SetItem(__pyx_v_result, __pyx_n_s_maxlen, __pyx_t_4) < 0)) __PYX_ERR(0, 86, __pyx_L1_error)
+  if (unlikely(PyDict_SetItem(__pyx_v_result, __pyx_n_s_maxlen, __pyx_t_4) < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "strpipe/ops/pad.pyx":87
+  /* "strpipe/ops/pad.pyx":88
  * 
  *         result['maxlen'] = maxlen
  *         result['pad_token'] = self._pad_token             # <<<<<<<<<<<<<<
@@ -2177,10 +2177,10 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
  */
   __pyx_t_4 = __pyx_v_self->_pad_token;
   __Pyx_INCREF(__pyx_t_4);
-  if (unlikely(PyDict_SetItem(__pyx_v_result, __pyx_n_s_pad_token, __pyx_t_4) < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
+  if (unlikely(PyDict_SetItem(__pyx_v_result, __pyx_n_s_pad_token, __pyx_t_4) < 0)) __PYX_ERR(0, 88, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "strpipe/ops/pad.pyx":89
+  /* "strpipe/ops/pad.pyx":90
  *         result['pad_token'] = self._pad_token
  * 
  *         return result             # <<<<<<<<<<<<<<
@@ -2192,7 +2192,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
   __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
-  /* "strpipe/ops/pad.pyx":69
+  /* "strpipe/ops/pad.pyx":70
  *         return True
  * 
  *     def fit(self, input_data):             # <<<<<<<<<<<<<<
@@ -2213,7 +2213,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
   return __pyx_r;
 }
 
-/* "strpipe/ops/pad.pyx":91
+/* "strpipe/ops/pad.pyx":92
  *         return result
  * 
  *     def transform(self, state, input_data):             # <<<<<<<<<<<<<<
@@ -2253,11 +2253,11 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_7transform(PyObject *__pyx_v_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_input_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, 1); __PYX_ERR(0, 91, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, 1); __PYX_ERR(0, 92, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "transform") < 0)) __PYX_ERR(0, 91, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "transform") < 0)) __PYX_ERR(0, 92, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2270,7 +2270,7 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_7transform(PyObject *__pyx_v_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 91, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 92, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.ops.pad.Pad.transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2305,109 +2305,109 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
   __Pyx_RefNannySetupContext("transform", 0);
   __Pyx_INCREF(__pyx_v_input_data);
 
-  /* "strpipe/ops/pad.pyx":98
+  /* "strpipe/ops/pad.pyx":99
  *             input_data
  *         """
  *         maxlen = state['maxlen']             # <<<<<<<<<<<<<<
  *         pad_token = state['pad_token']
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_maxlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_maxlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_maxlen = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":99
+  /* "strpipe/ops/pad.pyx":100
  *         """
  *         maxlen = state['maxlen']
  *         pad_token = state['pad_token']             # <<<<<<<<<<<<<<
  * 
  *         cdef str sos_token = DefaultTokens.nul
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_pad_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_pad_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_pad_token = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":101
+  /* "strpipe/ops/pad.pyx":102
  *         pad_token = state['pad_token']
  * 
  *         cdef str sos_token = DefaultTokens.nul             # <<<<<<<<<<<<<<
  *         cdef str eos_token = DefaultTokens.nul
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 101, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 102, __pyx_L1_error)
   __pyx_v_sos_token = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "strpipe/ops/pad.pyx":102
+  /* "strpipe/ops/pad.pyx":103
  * 
  *         cdef str sos_token = DefaultTokens.nul
  *         cdef str eos_token = DefaultTokens.nul             # <<<<<<<<<<<<<<
  * 
  *         if 'sos_token' in state and 'eos_token' in state:
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 102, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 103, __pyx_L1_error)
   __pyx_v_eos_token = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":104
+  /* "strpipe/ops/pad.pyx":105
  *         cdef str eos_token = DefaultTokens.nul
  * 
  *         if 'sos_token' in state and 'eos_token' in state:             # <<<<<<<<<<<<<<
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']
  */
-  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 105, __pyx_L1_error)
   __pyx_t_5 = (__pyx_t_4 != 0);
   if (__pyx_t_5) {
   } else {
     __pyx_t_3 = __pyx_t_5;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 105, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_5 != 0);
   __pyx_t_3 = __pyx_t_4;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "strpipe/ops/pad.pyx":105
+    /* "strpipe/ops/pad.pyx":106
  * 
  *         if 'sos_token' in state and 'eos_token' in state:
  *             sos_token = state['sos_token']             # <<<<<<<<<<<<<<
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):
  */
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_sos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_sos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 105, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 106, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_sos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":106
+    /* "strpipe/ops/pad.pyx":107
  *         if 'sos_token' in state and 'eos_token' in state:
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']             # <<<<<<<<<<<<<<
  *         elif not ('sos_token' in state or 'eos_token' in state):
  *             sos_token = self._sos_token
  */
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_eos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_eos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 106, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 107, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_eos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":104
+    /* "strpipe/ops/pad.pyx":105
  *         cdef str eos_token = DefaultTokens.nul
  * 
  *         if 'sos_token' in state and 'eos_token' in state:             # <<<<<<<<<<<<<<
@@ -2417,28 +2417,28 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
     goto __pyx_L3;
   }
 
-  /* "strpipe/ops/pad.pyx":107
+  /* "strpipe/ops/pad.pyx":108
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):             # <<<<<<<<<<<<<<
  *             sos_token = self._sos_token
  *             eos_token = self._eos_token
  */
-  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 108, __pyx_L1_error)
   __pyx_t_5 = (__pyx_t_4 != 0);
   if (!__pyx_t_5) {
   } else {
     __pyx_t_3 = __pyx_t_5;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 108, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_5 != 0);
   __pyx_t_3 = __pyx_t_4;
   __pyx_L6_bool_binop_done:;
   __pyx_t_4 = ((!__pyx_t_3) != 0);
   if (likely(__pyx_t_4)) {
 
-    /* "strpipe/ops/pad.pyx":108
+    /* "strpipe/ops/pad.pyx":109
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):
  *             sos_token = self._sos_token             # <<<<<<<<<<<<<<
@@ -2450,7 +2450,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
     __Pyx_DECREF_SET(__pyx_v_sos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":109
+    /* "strpipe/ops/pad.pyx":110
  *         elif not ('sos_token' in state or 'eos_token' in state):
  *             sos_token = self._sos_token
  *             eos_token = self._eos_token             # <<<<<<<<<<<<<<
@@ -2462,7 +2462,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
     __Pyx_DECREF_SET(__pyx_v_eos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":107
+    /* "strpipe/ops/pad.pyx":108
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):             # <<<<<<<<<<<<<<
@@ -2472,7 +2472,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
     goto __pyx_L3;
   }
 
-  /* "strpipe/ops/pad.pyx":111
+  /* "strpipe/ops/pad.pyx":112
  *             eos_token = self._eos_token
  *         else:
  *             raise ValueError("state must provide both start-of-sentence "             # <<<<<<<<<<<<<<
@@ -2480,22 +2480,22 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
  *         self._check_tokens(sos_token, eos_token, pad_token)
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 111, __pyx_L1_error)
+    __PYX_ERR(0, 112, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "strpipe/ops/pad.pyx":113
+  /* "strpipe/ops/pad.pyx":114
  *             raise ValueError("state must provide both start-of-sentence "
  *                              "and end-of-sentence token not just one.")
  *         self._check_tokens(sos_token, eos_token, pad_token)             # <<<<<<<<<<<<<<
  * 
  *         if sos_token != DefaultTokens.nul:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_tokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_tokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_6 = NULL;
   __pyx_t_7 = 0;
@@ -2512,7 +2512,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_6, __pyx_v_sos_token, __pyx_v_eos_token, __pyx_v_pad_token};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -2520,13 +2520,13 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_6, __pyx_v_sos_token, __pyx_v_eos_token, __pyx_v_pad_token};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     if (__pyx_t_6) {
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -2540,138 +2540,138 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
     __Pyx_INCREF(__pyx_v_pad_token);
     __Pyx_GIVEREF(__pyx_v_pad_token);
     PyTuple_SET_ITEM(__pyx_t_8, 2+__pyx_t_7, __pyx_v_pad_token);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":115
+  /* "strpipe/ops/pad.pyx":116
  *         self._check_tokens(sos_token, eos_token, pad_token)
  * 
  *         if sos_token != DefaultTokens.nul:             # <<<<<<<<<<<<<<
  *             input_data = input_data[: (maxlen - 2)]
  *             sentences_with_boundary_tokens = add_start_end_token_in_sentences_in_c(
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_sos_token, __pyx_t_2, Py_NE)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_sos_token, __pyx_t_2, Py_NE)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "strpipe/ops/pad.pyx":116
+    /* "strpipe/ops/pad.pyx":117
  * 
  *         if sos_token != DefaultTokens.nul:
  *             input_data = input_data[: (maxlen - 2)]             # <<<<<<<<<<<<<<
  *             sentences_with_boundary_tokens = add_start_end_token_in_sentences_in_c(
  *                 input_data,
  */
-    __pyx_t_2 = __Pyx_PyInt_SubtractObjC(__pyx_v_maxlen, __pyx_int_2, 2, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_SubtractObjC(__pyx_v_maxlen, __pyx_int_2, 2, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_input_data, 0, 0, NULL, &__pyx_t_2, NULL, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_input_data, 0, 0, NULL, &__pyx_t_2, NULL, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF_SET(__pyx_v_input_data, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":118
+    /* "strpipe/ops/pad.pyx":119
  *             input_data = input_data[: (maxlen - 2)]
  *             sentences_with_boundary_tokens = add_start_end_token_in_sentences_in_c(
  *                 input_data,             # <<<<<<<<<<<<<<
  *                 sos_token,
  *                 eos_token,
  */
-    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 118, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 119, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":117
+    /* "strpipe/ops/pad.pyx":118
  *         if sos_token != DefaultTokens.nul:
  *             input_data = input_data[: (maxlen - 2)]
  *             sentences_with_boundary_tokens = add_start_end_token_in_sentences_in_c(             # <<<<<<<<<<<<<<
  *                 input_data,
  *                 sos_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_19add_start_end_token_add_start_end_token_in_sentences_in_c(((PyObject*)__pyx_v_input_data), __pyx_v_sos_token, __pyx_v_eos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_19add_start_end_token_add_start_end_token_in_sentences_in_c(((PyObject*)__pyx_v_input_data), __pyx_v_sos_token, __pyx_v_eos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_sentences_with_boundary_tokens = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":123
+    /* "strpipe/ops/pad.pyx":124
  *             )
  *             tx_info = pad_sentences_meta_in_c(
  *                 sentences=input_data,             # <<<<<<<<<<<<<<
  *                 pad_token=pad_token,
  *                 maxlen=maxlen - 1,
  */
-    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 123, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 124, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":124
+    /* "strpipe/ops/pad.pyx":125
  *             tx_info = pad_sentences_meta_in_c(
  *                 sentences=input_data,
  *                 pad_token=pad_token,             # <<<<<<<<<<<<<<
  *                 maxlen=maxlen - 1,
  *             )
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 124, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 125, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":125
+    /* "strpipe/ops/pad.pyx":126
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  *                 maxlen=maxlen - 1,             # <<<<<<<<<<<<<<
  *             )
  *             padded_sentences = pad_sentences_in_c(
  */
-    __pyx_t_1 = __Pyx_PyInt_SubtractObjC(__pyx_v_maxlen, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_SubtractObjC(__pyx_v_maxlen, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_9 = __Pyx_PyInt_As_unsigned_int(__pyx_t_1); if (unlikely((__pyx_t_9 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyInt_As_unsigned_int(__pyx_t_1); if (unlikely((__pyx_t_9 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":122
+    /* "strpipe/ops/pad.pyx":123
  *                 eos_token,
  *             )
  *             tx_info = pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_tx_info = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":129
+    /* "strpipe/ops/pad.pyx":130
  *             padded_sentences = pad_sentences_in_c(
  *                 sentences=sentences_with_boundary_tokens,
  *                 pad_token=pad_token,             # <<<<<<<<<<<<<<
  *                 maxlen=maxlen,
  *             )
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 129, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 130, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":130
+    /* "strpipe/ops/pad.pyx":131
  *                 sentences=sentences_with_boundary_tokens,
  *                 pad_token=pad_token,
  *                 maxlen=maxlen,             # <<<<<<<<<<<<<<
  *             )
  * 
  */
-    __pyx_t_9 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_9 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_9 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":127
+    /* "strpipe/ops/pad.pyx":128
  *                 maxlen=maxlen - 1,
  *             )
  *             padded_sentences = pad_sentences_in_c(             # <<<<<<<<<<<<<<
  *                 sentences=sentences_with_boundary_tokens,
  *                 pad_token=pad_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(__pyx_v_sentences_with_boundary_tokens, ((PyObject*)__pyx_v_pad_token), __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(__pyx_v_sentences_with_boundary_tokens, ((PyObject*)__pyx_v_pad_token), __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_padded_sentences = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":115
+    /* "strpipe/ops/pad.pyx":116
  *         self._check_tokens(sos_token, eos_token, pad_token)
  * 
  *         if sos_token != DefaultTokens.nul:             # <<<<<<<<<<<<<<
@@ -2681,7 +2681,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
     goto __pyx_L8;
   }
 
-  /* "strpipe/ops/pad.pyx":134
+  /* "strpipe/ops/pad.pyx":135
  * 
  *         else:
  *             tx_info = pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
@@ -2690,87 +2690,87 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
  */
   /*else*/ {
 
-    /* "strpipe/ops/pad.pyx":135
+    /* "strpipe/ops/pad.pyx":136
  *         else:
  *             tx_info = pad_sentences_meta_in_c(
  *                 sentences=input_data,             # <<<<<<<<<<<<<<
  *                 pad_token=pad_token,
  *                 maxlen=maxlen,
  */
-    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 135, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 136, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":136
+    /* "strpipe/ops/pad.pyx":137
  *             tx_info = pad_sentences_meta_in_c(
  *                 sentences=input_data,
  *                 pad_token=pad_token,             # <<<<<<<<<<<<<<
  *                 maxlen=maxlen,
  *             )
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 136, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 137, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":137
+    /* "strpipe/ops/pad.pyx":138
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  *                 maxlen=maxlen,             # <<<<<<<<<<<<<<
  *             )
  *             padded_sentences = pad_sentences_in_c(
  */
-    __pyx_t_9 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_9 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_9 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":134
+    /* "strpipe/ops/pad.pyx":135
  * 
  *         else:
  *             tx_info = pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_tx_info = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":140
+    /* "strpipe/ops/pad.pyx":141
  *             )
  *             padded_sentences = pad_sentences_in_c(
  *                 sentences=input_data,             # <<<<<<<<<<<<<<
  *                 pad_token=pad_token,
  *                 maxlen=maxlen,
  */
-    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 140, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 141, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":141
+    /* "strpipe/ops/pad.pyx":142
  *             padded_sentences = pad_sentences_in_c(
  *                 sentences=input_data,
  *                 pad_token=pad_token,             # <<<<<<<<<<<<<<
  *                 maxlen=maxlen,
  *             )
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 141, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 142, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":142
+    /* "strpipe/ops/pad.pyx":143
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  *                 maxlen=maxlen,             # <<<<<<<<<<<<<<
  *             )
  * 
  */
-    __pyx_t_9 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_9 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_9 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 143, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":139
+    /* "strpipe/ops/pad.pyx":140
  *                 maxlen=maxlen,
  *             )
  *             padded_sentences = pad_sentences_in_c(             # <<<<<<<<<<<<<<
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_padded_sentences = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
   }
   __pyx_L8:;
 
-  /* "strpipe/ops/pad.pyx":145
+  /* "strpipe/ops/pad.pyx":146
  *             )
  * 
  *         return padded_sentences, tx_info             # <<<<<<<<<<<<<<
@@ -2778,7 +2778,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
  *     def inverse_transform(self, state, input_data, tx_info):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_padded_sentences);
   __Pyx_GIVEREF(__pyx_v_padded_sentences);
@@ -2790,7 +2790,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/ops/pad.pyx":91
+  /* "strpipe/ops/pad.pyx":92
  *         return result
  * 
  *     def transform(self, state, input_data):             # <<<<<<<<<<<<<<
@@ -2820,7 +2820,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
   return __pyx_r;
 }
 
-/* "strpipe/ops/pad.pyx":147
+/* "strpipe/ops/pad.pyx":148
  *         return padded_sentences, tx_info
  * 
  *     def inverse_transform(self, state, input_data, tx_info):             # <<<<<<<<<<<<<<
@@ -2863,17 +2863,17 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_9inverse_transform(PyObject *_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_input_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 1); __PYX_ERR(0, 147, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 1); __PYX_ERR(0, 148, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_tx_info)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 2); __PYX_ERR(0, 147, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 2); __PYX_ERR(0, 148, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "inverse_transform") < 0)) __PYX_ERR(0, 147, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "inverse_transform") < 0)) __PYX_ERR(0, 148, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2888,7 +2888,7 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_9inverse_transform(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 147, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 148, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.ops.pad.Pad.inverse_transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2925,85 +2925,85 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
   int __pyx_t_13;
   __Pyx_RefNannySetupContext("inverse_transform", 0);
 
-  /* "strpipe/ops/pad.pyx":156
+  /* "strpipe/ops/pad.pyx":157
  *         """
  * 
  *         cdef str sos_token = DefaultTokens.nul             # <<<<<<<<<<<<<<
  *         cdef str eos_token = DefaultTokens.nul
  *         cdef str pad_token
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 156, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 157, __pyx_L1_error)
   __pyx_v_sos_token = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "strpipe/ops/pad.pyx":157
+  /* "strpipe/ops/pad.pyx":158
  * 
  *         cdef str sos_token = DefaultTokens.nul
  *         cdef str eos_token = DefaultTokens.nul             # <<<<<<<<<<<<<<
  *         cdef str pad_token
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 157, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 158, __pyx_L1_error)
   __pyx_v_eos_token = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":160
+  /* "strpipe/ops/pad.pyx":161
  *         cdef str pad_token
  * 
  *         if 'sos_token' in state and 'eos_token' in state:             # <<<<<<<<<<<<<<
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']
  */
-  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 161, __pyx_L1_error)
   __pyx_t_5 = (__pyx_t_4 != 0);
   if (__pyx_t_5) {
   } else {
     __pyx_t_3 = __pyx_t_5;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 161, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_5 != 0);
   __pyx_t_3 = __pyx_t_4;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "strpipe/ops/pad.pyx":161
+    /* "strpipe/ops/pad.pyx":162
  * 
  *         if 'sos_token' in state and 'eos_token' in state:
  *             sos_token = state['sos_token']             # <<<<<<<<<<<<<<
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):
  */
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_sos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_sos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 161, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 162, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_sos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":162
+    /* "strpipe/ops/pad.pyx":163
  *         if 'sos_token' in state and 'eos_token' in state:
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']             # <<<<<<<<<<<<<<
  *         elif not ('sos_token' in state or 'eos_token' in state):
  *             sos_token = self._sos_token
  */
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_eos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_eos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 162, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_eos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":160
+    /* "strpipe/ops/pad.pyx":161
  *         cdef str pad_token
  * 
  *         if 'sos_token' in state and 'eos_token' in state:             # <<<<<<<<<<<<<<
@@ -3013,28 +3013,28 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
     goto __pyx_L3;
   }
 
-  /* "strpipe/ops/pad.pyx":163
+  /* "strpipe/ops/pad.pyx":164
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):             # <<<<<<<<<<<<<<
  *             sos_token = self._sos_token
  *             eos_token = self._eos_token
  */
-  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 164, __pyx_L1_error)
   __pyx_t_5 = (__pyx_t_4 != 0);
   if (!__pyx_t_5) {
   } else {
     __pyx_t_3 = __pyx_t_5;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 164, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_5 != 0);
   __pyx_t_3 = __pyx_t_4;
   __pyx_L6_bool_binop_done:;
   __pyx_t_4 = ((!__pyx_t_3) != 0);
   if (likely(__pyx_t_4)) {
 
-    /* "strpipe/ops/pad.pyx":164
+    /* "strpipe/ops/pad.pyx":165
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):
  *             sos_token = self._sos_token             # <<<<<<<<<<<<<<
@@ -3046,7 +3046,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
     __Pyx_DECREF_SET(__pyx_v_sos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":165
+    /* "strpipe/ops/pad.pyx":166
  *         elif not ('sos_token' in state or 'eos_token' in state):
  *             sos_token = self._sos_token
  *             eos_token = self._eos_token             # <<<<<<<<<<<<<<
@@ -3058,7 +3058,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
     __Pyx_DECREF_SET(__pyx_v_eos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":163
+    /* "strpipe/ops/pad.pyx":164
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):             # <<<<<<<<<<<<<<
@@ -3068,7 +3068,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
     goto __pyx_L3;
   }
 
-  /* "strpipe/ops/pad.pyx":167
+  /* "strpipe/ops/pad.pyx":168
  *             eos_token = self._eos_token
  *         else:
  *             raise ValueError("state must provide both start-of-sentence "             # <<<<<<<<<<<<<<
@@ -3076,35 +3076,35 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
  * 
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 167, __pyx_L1_error)
+    __PYX_ERR(0, 168, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "strpipe/ops/pad.pyx":170
+  /* "strpipe/ops/pad.pyx":171
  *                              "and end-of-sentence token not just one.")
  * 
  *         pad_token = state['pad_token']             # <<<<<<<<<<<<<<
  *         self._check_tokens(sos_token, eos_token, pad_token)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_pad_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_pad_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 170, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 171, __pyx_L1_error)
   __pyx_v_pad_token = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":171
+  /* "strpipe/ops/pad.pyx":172
  * 
  *         pad_token = state['pad_token']
  *         self._check_tokens(sos_token, eos_token, pad_token)             # <<<<<<<<<<<<<<
  * 
  *         cdef list s_list
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_tokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 171, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_tokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_6 = NULL;
   __pyx_t_7 = 0;
@@ -3121,7 +3121,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_6, __pyx_v_sos_token, __pyx_v_eos_token, __pyx_v_pad_token};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -3129,13 +3129,13 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_6, __pyx_v_sos_token, __pyx_v_eos_token, __pyx_v_pad_token};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 171, __pyx_L1_error)
+    __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 172, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     if (__pyx_t_6) {
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -3149,52 +3149,52 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
     __Pyx_INCREF(__pyx_v_pad_token);
     __Pyx_GIVEREF(__pyx_v_pad_token);
     PyTuple_SET_ITEM(__pyx_t_8, 2+__pyx_t_7, __pyx_v_pad_token);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":177
+  /* "strpipe/ops/pad.pyx":178
  * 
  *         # Strip SOS
  *         if sos_token != DefaultTokens.nul:             # <<<<<<<<<<<<<<
  *             s_list = []
  *             n_sent = len(input_data)
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_sos_token, __pyx_t_2, Py_NE)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_sos_token, __pyx_t_2, Py_NE)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "strpipe/ops/pad.pyx":178
+    /* "strpipe/ops/pad.pyx":179
  *         # Strip SOS
  *         if sos_token != DefaultTokens.nul:
  *             s_list = []             # <<<<<<<<<<<<<<
  *             n_sent = len(input_data)
  *             for i in range(n_sent):
  */
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 179, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_s_list = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "strpipe/ops/pad.pyx":179
+    /* "strpipe/ops/pad.pyx":180
  *         if sos_token != DefaultTokens.nul:
  *             s_list = []
  *             n_sent = len(input_data)             # <<<<<<<<<<<<<<
  *             for i in range(n_sent):
  *                 s_list.append(input_data[i][1:])
  */
-    __pyx_t_9 = PyObject_Length(__pyx_v_input_data); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 179, __pyx_L1_error)
+    __pyx_t_9 = PyObject_Length(__pyx_v_input_data); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 180, __pyx_L1_error)
     __pyx_v_n_sent = __pyx_t_9;
 
-    /* "strpipe/ops/pad.pyx":180
+    /* "strpipe/ops/pad.pyx":181
  *             s_list = []
  *             n_sent = len(input_data)
  *             for i in range(n_sent):             # <<<<<<<<<<<<<<
@@ -3206,23 +3206,23 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
     for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
       __pyx_v_i = __pyx_t_12;
 
-      /* "strpipe/ops/pad.pyx":181
+      /* "strpipe/ops/pad.pyx":182
  *             n_sent = len(input_data)
  *             for i in range(n_sent):
  *                 s_list.append(input_data[i][1:])             # <<<<<<<<<<<<<<
  *             return unpad_sentences_in_c(s_list, tx_info)
  * 
  */
-      __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_input_data, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 181, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_input_data, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 182, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_t_2, 1, 0, NULL, NULL, &__pyx_slice__11, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 181, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_t_2, 1, 0, NULL, NULL, &__pyx_slice__11, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_13 = __Pyx_PyList_Append(__pyx_v_s_list, __pyx_t_1); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 181, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyList_Append(__pyx_v_s_list, __pyx_t_1); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 182, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
 
-    /* "strpipe/ops/pad.pyx":182
+    /* "strpipe/ops/pad.pyx":183
  *             for i in range(n_sent):
  *                 s_list.append(input_data[i][1:])
  *             return unpad_sentences_in_c(s_list, tx_info)             # <<<<<<<<<<<<<<
@@ -3230,14 +3230,14 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
  *         return unpad_sentences_in_c(
  */
     __Pyx_XDECREF(__pyx_r);
-    if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 182, __pyx_L1_error)
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(__pyx_v_s_list, ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(__pyx_v_s_list, ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "strpipe/ops/pad.pyx":177
+    /* "strpipe/ops/pad.pyx":178
  * 
  *         # Strip SOS
  *         if sos_token != DefaultTokens.nul:             # <<<<<<<<<<<<<<
@@ -3246,7 +3246,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
  */
   }
 
-  /* "strpipe/ops/pad.pyx":184
+  /* "strpipe/ops/pad.pyx":185
  *             return unpad_sentences_in_c(s_list, tx_info)
  * 
  *         return unpad_sentences_in_c(             # <<<<<<<<<<<<<<
@@ -3255,37 +3255,37 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "strpipe/ops/pad.pyx":185
+  /* "strpipe/ops/pad.pyx":186
  * 
  *         return unpad_sentences_in_c(
  *             input_data,             # <<<<<<<<<<<<<<
  *             tx_info,
  *         )
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 185, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 186, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":186
+  /* "strpipe/ops/pad.pyx":187
  *         return unpad_sentences_in_c(
  *             input_data,
  *             tx_info,             # <<<<<<<<<<<<<<
  *         )
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 186, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 187, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":184
+  /* "strpipe/ops/pad.pyx":185
  *             return unpad_sentences_in_c(s_list, tx_info)
  * 
  *         return unpad_sentences_in_c(             # <<<<<<<<<<<<<<
  *             input_data,
  *             tx_info,
  */
-  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/ops/pad.pyx":147
+  /* "strpipe/ops/pad.pyx":148
  *         return padded_sentences, tx_info
  * 
  *     def inverse_transform(self, state, input_data, tx_info):             # <<<<<<<<<<<<<<
@@ -4368,8 +4368,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 53, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 181, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -4379,91 +4379,91 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "strpipe/ops/pad.pyx":53
+  /* "strpipe/ops/pad.pyx":54
  * 
  *         if eos_token == DefaultTokens.nul:
  *             raise ValueError("Only start-of-sentence token was provided."             # <<<<<<<<<<<<<<
  *                              "Should provide corresponding end-of-sentence token.")
  * 
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_Only_start_of_sentence_token_was); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_Only_start_of_sentence_token_was); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "strpipe/ops/pad.pyx":57
+  /* "strpipe/ops/pad.pyx":58
  * 
  *         if sos_token == DefaultTokens.nul:
  *             raise ValueError("Only start-of-sentence token was provided."             # <<<<<<<<<<<<<<
  *                              "Should provide corresponding end-of-sentence token.")
  * 
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_Only_start_of_sentence_token_was); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_Only_start_of_sentence_token_was); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "strpipe/ops/pad.pyx":61
+  /* "strpipe/ops/pad.pyx":62
  * 
  *         if sos_token == eos_token:
  *             raise ValueError("Start-of-sentence token cannot be equal to end-of-sentence token.")             # <<<<<<<<<<<<<<
  *         if sos_token == pad_token:
  *             raise ValueError("Start-of-sentence token cannot be equal to pad token.")
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_Start_of_sentence_token_cannot_b); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_Start_of_sentence_token_cannot_b); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "strpipe/ops/pad.pyx":63
+  /* "strpipe/ops/pad.pyx":64
  *             raise ValueError("Start-of-sentence token cannot be equal to end-of-sentence token.")
  *         if sos_token == pad_token:
  *             raise ValueError("Start-of-sentence token cannot be equal to pad token.")             # <<<<<<<<<<<<<<
  *         if eos_token == pad_token:
  *             raise ValueError("End-of-sentence token cannot be equal to pad token.")
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_Start_of_sentence_token_cannot_b_2); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_Start_of_sentence_token_cannot_b_2); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "strpipe/ops/pad.pyx":65
+  /* "strpipe/ops/pad.pyx":66
  *             raise ValueError("Start-of-sentence token cannot be equal to pad token.")
  *         if eos_token == pad_token:
  *             raise ValueError("End-of-sentence token cannot be equal to pad token.")             # <<<<<<<<<<<<<<
  * 
  *         return True
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_End_of_sentence_token_cannot_be); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_End_of_sentence_token_cannot_be); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "strpipe/ops/pad.pyx":111
+  /* "strpipe/ops/pad.pyx":112
  *             eos_token = self._eos_token
  *         else:
  *             raise ValueError("state must provide both start-of-sentence "             # <<<<<<<<<<<<<<
  *                              "and end-of-sentence token not just one.")
  *         self._check_tokens(sos_token, eos_token, pad_token)
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_state_must_provide_both_start_of); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_state_must_provide_both_start_of); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 112, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "strpipe/ops/pad.pyx":167
+  /* "strpipe/ops/pad.pyx":168
  *             eos_token = self._eos_token
  *         else:
  *             raise ValueError("state must provide both start-of-sentence "             # <<<<<<<<<<<<<<
  *                              "and end-of-sentence token not just one.")
  * 
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_state_must_provide_both_start_of); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 167, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_state_must_provide_both_start_of); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 168, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "strpipe/ops/pad.pyx":181
+  /* "strpipe/ops/pad.pyx":182
  *             n_sent = len(input_data)
  *             for i in range(n_sent):
  *                 s_list.append(input_data[i][1:])             # <<<<<<<<<<<<<<
  *             return unpad_sentences_in_c(s_list, tx_info)
  * 
  */
-  __pyx_slice__11 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__11)) __PYX_ERR(0, 181, __pyx_L1_error)
+  __pyx_slice__11 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__11)) __PYX_ERR(0, 182, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__11);
   __Pyx_GIVEREF(__pyx_slice__11);
 
@@ -4837,7 +4837,7 @@ if (!__Pyx_RefNanny) {
  *         str sos_token=DefaultTokens.nul,
  *         str eos_token=DefaultTokens.nul,             # <<<<<<<<<<<<<<
  *         str pad_token=DefaultTokens.pad,
- *         int maxlen=-1):
+ *         int maxlen=-1,
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -4853,8 +4853,8 @@ if (!__Pyx_RefNanny) {
  *         str sos_token=DefaultTokens.nul,
  *         str eos_token=DefaultTokens.nul,
  *         str pad_token=DefaultTokens.pad,             # <<<<<<<<<<<<<<
- *         int maxlen=-1):
- *         self.input_type = STRING_LIST
+ *         int maxlen=-1,
+ *     ):
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

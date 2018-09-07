@@ -33,7 +33,8 @@ cdef class Pad(BaseOp):
         str sos_token=DefaultTokens.nul,
         str eos_token=DefaultTokens.nul,
         str pad_token=DefaultTokens.pad,
-        int maxlen=-1):
+        int maxlen=-1,
+    ):
         self.input_type = STRING_LIST
         self.output_type = STRING_LIST
         self._pad_token = pad_token
