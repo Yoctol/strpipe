@@ -1,5 +1,6 @@
 from strpipe.ops.base cimport BaseOp
 from strpipe.toolkit.compute_maxlen cimport compute_maxlen_in_c
+from strpipe.toolkit.add_start_end_token cimport add_start_end_token_in_sentences_in_c
 from strpipe.toolkit.compute_bdd_sentlens cimport compute_bounded_sentlens_in_c
 from strpipe.toolkit.pad_sentences cimport (  # noqa: E211
     pad_sentences_in_c,
@@ -53,14 +54,20 @@ cdef class Pad(BaseOp):
             input_data: input data
         '''
         cdef int maxlen
+        cdef dict result = {}
         if self._maxlen == -1:
             maxlen = compute_maxlen_in_c(input_data)
+            if self._sos_token != DefaultTokens.nul:
+                maxlen += 2
+                result['sos_token'] = self._sos_token
+                result['eos_token'] = self._eos_token
         else:
             maxlen = self._maxlen
-        return {
-            'maxlen': maxlen,
-            'pad_token': self._pad_token,
-        }
+
+        result['maxlen'] = maxlen
+        result['pad_token'] = self._pad_token
+
+        return result
 
     def transform(self, state, input_data):
         '''Add eos and sos tokens if necessary then pads to fixed length.
@@ -71,16 +78,49 @@ cdef class Pad(BaseOp):
         '''
         maxlen = state['maxlen']
         pad_token = state['pad_token']
-        tx_info = pad_sentences_meta_in_c(
-            sentences=input_data,
-            pad_token=pad_token,
-            maxlen=maxlen,
-        )
-        padded_sentences = pad_sentences_in_c(
-            sentences=input_data,
-            pad_token=pad_token,
-            maxlen=maxlen,
-        )
+
+        cdef str sos_token = DefaultTokens.nul
+        cdef str eos_token = DefaultTokens.nul
+
+        if 'sos_token' in state and 'eos_token' in state:
+            sos_token = state['sos_token']
+            eos_token = state['eos_token']
+        elif not ('sos_token' in state or 'eos_token' in state):
+            sos_token = self._sos_token
+            eos_token = self._eos_token
+        else:
+            raise ValueError("state must provide both start-of-sentence "
+                             "and end-of-sentence token not just one.")
+
+        if sos_token != DefaultTokens.nul:
+            input_data = input_data[: (maxlen - 2)]
+            sentences_with_boundary_tokens = add_start_end_token_in_sentences_in_c(
+                input_data,
+                sos_token,
+                eos_token)
+            tx_info = pad_sentences_meta_in_c(
+                sentences=input_data,
+                pad_token=pad_token,
+                maxlen=maxlen - 1,
+            )
+            padded_sentences = pad_sentences_in_c(
+                sentences=sentences_with_boundary_tokens,
+                pad_token=pad_token,
+                maxlen=maxlen,
+            )
+
+        else:
+            tx_info = pad_sentences_meta_in_c(
+                sentences=input_data,
+                pad_token=pad_token,
+                maxlen=maxlen,
+            )
+            padded_sentences = pad_sentences_in_c(
+                sentences=input_data,
+                pad_token=pad_token,
+                maxlen=maxlen,
+            )
+
         return padded_sentences, tx_info
 
     def inverse_transform(self, state, input_data, tx_info):
@@ -91,6 +131,31 @@ cdef class Pad(BaseOp):
             input_data:
             tx_info:
         '''
+
+        cdef str sos_token = DefaultTokens.nul
+        cdef str eos_token = DefaultTokens.nul
+
+        if 'sos_token' in state and 'eos_token' in state:
+            sos_token = state['sos_token']
+            eos_token = state['eos_token']
+        elif not ('sos_token' in state or 'eos_token' in state):
+            sos_token = self._sos_token
+            eos_token = self._eos_token
+        else:
+            raise ValueError("state must provide both start-of-sentence "
+                             "and end-of-sentence token not just one.")
+
+        cdef list s_list
+        cdef unsigned int n_sent
+
+        # Strip SOS
+        if sos_token != DefaultTokens.nul:
+            s_list = []
+            n_sent = len(input_data)
+            for i in range(n_sent):
+                s_list.append(input_data[i][1:])
+            return unpad_sentences_in_c(s_list, tx_info)
+
         return unpad_sentences_in_c(
             input_data,
             tx_info,
