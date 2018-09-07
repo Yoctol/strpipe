@@ -90,6 +90,23 @@ def test_pad_fit_checks_tokens_not_in_input_data(padder):
         padder.fit(input_data)
 
 
+@pytest.mark.parametrize('padder', [
+    Pad(sos_token='<START_TOK>'),
+    Pad(eos_token='<END_TOK>'),
+    Pad(pad_token='<PADDING>'),
+])
+def test_pad_transform_checks_tokens_not_in_input_data(padder):
+    input_data = [
+        ["I'm", "ok"],
+        ["<START_TOK>", "I", "already", "have", "tokens", "<END_TOK>", "<PADDING>"]
+    ]
+    state = padder.fit([
+        ["1", "2"]
+    ])
+    with pytest.raises(ValueError):
+        padder.transform(state, input_data)
+
+
 def test_pad_transform():
     padder = Pad()
     pto = '<pad>'
