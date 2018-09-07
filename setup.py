@@ -87,7 +87,9 @@ setup(
     author_email='cph@yoctol.com',
     url='https://github.com/Yoctol/strpipe',
     license='MIT',
-    install_requires=[],
+    install_requires=[
+        'tokenizer-hub',
+    ],
     packages=find_packages(),
     cmdclass=cmdclass,
     ext_modules=ext_modules,
