@@ -36,6 +36,14 @@ cdef class Pad(BaseOp):
         self.input_type = STRING_LIST
         self.output_type = STRING_LIST
         self._pad_token = pad_token
+
+        if (sos_token == DefaultTokens.nul) != (eos_token == DefaultTokens.nul):
+            raise ValueError("Must provide both start-of-sentence "
+                             "and end-of-sentence token not just one.")
+
+        self._sos_token = sos_token
+        self._eos_token = eos_token
+
         self._maxlen = maxlen
 
     def fit(self, input_data):
