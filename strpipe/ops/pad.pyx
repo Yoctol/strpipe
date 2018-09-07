@@ -38,14 +38,33 @@ cdef class Pad(BaseOp):
         self.output_type = STRING_LIST
         self._pad_token = pad_token
 
-        if (sos_token == DefaultTokens.nul) != (eos_token == DefaultTokens.nul):
-            raise ValueError("Must provide both start-of-sentence "
-                             "and end-of-sentence token not just one.")
+        self._check_tokens(sos_token, eos_token, pad_token)
 
         self._sos_token = sos_token
         self._eos_token = eos_token
 
         self._maxlen = maxlen
+
+    def _check_tokens(self, sos_token, eos_token, pad_token):
+        if (sos_token == DefaultTokens.nul) and (eos_token == DefaultTokens.nul):
+            return True
+
+        if eos_token == DefaultTokens.nul:
+            raise ValueError("Only start-of-sentence token was provided."
+                             "Should provide corresponding end-of-sentence token.")
+
+        if sos_token == DefaultTokens.nul:
+            raise ValueError("Only start-of-sentence token was provided."
+                             "Should provide corresponding end-of-sentence token.")
+
+        if sos_token == eos_token:
+            raise ValueError("Start-of-sentence token cannot be equal to end-of-sentence token.")
+        if sos_token == pad_token:
+            raise ValueError("Start-of-sentence token cannot be equal to pad token.")
+        if eos_token == pad_token:
+            raise ValueError("End-of-sentence token cannot be equal to pad token.")
+
+        return True
 
     def fit(self, input_data):
         ''' Figure out maxlen if not specified in __init__.
@@ -91,6 +110,7 @@ cdef class Pad(BaseOp):
         else:
             raise ValueError("state must provide both start-of-sentence "
                              "and end-of-sentence token not just one.")
+        self._check_tokens(sos_token, eos_token, pad_token)
 
         if sos_token != DefaultTokens.nul:
             input_data = input_data[: (maxlen - 2)]
@@ -135,6 +155,7 @@ cdef class Pad(BaseOp):
 
         cdef str sos_token = DefaultTokens.nul
         cdef str eos_token = DefaultTokens.nul
+        cdef str pad_token
 
         if 'sos_token' in state and 'eos_token' in state:
             sos_token = state['sos_token']
@@ -145,6 +166,9 @@ cdef class Pad(BaseOp):
         else:
             raise ValueError("state must provide both start-of-sentence "
                              "and end-of-sentence token not just one.")
+
+        pad_token = state['pad_token']
+        self._check_tokens(sos_token, eos_token, pad_token)
 
         cdef list s_list
         cdef unsigned int n_sent
