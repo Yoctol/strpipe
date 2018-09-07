@@ -125,10 +125,17 @@ cdef list unpad_sentence_in_c(
     sentlen = meta['sentlen']
     sentence_tail = meta['sentence_tail']
     padded_sentlen = len(sentence)
-    if padded_sentlen >= sentlen:
-        output_sentence = sentence[:sentlen]
-    else:
-        output_sentence = sentence + sentence_tail
+
+    cdef int start_idx = 0
+    cdef int end_idx
+    end_idx = padded_sentlen
+
+    if meta.get('sos_token'):
+        start_idx += 1
+    if meta.get('eos_token'):
+        end_idx -= 1
+
+    output_sentence = sentence[start_idx:start_idx+sentlen] + sentence_tail
 
     return output_sentence
 
