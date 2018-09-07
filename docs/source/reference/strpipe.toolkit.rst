@@ -52,10 +52,18 @@ strpipe.toolkit.default\_tokens module
     :undoc-members:
     :show-inheritance:
 
-strpipe.toolkit.index\_to\_token module
----------------------------------------
+strpipe.toolkit.expand\_vocabulary module
+-----------------------------------------
 
-.. automodule:: strpipe.toolkit.index_to_token
+.. automodule:: strpipe.toolkit.expand_vocabulary
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+strpipe.toolkit.invert\_dictionary module
+-----------------------------------------
+
+.. automodule:: strpipe.toolkit.invert_dictionary
     :members:
     :undoc-members:
     :show-inheritance:
@@ -80,6 +88,14 @@ strpipe.toolkit.token\_to\_index module
 ---------------------------------------
 
 .. automodule:: strpipe.toolkit.token_to_index
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+strpipe.toolkit.tokens\_in\_sentences module
+--------------------------------------------
+
+.. automodule:: strpipe.toolkit.tokens_in_sentences
     :members:
     :undoc-members:
     :show-inheritance:

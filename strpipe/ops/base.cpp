@@ -805,7 +805,7 @@ struct __pyx_obj_7strpipe_3ops_4base_BaseOp {
  * 
  * 
  * cdef class BaseOp:             # <<<<<<<<<<<<<<
- *     '''Base class for Ops
+ *     """Base class for Ops
  * 
  */
 
@@ -1179,7 +1179,7 @@ static PyObject *__pyx_codeobj__2;
  * 
  *     @staticmethod
  *     cdef fit(input):             # <<<<<<<<<<<<<<
- *         pass
+ *         """Generate the **state** of the Op
  * 
  */
 
@@ -1195,11 +1195,11 @@ static PyObject *__pyx_f_7strpipe_3ops_4base_6BaseOp_fit(CYTHON_UNUSED struct __
   return __pyx_r;
 }
 
-/* "strpipe/ops/base.pyx":19
+/* "strpipe/ops/base.pyx":28
  * 
  *     @staticmethod
  *     cdef transform(state, input):             # <<<<<<<<<<<<<<
- *         pass
+ *         """Transform input data
  * 
  */
 
@@ -1215,11 +1215,12 @@ static PyObject *__pyx_f_7strpipe_3ops_4base_6BaseOp_transform(CYTHON_UNUSED str
   return __pyx_r;
 }
 
-/* "strpipe/ops/base.pyx":23
+/* "strpipe/ops/base.pyx":42
  * 
  *     @staticmethod
  *     cdef inverse_transfrom(state, input, meta):             # <<<<<<<<<<<<<<
- *         pass
+ *         """Restore input data to its original form
+ * 
  */
 
 static PyObject *__pyx_f_7strpipe_3ops_4base_6BaseOp_inverse_transfrom(CYTHON_UNUSED struct __pyx_obj_7strpipe_3ops_4base_BaseOp *__pyx_v_state, CYTHON_UNUSED PyObject *__pyx_v_input, CYTHON_UNUSED PyObject *__pyx_v_meta) {
