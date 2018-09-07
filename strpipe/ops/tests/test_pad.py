@@ -25,6 +25,39 @@ def test_pad_init_needs_both_sos_and_eos_or_neither():
         Pad(eos_token='<eos>')
 
 
+def test_pad_passing_state_needs_both_sos_and_eos_or_neither():
+    padder = Pad()
+    input_data = [
+        [],
+    ]
+    output_data = [
+        [DefaultTokens.pad],
+    ]
+    tx_info = [
+        {'sentlen': 0, 'sentence_tail': []},
+    ]
+
+    state1 = {'maxlen': 0, 'pad_token': '<PAD>'}
+    state2 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<eos>'}
+    state3 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>'}
+    state4 = {'maxlen': 2, 'pad_token': '<PAD>', 'eos_token': '<eos>'}
+ 
+
+    output_data1, _ = padder.transform(state1, input_data)
+    output_data2, _ = padder.transform(state2, input_data)
+    with pytest.raises(ValueError):
+        padder.transform(state3, input_data)
+    with pytest.raises(ValueError):
+        padder.transform(state4, input_data)
+
+    padder.inverse_transform(state1, output_data1, tx_info)
+    padder.inverse_transform(state2, output_data2, tx_info)
+    with pytest.raises(ValueError):
+        padder.inverse_transform(state3, output_data1, tx_info)
+    with pytest.raises(ValueError):
+        padder.inverse_transform(state4, output_data2, tx_info)
+
+
 def test_pad_fit():
     padder = Pad()
 
