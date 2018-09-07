@@ -59,7 +59,8 @@ $ make test
 ```
 $ make docs
 
-Docs will be built in the `docs/build/html` folder.
+Docs will be built in the `docs/build/html` folder. (Note: this also reinstalls the package because we
+need Cython code to be rebuilt.)
 ```
 
 ## Extend Ops

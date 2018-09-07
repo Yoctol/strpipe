@@ -1,13 +1,6 @@
 strpipe.toolkit package
 =======================
 
-Subpackages
------------
-
-.. toctree::
-
-    strpipe.toolkit.test
-
 Submodules
 ----------
 

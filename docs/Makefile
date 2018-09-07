@@ -19,7 +19,7 @@ all:
 apidoc:
 	@echo ***Regenerating API stubs for code in $(CODEDIR)***
 	rm -r $(SOURCEDIR)/reference || true
-	$(SPHINXAPIDOC) -f -o $(SOURCEDIR)/reference $(CODEDIR)
+	$(SPHINXAPIDOC) -f -o $(SOURCEDIR)/reference $(CODEDIR) $(CODEDIR)/test* $(CODEDIR)/**/test/* $(CODEDIR)/**/tests/*
 
 # Put it first so that "make" without argument is like "make help".
 help:

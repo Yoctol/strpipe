@@ -47,6 +47,10 @@ if use_cython:
                 path_str[:-4].replace('/', '.'),
                 [path_str],
             )
+
+        # Have Cython embed function call signature information in docstrings,
+        # so that Sphinx can extract and use those signatures.
+        extension.cython_directives = {"embedsignature": True}
         ext_modules.append(extension)
     cmdclass.update({'build_ext': build_ext})
 

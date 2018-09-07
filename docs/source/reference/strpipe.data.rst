@@ -1,13 +1,6 @@
 strpipe.data package
 ====================
 
-Subpackages
------------
-
-.. toctree::
-
-    strpipe.data.tests
-
 Submodules
 ----------
 
