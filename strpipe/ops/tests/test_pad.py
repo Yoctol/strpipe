@@ -30,9 +30,6 @@ def test_pad_passing_state_needs_both_sos_and_eos_or_neither():
     input_data = [
         [],
     ]
-    output_data = [
-        [DefaultTokens.pad],
-    ]
     tx_info = [
         {'sentlen': 0, 'sentence_tail': []},
     ]
@@ -41,7 +38,6 @@ def test_pad_passing_state_needs_both_sos_and_eos_or_neither():
     state2 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<eos>'}
     state3 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>'}
     state4 = {'maxlen': 2, 'pad_token': '<PAD>', 'eos_token': '<eos>'}
- 
 
     output_data1, _ = padder.transform(state1, input_data)
     output_data2, _ = padder.transform(state2, input_data)
