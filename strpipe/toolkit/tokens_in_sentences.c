@@ -1062,7 +1062,8 @@ static PyObject *__pyx_codeobj__4;
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_7toolkit_19tokens_in_sentences_1are_tokens_in_sentences(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_7strpipe_7toolkit_19tokens_in_sentences_1are_tokens_in_sentences = {"are_tokens_in_sentences", (PyCFunction)__pyx_pw_7strpipe_7toolkit_19tokens_in_sentences_1are_tokens_in_sentences, METH_VARARGS|METH_KEYWORDS, 0};
+static char __pyx_doc_7strpipe_7toolkit_19tokens_in_sentences_are_tokens_in_sentences[] = "are_tokens_in_sentences(tokens: list[str], sentences: list[list[str]])";
+static PyMethodDef __pyx_mdef_7strpipe_7toolkit_19tokens_in_sentences_1are_tokens_in_sentences = {"are_tokens_in_sentences", (PyCFunction)__pyx_pw_7strpipe_7toolkit_19tokens_in_sentences_1are_tokens_in_sentences, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7strpipe_7toolkit_19tokens_in_sentences_are_tokens_in_sentences};
 static PyObject *__pyx_pw_7strpipe_7toolkit_19tokens_in_sentences_1are_tokens_in_sentences(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_tokens = 0;
   PyObject *__pyx_v_sentences = 0;
@@ -1197,7 +1198,8 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_19tokens_in_sentences_are_tokens_in_
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7strpipe_7toolkit_19tokens_in_sentences_3is_token_in_sentences(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_7strpipe_7toolkit_19tokens_in_sentences_3is_token_in_sentences = {"is_token_in_sentences", (PyCFunction)__pyx_pw_7strpipe_7toolkit_19tokens_in_sentences_3is_token_in_sentences, METH_VARARGS|METH_KEYWORDS, 0};
+static char __pyx_doc_7strpipe_7toolkit_19tokens_in_sentences_2is_token_in_sentences[] = "is_token_in_sentences(str token: str, sentences: list[list[str]])";
+static PyMethodDef __pyx_mdef_7strpipe_7toolkit_19tokens_in_sentences_3is_token_in_sentences = {"is_token_in_sentences", (PyCFunction)__pyx_pw_7strpipe_7toolkit_19tokens_in_sentences_3is_token_in_sentences, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7strpipe_7toolkit_19tokens_in_sentences_2is_token_in_sentences};
 static PyObject *__pyx_pw_7strpipe_7toolkit_19tokens_in_sentences_3is_token_in_sentences(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_token = 0;
   PyObject *__pyx_v_sentences = 0;
