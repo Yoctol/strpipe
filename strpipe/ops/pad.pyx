@@ -23,6 +23,8 @@ cdef class Pad(BaseOp):
     '''
 
     cdef str _pad_token
+    cdef str _sos_token
+    cdef str _eos_token
     cdef int _maxlen
 
     def __init__(
@@ -57,8 +59,10 @@ cdef class Pad(BaseOp):
 
         if self._sos_token != DefaultTokens.nul:
             state['sos_token'] = self._sos_token
+            state['maxlen'] += 1
         if self._eos_token != DefaultTokens.nul:
             state['eos_token'] = self._eos_token
+            state['maxlen'] += 1
 
         return state
 
