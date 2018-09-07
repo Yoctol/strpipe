@@ -71,7 +71,7 @@ def test_add_step_by_op_name_correctly_create_op(mocker):
     )
     p = Pipe(op_factory=mock_factory)
 
-    p.add_steps_by_op_name(mock_op_name)
+    p.add_step_by_op_name(mock_op_name)
     MockOp.assert_called_once_with(**{})
 
 
@@ -85,7 +85,7 @@ def test_add_step_by_op_name_correctly_create_op_with_kwargs(mocker):
     expected_kwargs = {'a': 1, '2': 'b'}
     p = Pipe(op_factory=mock_factory)
 
-    p.add_steps_by_op_name(
+    p.add_step_by_op_name(
         mock_op_name,
         op_kwargs=expected_kwargs,
     )
@@ -107,6 +107,6 @@ def test_add_step_by_op_name_raise_if_type_wrong():
     )
     p = Pipe(op_factory=mock_factory)
 
-    p.add_steps_by_op_name('MockOp1')
+    p.add_step_by_op_name('MockOp1')
     with pytest.raises(TypeError):
-        p.add_steps_by_op_name('MockOp2')
+        p.add_step_by_op_name('MockOp2')
