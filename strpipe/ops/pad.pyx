@@ -34,6 +34,8 @@ cdef class Pad(BaseOp):
         self.input_type = STRING_LIST
         self.output_type = STRING_LIST
         self._pad_token = pad_token
+        self._sos_token = sos_token
+        self._eos_token = eos_token
         self._maxlen = maxlen
 
     def fit(self, input_data):
@@ -47,10 +49,18 @@ cdef class Pad(BaseOp):
             maxlen = compute_maxlen_in_c(input_data)
         else:
             maxlen = self._maxlen
-        return {
+
+        state = {
             'maxlen': maxlen,
             'pad_token': self._pad_token,
         }
+
+        if self._sos_token != DefaultTokens.nul:
+            state['sos_token'] = self._sos_token
+        if self._eos_token != DefaultTokens.nul:
+            state['eos_token'] = self._eos_token
+
+        return state
 
     def transform(self, state, input_data):
         '''Add eos and sos tokens if necessary then pads to fixed length.
@@ -61,14 +71,21 @@ cdef class Pad(BaseOp):
         '''
         maxlen = state['maxlen']
         pad_token = state['pad_token']
+        sos_token = state.get('sos_token', DefaultTokens.nul)
+        eos_token = state.get('eos_token', DefaultTokens.nul)
+
         tx_info = pad_sentences_meta_in_c(
             sentences=input_data,
             pad_token=pad_token,
+            sos_token=sos_token,
+            eos_token=eos_token,
             maxlen=maxlen,
         )
         padded_sentences = pad_sentences_in_c(
             sentences=input_data,
             pad_token=pad_token,
+            sos_token=sos_token,
+            eos_token=eos_token,
             maxlen=maxlen,
         )
         return padded_sentences, tx_info
