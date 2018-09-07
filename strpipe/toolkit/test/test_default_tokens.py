@@ -7,6 +7,7 @@ def test_get_default_tokens():
     assert D.eos == '<EOS>'
     assert D.unk == '<UNK>'
     assert D.pad == '<PAD>'
+    assert D.nul == '\0'
 
 
 def test_list_all_tokens():
@@ -17,4 +18,5 @@ def test_list_all_tokens():
         'eos': '<EOS>',
         'unk': '<UNK>',
         'pad': '<PAD>',
+        'nul': '\0'
     }
