@@ -150,7 +150,7 @@ def test_pad_transform_with_sos_and_eos():
 
     expected_output = [
         [sto, 'h', 'a', 'p', 'p', 'y', eto, pto, pto],
-        [sto, 'h', 'a', 'p', 'p', 'i', 'n', 'e', eto],
+        [sto, 'h', 'a', 'p', 'p', 'i', 'n', 'e', 's'],
         [sto, 'h', 'a', 'p', 'p', 'i', 'l', 'y', eto],
     ]
 
@@ -160,7 +160,7 @@ def test_pad_transform_with_sos_and_eos():
     sentlens = [t['sentlen'] for t in tx_info]
     sentence_tail = [t['sentence_tail'] for t in tx_info]
     assert sentlens == [5, 9, 7]
-    assert sentence_tail == [[], ['s', 's'], []]
+    assert sentence_tail == [[], ['s'], []]
 
 
 def test_pad_inverse_transform():
@@ -203,13 +203,13 @@ def test_pad_inverse_transform_with_sos_and_eos():
 
     output_data = [
         [sto, 'h', 'a', 'p', 'p', 'y', eto, pto, pto],
-        [sto, 'h', 'a', 'p', 'p', 'i', 'n', 'e', eto],
+        [sto, 'h', 'a', 'p', 'p', 'i', 'n', 'e', 's'],
         [sto, 'h', 'a', 'p', 'p', 'i', 'l', 'y', eto],
     ]
 
     tx_info = [
         {'sentlen': 5, 'sentence_tail': []},
-        {'sentlen': 9, 'sentence_tail': ['s', 's']},
+        {'sentlen': 9, 'sentence_tail': ['s']},
         {'sentlen': 7, 'sentence_tail': []},
     ]
 
