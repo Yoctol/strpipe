@@ -27,11 +27,11 @@ p.add_step_by_op_name(
     state={'你': 0, '好': 1, '早': 2},  # if provided, the p.fit won't change it
 )
 
-data = sp.TextData([
+data = [
     '你好啊\n',
     '早安',
     '你早上好\n',
-])
+]
 
 p.fit(data)
 result, tx_info = p.transform(data)  # convention: tx => tranform

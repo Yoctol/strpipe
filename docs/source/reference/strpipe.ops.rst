@@ -28,6 +28,22 @@ strpipe.ops.pad module
     :undoc-members:
     :show-inheritance:
 
+strpipe.ops.token\_to\_index module
+-----------------------------------
+
+.. automodule:: strpipe.ops.token_to_index
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+strpipe.ops.zhchar\_tokenizer module
+------------------------------------
+
+.. automodule:: strpipe.ops.zhchar_tokenizer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------
