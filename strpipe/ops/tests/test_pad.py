@@ -1,5 +1,7 @@
 import json
 
+import pytest
+
 from strpipe.data.types import STRING_LIST
 from strpipe.toolkit.default_tokens import DefaultTokens
 
@@ -10,12 +12,17 @@ def test_pad_correctly_created():
     def yield_padders():
         yield Pad()
         yield Pad(pad_token='<pad>')
-        yield Pad(eos_token='<eos>')
-        yield Pad(sos_token='<sos>')
         yield Pad(sos_token='<sos>', eos_token='<eos>')
     for padder in yield_padders():
         assert padder.input_type == STRING_LIST
         assert padder.output_type == STRING_LIST
+
+
+def test_pad_init_needs_both_sos_and_eos_or_neither():
+    with pytest.raises(ValueError):
+        Pad(sos_token='<sos>')
+    with pytest.raises(ValueError):
+        Pad(eos_token='<eos>')
 
 
 def test_pad_fit():
