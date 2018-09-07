@@ -17,21 +17,21 @@ pip install strpipe
 import strpipe as sp
 
 p = sp.Pipe()
-p.add_step_by_op_name(
+p.add_steps_by_op_name(
     op_name='Trim',
     op_kwargs={'tokens': ['\n', '\r']},
 )
-p.add_step_by_op_name('CharTokenize')
-p.add_step_by_op_name(
+p.add_steps_by_op_name('CharTokenize')
+p.add_steps_by_op_name(
     op_name='MapStringToIndex',
     state={'你': 0, '好': 1, '早': 2},  # if provided, the p.fit won't change it
 )
 
-data = sp.TextData([
+data = [
     '你好啊\n',
     '早安',
     '你早上好\n',
-])
+]
 
 p.fit(data)
 result, tx_info = p.transform(data)  # convention: tx => tranform
