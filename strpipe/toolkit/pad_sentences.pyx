@@ -1,5 +1,4 @@
 # cython: nonecheck=True
-from libc.stdio cimport printf
 from default_tokens import DefaultTokens
 
 
@@ -57,8 +56,6 @@ cdef list pad_sentence_in_c(
 
     sent_len = len(sentence)
     inner_maxlen = maxlen
-    if inner_maxlen < 0:
-        raise Exception()
 
     if sos_token != DefaultTokens.nul:
         inner_maxlen -= 1
@@ -102,8 +99,6 @@ cdef dict pad_sentence_meta_in_c(
     if eos_token != DefaultTokens.nul:
         output_meta_dict['eos_token'] = eos_token
         maxlen -= 1
-    if maxlen < 0:
-        raise Exception()
 
     if maxlen >= sentlen:
         output_meta_dict['sentence_tail'] = []
