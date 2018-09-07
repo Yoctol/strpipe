@@ -1,5 +1,6 @@
 from strpipe.ops.base cimport BaseOp
 from strpipe.toolkit.compute_maxlen cimport compute_maxlen_in_c
+from strpipe.toolkit.tokens_in_sentences cimport are_tokens_in_sentences_in_c
 from strpipe.toolkit.compute_bdd_sentlens cimport compute_bounded_sentlens_in_c
 from strpipe.toolkit.pad_sentences cimport (  # noqa: E211
     pad_sentences_in_c,
@@ -46,6 +47,16 @@ cdef class Pad(BaseOp):
         Args:
             input_data: input data
         '''
+        cdef list tokens = [self._pad_token]
+        if self._sos_token != DefaultTokens.nul:
+            tokens.append(self._sos_token)
+        if self._eos_token != DefaultTokens.nul:
+            tokens.append(self._eos_token)
+        token_check = are_tokens_in_sentences_in_c(tokens,
+                                                   input_data)
+        if any(token_check):
+            raise ValueError("Detected input_data already has tokens matching given pad/eos/sos!")
+
         cdef int maxlen
         if self._maxlen == -1:
             maxlen = compute_maxlen_in_c(input_data)
@@ -77,6 +88,16 @@ cdef class Pad(BaseOp):
         pad_token = state['pad_token']
         sos_token = state.get('sos_token', DefaultTokens.nul)
         eos_token = state.get('eos_token', DefaultTokens.nul)
+
+        cdef list tokens = [pad_token]
+        if sos_token != DefaultTokens.nul:
+            tokens.append(self._sos_token)
+        if eos_token != DefaultTokens.nul:
+            tokens.append(self._eos_token)
+        token_check = are_tokens_in_sentences_in_c(tokens,
+                                                   input_data)
+        if any(token_check):
+            raise ValueError("Detected input_data already has tokens matching given pad/eos/sos!")
 
         tx_info = pad_sentences_meta_in_c(
             sentences=input_data,
