@@ -2138,7 +2138,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4transform(struct __pyx_obj_7s
  *             sentences_with_boundary_tokens = add_start_end_token_in_sentences_in_c(
  *                 input_data,             # <<<<<<<<<<<<<<
  *                 sos_token,
- *                 eos_token)
+ *                 eos_token,
  */
     if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 98, __pyx_L1_error)
 
@@ -2154,74 +2154,74 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4transform(struct __pyx_obj_7s
     __pyx_v_sentences_with_boundary_tokens = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":102
- *                 eos_token)
+    /* "strpipe/ops/pad.pyx":103
+ *             )
  *             tx_info = pad_sentences_meta_in_c(
  *                 sentences=input_data,             # <<<<<<<<<<<<<<
  *                 pad_token=pad_token,
  *                 maxlen=maxlen - 1,
  */
-    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 102, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 103, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":103
+    /* "strpipe/ops/pad.pyx":104
  *             tx_info = pad_sentences_meta_in_c(
  *                 sentences=input_data,
  *                 pad_token=pad_token,             # <<<<<<<<<<<<<<
  *                 maxlen=maxlen - 1,
  *             )
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 103, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 104, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":104
+    /* "strpipe/ops/pad.pyx":105
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  *                 maxlen=maxlen - 1,             # <<<<<<<<<<<<<<
  *             )
  *             padded_sentences = pad_sentences_in_c(
  */
-    __pyx_t_1 = __Pyx_PyInt_SubtractObjC(__pyx_v_maxlen, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_SubtractObjC(__pyx_v_maxlen, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_6 = __Pyx_PyInt_As_unsigned_int(__pyx_t_1); if (unlikely((__pyx_t_6 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_As_unsigned_int(__pyx_t_1); if (unlikely((__pyx_t_6 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":101
- *                 sos_token,
- *                 eos_token)
+    /* "strpipe/ops/pad.pyx":102
+ *                 eos_token,
+ *             )
  *             tx_info = pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_tx_info = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":108
+    /* "strpipe/ops/pad.pyx":109
  *             padded_sentences = pad_sentences_in_c(
  *                 sentences=sentences_with_boundary_tokens,
  *                 pad_token=pad_token,             # <<<<<<<<<<<<<<
  *                 maxlen=maxlen,
  *             )
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 108, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 109, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":109
+    /* "strpipe/ops/pad.pyx":110
  *                 sentences=sentences_with_boundary_tokens,
  *                 pad_token=pad_token,
  *                 maxlen=maxlen,             # <<<<<<<<<<<<<<
  *             )
  * 
  */
-    __pyx_t_6 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_6 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_6 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 110, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":106
+    /* "strpipe/ops/pad.pyx":107
  *                 maxlen=maxlen - 1,
  *             )
  *             padded_sentences = pad_sentences_in_c(             # <<<<<<<<<<<<<<
  *                 sentences=sentences_with_boundary_tokens,
  *                 pad_token=pad_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(__pyx_v_sentences_with_boundary_tokens, ((PyObject*)__pyx_v_pad_token), __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(__pyx_v_sentences_with_boundary_tokens, ((PyObject*)__pyx_v_pad_token), __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_padded_sentences = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
@@ -2236,7 +2236,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4transform(struct __pyx_obj_7s
     goto __pyx_L8;
   }
 
-  /* "strpipe/ops/pad.pyx":113
+  /* "strpipe/ops/pad.pyx":114
  * 
  *         else:
  *             tx_info = pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
@@ -2245,87 +2245,87 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4transform(struct __pyx_obj_7s
  */
   /*else*/ {
 
-    /* "strpipe/ops/pad.pyx":114
+    /* "strpipe/ops/pad.pyx":115
  *         else:
  *             tx_info = pad_sentences_meta_in_c(
  *                 sentences=input_data,             # <<<<<<<<<<<<<<
  *                 pad_token=pad_token,
  *                 maxlen=maxlen,
  */
-    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 114, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 115, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":115
+    /* "strpipe/ops/pad.pyx":116
  *             tx_info = pad_sentences_meta_in_c(
  *                 sentences=input_data,
  *                 pad_token=pad_token,             # <<<<<<<<<<<<<<
  *                 maxlen=maxlen,
  *             )
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 115, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 116, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":116
+    /* "strpipe/ops/pad.pyx":117
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  *                 maxlen=maxlen,             # <<<<<<<<<<<<<<
  *             )
  *             padded_sentences = pad_sentences_in_c(
  */
-    __pyx_t_6 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_6 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_6 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 117, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":113
+    /* "strpipe/ops/pad.pyx":114
  * 
  *         else:
  *             tx_info = pad_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_tx_info = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":119
+    /* "strpipe/ops/pad.pyx":120
  *             )
  *             padded_sentences = pad_sentences_in_c(
  *                 sentences=input_data,             # <<<<<<<<<<<<<<
  *                 pad_token=pad_token,
  *                 maxlen=maxlen,
  */
-    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 119, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 120, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":120
+    /* "strpipe/ops/pad.pyx":121
  *             padded_sentences = pad_sentences_in_c(
  *                 sentences=input_data,
  *                 pad_token=pad_token,             # <<<<<<<<<<<<<<
  *                 maxlen=maxlen,
  *             )
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 120, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_pad_token))||((__pyx_v_pad_token) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pad_token)->tp_name), 0))) __PYX_ERR(0, 121, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":121
+    /* "strpipe/ops/pad.pyx":122
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  *                 maxlen=maxlen,             # <<<<<<<<<<<<<<
  *             )
  * 
  */
-    __pyx_t_6 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_6 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_As_unsigned_int(__pyx_v_maxlen); if (unlikely((__pyx_t_6 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 122, __pyx_L1_error)
 
-    /* "strpipe/ops/pad.pyx":118
+    /* "strpipe/ops/pad.pyx":119
  *                 maxlen=maxlen,
  *             )
  *             padded_sentences = pad_sentences_in_c(             # <<<<<<<<<<<<<<
  *                 sentences=input_data,
  *                 pad_token=pad_token,
  */
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_pad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_pad_token), __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_padded_sentences = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
   }
   __pyx_L8:;
 
-  /* "strpipe/ops/pad.pyx":124
+  /* "strpipe/ops/pad.pyx":125
  *             )
  * 
  *         return padded_sentences, tx_info             # <<<<<<<<<<<<<<
@@ -2333,7 +2333,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4transform(struct __pyx_obj_7s
  *     def inverse_transform(self, state, input_data, tx_info):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_padded_sentences);
   __Pyx_GIVEREF(__pyx_v_padded_sentences);
@@ -2373,7 +2373,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4transform(struct __pyx_obj_7s
   return __pyx_r;
 }
 
-/* "strpipe/ops/pad.pyx":126
+/* "strpipe/ops/pad.pyx":127
  *         return padded_sentences, tx_info
  * 
  *     def inverse_transform(self, state, input_data, tx_info):             # <<<<<<<<<<<<<<
@@ -2416,17 +2416,17 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_7inverse_transform(PyObject *_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_input_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 1); __PYX_ERR(0, 126, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 1); __PYX_ERR(0, 127, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_tx_info)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 2); __PYX_ERR(0, 126, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 2); __PYX_ERR(0, 127, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "inverse_transform") < 0)) __PYX_ERR(0, 126, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "inverse_transform") < 0)) __PYX_ERR(0, 127, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2441,7 +2441,7 @@ static PyObject *__pyx_pw_7strpipe_3ops_3pad_3Pad_7inverse_transform(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 126, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 127, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.ops.pad.Pad.inverse_transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2474,85 +2474,85 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(struct __py
   int __pyx_t_10;
   __Pyx_RefNannySetupContext("inverse_transform", 0);
 
-  /* "strpipe/ops/pad.pyx":135
+  /* "strpipe/ops/pad.pyx":136
  *         '''
  * 
  *         cdef str sos_token = DefaultTokens.nul             # <<<<<<<<<<<<<<
  *         cdef str eos_token = DefaultTokens.nul
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 136, __pyx_L1_error)
   __pyx_v_sos_token = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "strpipe/ops/pad.pyx":136
+  /* "strpipe/ops/pad.pyx":137
  * 
  *         cdef str sos_token = DefaultTokens.nul
  *         cdef str eos_token = DefaultTokens.nul             # <<<<<<<<<<<<<<
  * 
  *         if 'sos_token' in state and 'eos_token' in state:
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_nul); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 137, __pyx_L1_error)
   __pyx_v_eos_token = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/pad.pyx":138
+  /* "strpipe/ops/pad.pyx":139
  *         cdef str eos_token = DefaultTokens.nul
  * 
  *         if 'sos_token' in state and 'eos_token' in state:             # <<<<<<<<<<<<<<
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']
  */
-  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 139, __pyx_L1_error)
   __pyx_t_5 = (__pyx_t_4 != 0);
   if (__pyx_t_5) {
   } else {
     __pyx_t_3 = __pyx_t_5;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 139, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_5 != 0);
   __pyx_t_3 = __pyx_t_4;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "strpipe/ops/pad.pyx":139
+    /* "strpipe/ops/pad.pyx":140
  * 
  *         if 'sos_token' in state and 'eos_token' in state:
  *             sos_token = state['sos_token']             # <<<<<<<<<<<<<<
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):
  */
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_sos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_sos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 139, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_sos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":140
+    /* "strpipe/ops/pad.pyx":141
  *         if 'sos_token' in state and 'eos_token' in state:
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']             # <<<<<<<<<<<<<<
  *         elif not ('sos_token' in state or 'eos_token' in state):
  *             sos_token = self._sos_token
  */
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_eos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_state, __pyx_n_s_eos_token); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 140, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_eos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":138
+    /* "strpipe/ops/pad.pyx":139
  *         cdef str eos_token = DefaultTokens.nul
  * 
  *         if 'sos_token' in state and 'eos_token' in state:             # <<<<<<<<<<<<<<
@@ -2562,28 +2562,28 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(struct __py
     goto __pyx_L3;
   }
 
-  /* "strpipe/ops/pad.pyx":141
+  /* "strpipe/ops/pad.pyx":142
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):             # <<<<<<<<<<<<<<
  *             sos_token = self._sos_token
  *             eos_token = self._eos_token
  */
-  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_sos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 142, __pyx_L1_error)
   __pyx_t_5 = (__pyx_t_4 != 0);
   if (!__pyx_t_5) {
   } else {
     __pyx_t_3 = __pyx_t_5;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_eos_token, __pyx_v_state, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 142, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_5 != 0);
   __pyx_t_3 = __pyx_t_4;
   __pyx_L6_bool_binop_done:;
   __pyx_t_4 = ((!__pyx_t_3) != 0);
   if (likely(__pyx_t_4)) {
 
-    /* "strpipe/ops/pad.pyx":142
+    /* "strpipe/ops/pad.pyx":143
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):
  *             sos_token = self._sos_token             # <<<<<<<<<<<<<<
@@ -2595,7 +2595,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(struct __py
     __Pyx_DECREF_SET(__pyx_v_sos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":143
+    /* "strpipe/ops/pad.pyx":144
  *         elif not ('sos_token' in state or 'eos_token' in state):
  *             sos_token = self._sos_token
  *             eos_token = self._eos_token             # <<<<<<<<<<<<<<
@@ -2607,7 +2607,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(struct __py
     __Pyx_DECREF_SET(__pyx_v_eos_token, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "strpipe/ops/pad.pyx":141
+    /* "strpipe/ops/pad.pyx":142
  *             sos_token = state['sos_token']
  *             eos_token = state['eos_token']
  *         elif not ('sos_token' in state or 'eos_token' in state):             # <<<<<<<<<<<<<<
@@ -2617,7 +2617,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(struct __py
     goto __pyx_L3;
   }
 
-  /* "strpipe/ops/pad.pyx":145
+  /* "strpipe/ops/pad.pyx":146
  *             eos_token = self._eos_token
  *         else:
  *             raise ValueError("state must provide both start-of-sentence "             # <<<<<<<<<<<<<<
@@ -2625,53 +2625,53 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(struct __py
  * 
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 145, __pyx_L1_error)
+    __PYX_ERR(0, 146, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "strpipe/ops/pad.pyx":152
+  /* "strpipe/ops/pad.pyx":153
  * 
  *         # Strip SOS
  *         if sos_token != DefaultTokens.nul:             # <<<<<<<<<<<<<<
  *             s_list = []
  *             n_sent = len(input_data)
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_sos_token, __pyx_t_2, Py_NE)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_sos_token, __pyx_t_2, Py_NE)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "strpipe/ops/pad.pyx":153
+    /* "strpipe/ops/pad.pyx":154
  *         # Strip SOS
  *         if sos_token != DefaultTokens.nul:
  *             s_list = []             # <<<<<<<<<<<<<<
  *             n_sent = len(input_data)
  *             for i in range(n_sent):
  */
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_s_list = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "strpipe/ops/pad.pyx":154
+    /* "strpipe/ops/pad.pyx":155
  *         if sos_token != DefaultTokens.nul:
  *             s_list = []
  *             n_sent = len(input_data)             # <<<<<<<<<<<<<<
  *             for i in range(n_sent):
  *                 s_list.append(input_data[i][1:])
  */
-    __pyx_t_6 = PyObject_Length(__pyx_v_input_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_6 = PyObject_Length(__pyx_v_input_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 155, __pyx_L1_error)
     __pyx_v_n_sent = __pyx_t_6;
 
-    /* "strpipe/ops/pad.pyx":155
+    /* "strpipe/ops/pad.pyx":156
  *             s_list = []
  *             n_sent = len(input_data)
  *             for i in range(n_sent):             # <<<<<<<<<<<<<<
@@ -2683,23 +2683,23 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(struct __py
     for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
       __pyx_v_i = __pyx_t_9;
 
-      /* "strpipe/ops/pad.pyx":156
+      /* "strpipe/ops/pad.pyx":157
  *             n_sent = len(input_data)
  *             for i in range(n_sent):
  *                 s_list.append(input_data[i][1:])             # <<<<<<<<<<<<<<
  *             return unpad_sentences_in_c(s_list, tx_info)
  * 
  */
-      __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_input_data, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_input_data, __pyx_v_i, unsigned int, 0, __Pyx_PyInt_From_unsigned_int, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_t_2, 1, 0, NULL, NULL, &__pyx_slice__7, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_t_2, 1, 0, NULL, NULL, &__pyx_slice__7, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_s_list, __pyx_t_1); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 156, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_s_list, __pyx_t_1); if (unlikely(__pyx_t_10 == ((int)-1))) __PYX_ERR(0, 157, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
 
-    /* "strpipe/ops/pad.pyx":157
+    /* "strpipe/ops/pad.pyx":158
  *             for i in range(n_sent):
  *                 s_list.append(input_data[i][1:])
  *             return unpad_sentences_in_c(s_list, tx_info)             # <<<<<<<<<<<<<<
@@ -2707,14 +2707,14 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(struct __py
  *         return unpad_sentences_in_c(
  */
     __Pyx_XDECREF(__pyx_r);
-    if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 157, __pyx_L1_error)
-    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(__pyx_v_s_list, ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(__pyx_v_s_list, ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "strpipe/ops/pad.pyx":152
+    /* "strpipe/ops/pad.pyx":153
  * 
  *         # Strip SOS
  *         if sos_token != DefaultTokens.nul:             # <<<<<<<<<<<<<<
@@ -2723,7 +2723,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(struct __py
  */
   }
 
-  /* "strpipe/ops/pad.pyx":159
+  /* "strpipe/ops/pad.pyx":160
  *             return unpad_sentences_in_c(s_list, tx_info)
  * 
  *         return unpad_sentences_in_c(             # <<<<<<<<<<<<<<
@@ -2732,37 +2732,37 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6inverse_transform(struct __py
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "strpipe/ops/pad.pyx":160
+  /* "strpipe/ops/pad.pyx":161
  * 
  *         return unpad_sentences_in_c(
  *             input_data,             # <<<<<<<<<<<<<<
  *             tx_info,
  *         )
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 160, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 161, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":161
+  /* "strpipe/ops/pad.pyx":162
  *         return unpad_sentences_in_c(
  *             input_data,
  *             tx_info,             # <<<<<<<<<<<<<<
  *         )
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 161, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 162, __pyx_L1_error)
 
-  /* "strpipe/ops/pad.pyx":159
+  /* "strpipe/ops/pad.pyx":160
  *             return unpad_sentences_in_c(s_list, tx_info)
  * 
  *         return unpad_sentences_in_c(             # <<<<<<<<<<<<<<
  *             input_data,
  *             tx_info,
  */
-  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_13pad_sentences_unpad_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/ops/pad.pyx":126
+  /* "strpipe/ops/pad.pyx":127
  *         return padded_sentences, tx_info
  * 
  *     def inverse_transform(self, state, input_data, tx_info):             # <<<<<<<<<<<<<<
@@ -3838,7 +3838,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 42, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 156, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3870,25 +3870,25 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "strpipe/ops/pad.pyx":145
+  /* "strpipe/ops/pad.pyx":146
  *             eos_token = self._eos_token
  *         else:
  *             raise ValueError("state must provide both start-of-sentence "             # <<<<<<<<<<<<<<
  *                              "and end-of-sentence token not just one.")
  * 
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_state_must_provide_both_start_of); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_state_must_provide_both_start_of); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "strpipe/ops/pad.pyx":156
+  /* "strpipe/ops/pad.pyx":157
  *             n_sent = len(input_data)
  *             for i in range(n_sent):
  *                 s_list.append(input_data[i][1:])             # <<<<<<<<<<<<<<
  *             return unpad_sentences_in_c(s_list, tx_info)
  * 
  */
-  __pyx_slice__7 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__7)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_slice__7 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__7)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__7);
   __Pyx_GIVEREF(__pyx_slice__7);
 

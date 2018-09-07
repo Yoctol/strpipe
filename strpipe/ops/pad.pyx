@@ -97,7 +97,8 @@ cdef class Pad(BaseOp):
             sentences_with_boundary_tokens = add_start_end_token_in_sentences_in_c(
                 input_data,
                 sos_token,
-                eos_token)
+                eos_token,
+            )
             tx_info = pad_sentences_meta_in_c(
                 sentences=input_data,
                 pad_token=pad_token,
