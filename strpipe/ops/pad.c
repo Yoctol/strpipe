@@ -790,7 +790,7 @@ struct __pyx_obj_7strpipe_3ops_4base_BaseOp {
  * 
  * 
  * cdef class Pad(BaseOp):             # <<<<<<<<<<<<<<
- *     '''Pad texts so that they are the same size.
+ *     """Pad texts so that they are the same size.
  * 
  */
 struct __pyx_obj_7strpipe_3ops_3pad_Pad {
@@ -821,7 +821,7 @@ static struct __pyx_vtabstruct_7strpipe_3ops_4base_BaseOp *__pyx_vtabptr_7strpip
  * 
  * 
  * cdef class Pad(BaseOp):             # <<<<<<<<<<<<<<
- *     '''Pad texts so that they are the same size.
+ *     """Pad texts so that they are the same size.
  * 
  */
 
@@ -2010,7 +2010,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_2_check_tokens(CYTHON_UNUSED s
  *         return True
  * 
  *     def fit(self, input_data):             # <<<<<<<<<<<<<<
- *         ''' Figure out maxlen if not specified in __init__.
+ *         """ Figure out maxlen if not specified in __init__.
  * 
  */
 
@@ -2040,7 +2040,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
   __Pyx_RefNannySetupContext("fit", 0);
 
   /* "strpipe/ops/pad.pyx":76
- *         '''
+ *         """
  *         cdef int maxlen
  *         cdef dict result = {}             # <<<<<<<<<<<<<<
  *         if self._maxlen == -1:
@@ -2196,7 +2196,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
  *         return True
  * 
  *     def fit(self, input_data):             # <<<<<<<<<<<<<<
- *         ''' Figure out maxlen if not specified in __init__.
+ *         """ Figure out maxlen if not specified in __init__.
  * 
  */
 
@@ -2217,7 +2217,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_4fit(struct __pyx_obj_7strpipe
  *         return result
  * 
  *     def transform(self, state, input_data):             # <<<<<<<<<<<<<<
- *         '''Add eos and sos tokens if necessary then pads to fixed length.
+ *         """Add eos and sos tokens if necessary then pads to fixed length.
  * 
  */
 
@@ -2307,7 +2307,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
 
   /* "strpipe/ops/pad.pyx":98
  *             input_data
- *         '''
+ *         """
  *         maxlen = state['maxlen']             # <<<<<<<<<<<<<<
  *         pad_token = state['pad_token']
  * 
@@ -2318,7 +2318,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
   __pyx_t_1 = 0;
 
   /* "strpipe/ops/pad.pyx":99
- *         '''
+ *         """
  *         maxlen = state['maxlen']
  *         pad_token = state['pad_token']             # <<<<<<<<<<<<<<
  * 
@@ -2794,7 +2794,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
  *         return result
  * 
  *     def transform(self, state, input_data):             # <<<<<<<<<<<<<<
- *         '''Add eos and sos tokens if necessary then pads to fixed length.
+ *         """Add eos and sos tokens if necessary then pads to fixed length.
  * 
  */
 
@@ -2824,7 +2824,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_6transform(struct __pyx_obj_7s
  *         return padded_sentences, tx_info
  * 
  *     def inverse_transform(self, state, input_data, tx_info):             # <<<<<<<<<<<<<<
- *         '''Remove eos, sos and padding.
+ *         """Remove eos, sos and padding.
  * 
  */
 
@@ -2926,7 +2926,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
   __Pyx_RefNannySetupContext("inverse_transform", 0);
 
   /* "strpipe/ops/pad.pyx":156
- *         '''
+ *         """
  * 
  *         cdef str sos_token = DefaultTokens.nul             # <<<<<<<<<<<<<<
  *         cdef str eos_token = DefaultTokens.nul
@@ -3289,7 +3289,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_3pad_3Pad_8inverse_transform(struct __py
  *         return padded_sentences, tx_info
  * 
  *     def inverse_transform(self, state, input_data, tx_info):             # <<<<<<<<<<<<<<
- *         '''Remove eos, sos and padding.
+ *         """Remove eos, sos and padding.
  * 
  */
 

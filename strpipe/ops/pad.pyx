@@ -13,7 +13,7 @@ from strpipe.data.types import STRING_LIST
 
 
 cdef class Pad(BaseOp):
-    '''Pad texts so that they are the same size.
+    """Pad texts so that they are the same size.
 
     Args:
         pad_token (optional): Padding token. Default: :obj:`DefaultTokens.pad`
@@ -21,7 +21,7 @@ cdef class Pad(BaseOp):
         eos_token (optional): End of sentence token.
         maxlen (optional): The length to pad to. Note that this includes eos, sos tokens as
             part of the length count.
-    '''
+    """
 
     cdef str _pad_token
     cdef str _sos_token
@@ -67,11 +67,11 @@ cdef class Pad(BaseOp):
         return True
 
     def fit(self, input_data):
-        ''' Figure out maxlen if not specified in __init__.
+        """ Figure out maxlen if not specified in __init__.
 
         Args:
             input_data: input data
-        '''
+        """
         cdef int maxlen
         cdef dict result = {}
         if self._maxlen == -1:
@@ -89,12 +89,12 @@ cdef class Pad(BaseOp):
         return result
 
     def transform(self, state, input_data):
-        '''Add eos and sos tokens if necessary then pads to fixed length.
+        """Add eos and sos tokens if necessary then pads to fixed length.
 
         Args:
             state
             input_data
-        '''
+        """
         maxlen = state['maxlen']
         pad_token = state['pad_token']
 
@@ -145,13 +145,13 @@ cdef class Pad(BaseOp):
         return padded_sentences, tx_info
 
     def inverse_transform(self, state, input_data, tx_info):
-        '''Remove eos, sos and padding.
+        """Remove eos, sos and padding.
 
         Args:
             state:
             input_data:
             tx_info:
-        '''
+        """
 
         cdef str sos_token = DefaultTokens.nul
         cdef str eos_token = DefaultTokens.nul
