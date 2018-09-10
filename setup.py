@@ -89,6 +89,7 @@ setup(
     license='MIT',
     install_requires=[
         'tokenizer-hub',
+        'text-normalizer',
     ],
     packages=find_packages(),
     cmdclass=cmdclass,
