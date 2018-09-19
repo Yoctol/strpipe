@@ -110,3 +110,23 @@ def test_add_step_by_op_name_raise_if_type_wrong():
     p.add_step_by_op_name('MockOp1')
     with pytest.raises(TypeError):
         p.add_step_by_op_name('MockOp2')
+
+
+def test_get_state():
+    mock_op_1 = MagicMock(inpur_type=STRING, output_type=STRING)
+    MockOp1 = Mock(return_value=mock_op_1)
+
+    mock_factory = _OpFactory()
+    mock_factory.register('MockOp1',  # noqa: E128
+        MockOp1,
+    )
+    p = Pipe(op_factory=mock_factory)
+    p.add_step_by_op_name(
+        'MockOp1',
+        state={
+            '隼興名言': '你的身體不知道你想變強...',
+        },
+    )
+    p.get_state(0) == {
+        '隼興名言': '你的身體不知道你想變強...',
+    }

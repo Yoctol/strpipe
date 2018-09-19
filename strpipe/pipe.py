@@ -106,6 +106,10 @@ class Pipe:
             data = step.inverse_transform(data, meta)
         return data
 
+    def get_state(self, index: int):
+        state = self._steps[index].state
+        return state
+
     def save_json(self, path):
         serializable = {}
         step_recoverables = []
