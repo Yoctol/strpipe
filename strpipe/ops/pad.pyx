@@ -5,7 +5,6 @@ from strpipe.toolkit.add_start_end_token cimport (  # noqa: E211
     add_start_end_token_in_sentences_meta_in_c,
     remove_start_end_token_in_sentences_in_c,
 )
-from strpipe.toolkit.compute_bdd_sentlens cimport compute_bounded_sentlens_in_c
 from strpipe.toolkit.pad_sentences cimport (  # noqa: E211
     pad_sentences_in_c,
     pad_sentences_meta_in_c,
