@@ -1,11 +1,13 @@
-import json
-
 import pytest
 
 from strpipe.data.types import STRING_LIST
 from strpipe.toolkit.default_tokens import DefaultTokens
-
 from strpipe.ops.pad import Pad
+
+from .state_serialization_issues import (
+    serializable,
+    unchange_after_serialize,
+)
 
 
 def test_pad_correctly_created():
@@ -45,7 +47,8 @@ def test_pad_passing_state_needs_both_sos_and_eos_or_neither():
     ]
 
     state1 = {'maxlen': 0, 'pad_token': '<PAD>'}
-    state2 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<eos>'}
+    state2 = {'maxlen': 2, 'pad_token': '<PAD>',
+              'sos_token': '<sos>', 'eos_token': '<eos>'}
     state3 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>'}
     state4 = {'maxlen': 2, 'pad_token': '<PAD>', 'eos_token': '<eos>'}
 
@@ -84,7 +87,8 @@ def test_pad_passing_state_tokens_in_state_should_be_distinct():
         with pytest.raises(ValueError):
             padder.transform(bad_state, input_data)
 
-    state = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<eos>'}
+    state = {'maxlen': 5, 'pad_token': '<PAD>',
+             'sos_token': '<sos>', 'eos_token': '<eos>'}
     output_data, _ = padder.transform(state, input_data)
 
     bad_state4 = {'maxlen': 5, 'pad_token': '<PAD>',
@@ -115,7 +119,8 @@ def test_pad_fit():
     assert state['maxlen'] == 6
     assert 'pad_token' in state
     assert state['pad_token'] == DefaultTokens.pad
-    assert json.dumps(state)  # serializable
+    serializable(state)
+    unchange_after_serialize(state)
 
 
 def test_pad_fit_with_sos_and_eos():
@@ -138,7 +143,8 @@ def test_pad_fit_with_sos_and_eos():
     assert state['sos_token'] == DefaultTokens.sos
     assert 'eos_token' in state
     assert state['eos_token'] == DefaultTokens.eos
-    assert json.dumps(state)  # serializable
+    serializable(state)
+    unchange_after_serialize(state)
 
 
 def test_pad_transform():
@@ -284,4 +290,5 @@ def test_pad_with_custom_kwargs_fit():
 
     assert state['maxlen'] == expected_maxlen
     assert state['pad_token'] == expected_other_token
-    assert json.dumps(state)  # serialzable
+    serializable(state)
+    unchange_after_serialize(state)

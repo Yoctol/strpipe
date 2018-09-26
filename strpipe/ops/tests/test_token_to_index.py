@@ -1,8 +1,11 @@
-import json
-
 from strpipe.data.types import STRING_LIST
 from strpipe.toolkit.default_tokens import DefaultTokens
 from strpipe.ops.token_to_index import TokenToIndexWithUNK
+
+from .state_serialization_issues import (
+    serializable,
+    unchange_after_serialize,
+)
 
 
 def test_correctly_created():
@@ -32,7 +35,8 @@ def test_fit_wo_default_token2index():
     # for serialization, key should be a string not int
     assert set(state['token2index'].values()) == set(
         [int(i) for i in state['index2token'].keys()])
-    assert json.dumps(state)  # serialzable
+    serializable(state)
+    unchange_after_serialize(state)
 
 
 def test_fit_with_default_token2index():
@@ -58,7 +62,8 @@ def test_fit_with_default_token2index():
     assert state['token2index'] == {
         'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4, 'f': 5, unk_token: 6,
     }
-    assert json.dumps(state)  # serialzable
+    serializable(state)
+    unchange_after_serialize(state)
 
 
 def test_transform():
