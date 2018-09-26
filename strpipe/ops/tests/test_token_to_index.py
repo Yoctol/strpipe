@@ -1,6 +1,6 @@
 from strpipe.data.types import STRING_LIST
 from strpipe.toolkit.default_tokens import DefaultTokens
-from strpipe.ops.token_to_index import TokenToIndexWithUNK
+from strpipe.ops.token_to_index import TokenToIndex
 
 from .state_serialization_issues import (
     serializable,
@@ -9,13 +9,13 @@ from .state_serialization_issues import (
 
 
 def test_correctly_created():
-    ti_mapper = TokenToIndexWithUNK()
+    ti_mapper = TokenToIndex()
     assert ti_mapper.input_type == STRING_LIST
     assert ti_mapper.output_type == STRING_LIST
 
 
 def test_fit_wo_default_token2index():
-    ti_mapper = TokenToIndexWithUNK()
+    ti_mapper = TokenToIndex()
     input_data = [
         ['a', 'p', 'p', 'l', 'e'],
         ['b', 'a', 'n', 'a', 'n', 'a'],
@@ -41,7 +41,7 @@ def test_fit_wo_default_token2index():
 
 def test_fit_with_default_token2index():
     unk_token = DefaultTokens.unk
-    ti_mapper = TokenToIndexWithUNK(
+    ti_mapper = TokenToIndex(
         token2index={
             'a': 0,
             'b': 1,
@@ -67,7 +67,7 @@ def test_fit_with_default_token2index():
 
 
 def test_transform():
-    ti_mapper = TokenToIndexWithUNK()
+    ti_mapper = TokenToIndex()
     unk_token = DefaultTokens.unk
 
     output_data, tx_info = ti_mapper.transform(
@@ -96,7 +96,7 @@ def test_transform():
 
 
 def test_inverse_transform():
-    ti_mapper = TokenToIndexWithUNK()
+    ti_mapper = TokenToIndex()
     unk_token = DefaultTokens.unk
     output_data = ti_mapper.inverse_transform(
         state={
