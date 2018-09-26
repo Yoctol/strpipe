@@ -114,7 +114,7 @@ cdef list indices_to_sentence_in_c(
     ):
     cdef unsigned int i, n_index, index
     cdef list sentence = []
-    cdef str token
+    cdef str token, key
 
     n_index = len(indices)
     for i in range(n_index):
@@ -122,7 +122,8 @@ cdef list indices_to_sentence_in_c(
         if i in meta:
             token = meta[i]
         else:
-            token = index2token[index]
+            key = str(index)
+            token = index2token[key]
         sentence.append(token)
     return sentence
 

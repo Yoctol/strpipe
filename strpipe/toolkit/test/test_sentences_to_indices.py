@@ -35,11 +35,11 @@ def test_indices_to_sentences():
             [0, 1, 0],
         ],
         index2token={
-            0: "<UNK>",
-            1: "喜歡",
-            2: "吃",
-            3: "榴槤",
-        },
+            '0': "<UNK>",
+            '1': "喜歡",
+            '2': "吃",
+            '3': "榴槤",
+        },  # for serialization, key should be a string not int
         meta=[
             {0: "alvin"},
             {0: "隼興", 2: "蛋白質"},
@@ -80,10 +80,10 @@ def test_indices_to_sentences_wo_unk():
             [0, 0, 1, 0],
         ],
         index2token={
-            0: "喜歡",
-            1: "吃",
-            2: "榴槤",
-        },
+            '0': "喜歡",
+            '1': "吃",
+            '2': "榴槤",
+        },  # for serialization, key should be a string not int
         meta=[
             {0: "蔣勤彥"},
             {0: "薄餡", 3: "小泡芙"},

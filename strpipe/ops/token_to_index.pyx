@@ -68,7 +68,10 @@ cdef class TokenToIndexWithUNK(BaseOp):
             tokens=[self._unk_token] + self._necessary_tokens,
         )
 
-        self._index2token = invert_dictionary_in_c(self._token2index)
+        self._index2token = invert_dictionary_in_c(
+            self._token2index,
+            serializable=True,
+        )
         return {
             'token2index': self._token2index,
             'index2token': self._index2token,
