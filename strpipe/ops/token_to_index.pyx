@@ -20,12 +20,13 @@ from strpipe.toolkit.default_tokens import DefaultTokens
 from strpipe.data.types import STRING_LIST
 
 
-cdef class TokenToIndexWithUNK(BaseOp):
+cdef class TokenToIndex(BaseOp):
 
     cdef str _unk_token
     cdef dict _token2index, _index2token
     cdef unsigned int _vocab_size
     cdef list _necessary_tokens
+    cdef bint _skip_unknown
 
     def __init__(
             self,
@@ -33,6 +34,7 @@ cdef class TokenToIndexWithUNK(BaseOp):
             vocab_size: int = 1e+8,
             token2index: dict = None,
             necessary_tokens: list[str] = None,
+            _skip_unknown: bool = False,
         ):
         self.input_type = STRING_LIST
         self.output_type = STRING_LIST
@@ -41,6 +43,9 @@ cdef class TokenToIndexWithUNK(BaseOp):
         self._vocab_size = vocab_size
         self._token2index = token2index
         self._necessary_tokens = necessary_tokens
+        self._skip_unknown = _skip_unknown
+        if self._skip_unknown is True:
+            raise NotImplementedError("TokenToIndex has not implemented skip-unknown mode")
 
         self._index2token = None
 
