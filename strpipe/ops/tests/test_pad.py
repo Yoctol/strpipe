@@ -47,8 +47,7 @@ def test_pad_passing_state_needs_both_sos_and_eos_or_neither():
     ]
 
     state1 = {'maxlen': 0, 'pad_token': '<PAD>'}
-    state2 = {'maxlen': 2, 'pad_token': '<PAD>',
-              'sos_token': '<sos>', 'eos_token': '<eos>'}
+    state2 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<eos>'}
     state3 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>'}
     state4 = {'maxlen': 2, 'pad_token': '<PAD>', 'eos_token': '<eos>'}
 
@@ -76,27 +75,35 @@ def test_pad_passing_state_tokens_in_state_should_be_distinct():
         {'sentlen': 0, 'sentence_tail': []},
     ]
 
-    bad_state1 = {'maxlen': 5, 'pad_token': '<PAD>',
-                  'sos_token': '<PAD>', 'eos_token': '<eos>'}
-    bad_state2 = {'maxlen': 5, 'pad_token': '<PAD>',
-                  'sos_token': '<sos>', 'eos_token': '<PAD>'}
-    bad_state3 = {'maxlen': 5, 'pad_token': '<PAD>',
-                  'sos_token': '<boundary>', 'eos_token': '<boundary>'}
+    bad_state1 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<PAD>', 'eos_token': '<eos>'}
+    bad_state2 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<PAD>'}
+    bad_state3 = {
+        'maxlen': 5,
+        'pad_token': '<PAD>',
+        'sos_token': '<boundary>',
+        'eos_token': '<boundary>',
+    }  # cannot be one line, since it is too long
 
     for bad_state in (bad_state1, bad_state2, bad_state3):
         with pytest.raises(ValueError):
             padder.transform(bad_state, input_data)
 
-    state = {'maxlen': 5, 'pad_token': '<PAD>',
-             'sos_token': '<sos>', 'eos_token': '<eos>'}
+    state = {
+        'maxlen': 5,
+        'pad_token': '<PAD>',
+        'sos_token': '<sos>',
+        'eos_token': '<eos>',
+    }  # cannot be one line, since it is too long
     output_data, _ = padder.transform(state, input_data)
 
-    bad_state4 = {'maxlen': 5, 'pad_token': '<PAD>',
-                  'sos_token': '<PAD>', 'eos_token': '<eos>'}
-    bad_state5 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token':
-                  '<sos>', 'eos_token': '<PAD>'}
-    bad_state6 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token':
-                  '<boundary>', 'eos_token': '<boundary>'}
+    bad_state4 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<PAD>', 'eos_token': '<eos>'}
+    bad_state5 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<PAD>'}
+    bad_state6 = {
+        'maxlen': 5,
+        'pad_token': '<PAD>',
+        'sos_token': '<boundary>',
+        'eos_token': '<boundary>',
+    }  # cannot be one line, since it is too long
 
     for bad_state in (bad_state4, bad_state5, bad_state6):
         with pytest.raises(ValueError):
