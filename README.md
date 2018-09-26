@@ -44,7 +44,7 @@ back_data = p.inverse_transform(result, tx_info)
 p.save_json('/path/of/pipe')
 
 # Load it
-p = Pipe.load_json('/path/of/pipe')
+p = sp.Pipe.restore_from_json('/path/of/pipe')
 result, meta = p.transform(['你好'])
 ```
 
