@@ -844,6 +844,18 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 /* GetBuiltinName.proto */
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
+/* RaiseDoubleKeywords.proto */
+static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
+
+/* ParseKeywords.proto */
+static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
+    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
+    const char* function_name);
+
+/* RaiseArgTupleInvalid.proto */
+static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
+    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
 /* ArgTypeTest.proto */
 #define __Pyx_ArgTypeTest(obj, type, none_allowed, name, exact)\
     ((likely((Py_TYPE(obj) == type) | (none_allowed && (obj == Py_None)))) ? 1 :\
@@ -1031,7 +1043,7 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
 /* Module declarations from 'strpipe.toolkit.invert_dictionary' */
-static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary_in_c(PyObject *); /*proto*/
+static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary_in_c(PyObject *, int); /*proto*/
 #define __Pyx_MODULE_NAME "strpipe.toolkit.invert_dictionary"
 extern int __pyx_module_is_main_strpipe__toolkit__invert_dictionary;
 int __pyx_module_is_main_strpipe__toolkit__invert_dictionary = 0;
@@ -1044,6 +1056,7 @@ static const char __pyx_k_items[] = "items";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_KeyError[] = "KeyError";
 static const char __pyx_k_input_dict[] = "input_dict";
+static const char __pyx_k_serializable[] = "serializable";
 static const char __pyx_k_duplicate_value[] = "duplicate value [{}]";
 static const char __pyx_k_invert_dictionary[] = "invert_dictionary";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
@@ -1057,10 +1070,11 @@ static PyObject *__pyx_n_s_input_dict;
 static PyObject *__pyx_n_s_invert_dictionary;
 static PyObject *__pyx_n_s_items;
 static PyObject *__pyx_n_s_main;
+static PyObject *__pyx_n_s_serializable;
 static PyObject *__pyx_kp_s_strpipe_toolkit_invert_dictionar;
 static PyObject *__pyx_n_s_strpipe_toolkit_invert_dictionar_2;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_pf_7strpipe_7toolkit_17invert_dictionary_invert_dictionary(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_input_dict); /* proto */
+static PyObject *__pyx_pf_7strpipe_7toolkit_17invert_dictionary_invert_dictionary(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_input_dict, PyObject *__pyx_v_serializable); /* proto */
 static __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_items = {0, &__pyx_n_s_items, 0, 0, 0};
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_codeobj__2;
@@ -1069,20 +1083,89 @@ static PyObject *__pyx_codeobj__2;
 /* "strpipe/toolkit/invert_dictionary.pyx":3
  * 
  * 
- * def invert_dictionary(input_dict: dict):             # <<<<<<<<<<<<<<
- *     return invert_dictionary_in_c(input_dict=input_dict)
- * 
+ * def invert_dictionary(             # <<<<<<<<<<<<<<
+ *         input_dict: dict,
+ *         serializable: bool=False,
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7strpipe_7toolkit_17invert_dictionary_1invert_dictionary(PyObject *__pyx_self, PyObject *__pyx_v_input_dict); /*proto*/
-static PyMethodDef __pyx_mdef_7strpipe_7toolkit_17invert_dictionary_1invert_dictionary = {"invert_dictionary", (PyCFunction)__pyx_pw_7strpipe_7toolkit_17invert_dictionary_1invert_dictionary, METH_O, 0};
-static PyObject *__pyx_pw_7strpipe_7toolkit_17invert_dictionary_1invert_dictionary(PyObject *__pyx_self, PyObject *__pyx_v_input_dict) {
+static PyObject *__pyx_pw_7strpipe_7toolkit_17invert_dictionary_1invert_dictionary(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7strpipe_7toolkit_17invert_dictionary_invert_dictionary[] = "invert_dictionary(dict input_dict: dict, serializable: bool = False)";
+static PyMethodDef __pyx_mdef_7strpipe_7toolkit_17invert_dictionary_1invert_dictionary = {"invert_dictionary", (PyCFunction)__pyx_pw_7strpipe_7toolkit_17invert_dictionary_1invert_dictionary, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7strpipe_7toolkit_17invert_dictionary_invert_dictionary};
+static PyObject *__pyx_pw_7strpipe_7toolkit_17invert_dictionary_1invert_dictionary(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_input_dict = 0;
+  PyObject *__pyx_v_serializable = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("invert_dictionary (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_input_dict), (&PyDict_Type), 1, "input_dict", 1))) __PYX_ERR(0, 3, __pyx_L1_error)
-  __pyx_r = __pyx_pf_7strpipe_7toolkit_17invert_dictionary_invert_dictionary(__pyx_self, ((PyObject*)__pyx_v_input_dict));
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_input_dict,&__pyx_n_s_serializable,0};
+    PyObject* values[2] = {0,0};
+
+    /* "strpipe/toolkit/invert_dictionary.pyx":5
+ * def invert_dictionary(
+ *         input_dict: dict,
+ *         serializable: bool=False,             # <<<<<<<<<<<<<<
+ *     ):
+ *     return invert_dictionary_in_c(
+ */
+    values[1] = ((PyObject *)Py_False);
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_input_dict)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_serializable);
+          if (value) { values[1] = value; kw_args--; }
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "invert_dictionary") < 0)) __PYX_ERR(0, 3, __pyx_L3_error)
+      }
+    } else {
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_input_dict = ((PyObject*)values[0]);
+    __pyx_v_serializable = values[1];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("invert_dictionary", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 3, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("strpipe.toolkit.invert_dictionary.invert_dictionary", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_input_dict), (&PyDict_Type), 1, "input_dict", 1))) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_r = __pyx_pf_7strpipe_7toolkit_17invert_dictionary_invert_dictionary(__pyx_self, __pyx_v_input_dict, __pyx_v_serializable);
+
+  /* "strpipe/toolkit/invert_dictionary.pyx":3
+ * 
+ * 
+ * def invert_dictionary(             # <<<<<<<<<<<<<<
+ *         input_dict: dict,
+ *         serializable: bool=False,
+ */
 
   /* function exit code */
   goto __pyx_L0;
@@ -1093,37 +1176,55 @@ static PyObject *__pyx_pw_7strpipe_7toolkit_17invert_dictionary_1invert_dictiona
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7strpipe_7toolkit_17invert_dictionary_invert_dictionary(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_input_dict) {
+static PyObject *__pyx_pf_7strpipe_7toolkit_17invert_dictionary_invert_dictionary(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_input_dict, PyObject *__pyx_v_serializable) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("invert_dictionary", 0);
 
-  /* "strpipe/toolkit/invert_dictionary.pyx":4
- * 
- * def invert_dictionary(input_dict: dict):
- *     return invert_dictionary_in_c(input_dict=input_dict)             # <<<<<<<<<<<<<<
- * 
- * 
+  /* "strpipe/toolkit/invert_dictionary.pyx":7
+ *         serializable: bool=False,
+ *     ):
+ *     return invert_dictionary_in_c(             # <<<<<<<<<<<<<<
+ *         input_dict=input_dict,
+ *         serializable=serializable,
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary_in_c(__pyx_v_input_dict); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
+
+  /* "strpipe/toolkit/invert_dictionary.pyx":9
+ *     return invert_dictionary_in_c(
+ *         input_dict=input_dict,
+ *         serializable=serializable,             # <<<<<<<<<<<<<<
+ *     )
+ * 
+ */
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_serializable); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L1_error)
+
+  /* "strpipe/toolkit/invert_dictionary.pyx":7
+ *         serializable: bool=False,
+ *     ):
+ *     return invert_dictionary_in_c(             # <<<<<<<<<<<<<<
+ *         input_dict=input_dict,
+ *         serializable=serializable,
+ */
+  __pyx_t_2 = __pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary_in_c(__pyx_v_input_dict, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
   goto __pyx_L0;
 
   /* "strpipe/toolkit/invert_dictionary.pyx":3
  * 
  * 
- * def invert_dictionary(input_dict: dict):             # <<<<<<<<<<<<<<
- *     return invert_dictionary_in_c(input_dict=input_dict)
- * 
+ * def invert_dictionary(             # <<<<<<<<<<<<<<
+ *         input_dict: dict,
+ *         serializable: bool=False,
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("strpipe.toolkit.invert_dictionary.invert_dictionary", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -1132,18 +1233,19 @@ static PyObject *__pyx_pf_7strpipe_7toolkit_17invert_dictionary_invert_dictionar
   return __pyx_r;
 }
 
-/* "strpipe/toolkit/invert_dictionary.pyx":7
+/* "strpipe/toolkit/invert_dictionary.pyx":13
  * 
  * 
  * cdef dict invert_dictionary_in_c(             # <<<<<<<<<<<<<<
  *         dict input_dict,
- *     ):
+ *         bint serializable,
  */
 
-static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary_in_c(PyObject *__pyx_v_input_dict) {
+static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary_in_c(PyObject *__pyx_v_input_dict, int __pyx_v_serializable) {
   PyObject *__pyx_v_output_dict = 0;
   PyObject *__pyx_v_key = NULL;
   PyObject *__pyx_v_value = NULL;
+  PyObject *__pyx_v_output_key = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1158,19 +1260,19 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
   int __pyx_t_10;
   __Pyx_RefNannySetupContext("invert_dictionary_in_c", 0);
 
-  /* "strpipe/toolkit/invert_dictionary.pyx":10
- *         dict input_dict,
+  /* "strpipe/toolkit/invert_dictionary.pyx":17
+ *         bint serializable,
  *     ):
  *     cdef dict output_dict = {}             # <<<<<<<<<<<<<<
  * 
  *     for key, value in input_dict.items():
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_output_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/invert_dictionary.pyx":12
+  /* "strpipe/toolkit/invert_dictionary.pyx":19
  *     cdef dict output_dict = {}
  * 
  *     for key, value in input_dict.items():             # <<<<<<<<<<<<<<
@@ -1179,17 +1281,17 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
  */
   if (unlikely(__pyx_v_input_dict == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-    __PYX_ERR(0, 12, __pyx_L1_error)
+    __PYX_ERR(0, 19, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_PyDict_Items(__pyx_v_input_dict); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_Items(__pyx_v_input_dict); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 12, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -1197,17 +1299,17 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 12, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 19, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 12, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 19, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -1217,7 +1319,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 12, __pyx_L1_error)
+          else __PYX_ERR(0, 19, __pyx_L1_error)
         }
         break;
       }
@@ -1229,7 +1331,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 12, __pyx_L1_error)
+        __PYX_ERR(0, 19, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -1242,15 +1344,15 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
       __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(__pyx_t_6);
       #else
-      __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 12, __pyx_L1_error)
+      __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 12, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 19, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       #endif
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 12, __pyx_L1_error)
+      __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 19, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_8 = Py_TYPE(__pyx_t_7)->tp_iternext;
@@ -1258,7 +1360,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
       __Pyx_GOTREF(__pyx_t_5);
       index = 1; __pyx_t_6 = __pyx_t_8(__pyx_t_7); if (unlikely(!__pyx_t_6)) goto __pyx_L5_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_6);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 2) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 2) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
       __pyx_t_8 = NULL;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       goto __pyx_L6_unpacking_done;
@@ -1266,7 +1368,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_t_8 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 12, __pyx_L1_error)
+      __PYX_ERR(0, 19, __pyx_L1_error)
       __pyx_L6_unpacking_done:;
     }
     __Pyx_XDECREF_SET(__pyx_v_key, __pyx_t_5);
@@ -1274,25 +1376,25 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
     __Pyx_XDECREF_SET(__pyx_v_value, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "strpipe/toolkit/invert_dictionary.pyx":13
+    /* "strpipe/toolkit/invert_dictionary.pyx":20
  * 
  *     for key, value in input_dict.items():
  *         if value in output_dict:             # <<<<<<<<<<<<<<
  *             raise KeyError(
  *                 'duplicate value [{}]'.format(value),
  */
-    __pyx_t_9 = (__Pyx_PyDict_ContainsTF(__pyx_v_value, __pyx_v_output_dict, Py_EQ)); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 13, __pyx_L1_error)
+    __pyx_t_9 = (__Pyx_PyDict_ContainsTF(__pyx_v_value, __pyx_v_output_dict, Py_EQ)); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 20, __pyx_L1_error)
     __pyx_t_10 = (__pyx_t_9 != 0);
     if (unlikely(__pyx_t_10)) {
 
-      /* "strpipe/toolkit/invert_dictionary.pyx":15
+      /* "strpipe/toolkit/invert_dictionary.pyx":22
  *         if value in output_dict:
  *             raise KeyError(
  *                 'duplicate value [{}]'.format(value),             # <<<<<<<<<<<<<<
  *             )
- *         output_dict[value] = key
+ * 
  */
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_duplicate_value, __pyx_n_s_format); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 15, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_duplicate_value, __pyx_n_s_format); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 22, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_5 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -1305,13 +1407,13 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
         }
       }
       if (!__pyx_t_5) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_v_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_v_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
       } else {
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_6)) {
           PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_v_value};
-          __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_1);
         } else
@@ -1319,40 +1421,40 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
           PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_v_value};
-          __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_1);
         } else
         #endif
         {
-          __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 15, __pyx_L1_error)
+          __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 22, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
           __Pyx_INCREF(__pyx_v_value);
           __Pyx_GIVEREF(__pyx_v_value);
           PyTuple_SET_ITEM(__pyx_t_7, 0+1, __pyx_v_value);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         }
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "strpipe/toolkit/invert_dictionary.pyx":14
+      /* "strpipe/toolkit/invert_dictionary.pyx":21
  *     for key, value in input_dict.items():
  *         if value in output_dict:
  *             raise KeyError(             # <<<<<<<<<<<<<<
  *                 'duplicate value [{}]'.format(value),
  *             )
  */
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_KeyError, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 14, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_KeyError, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 21, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_Raise(__pyx_t_6, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __PYX_ERR(0, 14, __pyx_L1_error)
+      __PYX_ERR(0, 21, __pyx_L1_error)
 
-      /* "strpipe/toolkit/invert_dictionary.pyx":13
+      /* "strpipe/toolkit/invert_dictionary.pyx":20
  * 
  *     for key, value in input_dict.items():
  *         if value in output_dict:             # <<<<<<<<<<<<<<
@@ -1361,15 +1463,60 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
  */
     }
 
-    /* "strpipe/toolkit/invert_dictionary.pyx":17
- *                 'duplicate value [{}]'.format(value),
- *             )
- *         output_dict[value] = key             # <<<<<<<<<<<<<<
+    /* "strpipe/toolkit/invert_dictionary.pyx":26
+ * 
+ *         # for serialization
+ *         if serializable:             # <<<<<<<<<<<<<<
+ *             output_key = str(value)
+ *         else:
+ */
+    __pyx_t_10 = (__pyx_v_serializable != 0);
+    if (__pyx_t_10) {
+
+      /* "strpipe/toolkit/invert_dictionary.pyx":27
+ *         # for serialization
+ *         if serializable:
+ *             output_key = str(value)             # <<<<<<<<<<<<<<
+ *         else:
+ *             output_key = value
+ */
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_value); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 27, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_XDECREF_SET(__pyx_v_output_key, __pyx_t_6);
+      __pyx_t_6 = 0;
+
+      /* "strpipe/toolkit/invert_dictionary.pyx":26
+ * 
+ *         # for serialization
+ *         if serializable:             # <<<<<<<<<<<<<<
+ *             output_key = str(value)
+ *         else:
+ */
+      goto __pyx_L8;
+    }
+
+    /* "strpipe/toolkit/invert_dictionary.pyx":29
+ *             output_key = str(value)
+ *         else:
+ *             output_key = value             # <<<<<<<<<<<<<<
+ *         output_dict[output_key] = key
  *     return output_dict
  */
-    if (unlikely(PyDict_SetItem(__pyx_v_output_dict, __pyx_v_value, __pyx_v_key) < 0)) __PYX_ERR(0, 17, __pyx_L1_error)
+    /*else*/ {
+      __Pyx_INCREF(__pyx_v_value);
+      __Pyx_XDECREF_SET(__pyx_v_output_key, __pyx_v_value);
+    }
+    __pyx_L8:;
 
-    /* "strpipe/toolkit/invert_dictionary.pyx":12
+    /* "strpipe/toolkit/invert_dictionary.pyx":30
+ *         else:
+ *             output_key = value
+ *         output_dict[output_key] = key             # <<<<<<<<<<<<<<
+ *     return output_dict
+ */
+    if (unlikely(PyDict_SetItem(__pyx_v_output_dict, __pyx_v_output_key, __pyx_v_key) < 0)) __PYX_ERR(0, 30, __pyx_L1_error)
+
+    /* "strpipe/toolkit/invert_dictionary.pyx":19
  *     cdef dict output_dict = {}
  * 
  *     for key, value in input_dict.items():             # <<<<<<<<<<<<<<
@@ -1379,9 +1526,9 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "strpipe/toolkit/invert_dictionary.pyx":18
- *             )
- *         output_dict[value] = key
+  /* "strpipe/toolkit/invert_dictionary.pyx":31
+ *             output_key = value
+ *         output_dict[output_key] = key
  *     return output_dict             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
@@ -1389,12 +1536,12 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
   __pyx_r = __pyx_v_output_dict;
   goto __pyx_L0;
 
-  /* "strpipe/toolkit/invert_dictionary.pyx":7
+  /* "strpipe/toolkit/invert_dictionary.pyx":13
  * 
  * 
  * cdef dict invert_dictionary_in_c(             # <<<<<<<<<<<<<<
  *         dict input_dict,
- *     ):
+ *         bint serializable,
  */
 
   /* function exit code */
@@ -1410,6 +1557,7 @@ static PyObject *__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary
   __Pyx_XDECREF(__pyx_v_output_dict);
   __Pyx_XDECREF(__pyx_v_key);
   __Pyx_XDECREF(__pyx_v_value);
+  __Pyx_XDECREF(__pyx_v_output_key);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -1460,13 +1608,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_invert_dictionary, __pyx_k_invert_dictionary, sizeof(__pyx_k_invert_dictionary), 0, 0, 1, 1},
   {&__pyx_n_s_items, __pyx_k_items, sizeof(__pyx_k_items), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
+  {&__pyx_n_s_serializable, __pyx_k_serializable, sizeof(__pyx_k_serializable), 0, 0, 1, 1},
   {&__pyx_kp_s_strpipe_toolkit_invert_dictionar, __pyx_k_strpipe_toolkit_invert_dictionar, sizeof(__pyx_k_strpipe_toolkit_invert_dictionar), 0, 0, 1, 0},
   {&__pyx_n_s_strpipe_toolkit_invert_dictionar_2, __pyx_k_strpipe_toolkit_invert_dictionar_2, sizeof(__pyx_k_strpipe_toolkit_invert_dictionar_2), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_KeyError = __Pyx_GetBuiltinName(__pyx_n_s_KeyError); if (!__pyx_builtin_KeyError) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_builtin_KeyError = __Pyx_GetBuiltinName(__pyx_n_s_KeyError); if (!__pyx_builtin_KeyError) __PYX_ERR(0, 21, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1479,14 +1628,14 @@ static int __Pyx_InitCachedConstants(void) {
   /* "strpipe/toolkit/invert_dictionary.pyx":3
  * 
  * 
- * def invert_dictionary(input_dict: dict):             # <<<<<<<<<<<<<<
- *     return invert_dictionary_in_c(input_dict=input_dict)
- * 
+ * def invert_dictionary(             # <<<<<<<<<<<<<<
+ *         input_dict: dict,
+ *         serializable: bool=False,
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_n_s_input_dict); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(2, __pyx_n_s_input_dict, __pyx_n_s_serializable); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_invert_dictionar, __pyx_n_s_invert_dictionary, 3, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_strpipe_toolkit_invert_dictionar, __pyx_n_s_invert_dictionary, 3, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1530,7 +1679,7 @@ static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
-  if (__Pyx_ExportFunction("invert_dictionary_in_c", (void (*)(void))__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary_in_c, "PyObject *(PyObject *)") < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (__Pyx_ExportFunction("invert_dictionary_in_c", (void (*)(void))__pyx_f_7strpipe_7toolkit_17invert_dictionary_invert_dictionary_in_c, "PyObject *(PyObject *, int)") < 0) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1746,21 +1895,21 @@ if (!__Pyx_RefNanny) {
   /* "strpipe/toolkit/invert_dictionary.pyx":3
  * 
  * 
- * def invert_dictionary(input_dict: dict):             # <<<<<<<<<<<<<<
- *     return invert_dictionary_in_c(input_dict=input_dict)
- * 
+ * def invert_dictionary(             # <<<<<<<<<<<<<<
+ *         input_dict: dict,
+ *         serializable: bool=False,
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7strpipe_7toolkit_17invert_dictionary_1invert_dictionary, NULL, __pyx_n_s_strpipe_toolkit_invert_dictionar_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_invert_dictionary, __pyx_t_1) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "strpipe/toolkit/invert_dictionary.pyx":7
+  /* "strpipe/toolkit/invert_dictionary.pyx":13
  * 
  * 
  * cdef dict invert_dictionary_in_c(             # <<<<<<<<<<<<<<
  *         dict input_dict,
- *     ):
+ *         bint serializable,
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -1835,6 +1984,148 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
 #endif
     }
     return result;
+}
+
+/* RaiseDoubleKeywords */
+static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+/* ParseKeywords */
+static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    while (PyDict_Next(kwds, &pos, &key, &value)) {
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+            continue;
+        }
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (**name == key) ? 0 :
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key);
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    return -1;
+}
+
+/* RaiseArgTupleInvalid */
+static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
 }
 
 /* ArgTypeTest */

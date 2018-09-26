@@ -1,11 +1,13 @@
-import json
-
 import pytest
 
 from strpipe.data.types import STRING_LIST
 from strpipe.toolkit.default_tokens import DefaultTokens
-
 from strpipe.ops.pad import Pad
+
+from .state_serialization_issues import (
+    serializable,
+    unchange_after_serialize,
+)
 
 
 def test_pad_correctly_created():
@@ -73,26 +75,35 @@ def test_pad_passing_state_tokens_in_state_should_be_distinct():
         {'sentlen': 0, 'sentence_tail': []},
     ]
 
-    bad_state1 = {'maxlen': 5, 'pad_token': '<PAD>',
-                  'sos_token': '<PAD>', 'eos_token': '<eos>'}
-    bad_state2 = {'maxlen': 5, 'pad_token': '<PAD>',
-                  'sos_token': '<sos>', 'eos_token': '<PAD>'}
-    bad_state3 = {'maxlen': 5, 'pad_token': '<PAD>',
-                  'sos_token': '<boundary>', 'eos_token': '<boundary>'}
+    bad_state1 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<PAD>', 'eos_token': '<eos>'}
+    bad_state2 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<PAD>'}
+    bad_state3 = {
+        'maxlen': 5,
+        'pad_token': '<PAD>',
+        'sos_token': '<boundary>',
+        'eos_token': '<boundary>',
+    }  # cannot be one line, since it is too long
 
     for bad_state in (bad_state1, bad_state2, bad_state3):
         with pytest.raises(ValueError):
             padder.transform(bad_state, input_data)
 
-    state = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<eos>'}
+    state = {
+        'maxlen': 5,
+        'pad_token': '<PAD>',
+        'sos_token': '<sos>',
+        'eos_token': '<eos>',
+    }  # cannot be one line, since it is too long
     output_data, _ = padder.transform(state, input_data)
 
-    bad_state4 = {'maxlen': 5, 'pad_token': '<PAD>',
-                  'sos_token': '<PAD>', 'eos_token': '<eos>'}
-    bad_state5 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token':
-                  '<sos>', 'eos_token': '<PAD>'}
-    bad_state6 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token':
-                  '<boundary>', 'eos_token': '<boundary>'}
+    bad_state4 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<PAD>', 'eos_token': '<eos>'}
+    bad_state5 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<PAD>'}
+    bad_state6 = {
+        'maxlen': 5,
+        'pad_token': '<PAD>',
+        'sos_token': '<boundary>',
+        'eos_token': '<boundary>',
+    }  # cannot be one line, since it is too long
 
     for bad_state in (bad_state4, bad_state5, bad_state6):
         with pytest.raises(ValueError):
@@ -115,7 +126,8 @@ def test_pad_fit():
     assert state['maxlen'] == 6
     assert 'pad_token' in state
     assert state['pad_token'] == DefaultTokens.pad
-    assert json.dumps(state)  # serializable
+    serializable(state)
+    unchange_after_serialize(state)
 
 
 def test_pad_fit_with_sos_and_eos():
@@ -138,7 +150,8 @@ def test_pad_fit_with_sos_and_eos():
     assert state['sos_token'] == DefaultTokens.sos
     assert 'eos_token' in state
     assert state['eos_token'] == DefaultTokens.eos
-    assert json.dumps(state)  # serializable
+    serializable(state)
+    unchange_after_serialize(state)
 
 
 def test_pad_transform():
@@ -284,4 +297,5 @@ def test_pad_with_custom_kwargs_fit():
 
     assert state['maxlen'] == expected_maxlen
     assert state['pad_token'] == expected_other_token
-    assert json.dumps(state)  # serialzable
+    serializable(state)
+    unchange_after_serialize(state)
