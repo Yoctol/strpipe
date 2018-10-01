@@ -1,7 +1,10 @@
 from strpipe.ops.base cimport BaseOp
 from strpipe.toolkit.compute_maxlen cimport compute_maxlen_in_c
-from strpipe.toolkit.add_start_end_token cimport add_start_end_token_in_sentences_in_c
-from strpipe.toolkit.compute_bdd_sentlens cimport compute_bounded_sentlens_in_c
+from strpipe.toolkit.add_start_end_token cimport (  # noqa: E211
+    add_start_end_token_in_sentences_in_c,
+    add_start_end_token_in_sentences_meta_in_c,
+    remove_start_end_token_in_sentences_in_c,
+)
 from strpipe.toolkit.pad_sentences cimport (  # noqa: E211
     pad_sentences_in_c,
     pad_sentences_meta_in_c,
@@ -29,12 +32,12 @@ cdef class Pad(BaseOp):
     cdef int _maxlen
 
     def __init__(
-        self,
-        str sos_token=DefaultTokens.nul,
-        str eos_token=DefaultTokens.nul,
-        str pad_token=DefaultTokens.pad,
-        int maxlen=-1,
-    ):
+            self,
+            str sos_token=DefaultTokens.nul,
+            str eos_token=DefaultTokens.nul,
+            str pad_token=DefaultTokens.pad,
+            int maxlen=-1,
+        ):
         self.input_type = STRING_LIST
         self.output_type = STRING_LIST
         self._pad_token = pad_token
@@ -113,37 +116,34 @@ cdef class Pad(BaseOp):
                              "and end-of-sentence token not just one.")
         self._check_tokens(sos_token, eos_token, pad_token)
 
-        if sos_token != DefaultTokens.nul:
-            input_data = input_data[: (maxlen - 2)]
-            sentences_with_boundary_tokens = add_start_end_token_in_sentences_in_c(
-                input_data,
-                sos_token,
-                eos_token,
-            )
-            tx_info = pad_sentences_meta_in_c(
-                sentences=input_data,
-                pad_token=pad_token,
-                maxlen=maxlen - 1,
-            )
-            padded_sentences = pad_sentences_in_c(
-                sentences=sentences_with_boundary_tokens,
-                pad_token=pad_token,
-                maxlen=maxlen,
-            )
+        # add start token and end token
+        start_end_tx_info = add_start_end_token_in_sentences_meta_in_c(
+            sentences=input_data,
+            sos_token=sos_token,
+            eos_token=eos_token,
+        )
+        sentences_with_boundary_tokens = add_start_end_token_in_sentences_in_c(
+            sentences=input_data,
+            sos_token=sos_token,
+            eos_token=eos_token,
+        )
 
-        else:
-            tx_info = pad_sentences_meta_in_c(
-                sentences=input_data,
-                pad_token=pad_token,
-                maxlen=maxlen,
-            )
-            padded_sentences = pad_sentences_in_c(
-                sentences=input_data,
-                pad_token=pad_token,
-                maxlen=maxlen,
-            )
+        # pad sentences
+        pad_tx_info = pad_sentences_meta_in_c(
+            sentences=sentences_with_boundary_tokens,
+            pad_token=pad_token,
+            maxlen=maxlen,
+        )
+        padded_sentences = pad_sentences_in_c(
+            sentences=sentences_with_boundary_tokens,
+            pad_token=pad_token,
+            maxlen=maxlen,
+        )
 
-        return padded_sentences, tx_info
+        return padded_sentences, {
+            'add_sos_eos': start_end_tx_info,
+            'pad': pad_tx_info,
+        }
 
     def inverse_transform(self, state, input_data, tx_info):
         """Remove eos, sos and padding.
@@ -174,15 +174,14 @@ cdef class Pad(BaseOp):
         cdef list s_list
         cdef unsigned int n_sent
 
-        # Strip SOS
-        if sos_token != DefaultTokens.nul:
-            s_list = []
-            n_sent = len(input_data)
-            for i in range(n_sent):
-                s_list.append(input_data[i][1:])
-            return unpad_sentences_in_c(s_list, tx_info)
-
-        return unpad_sentences_in_c(
+        # unpad sentences
+        sents_wo_pad = unpad_sentences_in_c(
             input_data,
-            tx_info,
+            meta=tx_info['pad'],
         )
+        # remove start token and end token
+        output_data = remove_start_end_token_in_sentences_in_c(
+            sentences=sents_wo_pad,
+            meta=tx_info['add_sos_eos'],
+        )
+        return output_data

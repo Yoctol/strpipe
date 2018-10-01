@@ -20,11 +20,15 @@ REGRESSION_SUITES = [
                 output=TransformResult(
                     output=[['a', 'b'], ['c', '<PAD>'], ['d', 'e']],
                     tx_info=[
-                        [
-                            {'sentlen': 2, 'sentence_tail': []},
-                            {'sentlen': 1, 'sentence_tail': []},
-                            {'sentlen': 3, 'sentence_tail': ['f']}
-                        ],
+                        {
+                            'pad':
+                            [
+                                {'sentlen': 2, 'sentence_tail': []},
+                                {'sentlen': 1, 'sentence_tail': []},
+                                {'sentlen': 3, 'sentence_tail': ['f']}
+                            ],
+                            'add_sos_eos': [[False, False]] * 3,
+                        },
                     ],
                 ),
             )
@@ -34,11 +38,15 @@ REGRESSION_SUITES = [
                 input=TransformResult(
                     output=[['a', 'b'], ['c', '<PAD>'], ['d', 'e']],
                     tx_info=[
-                        [
-                            {'sentlen': 2, 'sentence_tail': []},
-                            {'sentlen': 1, 'sentence_tail': []},
-                            {'sentlen': 3, 'sentence_tail': ['f']}
-                        ],
+                        {
+                            'pad':
+                            [
+                                {'sentlen': 2, 'sentence_tail': []},
+                                {'sentlen': 1, 'sentence_tail': []},
+                                {'sentlen': 3, 'sentence_tail': ['f']}
+                            ],
+                            'add_sos_eos': [[False, False]] * 3,
+                        },
                     ],
                 ),
                 output=[['a', 'b'], ['c'], ['d', 'e', 'f']],
@@ -62,5 +70,6 @@ def test_regression_all_suites():
             assert actual_tx_info == case.output.tx_info
 
         for case in suite[INVERSE_TRANSFORM_CASES_KEY]:
-            actual_output = p.inverse_transform(case.input.output, case.input.tx_info)
+            actual_output = p.inverse_transform(
+                case.input.output, case.input.tx_info)
             assert actual_output == case.output

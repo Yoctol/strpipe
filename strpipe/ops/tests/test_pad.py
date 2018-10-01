@@ -42,12 +42,16 @@ def test_pad_passing_state_needs_both_sos_and_eos_or_neither():
     input_data = [
         [],
     ]
-    tx_info = [
-        {'sentlen': 0, 'sentence_tail': []},
-    ]
+    tx_info = {
+        'pad': [
+            {'sentlen': 0, 'sentence_tail': []},
+        ],
+        'add_sos_eos': [[False, False]],
+    }
 
     state1 = {'maxlen': 0, 'pad_token': '<PAD>'}
-    state2 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<eos>'}
+    state2 = {'maxlen': 2, 'pad_token': '<PAD>',
+              'sos_token': '<sos>', 'eos_token': '<eos>'}
     state3 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>'}
     state4 = {'maxlen': 2, 'pad_token': '<PAD>', 'eos_token': '<eos>'}
 
@@ -71,9 +75,12 @@ def test_pad_passing_state_tokens_in_state_should_be_distinct():
     input_data = [
         ["a", "b", "c"],
     ]
-    tx_info = [
-        {'sentlen': 0, 'sentence_tail': []},
-    ]
+    tx_info = {
+        'pad': [
+            {'sentlen': 0, 'sentence_tail': []},
+        ],
+        'add_sos_eos': [[False, False]],
+    }
 
     bad_state1 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<PAD>', 'eos_token': '<eos>'}
     bad_state2 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<PAD>'}
@@ -176,11 +183,17 @@ def test_pad_transform():
 
     output_data, tx_info = padder.transform(state, input_data)
     assert output_data == expected_output
-    assert len(tx_info) == len(output_data)
-    sentlens = [t['sentlen'] for t in tx_info]
-    sentence_tail = [t['sentence_tail'] for t in tx_info]
+    assert len(tx_info['pad']) == len(output_data)
+    assert len(tx_info['add_sos_eos']) == len(output_data)
+
+    # tx info from pad func
+    sentlens = [t['sentlen'] for t in tx_info['pad']]
+    sentence_tail = [t['sentence_tail'] for t in tx_info['pad']]
     assert sentlens == [5, 9, 7]
     assert sentence_tail == [[], ['s', 's'], []]
+
+    # tf info from add sos eos func
+    assert [[False, False]] * len(output_data) == tx_info['add_sos_eos']
 
 
 def test_pad_transform_with_sos_and_eos():
@@ -193,7 +206,6 @@ def test_pad_transform_with_sos_and_eos():
         'pad_token': pto,
         'sos_token': sto,
         'eos_token': eto,
-
     }
 
     input_data = [
@@ -210,11 +222,17 @@ def test_pad_transform_with_sos_and_eos():
 
     output_data, tx_info = padder.transform(state, input_data)
     assert output_data == expected_output
-    assert len(tx_info) == len(output_data)
-    sentlens = [t['sentlen'] for t in tx_info]
-    sentence_tail = [t['sentence_tail'] for t in tx_info]
-    assert sentlens == [5, 9, 7]
-    assert sentence_tail == [[], ['s'], []]
+    assert len(tx_info['pad']) == len(output_data)
+    assert len(tx_info['add_sos_eos']) == len(output_data)
+
+    # tx info from pad func
+    sentlens = [t['sentlen'] for t in tx_info['pad']]
+    sentence_tail = [t['sentence_tail'] for t in tx_info['pad']]
+    assert sentlens == [7, 11, 9]
+    assert sentence_tail == [[], ['s', '<BYE>'], []]
+
+    # tf info from add sos eos func
+    assert [[True, True]] * len(output_data) == tx_info['add_sos_eos']
 
 
 def test_pad_inverse_transform():
@@ -230,11 +248,18 @@ def test_pad_inverse_transform():
         ['h', 'a', 'p', 'p', 'i', 'n', 'e'],
         ['h', 'a', 'p', 'p', 'i', 'l', 'y'],
     ]
-    tx_info = [
-        {'sentlen': 5, 'sentence_tail': []},
-        {'sentlen': 9, 'sentence_tail': ['s', 's']},
-        {'sentlen': 7, 'sentence_tail': []},
-    ]
+    tx_info = {
+        'pad': [
+            {'sentlen': 5, 'sentence_tail': []},
+            {'sentlen': 9, 'sentence_tail': ['s', 's']},
+            {'sentlen': 7, 'sentence_tail': []},
+        ],
+        'add_sos_eos': [
+            [False, False],
+            [False, False],
+            [False, False],
+        ],
+    }
 
     expected_tx_data = [
         ['h', 'a', 'p', 'p', 'y'],  # shorter
@@ -263,11 +288,18 @@ def test_pad_inverse_transform_with_sos_and_eos():
         [sto, 'h', 'a', 'p', 'p', 'i', 'l', 'y', eto],
     ]
 
-    tx_info = [
-        {'sentlen': 5, 'sentence_tail': []},
-        {'sentlen': 9, 'sentence_tail': ['s']},
-        {'sentlen': 7, 'sentence_tail': []},
-    ]
+    tx_info = {
+        'pad': [
+            {'sentlen': 7, 'sentence_tail': []},
+            {'sentlen': 11, 'sentence_tail': ['s', eto]},
+            {'sentlen': 9, 'sentence_tail': []},
+        ],
+        'add_sos_eos': [
+            [True, True],
+            [True, True],
+            [True, True],
+        ],
+    }
 
     expected_tx_data = [
         ['h', 'a', 'p', 'p', 'y'],  # shorter
