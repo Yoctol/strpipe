@@ -1170,6 +1170,7 @@ int __pyx_module_is_main_strpipe__ops__add_sos_eos = 0;
 static PyObject *__pyx_builtin_ValueError;
 static const char __pyx_k_eos[] = "eos";
 static const char __pyx_k_new[] = "__new__";
+static const char __pyx_k_nul[] = "nul";
 static const char __pyx_k_sos[] = "sos";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_main[] = "__main__";
@@ -1225,6 +1226,7 @@ static PyObject *__pyx_n_s_input_data;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_new;
+static PyObject *__pyx_n_s_nul;
 static PyObject *__pyx_n_s_pickle;
 static PyObject *__pyx_n_s_pyx_PickleError;
 static PyObject *__pyx_n_s_pyx_checksum;
@@ -1352,7 +1354,12 @@ static int __pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos___init__(struct __pyx
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
+  __Pyx_INCREF(__pyx_v_sos_token);
+  __Pyx_INCREF(__pyx_v_eos_token);
 
   /* "strpipe/ops/add_sos_eos.pyx":32
  *             str eos_token=DefaultTokens.eos,
@@ -1375,7 +1382,7 @@ static int __pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos___init__(struct __pyx
  *         self.input_type = STRING_LIST
  *         self.output_type = STRING_LIST             # <<<<<<<<<<<<<<
  * 
- *         self._sos_token = sos_token
+ *         if sos_token is None:
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_STRING_LIST); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -1389,6 +1396,78 @@ static int __pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos___init__(struct __pyx
   /* "strpipe/ops/add_sos_eos.pyx":35
  *         self.output_type = STRING_LIST
  * 
+ *         if sos_token is None:             # <<<<<<<<<<<<<<
+ *             sos_token = DefaultTokens.nul
+ *         if eos_token is None:
+ */
+  __pyx_t_2 = (__pyx_v_sos_token == ((PyObject*)Py_None));
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "strpipe/ops/add_sos_eos.pyx":36
+ * 
+ *         if sos_token is None:
+ *             sos_token = DefaultTokens.nul             # <<<<<<<<<<<<<<
+ *         if eos_token is None:
+ *             eos_token = DefaultTokens.nul
+ */
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_nul); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 36, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (!(likely(PyString_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_4)->tp_name), 0))) __PYX_ERR(0, 36, __pyx_L1_error)
+    __Pyx_DECREF_SET(__pyx_v_sos_token, ((PyObject*)__pyx_t_4));
+    __pyx_t_4 = 0;
+
+    /* "strpipe/ops/add_sos_eos.pyx":35
+ *         self.output_type = STRING_LIST
+ * 
+ *         if sos_token is None:             # <<<<<<<<<<<<<<
+ *             sos_token = DefaultTokens.nul
+ *         if eos_token is None:
+ */
+  }
+
+  /* "strpipe/ops/add_sos_eos.pyx":37
+ *         if sos_token is None:
+ *             sos_token = DefaultTokens.nul
+ *         if eos_token is None:             # <<<<<<<<<<<<<<
+ *             eos_token = DefaultTokens.nul
+ * 
+ */
+  __pyx_t_3 = (__pyx_v_eos_token == ((PyObject*)Py_None));
+  __pyx_t_2 = (__pyx_t_3 != 0);
+  if (__pyx_t_2) {
+
+    /* "strpipe/ops/add_sos_eos.pyx":38
+ *             sos_token = DefaultTokens.nul
+ *         if eos_token is None:
+ *             eos_token = DefaultTokens.nul             # <<<<<<<<<<<<<<
+ * 
+ *         self._sos_token = sos_token
+ */
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_DefaultTokens); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_nul); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 38, __pyx_L1_error)
+    __Pyx_DECREF_SET(__pyx_v_eos_token, ((PyObject*)__pyx_t_1));
+    __pyx_t_1 = 0;
+
+    /* "strpipe/ops/add_sos_eos.pyx":37
+ *         if sos_token is None:
+ *             sos_token = DefaultTokens.nul
+ *         if eos_token is None:             # <<<<<<<<<<<<<<
+ *             eos_token = DefaultTokens.nul
+ * 
+ */
+  }
+
+  /* "strpipe/ops/add_sos_eos.pyx":40
+ *             eos_token = DefaultTokens.nul
+ * 
  *         self._sos_token = sos_token             # <<<<<<<<<<<<<<
  *         self._eos_token = eos_token
  * 
@@ -1399,7 +1478,7 @@ static int __pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos___init__(struct __pyx
   __Pyx_DECREF(__pyx_v_self->_sos_token);
   __pyx_v_self->_sos_token = __pyx_v_sos_token;
 
-  /* "strpipe/ops/add_sos_eos.pyx":36
+  /* "strpipe/ops/add_sos_eos.pyx":41
  * 
  *         self._sos_token = sos_token
  *         self._eos_token = eos_token             # <<<<<<<<<<<<<<
@@ -1425,14 +1504,17 @@ static int __pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos___init__(struct __pyx
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("strpipe.ops.add_sos_eos.AddSosEos.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_sos_token);
+  __Pyx_XDECREF(__pyx_v_eos_token);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "strpipe/ops/add_sos_eos.pyx":38
+/* "strpipe/ops/add_sos_eos.pyx":43
  *         self._eos_token = eos_token
  * 
  *     def fit(self, input_data):             # <<<<<<<<<<<<<<
@@ -1465,14 +1547,14 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_2fit(struct __p
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("fit", 0);
 
-  /* "strpipe/ops/add_sos_eos.pyx":45
+  /* "strpipe/ops/add_sos_eos.pyx":50
  *         """
  *         check_sos, check_eos = are_tokens_in_sentences_in_c(
  *             tokens=[self._sos_token, self._eos_token],             # <<<<<<<<<<<<<<
  *             sentences=input_data,
  *         )
  */
-  __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_self->_sos_token);
   __Pyx_GIVEREF(__pyx_v_self->_sos_token);
@@ -1481,23 +1563,23 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_2fit(struct __p
   __Pyx_GIVEREF(__pyx_v_self->_eos_token);
   PyList_SET_ITEM(__pyx_t_1, 1, __pyx_v_self->_eos_token);
 
-  /* "strpipe/ops/add_sos_eos.pyx":46
+  /* "strpipe/ops/add_sos_eos.pyx":51
  *         check_sos, check_eos = are_tokens_in_sentences_in_c(
  *             tokens=[self._sos_token, self._eos_token],
  *             sentences=input_data,             # <<<<<<<<<<<<<<
  *         )
  *         if check_sos:
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 51, __pyx_L1_error)
 
-  /* "strpipe/ops/add_sos_eos.pyx":44
+  /* "strpipe/ops/add_sos_eos.pyx":49
  *             input_data: input data
  *         """
  *         check_sos, check_eos = are_tokens_in_sentences_in_c(             # <<<<<<<<<<<<<<
  *             tokens=[self._sos_token, self._eos_token],
  *             sentences=input_data,
  */
-  __pyx_t_2 = __pyx_f_7strpipe_7toolkit_19tokens_in_sentences_are_tokens_in_sentences_in_c(((PyObject*)__pyx_t_1), ((PyObject*)__pyx_v_input_data)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_7strpipe_7toolkit_19tokens_in_sentences_are_tokens_in_sentences_in_c(((PyObject*)__pyx_t_1), ((PyObject*)__pyx_v_input_data)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (likely(__pyx_t_2 != Py_None)) {
@@ -1506,7 +1588,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_2fit(struct __p
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 44, __pyx_L1_error)
+      __PYX_ERR(0, 49, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     __pyx_t_1 = PyList_GET_ITEM(sequence, 0); 
@@ -1514,44 +1596,44 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_2fit(struct __p
     __Pyx_INCREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_t_3);
     #else
-    __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+    __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     #endif
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else {
-    __Pyx_RaiseNoneNotIterableError(); __PYX_ERR(0, 44, __pyx_L1_error)
+    __Pyx_RaiseNoneNotIterableError(); __PYX_ERR(0, 49, __pyx_L1_error)
   }
   __pyx_v_check_sos = __pyx_t_1;
   __pyx_t_1 = 0;
   __pyx_v_check_eos = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "strpipe/ops/add_sos_eos.pyx":48
+  /* "strpipe/ops/add_sos_eos.pyx":53
  *             sentences=input_data,
  *         )
  *         if check_sos:             # <<<<<<<<<<<<<<
  *             raise ValueError('SOS tokens are in input_data')
  *         if check_eos:
  */
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_check_sos); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_check_sos); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 53, __pyx_L1_error)
   if (unlikely(__pyx_t_4)) {
 
-    /* "strpipe/ops/add_sos_eos.pyx":49
+    /* "strpipe/ops/add_sos_eos.pyx":54
  *         )
  *         if check_sos:
  *             raise ValueError('SOS tokens are in input_data')             # <<<<<<<<<<<<<<
  *         if check_eos:
  *             raise ValueError('EOS tokens are in input_data')
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 49, __pyx_L1_error)
+    __PYX_ERR(0, 54, __pyx_L1_error)
 
-    /* "strpipe/ops/add_sos_eos.pyx":48
+    /* "strpipe/ops/add_sos_eos.pyx":53
  *             sentences=input_data,
  *         )
  *         if check_sos:             # <<<<<<<<<<<<<<
@@ -1560,30 +1642,30 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_2fit(struct __p
  */
   }
 
-  /* "strpipe/ops/add_sos_eos.pyx":50
+  /* "strpipe/ops/add_sos_eos.pyx":55
  *         if check_sos:
  *             raise ValueError('SOS tokens are in input_data')
  *         if check_eos:             # <<<<<<<<<<<<<<
  *             raise ValueError('EOS tokens are in input_data')
  * 
  */
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_check_eos); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_check_eos); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 55, __pyx_L1_error)
   if (unlikely(__pyx_t_4)) {
 
-    /* "strpipe/ops/add_sos_eos.pyx":51
+    /* "strpipe/ops/add_sos_eos.pyx":56
  *             raise ValueError('SOS tokens are in input_data')
  *         if check_eos:
  *             raise ValueError('EOS tokens are in input_data')             # <<<<<<<<<<<<<<
  * 
  *         return None
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 51, __pyx_L1_error)
+    __PYX_ERR(0, 56, __pyx_L1_error)
 
-    /* "strpipe/ops/add_sos_eos.pyx":50
+    /* "strpipe/ops/add_sos_eos.pyx":55
  *         if check_sos:
  *             raise ValueError('SOS tokens are in input_data')
  *         if check_eos:             # <<<<<<<<<<<<<<
@@ -1592,7 +1674,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_2fit(struct __p
  */
   }
 
-  /* "strpipe/ops/add_sos_eos.pyx":53
+  /* "strpipe/ops/add_sos_eos.pyx":58
  *             raise ValueError('EOS tokens are in input_data')
  * 
  *         return None             # <<<<<<<<<<<<<<
@@ -1603,7 +1685,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_2fit(struct __p
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
 
-  /* "strpipe/ops/add_sos_eos.pyx":38
+  /* "strpipe/ops/add_sos_eos.pyx":43
  *         self._eos_token = eos_token
  * 
  *     def fit(self, input_data):             # <<<<<<<<<<<<<<
@@ -1626,7 +1708,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_2fit(struct __p
   return __pyx_r;
 }
 
-/* "strpipe/ops/add_sos_eos.pyx":55
+/* "strpipe/ops/add_sos_eos.pyx":60
  *         return None
  * 
  *     def transform(self, state, input_data):             # <<<<<<<<<<<<<<
@@ -1666,11 +1748,11 @@ static PyObject *__pyx_pw_7strpipe_3ops_11add_sos_eos_9AddSosEos_5transform(PyOb
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_input_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, 1); __PYX_ERR(0, 55, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, 1); __PYX_ERR(0, 60, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "transform") < 0)) __PYX_ERR(0, 55, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "transform") < 0)) __PYX_ERR(0, 60, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1683,7 +1765,7 @@ static PyObject *__pyx_pw_7strpipe_3ops_11add_sos_eos_9AddSosEos_5transform(PyOb
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 55, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 60, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.ops.add_sos_eos.AddSosEos.transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1706,16 +1788,16 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_4transform(stru
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("transform", 0);
 
-  /* "strpipe/ops/add_sos_eos.pyx":65
+  /* "strpipe/ops/add_sos_eos.pyx":70
  *         # add start token and end token
  *         start_end_tx_info = add_start_end_token_in_sentences_meta_in_c(
  *             sentences=input_data,             # <<<<<<<<<<<<<<
  *             sos_token=self._sos_token,
  *             eos_token=self._eos_token,
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 65, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 70, __pyx_L1_error)
 
-  /* "strpipe/ops/add_sos_eos.pyx":66
+  /* "strpipe/ops/add_sos_eos.pyx":71
  *         start_end_tx_info = add_start_end_token_in_sentences_meta_in_c(
  *             sentences=input_data,
  *             sos_token=self._sos_token,             # <<<<<<<<<<<<<<
@@ -1725,7 +1807,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_4transform(stru
   __pyx_t_1 = __pyx_v_self->_sos_token;
   __Pyx_INCREF(__pyx_t_1);
 
-  /* "strpipe/ops/add_sos_eos.pyx":67
+  /* "strpipe/ops/add_sos_eos.pyx":72
  *             sentences=input_data,
  *             sos_token=self._sos_token,
  *             eos_token=self._eos_token,             # <<<<<<<<<<<<<<
@@ -1735,30 +1817,30 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_4transform(stru
   __pyx_t_2 = __pyx_v_self->_eos_token;
   __Pyx_INCREF(__pyx_t_2);
 
-  /* "strpipe/ops/add_sos_eos.pyx":64
+  /* "strpipe/ops/add_sos_eos.pyx":69
  * 
  *         # add start token and end token
  *         start_end_tx_info = add_start_end_token_in_sentences_meta_in_c(             # <<<<<<<<<<<<<<
  *             sentences=input_data,
  *             sos_token=self._sos_token,
  */
-  __pyx_t_3 = __pyx_f_7strpipe_7toolkit_19add_start_end_token_add_start_end_token_in_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_t_1), ((PyObject*)__pyx_t_2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_7strpipe_7toolkit_19add_start_end_token_add_start_end_token_in_sentences_meta_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_t_1), ((PyObject*)__pyx_t_2)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_start_end_tx_info = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "strpipe/ops/add_sos_eos.pyx":70
+  /* "strpipe/ops/add_sos_eos.pyx":75
  *         )
  *         output_sentences = add_start_end_token_in_sentences_in_c(
  *             sentences=input_data,             # <<<<<<<<<<<<<<
  *             sos_token=self._sos_token,
  *             eos_token=self._eos_token,
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 70, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 75, __pyx_L1_error)
 
-  /* "strpipe/ops/add_sos_eos.pyx":71
+  /* "strpipe/ops/add_sos_eos.pyx":76
  *         output_sentences = add_start_end_token_in_sentences_in_c(
  *             sentences=input_data,
  *             sos_token=self._sos_token,             # <<<<<<<<<<<<<<
@@ -1768,7 +1850,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_4transform(stru
   __pyx_t_3 = __pyx_v_self->_sos_token;
   __Pyx_INCREF(__pyx_t_3);
 
-  /* "strpipe/ops/add_sos_eos.pyx":72
+  /* "strpipe/ops/add_sos_eos.pyx":77
  *             sentences=input_data,
  *             sos_token=self._sos_token,
  *             eos_token=self._eos_token,             # <<<<<<<<<<<<<<
@@ -1778,21 +1860,21 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_4transform(stru
   __pyx_t_2 = __pyx_v_self->_eos_token;
   __Pyx_INCREF(__pyx_t_2);
 
-  /* "strpipe/ops/add_sos_eos.pyx":69
+  /* "strpipe/ops/add_sos_eos.pyx":74
  *             eos_token=self._eos_token,
  *         )
  *         output_sentences = add_start_end_token_in_sentences_in_c(             # <<<<<<<<<<<<<<
  *             sentences=input_data,
  *             sos_token=self._sos_token,
  */
-  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_19add_start_end_token_add_start_end_token_in_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_t_3), ((PyObject*)__pyx_t_2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_19add_start_end_token_add_start_end_token_in_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_t_3), ((PyObject*)__pyx_t_2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_output_sentences = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/add_sos_eos.pyx":74
+  /* "strpipe/ops/add_sos_eos.pyx":79
  *             eos_token=self._eos_token,
  *         )
  *         return output_sentences, start_end_tx_info             # <<<<<<<<<<<<<<
@@ -1800,7 +1882,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_4transform(stru
  *     def inverse_transform(self, state, input_data, tx_info):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_output_sentences);
   __Pyx_GIVEREF(__pyx_v_output_sentences);
@@ -1812,7 +1894,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_4transform(stru
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "strpipe/ops/add_sos_eos.pyx":55
+  /* "strpipe/ops/add_sos_eos.pyx":60
  *         return None
  * 
  *     def transform(self, state, input_data):             # <<<<<<<<<<<<<<
@@ -1835,7 +1917,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_4transform(stru
   return __pyx_r;
 }
 
-/* "strpipe/ops/add_sos_eos.pyx":76
+/* "strpipe/ops/add_sos_eos.pyx":81
  *         return output_sentences, start_end_tx_info
  * 
  *     def inverse_transform(self, state, input_data, tx_info):             # <<<<<<<<<<<<<<
@@ -1878,17 +1960,17 @@ static PyObject *__pyx_pw_7strpipe_3ops_11add_sos_eos_9AddSosEos_7inverse_transf
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_input_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 1); __PYX_ERR(0, 76, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 1); __PYX_ERR(0, 81, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_tx_info)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 2); __PYX_ERR(0, 76, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, 2); __PYX_ERR(0, 81, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "inverse_transform") < 0)) __PYX_ERR(0, 76, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "inverse_transform") < 0)) __PYX_ERR(0, 81, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1903,7 +1985,7 @@ static PyObject *__pyx_pw_7strpipe_3ops_11add_sos_eos_9AddSosEos_7inverse_transf
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 76, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("inverse_transform", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 81, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("strpipe.ops.add_sos_eos.AddSosEos.inverse_transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1923,37 +2005,37 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_6inverse_transf
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("inverse_transform", 0);
 
-  /* "strpipe/ops/add_sos_eos.pyx":86
+  /* "strpipe/ops/add_sos_eos.pyx":91
  *         # remove start token and end token
  *         output_data = remove_start_end_token_in_sentences_in_c(
  *             sentences=input_data,             # <<<<<<<<<<<<<<
  *             meta=tx_info,
  *         )
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 86, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_input_data))||((__pyx_v_input_data) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_input_data)->tp_name), 0))) __PYX_ERR(0, 91, __pyx_L1_error)
 
-  /* "strpipe/ops/add_sos_eos.pyx":87
+  /* "strpipe/ops/add_sos_eos.pyx":92
  *         output_data = remove_start_end_token_in_sentences_in_c(
  *             sentences=input_data,
  *             meta=tx_info,             # <<<<<<<<<<<<<<
  *         )
  *         return output_data
  */
-  if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 87, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_v_tx_info))||((__pyx_v_tx_info) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_tx_info)->tp_name), 0))) __PYX_ERR(0, 92, __pyx_L1_error)
 
-  /* "strpipe/ops/add_sos_eos.pyx":85
+  /* "strpipe/ops/add_sos_eos.pyx":90
  *         """
  *         # remove start token and end token
  *         output_data = remove_start_end_token_in_sentences_in_c(             # <<<<<<<<<<<<<<
  *             sentences=input_data,
  *             meta=tx_info,
  */
-  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_19add_start_end_token_remove_start_end_token_in_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7strpipe_7toolkit_19add_start_end_token_remove_start_end_token_in_sentences_in_c(((PyObject*)__pyx_v_input_data), ((PyObject*)__pyx_v_tx_info)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_output_data = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "strpipe/ops/add_sos_eos.pyx":89
+  /* "strpipe/ops/add_sos_eos.pyx":94
  *             meta=tx_info,
  *         )
  *         return output_data             # <<<<<<<<<<<<<<
@@ -1963,7 +2045,7 @@ static PyObject *__pyx_pf_7strpipe_3ops_11add_sos_eos_9AddSosEos_6inverse_transf
   __pyx_r = __pyx_v_output_data;
   goto __pyx_L0;
 
-  /* "strpipe/ops/add_sos_eos.pyx":76
+  /* "strpipe/ops/add_sos_eos.pyx":81
  *         return output_sentences, start_end_tx_info
  * 
  *     def inverse_transform(self, state, input_data, tx_info):             # <<<<<<<<<<<<<<
@@ -2967,6 +3049,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_new, __pyx_k_new, sizeof(__pyx_k_new), 0, 0, 1, 1},
+  {&__pyx_n_s_nul, __pyx_k_nul, sizeof(__pyx_k_nul), 0, 0, 1, 1},
   {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_PickleError, __pyx_k_pyx_PickleError, sizeof(__pyx_k_pyx_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_checksum, __pyx_k_pyx_checksum, sizeof(__pyx_k_pyx_checksum), 0, 0, 1, 1},
@@ -2993,7 +3076,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 54, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3003,25 +3086,25 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "strpipe/ops/add_sos_eos.pyx":49
+  /* "strpipe/ops/add_sos_eos.pyx":54
  *         )
  *         if check_sos:
  *             raise ValueError('SOS tokens are in input_data')             # <<<<<<<<<<<<<<
  *         if check_eos:
  *             raise ValueError('EOS tokens are in input_data')
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_SOS_tokens_are_in_input_data); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_SOS_tokens_are_in_input_data); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "strpipe/ops/add_sos_eos.pyx":51
+  /* "strpipe/ops/add_sos_eos.pyx":56
  *             raise ValueError('SOS tokens are in input_data')
  *         if check_eos:
  *             raise ValueError('EOS tokens are in input_data')             # <<<<<<<<<<<<<<
  * 
  *         return None
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_EOS_tokens_are_in_input_data); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_EOS_tokens_are_in_input_data); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 

@@ -63,7 +63,7 @@ def test_transform():
 
 
 def test_transform_wo_sos():
-    op = AddSosEos(sos_token=DefaultTokens.nul)
+    op = AddSosEos(sos_token=None)
     input_data = [
         ['1', '2', '3'],
         ['alvin', '喜歡', '吃', '榴槤'],
@@ -85,7 +85,7 @@ def test_transform_wo_sos():
 
 
 def test_transform_wo_eos():
-    op = AddSosEos(eos_token=DefaultTokens.nul)
+    op = AddSosEos(eos_token=None)
     input_data = [
         ['1', '2', '3'],
         ['alvin', '喜歡', '吃', '榴槤'],
@@ -108,8 +108,8 @@ def test_transform_wo_eos():
 
 def test_transform_wo_all():
     op = AddSosEos(
-        sos_token=DefaultTokens.nul,
-        eos_token=DefaultTokens.nul,
+        sos_token=None,
+        eos_token=None,
     )
     input_data = [
         ['1', '2', '3'],
@@ -131,8 +131,56 @@ def test_transform_wo_all():
     ]
 
 
-def test_inverse_transform():
-    op = AddSosEos(eos_token=DefaultTokens.nul)
+def test_inverse_transform_default():
+    op = AddSosEos()
+    input_data = [
+        ['<SOS>', '1', '2', '3', '<EOS>'],
+        ['<SOS>', 'alvin', '喜歡', '吃', '榴槤', '<EOS>'],
+        ['<SOS>', '隼興', '喜歡', '蛋白質', '<EOS>'],
+    ]
+    tx_info = [
+        [True, True],
+        [True, True],
+        [True, True],
+    ]
+    output_data = op.inverse_transform(
+        state=None,
+        input_data=input_data,
+        tx_info=tx_info,
+    )
+    assert output_data == [
+        ['1', '2', '3'],
+        ['alvin', '喜歡', '吃', '榴槤'],
+        ['隼興', '喜歡', '蛋白質'],
+    ]
+
+
+def test_inverse_transform_wo_sos():
+    op = AddSosEos(sos_token=None)
+    input_data = [
+        ['1', '2', '3', '<EOS>'],
+        ['alvin', '喜歡', '吃', '榴槤', '<EOS>'],
+        ['隼興', '喜歡', '蛋白質', '<EOS>'],
+    ]
+    tx_info = [
+        [False, True],
+        [False, True],
+        [False, True],
+    ]
+    output_data = op.inverse_transform(
+        state=None,
+        input_data=input_data,
+        tx_info=tx_info,
+    )
+    assert output_data == [
+        ['1', '2', '3'],
+        ['alvin', '喜歡', '吃', '榴槤'],
+        ['隼興', '喜歡', '蛋白質'],
+    ]
+
+
+def test_inverse_transform_wo_eos():
+    op = AddSosEos(eos_token=None)
     input_data = [
         ['<SOS>', '1', '2', '3'],
         ['<SOS>', 'alvin', '喜歡', '吃', '榴槤'],
@@ -152,4 +200,28 @@ def test_inverse_transform():
         ['1', '2', '3'],
         ['alvin', '喜歡', '吃', '榴槤'],
         ['隼興', '喜歡', '蛋白質'],
+    ]
+
+
+def test_inverse_transform_wo_all():
+    op = AddSosEos(sos_token=None, eos_token=None)
+    input_data = [
+        ['<SOS>', '1', '2', '3', '<EOS>'],
+        ['<SOS>', 'alvin', '喜歡', '吃', '榴槤', '<EOS>'],
+        ['<SOS>', '隼興', '喜歡', '蛋白質', '<EOS>'],
+    ]
+    tx_info = [
+        [False, False],
+        [False, False],
+        [False, False],
+    ]
+    output_data = op.inverse_transform(
+        state=None,
+        input_data=input_data,
+        tx_info=tx_info,
+    )
+    assert output_data == [
+        ['<SOS>', '1', '2', '3', '<EOS>'],
+        ['<SOS>', 'alvin', '喜歡', '吃', '榴槤', '<EOS>'],
+        ['<SOS>', '隼興', '喜歡', '蛋白質', '<EOS>'],
     ]

@@ -32,6 +32,11 @@ cdef class AddSosEos(BaseOp):
         self.input_type = STRING_LIST
         self.output_type = STRING_LIST
 
+        if sos_token is None:
+            sos_token = DefaultTokens.nul
+        if eos_token is None:
+            eos_token = DefaultTokens.nul
+
         self._sos_token = sos_token
         self._eos_token = eos_token
 
