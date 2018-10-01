@@ -4,8 +4,7 @@
       "op_name": "Pad",
       "op_kwargs": {},
       "state": {
-        "maxlen": 2,
-        "pad_token": "<PAD>"
+        "maxlen": 2
       }
     }
   ]
