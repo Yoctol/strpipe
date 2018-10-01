@@ -14,110 +14,12 @@ def test_pad_correctly_created():
     def yield_padders():
         yield Pad()
         yield Pad(pad_token='<pad>')
-        yield Pad(sos_token='<sos>', eos_token='<eos>')
-        yield Pad(sos_token='<sos>', eos_token='<eos>', pad_token='<pad>')
     for padder in yield_padders():
         assert padder.input_type == STRING_LIST
         assert padder.output_type == STRING_LIST
 
 
-def test_pad_init_needs_both_sos_and_eos_or_neither():
-    with pytest.raises(ValueError):
-        Pad(sos_token='<sos>')
-    with pytest.raises(ValueError):
-        Pad(eos_token='<eos>')
-
-
-def test_pad_init_tokens_should_be_distinct():
-    with pytest.raises(ValueError):
-        Pad(sos_token='<hello>', eos_token='<hello>')
-    with pytest.raises(ValueError):
-        Pad(sos_token=DefaultTokens.pad)
-    with pytest.raises(ValueError):
-        Pad(eos_token=DefaultTokens.pad)
-
-
-def test_pad_passing_state_needs_both_sos_and_eos_or_neither():
-    padder = Pad()
-    input_data = [
-        [],
-    ]
-    tx_info = {
-        'pad': [
-            {'sentlen': 0, 'sentence_tail': []},
-        ],
-        'add_sos_eos': [[False, False]],
-    }
-
-    state1 = {'maxlen': 0, 'pad_token': '<PAD>'}
-    state2 = {'maxlen': 2, 'pad_token': '<PAD>',
-              'sos_token': '<sos>', 'eos_token': '<eos>'}
-    state3 = {'maxlen': 2, 'pad_token': '<PAD>', 'sos_token': '<sos>'}
-    state4 = {'maxlen': 2, 'pad_token': '<PAD>', 'eos_token': '<eos>'}
-
-    output_data1, _ = padder.transform(state1, input_data)
-    output_data2, _ = padder.transform(state2, input_data)
-    with pytest.raises(ValueError):
-        padder.transform(state3, input_data)
-    with pytest.raises(ValueError):
-        padder.transform(state4, input_data)
-
-    padder.inverse_transform(state1, output_data1, tx_info)
-    padder.inverse_transform(state2, output_data2, tx_info)
-    with pytest.raises(ValueError):
-        padder.inverse_transform(state3, output_data1, tx_info)
-    with pytest.raises(ValueError):
-        padder.inverse_transform(state4, output_data2, tx_info)
-
-
-def test_pad_passing_state_tokens_in_state_should_be_distinct():
-    padder = Pad()
-    input_data = [
-        ["a", "b", "c"],
-    ]
-    tx_info = {
-        'pad': [
-            {'sentlen': 0, 'sentence_tail': []},
-        ],
-        'add_sos_eos': [[False, False]],
-    }
-
-    bad_state1 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<PAD>', 'eos_token': '<eos>'}
-    bad_state2 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<PAD>'}
-    bad_state3 = {
-        'maxlen': 5,
-        'pad_token': '<PAD>',
-        'sos_token': '<boundary>',
-        'eos_token': '<boundary>',
-    }  # cannot be one line, since it is too long
-
-    for bad_state in (bad_state1, bad_state2, bad_state3):
-        with pytest.raises(ValueError):
-            padder.transform(bad_state, input_data)
-
-    state = {
-        'maxlen': 5,
-        'pad_token': '<PAD>',
-        'sos_token': '<sos>',
-        'eos_token': '<eos>',
-    }  # cannot be one line, since it is too long
-    output_data, _ = padder.transform(state, input_data)
-
-    bad_state4 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<PAD>', 'eos_token': '<eos>'}
-    bad_state5 = {'maxlen': 5, 'pad_token': '<PAD>', 'sos_token': '<sos>', 'eos_token': '<PAD>'}
-    bad_state6 = {
-        'maxlen': 5,
-        'pad_token': '<PAD>',
-        'sos_token': '<boundary>',
-        'eos_token': '<boundary>',
-    }  # cannot be one line, since it is too long
-
-    for bad_state in (bad_state4, bad_state5, bad_state6):
-        with pytest.raises(ValueError):
-            padder.inverse_transform(bad_state, output_data, tx_info)
-
-
-def test_pad_fit():
+def test_fit():
     padder = Pad()
 
     input_data = [
@@ -131,42 +33,25 @@ def test_pad_fit():
     assert isinstance(state, dict)
     assert 'maxlen' in state
     assert state['maxlen'] == 6
-    assert 'pad_token' in state
-    assert state['pad_token'] == DefaultTokens.pad
     serializable(state)
     unchange_after_serialize(state)
 
 
-def test_pad_fit_with_sos_and_eos():
-    padder = Pad(sos_token=DefaultTokens.sos, eos_token=DefaultTokens.eos)
+def test_fit_raise_error_pad():
+    padder = Pad()
 
     input_data = [
-        ['a', 'p', 'p', 'l', 'e'],
-        ['b', 'a', 'n', 'a', 'n', 'a'],
-        ['e', 'a', 't'],
+        [DefaultTokens.pad, 'a', 'p', 'p', 'l', 'e'],
     ]
-
-    state = padder.fit(input_data)
-
-    assert isinstance(state, dict)
-    assert 'maxlen' in state
-    assert state['maxlen'] == 6 + 2
-    assert 'pad_token' in state
-    assert state['pad_token'] == DefaultTokens.pad
-    assert 'sos_token' in state
-    assert state['sos_token'] == DefaultTokens.sos
-    assert 'eos_token' in state
-    assert state['eos_token'] == DefaultTokens.eos
-    serializable(state)
-    unchange_after_serialize(state)
+    with pytest.raises(ValueError):
+        padder.fit(input_data)
 
 
 def test_pad_transform():
-    padder = Pad()
     pto = '<pad>'
+    padder = Pad(pad_token=pto)
     state = {
         'maxlen': 7,
-        'pad_token': pto,
     }
 
     input_data = [
@@ -183,64 +68,19 @@ def test_pad_transform():
 
     output_data, tx_info = padder.transform(state, input_data)
     assert output_data == expected_output
-    assert len(tx_info['pad']) == len(output_data)
-    assert len(tx_info['add_sos_eos']) == len(output_data)
+    assert len(tx_info) == len(output_data)
 
-    # tx info from pad func
-    sentlens = [t['sentlen'] for t in tx_info['pad']]
-    sentence_tail = [t['sentence_tail'] for t in tx_info['pad']]
+    sentlens = [t['sentlen'] for t in tx_info]
+    sentence_tail = [t['sentence_tail'] for t in tx_info]
     assert sentlens == [5, 9, 7]
     assert sentence_tail == [[], ['s', 's'], []]
 
-    # tf info from add sos eos func
-    assert [[False, False]] * len(output_data) == tx_info['add_sos_eos']
 
-
-def test_pad_transform_with_sos_and_eos():
-    padder = Pad()
-    sto = '<YO>'
+def test_inverse_transform():
     pto = '<pad>'
-    eto = '<BYE>'
-    state = {
-        'maxlen': 9,
-        'pad_token': pto,
-        'sos_token': sto,
-        'eos_token': eto,
-    }
-
-    input_data = [
-        ['h', 'a', 'p', 'p', 'y'],  # shorter
-        ['h', 'a', 'p', 'p', 'i', 'n', 'e', 's', 's'],  # longer
-        ['h', 'a', 'p', 'p', 'i', 'l', 'y'],  # same length
-    ]
-
-    expected_output = [
-        [sto, 'h', 'a', 'p', 'p', 'y', eto, pto, pto],
-        [sto, 'h', 'a', 'p', 'p', 'i', 'n', 'e', 's'],
-        [sto, 'h', 'a', 'p', 'p', 'i', 'l', 'y', eto],
-    ]
-
-    output_data, tx_info = padder.transform(state, input_data)
-    assert output_data == expected_output
-    assert len(tx_info['pad']) == len(output_data)
-    assert len(tx_info['add_sos_eos']) == len(output_data)
-
-    # tx info from pad func
-    sentlens = [t['sentlen'] for t in tx_info['pad']]
-    sentence_tail = [t['sentence_tail'] for t in tx_info['pad']]
-    assert sentlens == [7, 11, 9]
-    assert sentence_tail == [[], ['s', '<BYE>'], []]
-
-    # tf info from add sos eos func
-    assert [[True, True]] * len(output_data) == tx_info['add_sos_eos']
-
-
-def test_pad_inverse_transform():
-    padder = Pad()
-    pto = '<pad>'
+    padder = Pad(pad_token=pto)
     state = {
         'maxlen': 7,
-        'pad_token': pto,
     }
 
     output_data = [
@@ -248,58 +88,11 @@ def test_pad_inverse_transform():
         ['h', 'a', 'p', 'p', 'i', 'n', 'e'],
         ['h', 'a', 'p', 'p', 'i', 'l', 'y'],
     ]
-    tx_info = {
-        'pad': [
-            {'sentlen': 5, 'sentence_tail': []},
-            {'sentlen': 9, 'sentence_tail': ['s', 's']},
-            {'sentlen': 7, 'sentence_tail': []},
-        ],
-        'add_sos_eos': [
-            [False, False],
-            [False, False],
-            [False, False],
-        ],
-    }
-
-    expected_tx_data = [
-        ['h', 'a', 'p', 'p', 'y'],  # shorter
-        ['h', 'a', 'p', 'p', 'i', 'n', 'e', 's', 's'],  # longer
-        ['h', 'a', 'p', 'p', 'i', 'l', 'y'],  # same length
+    tx_info = [
+        {'sentlen': 5, 'sentence_tail': []},
+        {'sentlen': 9, 'sentence_tail': ['s', 's']},
+        {'sentlen': 7, 'sentence_tail': []},
     ]
-    tx_data = padder.inverse_transform(state, output_data, tx_info)
-    assert tx_data == expected_tx_data
-
-
-def test_pad_inverse_transform_with_sos_and_eos():
-    padder = Pad()
-    sto = '<YO>'
-    pto = '<pad>'
-    eto = '<BYE>'
-    state = {
-        'maxlen': 7,
-        'pad_token': pto,
-        'sos_token': sto,
-        'eos_token': eto
-    }
-
-    output_data = [
-        [sto, 'h', 'a', 'p', 'p', 'y', eto, pto, pto],
-        [sto, 'h', 'a', 'p', 'p', 'i', 'n', 'e', 's'],
-        [sto, 'h', 'a', 'p', 'p', 'i', 'l', 'y', eto],
-    ]
-
-    tx_info = {
-        'pad': [
-            {'sentlen': 7, 'sentence_tail': []},
-            {'sentlen': 11, 'sentence_tail': ['s', eto]},
-            {'sentlen': 9, 'sentence_tail': []},
-        ],
-        'add_sos_eos': [
-            [True, True],
-            [True, True],
-            [True, True],
-        ],
-    }
 
     expected_tx_data = [
         ['h', 'a', 'p', 'p', 'y'],  # shorter
@@ -328,6 +121,5 @@ def test_pad_with_custom_kwargs_fit():
     state = padder.fit(input_data)
 
     assert state['maxlen'] == expected_maxlen
-    assert state['pad_token'] == expected_other_token
     serializable(state)
     unchange_after_serialize(state)

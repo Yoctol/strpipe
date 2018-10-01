@@ -20,15 +20,11 @@ REGRESSION_SUITES = [
                 output=TransformResult(
                     output=[['a', 'b'], ['c', '<PAD>'], ['d', 'e']],
                     tx_info=[
-                        {
-                            'pad':
-                            [
-                                {'sentlen': 2, 'sentence_tail': []},
-                                {'sentlen': 1, 'sentence_tail': []},
-                                {'sentlen': 3, 'sentence_tail': ['f']}
-                            ],
-                            'add_sos_eos': [[False, False]] * 3,
-                        },
+                        [
+                            {'sentlen': 2, 'sentence_tail': []},
+                            {'sentlen': 1, 'sentence_tail': []},
+                            {'sentlen': 3, 'sentence_tail': ['f']},
+                        ],
                     ],
                 ),
             )
@@ -38,15 +34,11 @@ REGRESSION_SUITES = [
                 input=TransformResult(
                     output=[['a', 'b'], ['c', '<PAD>'], ['d', 'e']],
                     tx_info=[
-                        {
-                            'pad':
-                            [
-                                {'sentlen': 2, 'sentence_tail': []},
-                                {'sentlen': 1, 'sentence_tail': []},
-                                {'sentlen': 3, 'sentence_tail': ['f']}
-                            ],
-                            'add_sos_eos': [[False, False]] * 3,
-                        },
+                        [
+                            {'sentlen': 2, 'sentence_tail': []},
+                            {'sentlen': 1, 'sentence_tail': []},
+                            {'sentlen': 3, 'sentence_tail': ['f']},
+                        ],
                     ],
                 ),
                 output=[['a', 'b'], ['c'], ['d', 'e', 'f']],
