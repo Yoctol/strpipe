@@ -1,4 +1,6 @@
+import shutil
 from unittest.mock import MagicMock, Mock
+from pathlib import Path
 
 import pytest
 
@@ -18,11 +20,11 @@ class FakeStatefulOp:
 
     @staticmethod
     def transform(state, data):
-        return data, {'a': 1}
+        return data + '_with_state', {'a': 1}
 
     @staticmethod
     def inverse_transfrom(state, data, meta):
-        return data
+        return data[: -11]
 
 
 class FakeStatelessOp:
@@ -36,11 +38,11 @@ class FakeStatelessOp:
 
     @staticmethod
     def transform(state, data):
-        return data, {'b': 2}
+        return [data, 'stateless'], {'b': 2}
 
     @staticmethod
     def inverse_transfrom(state, data, meta):
-        return data
+        return data[: -1]
 
 
 @pytest.fixture
@@ -53,6 +55,19 @@ def fake_factory():
         FakeStatelessOp,
     )
     return test_factory
+
+
+@pytest.fixture
+def fake_pipe(fake_factory=fake_factory()):
+    p_custom = Pipe(op_factory=fake_factory)
+    p_custom.add_step_by_op_name(
+        'StatefulOp'
+    )
+    p_custom.add_checkpoint()
+    p_custom.add_step_by_op_name(
+        'StatelessOp'
+    )
+    return p_custom
 
 
 def test_pipe_init_use_correct_factory(fake_factory):
@@ -130,3 +145,29 @@ def test_get_state():
     p.get_state(0) == {
         '隼興名言': '你的身體不知道你想變強...',
     }
+
+
+def test_add_checkpoint(fake_pipe):
+    fake_pipe.fit('123456')
+    output = fake_pipe.transform('123456')
+    assert output[0] == ['123456_with_state', 'stateless']
+    assert output[2] == ['123456_with_state']
+
+
+def test_serialization(fake_pipe, fake_factory):
+    fake_pipe.fit('123456')
+    output_path = Path('.').joinpath(
+        'pipe_test/example.json').resolve()
+    output_path.parent.mkdir()
+    # save
+    fake_pipe.save_json(output_path)
+    # load
+    restored_pipe = Pipe.restore_from_json(
+        path=output_path,
+        op_factory=fake_factory,
+    )
+    output = restored_pipe.transform('123456')
+    assert output[0] == ['123456_with_state', 'stateless']
+    assert output[2] == ['123456_with_state']
+    # teardown
+    shutil.rmtree(str(output_path.parent))

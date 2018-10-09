@@ -1,3 +1,4 @@
+from typing import List
 import json
 
 from strpipe.ops import op_factory as default_op_factory
@@ -46,6 +47,7 @@ class Pipe:
         self._steps = []
         self._step_info = []
         self.op_factory = default_op_factory if op_factory is None else op_factory
+        self.reset_checkpoints()
 
     def add_step_by_op_name(
             self,
@@ -83,6 +85,18 @@ class Pipe:
             'op_kwargs': op_kwargs,
         })
 
+    def add_checkpoint(self):
+        """Record current index of steps"""
+        self._checkpoints.add(len(self._steps) - 1)
+
+    def set_checkpoints(self, step_indices: List[int]):
+        """Record all indices of steps"""
+        self._checkpoints = set(step_indices)
+
+    def reset_checkpoints(self):
+        """Clear recorded indices of steps"""
+        self._checkpoints = set()
+
     def fit(self, data):
         input_data = data
         for step in self._steps:
@@ -90,12 +104,31 @@ class Pipe:
             input_data, _ = step.transform(input_data)
 
     def transform(self, data):
+        """Process data based on Steps(Ops).
+
+        This method process input data according to the given
+        steps.
+
+        Args:
+            data:
+
+        Returns:
+            data: transfromed data
+            tx_info: list of information for inverse transformation.
+            intermediate: list of intermediate data processed during
+                          transfromation
+
+        """
+
         self._check_all_steps_can_transform()
         tx_info = []
-        for step in self._steps:
+        intermediate = []
+        for i, step in enumerate(self._steps):
             data, meta = step.transform(data)
             tx_info.append(meta)
-        return data, tx_info
+            if i in self._checkpoints:
+                intermediate.append(data)
+        return data, tx_info, intermediate
 
     def inverse_transform(self, data, tx_info):
         self._check_all_steps_can_transform()
@@ -113,27 +146,33 @@ class Pipe:
     def save_json(self, path):
         serializable = {}
         step_recoverables = []
+        # save step info and state
         for step, info in zip(self._steps, self._step_info):
             step_recoverables.append({
                 **info,
                 'state': step.state,
             })
         serializable['steps'] = step_recoverables
+        # save checkpoints
+        serializable['checkpoints'] = list(self._checkpoints)
         with open(path, 'w') as fw:
             json.dump(serializable, fw, ensure_ascii=False)
 
     @classmethod
-    def restore_from_json(cls, path):
-        p = cls()
+    def restore_from_json(cls, path: str, op_factory=None):
+        p = cls(op_factory=op_factory)
         with open(path, 'r') as f:
             _data = json.load(f)
             step_recoverables = _data['steps']
+        # restore steps
         for step_info in step_recoverables:
             p.add_step_by_op_name(
                 op_name=step_info['op_name'],
                 op_kwargs=step_info['op_kwargs'],
                 state=step_info['state'],
             )
+        # restore checkpoints
+        p.set_checkpoints(_data.get('checkpoints', []))
         return p
 
     def _check_all_steps_can_transform(self):

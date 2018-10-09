@@ -26,6 +26,7 @@ REGRESSION_SUITES = [
                             {'sentlen': 3, 'sentence_tail': ['f']},
                         ],
                     ],
+                    intermediate=[],
                 ),
             )
         ],
@@ -40,6 +41,7 @@ REGRESSION_SUITES = [
                             {'sentlen': 3, 'sentence_tail': ['f']},
                         ],
                     ],
+                    intermediate=[],
                 ),
                 output=[['a', 'b'], ['c'], ['d', 'e', 'f']],
             )
@@ -57,9 +59,10 @@ def test_regression_all_suites():
         p = Pipe.restore_from_json(_get_serialized_pipe_path(suite[PATH_KEY]))
 
         for case in suite[TRANSFORM_CASES_KEY]:
-            actual_output, actual_tx_info = p.transform(case.input)
+            actual_output, actual_tx_info, actual_interm = p.transform(case.input)
             assert actual_output == case.output.output
             assert actual_tx_info == case.output.tx_info
+            assert actual_interm == case.output.intermediate
 
         for case in suite[INVERSE_TRANSFORM_CASES_KEY]:
             actual_output = p.inverse_transform(
