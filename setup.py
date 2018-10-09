@@ -79,7 +79,7 @@ else:
 
 setup(
     name='strpipe',
-    version='0.3.0',
+    version='0.4.0',
     description='Reversible String Process Pipeline',
     long_description=long_description,
     python_requires='>=3.6',
