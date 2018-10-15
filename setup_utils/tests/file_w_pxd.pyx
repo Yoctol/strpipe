@@ -1,0 +1,2 @@
+cdef hello():
+    return "world"
