@@ -2,14 +2,15 @@ from ..pad_sentences import pad_sentences, unpad_sentences
 
 
 def test_pad_sentences_with_default_pad():
+    input_sentences = [
+        ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],
+        ["藍莓", "結冰", "惹"],
+        ["薩克斯風", "好用"],
+        [""],
+        [],
+    ]
     output = pad_sentences(
-        sentences=[
-            ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],
-            ["藍莓", "結冰", "惹"],
-            ["薩克斯風", "好用"],
-            [""],
-            [],
-        ],
+        sentences=input_sentences,
         maxlen=3,
     )
     assert output[0] == [
@@ -26,17 +27,25 @@ def test_pad_sentences_with_default_pad():
         {'sentlen': 1, 'sentence_tail': []},
         {'sentlen': 0, 'sentence_tail': []},
     ]
+    assert input_sentences == [
+        ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],
+        ["藍莓", "結冰", "惹"],
+        ["薩克斯風", "好用"],
+        [""],
+        [],
+    ]
 
 
 def test_pad_sentences_with_custom_pad():
+    input_sentences = [
+        ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],
+        ["藍莓", "結冰", "惹"],
+        ["薩克斯風", "好用"],
+        [""],
+        [],
+    ]
     output = pad_sentences(
-        sentences=[
-            ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],
-            ["藍莓", "結冰", "惹"],
-            ["薩克斯風", "好用"],
-            [""],
-            [],
-        ],
+        sentences=input_sentences,
         maxlen=3,
         pad_token="<CPH>",
     )
@@ -53,6 +62,13 @@ def test_pad_sentences_with_custom_pad():
         {'sentlen': 2, 'sentence_tail': []},
         {'sentlen': 1, 'sentence_tail': []},
         {'sentlen': 0, 'sentence_tail': []},
+    ]
+    assert input_sentences == [
+        ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],
+        ["藍莓", "結冰", "惹"],
+        ["薩克斯風", "好用"],
+        [""],
+        [],
     ]
 
 
