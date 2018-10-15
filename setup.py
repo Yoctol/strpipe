@@ -3,7 +3,7 @@ from pathlib import Path
 from setuptools import setup, find_packages
 from setuptools import Extension
 
-from utils import get_pxd_path
+from setup_utils.get_pxd_path import get_pxd_path
 
 try:
     from Cython.Distutils import build_ext

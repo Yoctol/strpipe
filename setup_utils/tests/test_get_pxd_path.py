@@ -1,7 +1,7 @@
 import os.path as osp
 from pathlib import Path
 
-from utils import get_pxd_path
+from ..get_pxd_path import get_pxd_path
 
 
 HERE = osp.dirname(osp.abspath(__file__))
