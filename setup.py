@@ -3,6 +3,7 @@ from pathlib import Path
 from setuptools import setup, find_packages
 from setuptools import Extension
 
+from utils import get_pxd_path
 
 try:
     from Cython.Distutils import build_ext
@@ -34,18 +35,23 @@ if use_cython:
     pyx_paths = sorted(Path('./strpipe').rglob("*.pyx"))
 
     for pyx_path in pyx_paths:
-        path_str = str(pyx_path)
+        pxd_path = get_pxd_path(pyx_path)
+        if pxd_path is not None:
+            sources = [str(pyx_path), str(pxd_path)]
+        else:
+            sources = [str(pyx_path)]
+
         first_line = pyx_path.read_text().split('\n')[0]
         if ('cpp' in first_line) or ('c++' in first_line):
             extension = Extension(
-                path_str[:-4].replace('/', '.'),
-                [path_str],
+                str(pyx_path)[:-4].replace('/', '.'),
+                sources,
                 language='c++',
             )
         else:
             extension = Extension(
-                path_str[:-4].replace('/', '.'),
-                [path_str],
+                str(pyx_path)[:-4].replace('/', '.'),
+                sources,
             )
 
         # Have Cython embed function call signature information in docstrings,
