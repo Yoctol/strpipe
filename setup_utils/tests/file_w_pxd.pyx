@@ -1,2 +1,0 @@
-cdef hello():
-    return "world"

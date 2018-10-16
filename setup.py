@@ -3,10 +3,9 @@ from pathlib import Path
 from setuptools import setup, find_packages
 from setuptools import Extension
 
-from setup_utils.get_pxd_path import get_pxd_path
-
 try:
     from Cython.Distutils import build_ext
+    from Cython.Build import cythonize
 except ImportError:
     use_cython = False
 else:
@@ -32,32 +31,26 @@ ext_modules = []
 
 
 if use_cython:
-    pyx_paths = sorted(Path('./strpipe').rglob("*.pyx"))
-
-    for pyx_path in pyx_paths:
-        pxd_path = get_pxd_path(pyx_path)
-        if pxd_path is not None:
-            sources = [str(pyx_path), str(pxd_path)]
-        else:
-            sources = [str(pyx_path)]
-
-        first_line = pyx_path.read_text().split('\n')[0]
-        if ('cpp' in first_line) or ('c++' in first_line):
-            extension = Extension(
-                str(pyx_path)[:-4].replace('/', '.'),
-                sources,
-                language='c++',
-            )
-        else:
-            extension = Extension(
-                str(pyx_path)[:-4].replace('/', '.'),
-                sources,
-            )
-
-        # Have Cython embed function call signature information in docstrings,
-        # so that Sphinx can extract and use those signatures.
-        extension.cython_directives = {"embedsignature": True}
-        ext_modules.append(extension)
+    ext_modules = [
+        Extension(
+            name='strpipe.toolkit.consistent_hash',
+            sources=[
+                'strpipe/toolkit/consistent_hash.pxd',
+                'strpipe/toolkit/consistent_hash.pyx',
+                'strpipe/toolkit/MurmurHash3.cpp',
+            ],
+            extra_compile_args=['-O3'],
+            language='c++'
+        ),
+        Extension(
+            name='*',
+            sources=['./**/*.pyx'],
+            extra_compile_args=['-O3'],
+        ),
+    ]
+    ext_modules = cythonize(ext_modules, exclude=['./setup_utils/**/*.pyx'])
+    for e in ext_modules:
+        e.cython_directives = {"embedsignature": True}
     cmdclass.update({'build_ext': build_ext})
 
 else:
@@ -85,7 +78,7 @@ else:
 
 setup(
     name='strpipe',
-    version='0.4.4',
+    version='0.4.5',
     description='Reversible String Process Pipeline',
     long_description=long_description,
     python_requires='>=3.6',
