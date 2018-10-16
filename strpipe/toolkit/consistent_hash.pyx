@@ -1,4 +1,4 @@
-# distutils: sources = MurmurHash3.cpp
+# distutils: sources = strpipe/toolkit/MurmurHash3.cpp
 
 
 cdef extern from "MurmurHash3.h":  # noqa: E999

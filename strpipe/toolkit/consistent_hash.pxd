@@ -1,9 +1,3 @@
-
-
-cdef extern from "MurmurHash3.cpp":  # noqa: E999
-    pass
-
-
 cdef extern from "MurmurHash3.h":  # noqa: E999
     void MurmurHash3_x86_32(
         void *key,  # noqa: E225
