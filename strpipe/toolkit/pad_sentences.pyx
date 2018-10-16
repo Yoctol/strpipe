@@ -47,12 +47,12 @@ cdef list pad_sentence_in_c(
     sent_len = len(sentence)
 
     if sent_len >= maxlen:
-        padded_sentence = sentence[: maxlen]
+        padded_sentence = sentence[: maxlen].copy()
     else:
         diff_len = maxlen - sent_len
         diff_sentence = [pad_token] * diff_len
         padded_sentence = sentence
-        padded_sentence.extend(diff_sentence)
+        padded_sentence = padded_sentence + diff_sentence
     return padded_sentence
 
 
