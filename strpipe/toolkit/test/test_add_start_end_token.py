@@ -10,14 +10,14 @@ def test_add_start_end_token_in_sentences_default():
         [''],
         ['勤彥', '喜歡', '新加坡', '的', '榴槤'],
         ['1', '2', 'aaa'],
-    ]    
+    ]
     output = add_start_end_token_in_sentences(input_list)
     assert input_list == [
         ['隼興', '喜歡', '蛋白質'],
         [''],
         ['勤彥', '喜歡', '新加坡', '的', '榴槤'],
         ['1', '2', 'aaa'],
-    ]    
+    ]
     assert output[0] == [
         ['<SOS>', '隼興', '喜歡', '蛋白質', '<EOS>'],
         ['<SOS>', '', '<EOS>'],
