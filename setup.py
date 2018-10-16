@@ -85,7 +85,7 @@ else:
 
 setup(
     name='strpipe',
-    version='0.4.3',
+    version='0.4.4',
     description='Reversible String Process Pipeline',
     long_description=long_description,
     python_requires='>=3.6',
@@ -97,7 +97,7 @@ setup(
         'tokenizer-hub',
         'text-normalizer',
     ],
-    packages=find_packages(),
+    packages=find_packages(exclude=('tests', 'setup_utils')),
     cmdclass=cmdclass,
     ext_modules=ext_modules,
 )
