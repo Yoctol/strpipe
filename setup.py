@@ -40,7 +40,7 @@ if use_cython:
                 'strpipe/toolkit/MurmurHash3.cpp',
             ],
             extra_compile_args=['-O3'],
-            language='c++'
+            language='c++',
         ),
         Extension(
             name='*',
@@ -55,24 +55,31 @@ if use_cython:
 
 else:
     # .c files
-    pyx_paths = sorted(Path('./strpipe').rglob("*.c"))
-    for pyx_path in pyx_paths:
-        path_str = str(pyx_path)
+    c_paths = sorted(Path('./strpipe').rglob("*.c"))
+    for c_path in c_paths:
+        path_str = str(c_path)
+        module_name = path_str[:-2].replace('/', '.')  # x/yy/zzz.c => x.yy.zzz
         ext_modules.append(
             Extension(
-                path_str[:-2].replace('/', '.'),
-                [path_str],
+                name=module_name,
+                sources=[path_str],
+                include_dirs=['.'],
             )
         )
 
     # .cpp files
-    pyx_paths = sorted(Path('./strpipe').rglob("*.cpp"))
-    for pyx_path in pyx_paths:
-        path_str = str(pyx_path)
+    cpp_paths = sorted(Path('./strpipe').rglob("*.cpp"))
+    for cpp_path in cpp_paths:
+        path_str = str(cpp_path)
+        module_name = path_str[:-4].replace('/', '.')  # x/yy/zzz.cpp => x.yy.zzz
+        sources = [path_str]
+        if 'consistent_hash' in module_name:
+            sources.append('strpipe/toolkit/MurmurHash3.cpp')
         ext_modules.append(
             Extension(
-                path_str[:-4].replace('/', '.'),
-                [path_str],
+                name=module_name,
+                sources=sources,
+                include_dirs=['.'],
             )
         )
 

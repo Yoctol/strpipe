@@ -1,0 +1,1 @@
+recursive-include strpipe *.c *.h *.pyx *.pxd *.pxi
