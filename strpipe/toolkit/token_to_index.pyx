@@ -1,5 +1,5 @@
 # distutils: language = c++
-from consistent_hash cimport consistent_hash_in_c  # noqa: E999
+from .consistent_hash cimport consistent_hash_in_c
 from default_tokens import DefaultTokens
 
 

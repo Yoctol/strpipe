@@ -13,6 +13,9 @@
             "strpipe/toolkit"
         ],
         "language": "c++",
+        "libraries": [
+            "strpipe/toolkit/MurmurHash3.h"
+        ],
         "name": "strpipe.toolkit.consistent_hash",
         "sources": [
             "strpipe/toolkit/consistent_hash.pyx",

@@ -2165,7 +2165,7 @@ if (!__Pyx_RefNanny) {
 
   /* "strpipe/toolkit/token_to_index.pyx":3
  * # distutils: language = c++
- * from consistent_hash cimport consistent_hash_in_c  # noqa: E999
+ * from .consistent_hash cimport consistent_hash_in_c
  * from default_tokens import DefaultTokens             # <<<<<<<<<<<<<<
  * 
  * 
@@ -2227,7 +2227,7 @@ if (!__Pyx_RefNanny) {
 
   /* "strpipe/toolkit/token_to_index.pyx":1
  * # distutils: language = c++             # <<<<<<<<<<<<<<
- * from consistent_hash cimport consistent_hash_in_c  # noqa: E999
+ * from .consistent_hash cimport consistent_hash_in_c
  * from default_tokens import DefaultTokens
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
