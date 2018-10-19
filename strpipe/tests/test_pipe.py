@@ -1,5 +1,5 @@
 import shutil
-from unittest.mock import MagicMock, Mock
+from unittest.mock import MagicMock, Mock, patch, ANY
 from pathlib import Path
 
 import pytest
@@ -156,9 +156,8 @@ def test_add_checkpoint(fake_pipe):
 
 def test_serialization(fake_pipe, fake_factory):
     fake_pipe.fit('123456')
-    output_path = Path('.').joinpath(
-        'pipe_test/example.json').resolve()
-    output_path.parent.mkdir()
+    output_path = Path('.').joinpath('pipe_test/example.json').resolve()
+    output_path.parent.mkdir(exist_ok=True)
     # save
     fake_pipe.save_json(output_path)
     # load
@@ -169,5 +168,20 @@ def test_serialization(fake_pipe, fake_factory):
     output = restored_pipe.transform('123456')
     assert output[0] == ['123456_with_state', 'stateless']
     assert output[2] == ['123456_with_state']
+
+    with patch('json.dump') as patch_dump:
+        fake_serializable = ['step1']
+        json_dump_kwargs = dict(
+            indent=2,
+            ensure_ascii=False,
+        )
+        fake_pipe._generate_serializable = lambda: fake_serializable
+        fake_pipe.save_json(output_path, json_dump_kwargs)
+        patch_dump.assert_called_once_with(
+            fake_serializable,
+            ANY,  # a filep
+            **json_dump_kwargs,
+        )
+
     # teardown
     shutil.rmtree(str(output_path.parent))
