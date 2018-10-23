@@ -143,9 +143,10 @@ class Pipe:
         state = self._steps[index].state
         return state
 
-    def save_json(self, path):
+    def _generate_serializable(self):
         serializable = {}
         step_recoverables = []
+
         # save step info and state
         for step, info in zip(self._steps, self._step_info):
             step_recoverables.append({
@@ -155,8 +156,16 @@ class Pipe:
         serializable['steps'] = step_recoverables
         # save checkpoints
         serializable['checkpoints'] = list(self._checkpoints)
+        return serializable
+
+    def save_json(self, path, json_dump_kwargs=None):
+        if json_dump_kwargs is None:
+            json_dump_kwargs = dict(
+                ensure_ascii=False,
+            )
+
         with open(path, 'w') as fw:
-            json.dump(serializable, fw, ensure_ascii=False)
+            json.dump(self._generate_serializable(), fw, **json_dump_kwargs)
 
     @classmethod
     def restore_from_json(cls, path: str, op_factory=None):
