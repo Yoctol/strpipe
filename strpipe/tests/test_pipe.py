@@ -61,11 +61,11 @@ def fake_factory():
 def fake_pipe(fake_factory=fake_factory()):
     p_custom = Pipe(op_factory=fake_factory)
     p_custom.add_step_by_op_name(
-        'StatefulOp'
+        'StatefulOp',
     )
     p_custom.add_checkpoint()
     p_custom.add_step_by_op_name(
-        'StatelessOp'
+        'StatelessOp',
     )
     return p_custom
 
@@ -82,7 +82,7 @@ def test_add_step_by_op_name_correctly_create_op(mocker):
     mock_op_name = 'MockOp'
     mock_factory = _OpFactory()
     mock_factory.register(mock_op_name,  # noqa: E128
-        MockOp
+        MockOp,
     )
     p = Pipe(op_factory=mock_factory)
 

@@ -43,7 +43,7 @@ def test_indices_to_sentences():
         meta=[
             {0: "alvin"},
             {0: "隼興", 2: "蛋白質"},
-        ]
+        ],
     )
     assert output == [
         ["alvin", "喜歡", "吃", "榴槤"],

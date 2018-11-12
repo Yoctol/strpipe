@@ -115,7 +115,7 @@ def test_pad_with_custom_kwargs_fit():
     input_data = [
         ['a', 'p', 'p', 'l', 'e'],
         ['b', 'a', 'n', 'a', 'n', 'a'],
-        ['e', 'a', 't']
+        ['e', 'a', 't'],
     ]
 
     state = padder.fit(input_data)

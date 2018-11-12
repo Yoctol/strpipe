@@ -18,5 +18,5 @@ def test_list_all_tokens():
         'eos': '<EOS>',
         'unk': '<UNK>',
         'pad': '<PAD>',
-        'nul': '\0'
+        'nul': '\0',
     }
