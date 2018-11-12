@@ -87,7 +87,7 @@ def test_unpad_sentences():
             {'sentlen': 2, 'sentence_tail': []},
             {'sentlen': 1, 'sentence_tail': []},
             {'sentlen': 0, 'sentence_tail': []},
-        ]
+        ],
     )
     assert output == [
         ["隼興", "覺得", "有顆頭", "有點", "猥瑣"],

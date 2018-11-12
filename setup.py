@@ -64,7 +64,7 @@ else:
                 name=module_name,
                 sources=[path_str],
                 include_dirs=['.'],
-            )
+            ),
         )
 
     # .cpp files
@@ -80,7 +80,7 @@ else:
                 name=module_name,
                 sources=sources,
                 include_dirs=['.'],
-            )
+            ),
         )
 
 setup(

@@ -28,7 +28,7 @@ REGRESSION_SUITES = [
                     ],
                     intermediate=[],
                 ),
-            )
+            ),
         ],
         INVERSE_TRANSFORM_CASES_KEY: [
             PipeRegressionCase(
@@ -44,7 +44,7 @@ REGRESSION_SUITES = [
                     intermediate=[],
                 ),
                 output=[['a', 'b'], ['c'], ['d', 'e', 'f']],
-            )
+            ),
         ],
     },
 ]

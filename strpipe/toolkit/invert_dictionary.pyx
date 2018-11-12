@@ -2,7 +2,7 @@
 
 def invert_dictionary(
         input_dict: dict,
-        serializable: bool=False,
+        serializable: bool = False,
     ):
     return invert_dictionary_in_c(
         input_dict=input_dict,
