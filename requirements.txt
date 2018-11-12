@@ -2,7 +2,7 @@
 pytest
 pytest-mock
 
-flake8
+flake8-config-yoctol >= 0.0.11
 pypandoc
 
 # sphinx document
