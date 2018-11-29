@@ -58,7 +58,7 @@ def fake_factory():
 
 
 @pytest.fixture
-def fake_pipe(fake_factory=fake_factory()):
+def fake_pipe(fake_factory):
     p_custom = Pipe(op_factory=fake_factory)
     p_custom.add_step_by_op_name(
         'StatefulOp',
