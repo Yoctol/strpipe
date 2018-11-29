@@ -94,7 +94,6 @@ setup(
     url='https://github.com/Yoctol/strpipe',
     license='MIT',
     install_requires=[
-        'tokenizer-hub',
         'text-normalizer',
     ],
     packages=find_packages(exclude=('tests', 'setup_utils')),
