@@ -36,6 +36,7 @@ clean:
 	rm -f .coverage.*
 	rm -rf build
 	python setup_utils/remove_so_files.py
+	python setup_utils/remove_generated_files.py
 	make -C docs clean
 	python setup.py clean
 
