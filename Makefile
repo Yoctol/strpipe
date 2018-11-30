@@ -7,7 +7,7 @@ installself:
 
 .PHONY: install
 install:
-	pip install -U pip wheel setuptools cython
+	pip install -U pip wheel setuptools cython==0.29.1
 	pip install -r requirements.txt
 	make installself
 
@@ -36,6 +36,7 @@ clean:
 	rm -f .coverage.*
 	rm -rf build
 	python setup_utils/remove_so_files.py
+	python setup_utils/remove_generated_files.py
 	make -C docs clean
 	python setup.py clean
 
