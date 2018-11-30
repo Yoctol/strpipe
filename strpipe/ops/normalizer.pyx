@@ -7,9 +7,6 @@ from strpipe.data.types import STRING
 
 cdef class Normalizer(BaseOp):
 
-    cdef str _norm_id
-    cdef object _normalizer
-
     '''
     ref: https://github.com/Yoctol/text-normalizer
     '''
