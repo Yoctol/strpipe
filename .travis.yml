@@ -21,6 +21,9 @@ script:
 - make lint
 - make test
 
+after_success:
+- codecov
+
 deploy:
   provider: pypi
   user: stegben
