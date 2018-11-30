@@ -7,7 +7,7 @@ installself:
 
 .PHONY: install
 install:
-	pip install -U pip wheel setuptools cython==0.29.0
+	pip install -U pip wheel setuptools cython==0.29.1
 	pip install -r requirements.txt
 	make installself
 
