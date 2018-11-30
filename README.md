@@ -1,6 +1,6 @@
 # strpipe
 
-[![travis-ci][travis-image]][travis-url]   [![pypi-version][pypi-image]][pypi-url]   [![coveralls][coveralls-image]][coveralls-url]
+[![travis-ci][travis-image]][travis-url]    [![pypi-version][pypi-image]][pypi-url]    [![codecov][codecov-image]][codecov-url]
 
 [travis-image]: https://travis-ci.org/Yoctol/strpipe.svg?branch=master
 [travis-url]: https://travis-ci.org/Yoctol/strpipe
@@ -8,8 +8,8 @@
 [pypi-image]: https://badge.fury.io/py/strpipe.svg
 [pypi-url]: https://badge.fury.io/py/strpipe
 
-[coveralls-image]: https://codecov.io/gh/codecov/strpipe/branch/master/graph/badge.svg
-[coveralls-url]: https://codecov.io/gh/codecov/strpipe
+[codecov-image]: https://codecov.io/gh/Yoctol/strpipe/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/Yoctol/strpipe
 
 
 Reversible string processing pipe. Featuring reproducibility, serializability and performance.
