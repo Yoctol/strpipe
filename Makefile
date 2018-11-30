@@ -18,7 +18,7 @@ lint:
 
 .PHONY: test
 test:
-	pytest
+	py.test --cov=strpipe/
 
 .PHONY: all
 all: test lint

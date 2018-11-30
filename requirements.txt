@@ -9,3 +9,8 @@ pypandoc
 sphinx
 sphinx-rtd-theme
 recommonmark
+
+
+# code coverage
+pytest-cov
+codecov
